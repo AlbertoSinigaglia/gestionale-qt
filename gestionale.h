@@ -2,7 +2,6 @@
 #define GESTIONALE_H
 
 #include <QWidget>
-
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
