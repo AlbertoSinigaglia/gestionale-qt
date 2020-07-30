@@ -8,7 +8,7 @@ namespace UFMath{
     //assunzione 1 : T implementa operatore < * > e conversione double -> T
     template <class T>
     T proporzionaleAMedia(T media, double percentuale){
-        return T * static_cast<T>(0.5 / percentuale);
+        return media * static_cast<T>(0.5 / percentuale);
     }
 
     /**     PROPORZIONALE A MEDIA
@@ -18,7 +18,7 @@ namespace UFMath{
     //assunzione 1 : T implementa operatore < * > e conversione double -> T
     template <class T>
     T proporzionaleAMedia(T media, unsigned int grado){
-        return T * static_cast<T>(5 / grado);
+        return media * static_cast<T>(5 / grado);
     }
 
     /**     MEDIA PONDERATA
