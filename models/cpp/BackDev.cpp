@@ -10,33 +10,33 @@ BackDev::BackDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping
             perc_capo_progetto(dati_server.perc_capo_progetto),
             livello_astrazione(dati_server.livello_astrazione),
             prove_correttezza(dati_server.prove_correttezza),
-            orientato_ortogonalità(dati_server.orientato_ortogonalità){}
+            orientato_ortogonalita(dati_server.orientato_ortogonalita){}
 };
 
 
-double BackDev::velocitàScrittura() const{
+double BackDev::velocitaScrittura() const{
     // più un programmatore lavora ad un livello di astrazione maggiore più si prospetta una scrittura più lenta 
-    double speed_up_astrazione = 1 - calcoloBonusLineare(0 , (livello_astrazione)/5.0 , 1 - Conv::perc_velocità_astrazione_5);
+    double speed_up_astrazione = 1 - calcoloBonusLineare(0 , (livello_astrazione)/5.0 , 1 - Conv::perc_velocita_astrazione_5);
 
-    //se li programmatore aggiunge al suo lavoro anche le prove di correttezza la velocità di scrittura del codice diminuisce
-    double malus_prove_correttezza = 1 - (prove_correttezza)? Conv::malus_velocità_prove_corettezza : 0;
+    //se li programmatore aggiunge al suo lavoro anche le prove di correttezza la velocita di scrittura del codice diminuisce
+    double malus_prove_correttezza = 1 - (prove_correttezza)? Conv::malus_velocita_prove_corettezza : 0;
 
-    return Software::velocitàScrittura() * speed_up_astrazione * malus_prove_correttezza;
+    return Software::velocitaScrittura() * speed_up_astrazione * malus_prove_correttezza;
 }
 
 
-unsigned int BackDev::riutilizzabilità() const{
+unsigned int BackDev::riutilizzabilita() const{
 
     int num_ricicli_per_astrazione = static_cast<int>(Conv::riutilizzo_astrazione_5 * livello_astrazione/5);
-    int num_ricicli_per_qualità_codice = Software::riutilizzabilità();
+    int num_ricicli_per_qualita_codice = Software::riutilizzabilita();
 
-    if(num_ricicli_per_astrazione > num_ricicli_per_qualità_codice) 
-        return num_ricicli_per_astrazione;   else   return num_ricicli_per_qualità_codice;
+    if(num_ricicli_per_astrazione > num_ricicli_per_qualita_codice)
+        return num_ricicli_per_astrazione;   else   return num_ricicli_per_qualita_codice;
 }
 
 
-bool BackDev::isOrientatoOrtogonalità() const{
-    return orientato_ortogonalità;
+bool BackDev::isOrientatoOrtogonalita() const{
+    return orientato_ortogonalita;
 }
 
 

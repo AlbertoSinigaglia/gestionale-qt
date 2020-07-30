@@ -38,7 +38,7 @@ void Employee::AumentoStipendo(float aumento){
 
 
 void Employee::prorogaContratto(DifferenzaDate aggiunta){          
-     fine_contratto.addRemoveGiorni(aggiunta);
+     fine_contratto+=aggiunta;
 }
 
 

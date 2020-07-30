@@ -83,12 +83,12 @@ struct DatiRiparazioneSistemi{
 struct DatiRipristinoSicurezza{
     unsigned int n_problemi_irrsolti;   
     unsigned int n_progetti_in_arrivo;          
-    unsigned int n_criticità_risolte;  
+    unsigned int n_criticita_risolte;
 
     DatiRipristinoSicurezza(unsigned int npi = 0, unsigned int npin = 0, unsigned int ncr = 0):
             n_problemi_irrsolti(npi),
             n_progetti_in_arrivo(npin),
-            n_criticità_risolte(ncr){}
+            n_criticita_risolte(ncr){}
 };
 
 // Campi dati estesi dalla classe BackDev
@@ -97,39 +97,39 @@ struct DatiLatoServer{
     double perc_capo_progetto;
     unsigned int livello_astrazione;
     bool prove_correttezza;
-    bool orientato_ortogonalità;
+    bool orientato_ortogonalita;
 
     DatiLatoServer(double pcp, unsigned int la, bool pc, bool oo):
             perc_capo_progetto(pcp),
             livello_astrazione(la),
             prove_correttezza(pc),
-            orientato_ortogonalità(oo){}
+            orientato_ortogonalita(oo){}
 };
 
 // Campi dati estesi dalla classe DBDev
 
 struct DatiDatabase{
-    double num_attributi_ridondanti_per_entità;
+    double num_attributi_ridondanti_per_entita;
     double speed_up_indicizzazioni;
-    double perc_entità_forma_normale;
+    double perc_entita_forma_normale;
 
     DatiDatabase(double narpe, double sui, double pefn):
-            num_attributi_ridondanti_per_entità(narpe),
+            num_attributi_ridondanti_per_entita(narpe),
             speed_up_indicizzazioni(sui),
-            perc_entità_forma_normale(pefn){}
+            perc_entita_forma_normale(pefn){}
 };
 
 // Campi dati estesi dalla classe FrontDev
 
 struct DatiLatoClient{
     Conv::Libreria libreria;
-    bool orientato_professionalità;
+    bool orientato_professionalita;
     double perc_righe_esterne;        
     double perc_codice_perfezionato; 
 
     DatiLatoClient(Conv::Libreria l, bool op, double pre, double pcp):
             libreria(l),
-            orientato_professionalità(op),
+            orientato_professionalita(op),
             perc_righe_esterne(pre),
             perc_codice_perfezionato(pcp){}
 };
@@ -158,4 +158,4 @@ struct DatiFullStack{
     DatiFullStack(double plb, bool si):
             perc_lavoro_back(plb),
             separa_interfacce(si){}
-}
+};

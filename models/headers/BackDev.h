@@ -20,18 +20,18 @@ public:
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const;
 
-    /**     VELOCITÀ SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual double velocitàScrittura() const;
+    /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
+    virtual double velocitaScrittura() const;
 
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
-    virtual unsigned int riutilizzabilità() const;
+    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
+    virtual unsigned int riutilizzabilita() const;
 
-    bool isOrientatoOrtogonalità() const;
+    bool isOrientatoOrtogonalita() const;
 
 private:
 
@@ -40,7 +40,7 @@ private:
     unsigned int livello_astrazione;
 
     bool prove_correttezza;
-    bool orientato_ortogonalità;
+    bool orientato_ortogonalita;
     
 };
 

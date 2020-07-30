@@ -22,24 +22,24 @@ public:
     /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual void aggiornaMese();
 
-    /**     VELOCITÀ SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual double velocitàScrittura() const;
+    /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
+    virtual double velocitaScrittura() const;
 
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
-    virtual unsigned int riutilizzabilità() const;
+    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
+    virtual unsigned int riutilizzabilita() const;
 
-    bool isOrientatoProfessionalità() const;
+    bool isOrientatoProfessionalita() const;
 
 private:
 
     Conv::Libreria libreria;
     
-    bool orientato_professionaità;
+    bool orientato_professionaita;
 l
     double perc_righe_esterne;         // percentuale delle righe derivanti da strumenti di design automation o codice copiato 
     double perc_codice_perfezionato;   // percentuale di codice esterno perfezionato 

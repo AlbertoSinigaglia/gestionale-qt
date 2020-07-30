@@ -30,12 +30,12 @@ public:
     */
     virtual unsigned int gradoEsperienza()  const; 
  
-    /**     VELOCITÀ SCRITTURA              (metodo reale)
-     * Il metodo offre una stima della velocità di produzione di codice (# righe all' ora) che ci si aspetta dall'impiegato.
+    /**     VELOCITa SCRITTURA              (metodo reale)
+     * Il metodo offre una stima della velocita di produzione di codice (# righe all' ora) che ci si aspetta dall'impiegato.
      * viene calcolato sulla base del linguaggio usato, l'esperienza e altre caratteristiche dei vari ambiti di impiego
-     * Quindi è un valore indipendente dalle caratteristiche di efficienza e produttività dell'impiegato
+     * Quindi è un valore indipendente dalle caratteristiche di efficienza e produttivita dell'impiegato
      */
-    virtual double velocitàScrittura() const;
+    virtual double velocitaScrittura() const;
 
 
 // -------------------
@@ -62,11 +62,11 @@ protected:
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITÀ                (metodo intero)
+    /**     RIUTILIZZABILITa                (metodo intero)
      * Il metodo ritorna un valore corrispondente a una stima del numero di progetti che potrebbero riutilizzare il codice
      * scritto dalo sviluppatroe software in questione.
      */
-    virtual unsigned int riutilizzabilità() const;
+    virtual unsigned int riutilizzabilita() const;
 
     /**     INFLUENZA PROGETTO              (metodo reale)
      * Il metodo ritorna un rapporto che esprime una maggiore o minore influenza nella produzione del progetto

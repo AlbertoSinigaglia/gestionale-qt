@@ -42,7 +42,7 @@ float Hardware::bonusStipendio() const{
 
     // calcolo un bonus che viene assegnato a chi gestisce molti sistemi, questo richiede una lavoro maggiore di organizzazione
     float bonus_quantitativo = calcoloBonusLineare(0.5, static_cast<double>(n_sistemi_gestiti) / 20.0, Conv::bonus_dei_20_sistemi);
-    return Employee::bonusStipendio() + bonus_responsabilità + bonus_quantitativo;
+    return Employee::bonusStipendio() + bonus_responsabilita + bonus_quantitativo;
 }
 
 

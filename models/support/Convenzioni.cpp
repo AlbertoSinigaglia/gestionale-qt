@@ -13,7 +13,7 @@ namespace Conv{         // CONVENZIONI
         JAVA = 1,
         PHP = 2,
         CPP = 3,
-        SWIFT = 4,     
+        SWIFT = 4,
         JAVASCRIPT = 5,
         RUBY = 6,
         SQL =7,
@@ -24,7 +24,7 @@ namespace Conv{         // CONVENZIONI
         BOOTSTRAP = 0,
         JQUERY = 1,
         TREEJS = 2,
-        ANGULAR = 3, 
+        ANGULAR = 3,
         VUEJS = 4
     };
 
@@ -36,11 +36,11 @@ namespace Conv{         // CONVENZIONI
 // --------
 // EMPLOYEE
 // --------
-        
+
     /**
     * coeff_liquidazione:                      (Modificabile)
     *  coefficente (del TFR) * calcolaStipendio() -> ultima retribuzione per una possibile liquidazione
-    */ 
+    */
     const double coeff_liquidazione = 0.889;
 
     /**     PERCENTUALE REMUNERAZIONE
@@ -63,15 +63,15 @@ namespace Conv{         // CONVENZIONI
 
     const double perc_codice_scritto = 0.2;
 
-    const double velocità_cpp = 100;   // righe all'ora
+    const double velocita_cpp = 100;   // righe all'ora
 
     const unsigned int soglia_n_righe_senior = 1000000;
 
-    /*  array di corrispondenze: Linguaggio -> grado relativo di complessità del linguaggio,
-        complessità relativa linguaggio(i) = (a parità di requisito) tempo impiegato per scrivere codice  
+    /*  array di corrispondenze: Linguaggio -> grado relativo di complessita del linguaggio,
+        complessita relativa linguaggio(i) = (a parita di requisito) tempo impiegato per scrivere codice
                                              in linguaggio(i) / quello impiegato usando il C++
     */
-    const float complessità_linguaggio[8] = {0.3f, 0.5f, 0.6f, 1.0f, 0.4f, 0.8f, 0.2f, 0.3f};
+    const float complessita_linguaggio[8] = {0.3f, 0.5f, 0.6f, 1.0f, 0.4f, 0.8f, 0.2f, 0.3f};
 
 
 // -----------
@@ -130,8 +130,8 @@ namespace Conv{         // CONVENZIONI
 
     const double perc_media_capo_progetto = 0.4;
 
-    const double perc_velocità_astrazione_5 = 0.8;
-    const double malus_velocità_prove_corettezza = 0.8;
+    const double perc_velocita_astrazione_5 = 0.8;
+    const double malus_velocita_prove_corettezza = 0.8;
 
     const unsigned int riutilizzo_astrazione_5 = 50;
 
@@ -149,10 +149,10 @@ namespace Conv{         // CONVENZIONI
 // FRONTDEV
 // --------
 
-    /*  array di corrispondenze: Libreria -> grado relativo di esaustività e evolvibilità della libreria,
-        esaustività relativa libreria(i) = numero di unità di codice di tale libreria sfruttate in un progetto mediamente 
-                                            / il numero di unità impiegate con ANGULAR
-        evolvibilità della libreria(i) = numero di anni previsti di aggiornamento delle classi della libreria (i) / quelli previsti per la libreria ANGULAR
+    /*  array di corrispondenze: Libreria -> grado relativo di esaustivita e evolvibilita della libreria,
+        esaustivita relativa libreria(i) = numero di unita di codice di tale libreria sfruttate in un progetto mediamente
+                                            / il numero di unita impiegate con ANGULAR
+        evolvibilita della libreria(i) = numero di anni previsti di aggiornamento delle classi della libreria (i) / quelli previsti per la libreria ANGULAR
     */
     const float esaustivita_libreria[5] = { 0.8 , 1.2 , 0.9 , 1 , 0.5};
     const float evolvibilita_libreria[5] = { 0.9 , 1.1 , 0.7 , 1 , 0.9};
@@ -189,13 +189,13 @@ namespace Conv{         // CONVENZIONI
 // SOFTWARE
 // --------
 
-    // assumo come valore di fondo scala di influenza in un progetto un influenza doppia rispetto a un generico 
-    // sviluppatore software quindi ne attribuisco un bonus 
+    // assumo come valore di fondo scala di influenza in un progetto un influenza doppia rispetto a un generico
+    // sviluppatore software quindi ne attribuisco un bonus
     const float bonus_influenza_progetto_doppia = 100;
-    //bonus complessità del linguaggio rispetto al C++
-    const float bonus_complessità_CPP = 100;
+    //bonus complessita del linguaggio rispetto al C++
+    const float bonus_complessita_CPP = 100;
 
-    // è un malus che esprime in quale percentuale la velocità di scrittura diminuisce per uno sviluppatore con grado Esperienza == 0
+    // è un malus che esprime in quale percentuale la velocita di scrittura diminuisce per uno sviluppatore con grado Esperienza == 0
     const float malus_inseperto_scrittura = 0.2;
 
 // -----------
@@ -219,13 +219,13 @@ namespace Conv{         // CONVENZIONI
 
     // bonus che viene dato all'impiegato che gestisce solo sistemi di sussistenza
     const float bonus_solo_sussistenza = 100;
-    
+
 
 // -------------
 // ITSECURITYDEV
 // -------------
 
-    const float bonus_delle_50_criticità = 100;
+    const float bonus_delle_50_criticita = 100;
 
 // -------
 // BACKDEV
