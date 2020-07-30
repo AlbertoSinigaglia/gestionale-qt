@@ -1,7 +1,7 @@
-#include "Employee.h"
-#include "Data.h"  
-#include "Convenzioni.cpp"
-#include "UsefullMath.cpp"
+#include "../headers/Employee.h"
+#include "../support/Data.h"
+#include "../support/Convenzioni.cpp"
+#include "../support/UsefullMath.cpp"
 #include <math.h>
  
 

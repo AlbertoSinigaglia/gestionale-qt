@@ -1,5 +1,5 @@
 #include "gestionale.h"
-
+#include "collections/DynamicArray.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

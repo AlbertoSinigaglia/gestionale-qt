@@ -14,7 +14,6 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
-#include "CSVInterface.h"
 namespace CSVParserDesign{
     template<class InIter, class T, class Funct>
     void split(InIter first, InIter last, const T&t, Funct f){

@@ -6,58 +6,58 @@
 #define CSVPARSER_DYNAMICARRAY_H
 #include <memory>
 template<class T> class DynamicArray;
-template<class T> class iterator;
-template<class T> class const_iterator;
+template<class T> class dynamic_array_iterator;
+template<class T> class const_dynamic_array_iterator;
 
-template<class T>const_iterator<T> operator+(const const_iterator<T>& iter, int  diff);
-template<class T>const_iterator<T> operator+(int  diff, const const_iterator<T>& iter);
-template<class T>const_iterator<T> operator-(int  diff, const const_iterator<T>& iter);
-template<class T>const_iterator<T> operator-(const const_iterator<T>& iter, int  diff);
+template<class T>const_dynamic_array_iterator<T> operator+(const const_dynamic_array_iterator<T>& iter, int  diff);
+template<class T>const_dynamic_array_iterator<T> operator+(int  diff, const const_dynamic_array_iterator<T>& iter);
+template<class T>const_dynamic_array_iterator<T> operator-(int  diff, const const_dynamic_array_iterator<T>& iter);
+template<class T>const_dynamic_array_iterator<T> operator-(const const_dynamic_array_iterator<T>& iter, int  diff);
 
-template<class T> iterator<T> operator+(const iterator<T>& iter, int  diff);
-template<class T> iterator<T> operator+(int  diff, const iterator<T>& iter);
-template<class T> iterator<T> operator-(int  diff, const iterator<T>& iter);
-template<class T> iterator<T> operator-(const iterator<T>& iter, int  diff);
+template<class T> dynamic_array_iterator<T> operator+(const dynamic_array_iterator<T>& iter, int  diff);
+template<class T> dynamic_array_iterator<T> operator+(int  diff, const dynamic_array_iterator<T>& iter);
+template<class T> dynamic_array_iterator<T> operator-(int  diff, const dynamic_array_iterator<T>& iter);
+template<class T> dynamic_array_iterator<T> operator-(const dynamic_array_iterator<T>& iter, int  diff);
 
 template<class T>
-class const_iterator  {
+class const_dynamic_array_iterator  {
     friend DynamicArray<T>;
-    friend iterator<T>;
+    friend dynamic_array_iterator<T>;
     /**
      * Operator + : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator++ (o operator-- se diff è negativo) diff volte, su una copia di iter
      */
-    friend const_iterator operator+<>(const const_iterator& iter, int  diff);
+    friend const_dynamic_array_iterator operator+<>(const const_dynamic_array_iterator& iter, int  diff);
     /**
      * Operator + : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator++ (o operator-- se diff è negativo) diff volte, su una copia di iter
      */
-    friend const_iterator operator+<>(int  diff, const const_iterator& iter);
+    friend const_dynamic_array_iterator operator+<>(int  diff, const const_dynamic_array_iterator& iter);
     /**
      * Operator - : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator-- (o operator++ se diff è positivo) diff volte, su una copia di iter
      */
-    friend const_iterator operator-<>(int  diff, const const_iterator& iter);
+    friend const_dynamic_array_iterator operator-<>(int  diff, const const_dynamic_array_iterator& iter);
     /**
      * Operator - : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator-- (o operator++ se diff è positivo) diff volte, su una copia di iter
      */
-    friend const_iterator operator-<>(const const_iterator& iter, int  diff);
+    friend const_dynamic_array_iterator operator-<>(const const_dynamic_array_iterator& iter, int  diff);
 private:
     /**
      * Costruttore privato di supporto
      * @param container : riferimento al contenitore a cui si riferisce
      * @param position : posizione corrente dell'iteratore dentro al contenitore
      */
-    const_iterator(const DynamicArray<T>* container, unsigned int position) :
+    const_dynamic_array_iterator(const DynamicArray<T>* container, unsigned int position) :
             arr(container),
             pos(static_cast<int>(position))
     {}
@@ -65,47 +65,47 @@ private:
     int pos;
 public:
     /**
-     * Operator - : restituisce la distanza tra i due iteratori
+     * Operator - : restituisce la distanza tra i due dynamic_array_iteratori
      * @param iter : iteratore a cui confrontare this
-     * @return distanza tra i due iteratori
+     * @return distanza tra i due dynamic_array_iteratori
      */
-    int operator-(const const_iterator& iter) const;
+    int operator-(const const_dynamic_array_iterator& iter) const;
     /**
-     * Operator == : controlla se i due iteratori puntano allo stesso elemento
-     * @param it : iterator a cui confrontare this
+     * Operator == : controlla se i due dynamic_array_iteratori puntano allo stesso elemento
+     * @param it : dynamic_array_iterator a cui confrontare this
      * @return
      *          true se puntano allo stesso contenitore e alla stessa sua posizione
      *          false altrimenti
      */
-    bool operator==(const const_iterator &it) const;
+    bool operator==(const const_dynamic_array_iterator &it) const;
     /**
-     * Operator != : controlla se i due iteratori puntano a elementi diversi
-     * @param it : iterator a cui confrontare this
+     * Operator != : controlla se i due dynamic_array_iteratori puntano a elementi diversi
+     * @param it : dynamic_array_iterator a cui confrontare this
      * @return
      *          true se puntano a contenitori diversi o se si riferiscono a posizioni diverse
      *          false altrimenti
      */
-    bool operator!=(const const_iterator &it) const;
+    bool operator!=(const const_dynamic_array_iterator &it) const;
     /**
      * Operator ++ (post-incrementato) : avanza il puntatore e restituisce il suo stato iniziale
      * @return puntatore copia di this allo stato iniziale, this invece avanzato di 1
      */
-    const_iterator operator++(int);
+    const_dynamic_array_iterator operator++(int);
     /**
      * Operator ++ (pre-incrementato) : avanza il puntatore di una posizione e ritorna un riferimento ad esso
      * @return il puntatore di invocazione avanzato di una posizione
      */
-    const_iterator& operator++();
+    const_dynamic_array_iterator& operator++();
     /**
      * Operator -- (post-decrementato) : indietreggia il puntatore e restituisce il suo stato iniziale
      * @return puntatore copia di this allo stato iniziale, this invece indietreggiato di 1
      */
-    const_iterator operator--(int);
+    const_dynamic_array_iterator operator--(int);
     /**
      * Operator -- (pre-decrementato) : indietreggia il puntatore e ne restituisce il riferimento
      * @return il puntatore di invocazione avanzato di una posizione
      */
-    const_iterator &operator--();
+    const_dynamic_array_iterator &operator--();
     /**
      * Operator * : ritorna il riferimento dell'elemento corrente
      * @return riferimento costante all'elemento corrente
@@ -127,99 +127,99 @@ public:
      * @param diff : posizioni da far avanzare l'iteratore
      * @return riferimento al puntatore avanzato di diff posizioni
      */
-    const_iterator& operator+=(unsigned int diff);
+    const_dynamic_array_iterator& operator+=(unsigned int diff);
     /**
      * Operator -= : fa indietreggiare (se diff>0 , altrimenti avanzare) l'iteratore di diff posizioni
      * @param diff : posizioni da far avanzare l'iteratore
      * @return riferimento al puntatore indietreggiato (se diff>0 , altrimenti avanzare) di diff posizioni
      */
-    const_iterator& operator-=(unsigned int diff);
+    const_dynamic_array_iterator& operator-=(unsigned int diff);
 };
 
 template<class T>
-class iterator {
+class dynamic_array_iterator {
     friend DynamicArray<T>;
-    friend const_iterator<T>;
+    friend const_dynamic_array_iterator<T>;
     /**
      * Operator + : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator++ (o operator-- se diff è negativo) diff volte, su una copia di iter
      */
-    friend iterator operator+<>(const iterator& iter, int  diff);
+    friend dynamic_array_iterator operator+<>(const dynamic_array_iterator& iter, int  diff);
     /**
      * Operator + : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator++ (o operator-- se diff è negativo) diff volte, su una copia di iter
      */
-    friend iterator operator+<>(int  diff, const iterator& iter);
+    friend dynamic_array_iterator operator+<>(int  diff, const dynamic_array_iterator& iter);
     /**
      * Operator - : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator-- (o operator++ se diff è positivo) diff volte, su una copia di iter
      */
-    friend iterator operator-<>(int  diff, const iterator& iter);
+    friend dynamic_array_iterator operator-<>(int  diff, const dynamic_array_iterator& iter);
     /**
      * Operator - : ritorna un iteratore che dista diff posizioni da iter(non fa nessun controllo sui bound)
      * @param iter : iteratore di partenza
      * @param diff :  posizione da avanzare o indietreggiare, in base a sign(diff)
      * @return puntatore che corrisponde a invocare operator-- (o operator++ se diff è positivo) diff volte, su una copia di iter
      */
-    friend iterator operator-<>(const iterator& iter, int  diff);
+    friend dynamic_array_iterator operator-<>(const dynamic_array_iterator& iter, int  diff);
 private:
     /**
      * Costruttore privato di supporto
      * @param container : riferimento al contenitore a cui si riferisce
      * @param position : posizione corrente dell'iteratore dentro al contenitore
      */
-    iterator(DynamicArray<T>* container, unsigned int position) : arr(container), pos(static_cast<int>(position)) {}
+    dynamic_array_iterator(DynamicArray<T>* container, unsigned int position) : arr(container), pos(static_cast<int>(position)) {}
     DynamicArray<T>* arr;
     int pos;
 public:
     /**
-     * Operator - : restituisce la distanza tra i due iteratori
+     * Operator - : restituisce la distanza tra i due dynamic_array_iteratori
      * @param iter : iteratore a cui confrontare this
-     * @return distanza tra i due iteratori
+     * @return distanza tra i due dynamic_array_iteratori
      */
-    int operator-(const iterator& iter) const;
+    int operator-(const dynamic_array_iterator& iter) const;
     /**
-     * Operator == : controlla se i due iteratori puntano allo stesso elemento
-     * @param it : iterator a cui confrontare this
+     * Operator == : controlla se i due dynamic_array_iteratori puntano allo stesso elemento
+     * @param it : dynamic_array_iterator a cui confrontare this
      * @return
      *          true se puntano allo stesso contenitore e alla stessa sua posizione
      *          false altrimenti
      */
-    bool operator==(const iterator &it) const ;
+    bool operator==(const dynamic_array_iterator &it) const ;
     /**
-     * Operator != : controlla se i due iteratori puntano a elementi diversi
-     * @param it : iterator a cui confrontare this
+     * Operator != : controlla se i due dynamic_array_iteratori puntano a elementi diversi
+     * @param it : dynamic_array_iterator a cui confrontare this
      * @return
      *          true se puntano a contenitori diversi o se si riferiscono a posizioni diverse
      *          false altrimenti
      */
-    bool operator!=(const iterator &it) const ;
+    bool operator!=(const dynamic_array_iterator &it) const ;
     /**
      * Operator ++ (post-incrementato) : avanza il puntatore e restituisce il suo stato iniziale
      * @return puntatore copia di this allo stato iniziale, this invece avanzato di 1
      */
-    iterator operator++(int) ;
+    dynamic_array_iterator operator++(int) ;
     /**
      * Operator ++ (preincrementato) : avanza il puntatore di una posizione e ritorna un riferimento ad esso
      * @return
      */
-    iterator &operator++() ;
+    dynamic_array_iterator &operator++() ;
     /**
      * Operator -- (post-decrementato) : indietreggia il puntatore e restituisce il suo stato iniziale
      * @return puntatore copia di this allo stato iniziale, this invece indietreggiato di 1
      */
-    iterator operator--(int) ;
+    dynamic_array_iterator operator--(int) ;
     /**
      * Operator -- (pre-decrementato) : indietreggia il puntatore e ne restituisce il riferimento
      * @return il puntatore di invocazione avanzato di una posizione
      */
-    iterator &operator--() ;
+    dynamic_array_iterator &operator--() ;
     /**
      * Operator * : ritorna il riferimento dell'elemento corrente
      * @return riferimento all'elemento corrente
@@ -241,24 +241,24 @@ public:
      * @param diff : posizioni da far avanzare l'iteratore
      * @return riferimento al puntatore avanzato di diff posizioni
      */
-    iterator& operator+=(int diff);
+    dynamic_array_iterator& operator+=(int diff);
     /**
      * Operator -= : fa indietreggiare (se diff>0 , altrimenti avanzare) l'iteratore di diff posizioni
      * @param diff : posizioni da far avanzare l'iteratore
      * @return riferimento al puntatore indietreggaito (se diff>0 , altrimenti avanzare) di diff posizioni
      */
-    iterator& operator-=(int diff);
+    dynamic_array_iterator& operator-=(int diff);
     /**
-     * Cast a const_iterator
-     * @return promuove this a const_iterator
+     * Cast a const_dynamic_array_iterator
+     * @return promuove this a const_dynamic_array_iterator
      */
-    operator const_iterator<T> () const;
+    operator const_dynamic_array_iterator<T> () const;
 };
 template<class T>
 class DynamicArray{
 public:
-    typedef iterator<T> iterator;
-    typedef const_iterator<T> const_iterator;
+    typedef dynamic_array_iterator<T> iterator;
+    typedef const_dynamic_array_iterator<T> const_iterator;
 
     /**
      *  Costruttore di default della classe (rappresenta un contenitore vuoto)
@@ -309,11 +309,11 @@ public:
     explicit DynamicArray(unsigned int s, const T& el = T()) ;
     /**
      * Costruttore : copia gli elementi [first , last) in this
-     * @tparam InputIt : Iteratore che sia compatibile con InputIterator (check : http://www.cplusplus.com/reference/iterator/InputIterator/)
+     * @tparam InputIt : iteratore che sia compatibile con Inputdynamic_array_iterator (check : http://www.cplusplus.com/reference/dynamic_array_iterator/Inputdynamic_array_iterator/)
      * @param first: posizione primo elemento
      * @param last: posizione a cui fermarsi
      */
-    template<class InputIt, typename = std::enable_if_t<!std::is_convertible_v<InputIt, const_iterator>>>
+    template<class InputIt, typename = std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator>>>
     DynamicArray(const InputIt& first, const InputIt& last );
     DynamicArray(const const_iterator& first, const const_iterator& last );
     /**
@@ -422,16 +422,16 @@ public:
     iterator insert(const const_iterator& pos, unsigned int count, const T& value );
     /**
      * Inserisce dalla posizione pos gli elementi [first,last)
-     * @tparam InputIt : Iteratore che sia compatibile con InputIterator (check : http://www.cplusplus.com/reference/iterator/InputIterator/)
+     * @tparam InputIt : iteratore che sia compatibile con Inputdynamic_array_iterator (check : http://www.cplusplus.com/reference/dynamic_array_iterator/Inputdynamic_array_iterator/)
      * @param pos : iteratore valido rappresentante la posizione a cui iniziare a inserire
      * @param first : primo elemento da copiare
      * @param last : iteratore rappresentante la fine degli elementi da inserire
      * @return itertore al primo elemento inserito
      */
     template< class InputIt >
-    std::enable_if_t<!std::is_convertible_v<InputIt, const_iterator>, iterator> insert(const const_iterator& pos, const InputIt& first, const InputIt& last );
-    template< class Const_Iterator >
-    std::enable_if_t<std::is_convertible_v<Const_Iterator, const_iterator>, iterator> insert(const const_iterator& pos, const Const_Iterator& first, const Const_Iterator& last );
+    std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> insert(const const_dynamic_array_iterator<T>& pos, const InputIt& first, const InputIt& last );
+    template< class Const_dynamic_array_iterator >
+    std::enable_if_t<std::is_convertible_v<const_dynamic_array_iterator<T>, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> insert(const const_dynamic_array_iterator<T>& pos, const Const_dynamic_array_iterator& first, const Const_dynamic_array_iterator& last );
     /**
      * Inserisce alla posizione pos un nuovo elemento construito con args
      * @tparam Args : tipi parametri da passare al costruttore di T
@@ -588,189 +588,189 @@ private:
 
 
 /********************************/
-/***         iterator         ***/
+/***         dynamic_array_iterator         ***/
 /********************************/
 template<class T>
-iterator<T> operator+(const iterator<T> &iter, int diff) {
-    return iterator(iter.arr, iter.pos + diff);
+dynamic_array_iterator<T> operator+(const dynamic_array_iterator<T> &iter, int diff) {
+    return dynamic_array_iterator(iter.arr, iter.pos + diff);
 }
 
 template<class T>
-iterator<T> operator+(int diff, const iterator<T> &iter){
+dynamic_array_iterator<T> operator+(int diff, const dynamic_array_iterator<T> &iter){
     return iter + diff;
 }
 
 template<class T>
-iterator<T> operator-(int diff, const iterator<T> &iter) {
+dynamic_array_iterator<T> operator-(int diff, const dynamic_array_iterator<T> &iter) {
     return iter + -diff;
 }
 
 template<class T>
-iterator<T> operator-(const iterator<T> &iter, int diff) {
+dynamic_array_iterator<T> operator-(const dynamic_array_iterator<T> &iter, int diff) {
     return iter + -diff;
 }
 
 template<class T>
-int iterator<T>::operator-(const iterator &iter) const {
+int dynamic_array_iterator<T>::operator-(const dynamic_array_iterator &iter) const {
     return pos - iter.pos;
 }
 
 template<class T>
-bool DynamicArray<T>::iterator::operator==(const iterator &it) const{
+bool dynamic_array_iterator<T>::operator==(const dynamic_array_iterator<T> &it) const{
     return arr == it.arr && pos == it.pos;
 }
 
 template<class T>
-bool DynamicArray<T>::iterator::operator!=(const iterator &it) const {
+bool dynamic_array_iterator<T>::operator!=(const dynamic_array_iterator &it) const {
     return !(*this == it);
 }
 
 template<class T>
-iterator<T> DynamicArray<T>::iterator::operator++(int){
+dynamic_array_iterator<T> dynamic_array_iterator<T>::operator++(int){
     auto cp(*this);
     ++pos;
     return cp;
 }
 
 template<class T>
-iterator<T> &DynamicArray<T>::iterator::operator++() {
+dynamic_array_iterator<T> &dynamic_array_iterator<T>::operator++() {
     ++pos;
     return *this;
 }
 
 template<class T>
-iterator<T> DynamicArray<T>::iterator::operator--(int) {
+dynamic_array_iterator<T> dynamic_array_iterator<T>::operator--(int) {
     auto cp(*this);
     --pos;
     return cp;
 }
 
 template<class T>
-iterator<T> &DynamicArray<T>::iterator::operator--() {
+dynamic_array_iterator<T> &dynamic_array_iterator<T>::operator--() {
     --pos;
     return *this;
 }
 
 template<class T>
-T &DynamicArray<T>::iterator::operator*() const {
+T &dynamic_array_iterator<T>::operator*() const {
     return (*arr)[pos];
 }
 
 template<class T>
-T *DynamicArray<T>::iterator::operator->() const {
+T *dynamic_array_iterator<T>::operator->() const {
     return &((*arr)[pos]);
 }
 
 template<class T>
-T &DynamicArray<T>::iterator::operator[](unsigned int diff) {
+T &dynamic_array_iterator<T>::operator[](unsigned int diff) {
     return (*arr)[pos+diff];
 }
 
 template<class T>
-iterator<T> &DynamicArray<T>::iterator::operator+=(int diff) {
+dynamic_array_iterator<T> &dynamic_array_iterator<T>::operator+=(int diff) {
     pos+= diff;
     return *this;
 }
 
 template<class T>
-iterator<T> &DynamicArray<T>::iterator::operator-=(int diff) {
+dynamic_array_iterator<T> &dynamic_array_iterator<T>::operator-=(int diff) {
     pos-= diff;
     return *this;
 }
 
 template<class T>
-iterator<T>::operator const_iterator<T>() const{
-    return const_iterator(arr, pos);
+dynamic_array_iterator<T>::operator const_dynamic_array_iterator<T>() const{
+    return const_dynamic_array_iterator(arr, pos);
 }
 
 
 /********************************/
-/***      const_iterator      ***/
+/***      const_dynamic_array_iterator      ***/
 /********************************/
 template<class T>
-const_iterator<T> operator+(const const_iterator<T> &iter, int diff) {
-    return const_iterator(iter.arr, iter.pos + diff);
+const_dynamic_array_iterator<T> operator+(const const_dynamic_array_iterator<T> &iter, int diff) {
+    return const_dynamic_array_iterator(iter.arr, iter.pos + diff);
 }
 
 template<class T>
-const_iterator<T> operator+(int diff, const const_iterator<T> &iter) {
+const_dynamic_array_iterator<T> operator+(int diff, const const_dynamic_array_iterator<T> &iter) {
     return iter + diff;
 }
 
 template<class T>
-const_iterator<T> operator-(int diff, const const_iterator<T> &iter) {
+const_dynamic_array_iterator<T> operator-(int diff, const const_dynamic_array_iterator<T> &iter) {
     return iter + -diff;
 }
 
 template<class T>
-const_iterator<T> operator-(const const_iterator<T> &iter, int diff) {
+const_dynamic_array_iterator<T> operator-(const const_dynamic_array_iterator<T> &iter, int diff) {
     return iter + -diff;
 }
 
 template<class T>
-int const_iterator<T>::operator-(const const_iterator &iter) const {
+int const_dynamic_array_iterator<T>::operator-(const const_dynamic_array_iterator &iter) const {
     return pos - iter.pos;
 }
 
 template<class T>
-bool const_iterator<T>::operator==(const const_iterator &it) const {
+bool const_dynamic_array_iterator<T>::operator==(const const_dynamic_array_iterator &it) const {
     return arr == it.arr && pos == it.pos;
 }
 
 template<class T>
-bool const_iterator<T>::operator!=(const const_iterator &it) const {
+bool const_dynamic_array_iterator<T>::operator!=(const const_dynamic_array_iterator &it) const {
     return !(*this == it);
 }
 
 template<class T>
-const_iterator<T> const_iterator<T>::operator++(int) {
+const_dynamic_array_iterator<T> const_dynamic_array_iterator<T>::operator++(int) {
     auto cp(*this);
     ++pos;
     return cp;
 }
 
 template<class T>
-const_iterator<T> &const_iterator<T>::operator++()  {
+const_dynamic_array_iterator<T> &const_dynamic_array_iterator<T>::operator++()  {
     ++pos;
     return *this;
 }
 
 template<class T>
-const_iterator<T> const_iterator<T>::operator--(int) {
+const_dynamic_array_iterator<T> const_dynamic_array_iterator<T>::operator--(int) {
     auto cp(*this);
     --pos;
     return cp;
 }
 
 template<class T>
-const_iterator<T> &const_iterator<T>::operator--() {
+const_dynamic_array_iterator<T> &const_dynamic_array_iterator<T>::operator--() {
     --pos;
     return *this;
 }
 
 template<class T>
-const T &const_iterator<T>::operator*() const {
+const T &const_dynamic_array_iterator<T>::operator*() const {
     return (*arr)[pos];
 }
 
 template<class T>
-const T *const_iterator<T>::operator->() const  {
+const T *const_dynamic_array_iterator<T>::operator->() const  {
     return &((*arr)[pos]);
 }
 
 template<class T>
-const T &const_iterator<T>::operator[](unsigned int diff) {
+const T &const_dynamic_array_iterator<T>::operator[](unsigned int diff) {
     return (*arr)[pos+diff];
 }
 
 template<class T>
-const_iterator<T> &const_iterator<T>::operator+=(unsigned int diff) {
+const_dynamic_array_iterator<T> &const_dynamic_array_iterator<T>::operator+=(unsigned int diff) {
     pos+= static_cast<int>(diff);
     return *this;
 }
 
 template<class T>
-const_iterator<T> &const_iterator<T>::operator-=(unsigned int diff) {
+const_dynamic_array_iterator<T> &const_dynamic_array_iterator<T>::operator-=(unsigned int diff) {
     pos-= static_cast<int>(diff);
     return *this;
 }
@@ -843,11 +843,11 @@ DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last) {
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(const DynamicArray::const_iterator &first, const DynamicArray::const_iterator &last) {
+DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, const const_dynamic_array_iterator<T> &last) {
     auto dist = last - first;
     size_ = capacity_ = dist;
     p = std::make_unique<T[]>(dist);
-    iterator it(this, first.pos);
+    dynamic_array_iterator it(this, first.pos);
     for(unsigned int i = 0; i < size_; ++i) {
         p[i] = *it;
         ++it;
@@ -897,7 +897,7 @@ bool DynamicArray<T>::empty() const {
 
 template<class T>
 template<class... Args>
-typename DynamicArray<T>::iterator DynamicArray<T>::emplace(const DynamicArray::const_iterator &pos, Args &&... args) {
+dynamic_array_iterator<T> DynamicArray<T>::emplace(const const_dynamic_array_iterator<T> &pos, Args &&... args) {
     prepare(1);
     if(pos == end()) {
         p[size_] = T(std::forward<Args>(args)...);
@@ -909,7 +909,7 @@ typename DynamicArray<T>::iterator DynamicArray<T>::emplace(const DynamicArray::
             p[i + 1] = p[i];
         p[pos.pos] = T(std::forward<Args>(args)...);
         ++size_;
-        return iterator(this, pos.pos);
+        return dynamic_array_iterator(this, pos.pos);
     }
 }
 
@@ -954,27 +954,27 @@ void DynamicArray<T>::push_back(T &&value) {
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::insert(const DynamicArray::const_iterator &pos, const T &value) {
+dynamic_array_iterator<T> DynamicArray<T>::insert(const const_dynamic_array_iterator<T> &pos, const T &value) {
     prepare(1);
     for( int i = size_-1; i >= pos.pos; --i)
         p[i+1]= std::move(p[i]);
     p[pos.pos] = value;
     ++size_;
-    return iterator(this, pos.pos);
+    return dynamic_array_iterator(this, pos.pos);
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::insert(const DynamicArray::const_iterator &pos, T &&value) {
+dynamic_array_iterator<T> DynamicArray<T>::insert(const const_dynamic_array_iterator<T> &pos, T &&value) {
     prepare(1);
     for(int i = size_-1; i >= pos.pos; --i)
         p[i+1]= std::move(p[i]);
     p[pos.pos] = std::move(value);
     ++size_;
-    return iterator(this, pos.pos);
+    return dynamic_array_iterator(this, pos.pos);
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::insert(const DynamicArray::const_iterator &pos, unsigned int count, const T &value) {
+dynamic_array_iterator<T> DynamicArray<T>::insert(const const_dynamic_array_iterator<T> &pos, unsigned int count, const T &value) {
     if(count > 0){
         prepare(count);
         for(int i = size_-1; i >= pos.pos; --i)
@@ -983,26 +983,26 @@ typename DynamicArray<T>::iterator DynamicArray<T>::insert(const DynamicArray::c
             p[i] = value;
         size_+=count;
     }
-    return iterator(this, pos.pos);
+    return dynamic_array_iterator(this, pos.pos);
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::erase(const DynamicArray::const_iterator &pos) {
+dynamic_array_iterator<T> DynamicArray<T>::erase(const const_dynamic_array_iterator<T> &pos) {
     if(pos != end() && !empty()) {
         for (int i = pos.pos; i < size_; ++i) {
             p[i] = std::move(p[i+1]);
         }
         --size_;
-        return iterator(this, pos.pos);
+        return dynamic_array_iterator(this, pos.pos);
     }
     return end();
 }
 
 template<class T>
-void DynamicArray<T>::erase(const DynamicArray::const_iterator &first, const DynamicArray::const_iterator &last) {
+void DynamicArray<T>::erase(const const_dynamic_array_iterator<T> &first, const const_dynamic_array_iterator<T> &last) {
     if(first != last) {
-        iterator l_(this, last.pos);
-        iterator f_(this, first.pos);
+        dynamic_array_iterator l_(this, last.pos);
+        dynamic_array_iterator f_(this, first.pos);
         while (f_ != l_)
             erase(--l_);
     }
@@ -1015,18 +1015,18 @@ void DynamicArray<T>::pop_back() {
 
 template<class T>
 template< class InputIt >
-std::enable_if_t<!std::is_convertible_v<InputIt, typename DynamicArray<T>::const_iterator>, typename DynamicArray<T>::iterator> DynamicArray<T>::insert(const typename DynamicArray<T>::const_iterator& pos, const InputIt& first, const InputIt& last ){
+std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> DynamicArray<T>::insert(const const_dynamic_array_iterator<T>& pos, const InputIt& first, const InputIt& last ){
     int dist = std::distance(first, last);
     insert_distance(dist, pos, first);
-    return iterator(this, pos.pos);
+    return dynamic_array_iterator(this, pos.pos);
 }
 
 template<class T>
-template< class Const_Iterator>
-std::enable_if_t<std::is_convertible_v<Const_Iterator, typename DynamicArray<T>::const_iterator>, typename DynamicArray<T>::iterator> DynamicArray<T>::insert(const typename DynamicArray<T>::const_iterator& pos, const Const_Iterator& first, const Const_Iterator& last ) {
+template< class Const_dynamic_array_iterator>
+std::enable_if_t<std::is_convertible_v<const_dynamic_array_iterator<T>, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> DynamicArray<T>::insert(const const_dynamic_array_iterator<T>& pos, const Const_dynamic_array_iterator& first, const Const_dynamic_array_iterator& last ) {
     int dist = last - first;
     insert_distance(dist, pos, first);
-    return iterator(this, pos.pos);
+    return dynamic_array_iterator(this, pos.pos);
 }
 
 template<class T>
@@ -1044,33 +1044,33 @@ T &DynamicArray<T>::emplace_back(Args &&... args) {
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::begin() {
-    return iterator(this, 0);
+dynamic_array_iterator<T> DynamicArray<T>::begin() {
+    return dynamic_array_iterator(this, 0);
 }
 
 template<class T>
-typename DynamicArray<T>::const_iterator DynamicArray<T>::begin() const {
-    return const_iterator(this, 0);
+const_dynamic_array_iterator<T> DynamicArray<T>::begin() const {
+    return const_dynamic_array_iterator(this, 0);
 }
 
 template<class T>
-typename DynamicArray<T>::const_iterator DynamicArray<T>::cbegin() const {
-    return const_iterator(this, 0);
+const_dynamic_array_iterator<T> DynamicArray<T>::cbegin() const {
+    return const_dynamic_array_iterator(this, 0);
 }
 
 template<class T>
-typename DynamicArray<T>::iterator DynamicArray<T>::end() {
-    return iterator(this, size_);
+dynamic_array_iterator<T> DynamicArray<T>::end() {
+    return dynamic_array_iterator(this, size_);
 }
 
 template<class T>
-typename DynamicArray<T>::const_iterator DynamicArray<T>::end() const  {
-    return const_iterator(this, size_);
+const_dynamic_array_iterator<T> DynamicArray<T>::end() const  {
+    return const_dynamic_array_iterator(this, size_);
 }
 
 template<class T>
-typename DynamicArray<T>::const_iterator DynamicArray<T>::cend() const  {
-    return const_iterator(this, size_);
+const_dynamic_array_iterator<T> DynamicArray<T>::cend() const  {
+    return const_dynamic_array_iterator(this, size_);
 }
 
 template<class T>
@@ -1135,7 +1135,7 @@ bool DynamicArray<T>::operator>=(const DynamicArray &other) const {
 
 template<class T>
 template<class Iter>
-void DynamicArray<T>::insert_distance(int dist, const DynamicArray::const_iterator &pos, const Iter &first) {
+void DynamicArray<T>::insert_distance(int dist, const const_dynamic_array_iterator<T> &pos, const Iter &first) {
     if(dist > 0){
         for(int i = 0 ; i < dist ; ++i)
             insert( pos + i , *(first + i));

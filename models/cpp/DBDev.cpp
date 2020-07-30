@@ -2,7 +2,7 @@
 // Created by Alberto Sinigaglia on 10/04/2020.
 //
 
-#include "DBDev.h"
+#include "../headers/DBDev.h"
 
 
 unsigned int DBDev::calcolaStipendio() const {

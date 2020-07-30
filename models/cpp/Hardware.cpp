@@ -2,7 +2,7 @@
 // Created by Alberto Sinigaglia on 05/04/2020.
 //
  
-#include "Hardware.h" 
+#include "../headers/Hardware.h"
 
  
 Hardware::Hardware(Persona persona, DatiLavoratore dati_lavoratore, DatiSistemi dati_sistemi):

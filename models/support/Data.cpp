@@ -11,8 +11,8 @@ int Data::giorniDelMese(unsigned int mese_, int anno_) {
 }
 
 Data Data::oggi() {
-    std::time_t now = time(nullptr);
-    tm *lt = std::localtime(&now);
+    time_t now = time(nullptr);
+    tm *lt = localtime(&now);
     return Data(lt->tm_year + 1900, lt->tm_mon + 1 , lt->tm_mday);
 }
 

@@ -2,7 +2,7 @@
 // Created by Alberto Sinigaglia on 10/04/2020.
 //
 
-#include "GUIDev.h"
+#include "../headers/GUIDev.h"
 
 unsigned int GUIDev::calcolaStipendio() const {
     auto bonus_righe_codice = 0.0f;

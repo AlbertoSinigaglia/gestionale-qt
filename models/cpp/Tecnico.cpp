@@ -2,7 +2,7 @@
 // Created by Alberto Sinigaglia on 10/04/2020.
 //
  
-#include "Tecnico.h"
+#include "../headers/Tecnico.h"
 
 
 Tecnico::Tecnico(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione, DatiSistemi dati_sistemi, DatiRiparazioneSistemi dati_riparazione_sistemi):
