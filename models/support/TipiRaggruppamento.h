@@ -123,14 +123,12 @@ struct DatiDatabase{
 
 struct DatiLatoClient{
     Conv::Libreria libreria;
-    bool orientato_professionalita;
-    double perc_righe_esterne;        
+    bool orientato_professionalita;     
     double perc_codice_perfezionato; 
 
-    DatiLatoClient(Conv::Libreria l, bool op, double pre, double pcp):
+    DatiLatoClient(Conv::Libreria l, bool op, double pcp):
             libreria(l),
             orientato_professionalita(op),
-            perc_righe_esterne(pre),
             perc_codice_perfezionato(pcp){}
 };
 

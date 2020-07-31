@@ -1,7 +1,4 @@
-//
-// Created by Alberto Sinigaglia on 05/04/2020.
-//
- 
+
 #include "../headers/Hardware.h"
 
  

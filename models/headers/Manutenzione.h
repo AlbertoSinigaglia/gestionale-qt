@@ -11,9 +11,9 @@ public:
     Manutenzione(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione);
 
     /**     PERCENTUALE RIPRISTINO                  (metodo reale  da 0 a 1)
-     * Il metodo indica con una percentuale il grado di ripristino della situazione di normalità sulla base del lavoro svolto
+     * Il metodo indica con una percentuale il grado di ripristino della situazione di normalita sulla base del lavoro svolto
      * a partire da inizio mese fin ora. 
-     *          La situazione di normalità è uno stato del sistema produttivo dove non sono più necessari gli interventi
+     *          La situazione di normalita è uno stato del sistema produttivo dove non sono più necessari gli interventi
      *          di manutanzione dell'impiegato (è pertanto riferita alla tipoligia specifica del suo lavoro)
      */
     virtual double percRipristino() const = 0;
@@ -37,11 +37,11 @@ protected:
      */
     virtual float valoreMedioRiparazione() const = 0;
 
-    /**     QUANTITÀ CONSIDEREVOLE RIPARAZIONI 
-     * Il metodo ritorna la quantità di manutenzioni che è considerata meritevole (per il tipo di mansione che svolge)
+    /**     QUANTITa CONSIDEREVOLE RIPARAZIONI 
+     * Il metodo ritorna la quantita di manutenzioni che è considerata meritevole (per il tipo di mansione che svolge)
      * in un mese per aggiudicarsi il bonus: bonus_n_riparazioni_considerevole (convenzione)
      */
-    virtual unsigned int quantitàConsiderevoleRiparazioni() const = 0;
+    virtual unsigned int quantitaConsiderevoleRiparazioni() const = 0;
 
     unsigned int getPercRiparazioniInefficaci() const;
     unsigned int getNRiparazioniMese() const;

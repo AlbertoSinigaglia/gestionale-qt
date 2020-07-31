@@ -1,7 +1,3 @@
-//
-// Created by Alberto Sinigaglia on 09/04/2020.
-//
- 
 #ifndef CSVPARSER_BACKDEV_H
 #define CSVPARSER_BACKDEV_H
  
@@ -25,8 +21,8 @@ public:
 
 protected:
 
-    /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const;
+    /*      INFLUENZA PROGETTO              (metodo che eredita l'obbiettivo della classe base)*/
+    virtual double influenzaProgetto() const; 
 
     /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
     virtual unsigned int riutilizzabilita() const;

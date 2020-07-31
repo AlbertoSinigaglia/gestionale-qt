@@ -134,9 +134,7 @@ namespace Conv{         // CONVENZIONI
     const double malus_velocita_prove_corettezza = 0.8;
 
     const unsigned int riutilizzo_astrazione_5 = 50;
-
-    const float valore_capo_un_progetto = 100;
-    const float valore_astrazione_5_un_progetto = 100;
+    const float valore_capo_progetto = 10;
 
 // -----
 // DBDEV
@@ -150,7 +148,7 @@ namespace Conv{         // CONVENZIONI
 // --------
 
     /*  array di corrispondenze: Libreria -> grado relativo di esaustivita e evolvibilita della libreria,
-        esaustivita relativa libreria(i) = numero di unita di codice di tale libreria sfruttate in un progetto mediamente
+        esaustivita relativa libreria(i) = numero di unita di codice di tale libreria sfruttate in un progetto mediamente 
                                             / il numero di unita impiegate con ANGULAR
         evolvibilita della libreria(i) = numero di anni previsti di aggiornamento delle classi della libreria (i) / quelli previsti per la libreria ANGULAR
     */
@@ -158,6 +156,9 @@ namespace Conv{         // CONVENZIONI
     const float evolvibilita_libreria[5] = { 0.9 , 1.1 , 0.7 , 1 , 0.9};
 
     const float speed_up_angular = 2.0;
+    const unsigned int riutilizzo_codice_angular = 10;
+
+    const unsigned int righe_progetto_perfezionate_media = 100;
 
 
 // ------
@@ -231,7 +232,7 @@ namespace Conv{         // CONVENZIONI
 // BACKDEV
 // -------
 
-    const float bonus_sempre_capo_progetto = 100;
+    const float bonus_orientamento_ortogonalita = 100;
     const float bonus_prove_correttezza = 100;
 
 // -----
@@ -241,6 +242,9 @@ namespace Conv{         // CONVENZIONI
 // --------
 // FRONTDEV
 // --------
+
+    const float bonus_orientamento_professionalita = 100;
+    const float bonus_meta_codice_adattato = 100;
 
 // ------
 // GUIDEV

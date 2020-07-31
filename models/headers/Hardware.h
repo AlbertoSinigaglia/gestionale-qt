@@ -1,7 +1,3 @@
-//
-// Created by Alberto Sinigaglia on 05/04/2020.
-// 
-  
 #ifndef CSVPARSER_HARDWARE_H
 #define CSVPARSER_HARDWARE_H
 

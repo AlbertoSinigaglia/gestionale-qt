@@ -1,7 +1,3 @@
-//
-// Created by Alberto Sinigaglia on 05/04/2020.
-//
- 
 #ifndef CSVPARSER_ITSECURITYDEV_H
 #define CSVPARSER_ITSECURITYDEV_H
 
@@ -27,14 +23,14 @@ public:
     /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual void aggiornaMese();
 
-    /**     VELOCITÀ SCRITTURA              (metodo che eredita l'obbiettivo della classe base Software)*/
-    virtual double velocitàScrittura() const;
+    /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base Software)*/
+    virtual double velocitaScrittura() const;
 
     /**     COMMIT PROBLEMA RISOLTO         (metodo booleano)
      * Il metodo consente di fare il commit di una manutenzione andata a buon fine facendo distinzione se questa
      * ha trattato un problema critico, e riturna true sse la procedura è andata a buon fine
      */
-    bool commitProblemaRisolto(bool isCriticità = false);
+    bool commitProblemaRisolto(bool isCriticita = false);
 
 
     unsigned int getNManutenzioniNonCritiche() const;
@@ -46,8 +42,8 @@ protected:
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base Software)*/
-    virtual unsigned int riutilizzabilità() const;
+    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base Software)*/
+    virtual unsigned int riutilizzabilita() const;
 
     /**     INFLUENZA PROGETTO              (metodo che eredita l'obbiettivo della classe base Software)*/
     virtual double influenzaProgetto() const;
@@ -58,8 +54,8 @@ protected:
     /*      VALORE RIPARAZIONE              (metodo che eredita l'obbiettivo della classe base Manutenzione)*/
     virtual float valoreMedioRiparazione() const;
 
-    /*      QUANTITÀ CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base Manutenzione)*/  
-    virtual unsigned int quantitàConsiderevoleRiparazioni() const;
+    /*      QUANTITa CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base Manutenzione)*/  
+    virtual unsigned int quantitaConsiderevoleRiparazioni() const;
 
 
 private:
@@ -75,7 +71,7 @@ private:
 
     unsigned int n_progetti_in_arrivo;   
            
-    unsigned int n_criticità_risolte;                                          
+    unsigned int n_criticita_risolte;                                          
 };
 
 #endif //CSVPARSER_ITSECURITYDEV_H

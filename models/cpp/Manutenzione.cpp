@@ -1,3 +1,4 @@
+
 #include "../headers/Manutenzione.h"
  
 
@@ -29,12 +30,12 @@ float Manutenzione::bonusStipendio() const{
 
     float bonus_competenza = calcoloBonusLineare( Conv::status_accettabile, perc_ripristino_medio, Conv::bonus_status_ottimo );
     
-    unsigned int n_riparazioni_considerevoli_nel_mese = quantitàConsiderevoleRiparazioni() * Data::oggi().getGiorno / 31 ;
-    float bonus_quantità_riparazioni = calcoloBonusLineare( 0.5,
+    unsigned int n_riparazioni_considerevoli_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno / 31 ;
+    float bonus_quantita_riparazioni = calcoloBonusLineare( 0.5,
                                                             n_riparazioni_mese / n_riparazioni_considerevoli_nel_mese,
                                                             Conv::bonus_n_riparazioni_considerevole );
 
-    return Employee::bonusStipendio() + bonus_competenza + bonus_quantità_riparazioni;
+    return Employee::bonusStipendio() + bonus_competenza + bonus_quantita_riparazioni;
 }
 
 

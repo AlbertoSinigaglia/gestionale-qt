@@ -1,3 +1,4 @@
+
 #include "../headers/FullStack.h"
 
 unsigned int FullStack::calcolaStipendio() const {

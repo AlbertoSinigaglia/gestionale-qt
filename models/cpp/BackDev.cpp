@@ -1,6 +1,3 @@
-//
-// Created by Alberto Sinigaglia on 09/04/2020.
-//
 
 #include "../headers/BackDev.h"
 
@@ -40,6 +37,10 @@ bool BackDev::isOrientatoOrtogonalita() const{
 }
 
 
+double BackDev::influenzaProgetto() const{
+    // livello astrazione 1 diminuisce del 10% l'influenza sul progetto, astrazione 5 la incrementa del 10%
+    return Software::influenzaProgetto() * (0.85 + livello_astrazione/20.0);
+}
 
 
 
@@ -54,17 +55,16 @@ bool BackDev::produttivo() const{
 
 float BackDev::bonusStipendio() const {
 
-    float bonus_capo_progetti = calcoloBonusLineare( Conv::perc_media_capo_progetto, perc_capo_progetto, Conv::bonus_sempre_capo_progetto );
+    float bonus_orientamento = (orientato_ortogonalita)? Conv::bonus_orientamento_ortogonalita : 0;
     float bonus_correttezza = (prove_correttezza)? Conv::bonus_prove_correttezza : 0;
 
-    return Software::bonusStipendio() + bonus_capo_progetti + bonus_correttezza;
+    return Software::bonusStipendio() + bonus_orientamento + bonus_correttezza;
 }
- 
+
 
 float BackDev::valoreLavoro() const {
 
-    float valore_influenza_architettura = getNProgettiConclusiMese() * Conv::valore_astrazione_5_un_progetto * livello_astrazione/5;
-    float valore_leadership_nel_mese = getNProgettiConclusiMese() * perc_capo_progetto * Conv::valore_capo_un_progetto;
+    float valore_leadership_nel_mese = getNProgettiConclusiMese() * perc_capo_progetto * Conv::valore_capo_progetto;
 
-    return Software::valoreLavoro() + valore_influenza_architettura + valore_leadership_nel_mese;
+    return Software::valoreLavoro() + valore_leadership_nel_mese;
 }

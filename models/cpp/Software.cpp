@@ -29,28 +29,28 @@ unsigned int Software::gradoEsperienza() const{
 }
 
 
-double Software::velocitàScrittura() const{
-    // ogni linguaggio introduce un aumento o decremento di velocità dovuto alla sua complessità
-    double velocità_linguaggio = Conv::velocità_cpp / Conv::complessità_linguaggio[linguaggio];
+double Software::velocitaScrittura() const{
+    // ogni linguaggio introduce un aumento o decremento di velocita dovuto alla sua complessita
+    double velocita_linguaggio = Conv::velocita_cpp / Conv::complessita_linguaggio[linguaggio];
 
-    // tolgo un malus alla velocità di scrittura proporzionale all'esperienza se questa è inferiore alla sufficienza ( 6 )
-    double malus_exp = velocità_linguaggio 
+    // tolgo un malus alla velocita di scrittura proporzionale all'esperienza se questa e inferiore alla sufficienza ( 6 )
+    double malus_exp = velocita_linguaggio 
                       * calcoloBonusLineare( 6 , (10 - gradoEsperienza())/10.0 , Conv::malus_inseperto_scrittura);
 
-    return velocità_linguaggio - malus_exp;
+    return velocita_linguaggio - malus_exp;
 }
 
 
 DifferenzaDate Software::durataCodice() const{
-    // sulla base della stima del numero dei progetti a cui può sopravvivere il codice calcolo il tempo di vita del codice
-    return static_const<DifferenzaDate> ( riutilizzabilità() * static_const<int>(Conv::durata_progetto_medio) );
+    // sulla base della stima del numero dei progetti a cui puo sopravvivere il codice calcolo il tempo di vita del codice
+    return static_const<DifferenzaDate> ( riutilizzabilita() * static_const<int>(Conv::durata_progetto_medio) );
 }
 
 
-unsigned int Software::riutilizzabilità() const{
+unsigned int Software::riutilizzabilita() const{
     // impiegato di esperienza nella media produce un codice che mediamente viene riutilizzato in 3 progetti
     float peso_esperienza = UFMath::proporzionaleAMedia(3.0f, gradoEsperienza() );
-    // maggiore sarà il rapporto: progettazione/sviluppo per un progetto migliori saranno le possibilità di riutilizzo del codice 
+    // maggiore sara il rapporto: progettazione/sviluppo per un progetto migliori saranno le possibilita di riutilizzo del codice 
     // questo se 
     float peso_progettazione = UFMath::proporzionaleAMedia(10.0f, (1 - perc_ore_programmazione) );
     // return la media dei due pesi
@@ -93,7 +93,7 @@ bool Software::produttivo() const{
     // Calcolo quante righe si aspetterebbe che venissero prodotte da uno sviluppatore 
     // con le caratteristiche DA CONTRATTO dello sviluppantore in questione
     double ore_programmazione_tot = static_cast<double>(orePerProgetto()) * perc_ore_programmazione;
-    int aspettativa_righe_per_progetto = static_cast<int>( velocitàScrittura() * ore_programmazione_tot );
+    int aspettativa_righe_per_progetto = static_cast<int>( velocitaScrittura() * ore_programmazione_tot );
     
     return Employee::produttivo() || (righePerProgetto() > aspettativa_righe_per_progetto);
 }
@@ -102,10 +102,10 @@ bool Software::produttivo() const{
 float Software::bonusStipendio() const { 
 
     // calcolo il bonus dell'influenza sui progetti, assumendo valore di fondo scala un influenza = 2 e  influenza media = 1,
-    // Pperciò adatto conseguentemmente calcoloBonusLineare(..)
+    // Ppercio adatto conseguentemmente calcoloBonusLineare(..)
     float bonus_influenza_progetti = calcoloBonusLineare(0.5, influenzaProgetto() / 2.0, Conv::bonus_influenza_progetto_doppia);    
 
-    float bonus_linguaggio = bonus_complessità_CPP * complessità_linguaggio[linguaggio];
+    float bonus_linguaggio = bonus_complessita_CPP * complessita_linguaggio[linguaggio];
 
     return  Employee::bonusStipendio() + bonus_influenza_progetti + bonus_linguaggio;
 }

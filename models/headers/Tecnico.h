@@ -1,7 +1,3 @@
-//
-// Created by Alberto Sinigaglia on 10/04/2020.
-// 
-
 #ifndef CSVPARSER_TECNICO_H 
 #define CSVPARSER_TECNICO_H
  
@@ -52,8 +48,8 @@ protected:
     */
     virtual unsigned int oreLavoroNelMese() const;
 
-    /*      QUANTITÀ CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base)*/  
-    virtual unsigned int quantitàConsiderevoleRiparazioni() const;
+    /*      QUANTITa CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base)*/  
+    virtual unsigned int quantitaConsiderevoleRiparazioni() const;
 
 
 private:

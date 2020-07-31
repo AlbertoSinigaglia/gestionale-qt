@@ -1,7 +1,3 @@
-//
-// Created by Riccardo Calcagno on 05/05/2020.
-//
-  
 #ifndef PERSONA_H
 #define PERSONA_H
 
