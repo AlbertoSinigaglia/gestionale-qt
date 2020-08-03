@@ -2,78 +2,60 @@
 #include "../headers/DBDev.h"
 
 
-unsigned int DBDev::calcolaStipendio() const {
-    auto bonus_righe_codice = 0.0f;
-    auto bonus_libreria = 0u;
-    switch(linguaggio){
-        case Linguaggio::PYTHON:
-            bonus_righe_codice+= 0.2f;
-            bonus_libreria = 10u;
-            break;
-        case Linguaggio::JAVA:
-            bonus_righe_codice+= 0.4f;
-            bonus_libreria = 20u;
-            break; 
-        case Linguaggio::PHP:
-            bonus_righe_codice+= 0.6f;
-            bonus_libreria = 20u;
-            break;
-        case Linguaggio::C_SHARP:
-            bonus_righe_codice+= 0.5f;
-            bonus_libreria = 30u;
-            break;
-        case Linguaggio::JAVASCRIPT:
-            bonus_righe_codice+= 0.6f;
-            bonus_libreria = 20u;
-            break;
-        case Linguaggio::RUBY:
-            bonus_righe_codice+= 0.3f;
-            bonus_libreria = 20u;
-            break;
-        default:
-            break;
-    }
-    bonus_righe_codice *= static_cast<float>(Software::getRigheCodice());
-    auto bonus_db = database * 200u;
-    return
-            static_cast<unsigned int>(bonus_righe_codice) +
-            static_cast<unsigned int>(Software::calcolaStipendio())+
-            bonus_db +
-            bonus_libreria;
-}
+DBDev::DBDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiDatabase dati_database):
+            BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
+            num_attributi_ridondanti_per_entita(dati_database.num_attributi_ridondanti_per_entita),
+            speed_up_indicizzazioni(dati_database.speed_up_indicizzazioni),
+            perc_entita_forma_normale(dati_database.perc_entita_forma_normale){}
 
-double DBDev::valoreLavoro() const {
-    auto valore_codice = 0.0f;
-    switch(linguaggio){
-        case Linguaggio::PYTHON:
-            valore_codice+= 0.2f;
-            break;
-        case Linguaggio::JAVA:
-            valore_codice+= 0.2f;
-            break;
-        case Linguaggio::PHP:
-            valore_codice+= 0.3f;
-            break;
-        case Linguaggio::C_SHARP:
-            valore_codice+= 0.2f;
-            break;
-        case Linguaggio::JAVASCRIPT:
-            valore_codice+= 0.3f;
-            break;
-        case Linguaggio::RUBY:
-            valore_codice+= 0.3f;
-            break;
-        default:
-            break;
-    }
-    valore_codice *= getRigheCodice();
-    // in media un programmatore fa un database ogni 3 progetti
-    auto valore_db = getDataAssunzione().differenzaMesi(date::oggi()) *0.3;
-    return valore_db+valore_codice;
 
+unsigned int DBDev::gradoOrtogonalita() const{
+    // istituisco un malus che è dirett proporzionale al surplus di entità ridondanti rispetto alla media
+    double malus_ridondanza = Conv::media_attributi_ridondanti_per_entita / num_attributi_ridondanti_per_entita;
+    // limito il malus
+    if (malus_ridondanza < 0.5) malus_ridondanza = 0.5;
+
+    unsigned int grado = static_cast<unsigned int> (perc_entita_forma_normale * 10.0 * malus_ridondanza);
+    return (grado <= 10)? grado : 10;
 }
 
 
-unsigned int DBDev::getStipendioFisso() const{
-    return DBDEV_STIPENDIO_FISSO;
+unsigned int DBDev::riutilizzabilita() const{
+    // calcolo di quanto incrementa il numero di progetti che potrebbero implementare il codice sulla base di quanto è ortogonale
+    double incremento = 1 + calcoloBonusLineare(0.6 , gradoOrtogonalita()/10.0 , Conv::moltiplicatore_ricicli_ortogonalita_10 -1);
+
+    return static_cast<unsigned int> (BackDev::riutilizzabilita() * incremento);
+}
+
+
+float DBDev::remunerazioneOraRoutine() const{
+    return Conv::remunerazione_ora_routine_DBDev;
+}
+
+
+unsigned int DBDev::gradoPerformance() const{
+    // è direttamente proprozionale allo speed_up relativo generato dalle indicizzazioni che ha introdotto
+    unsigned int grado = static_cast<unsigned int> (speed_up_indicizzazioni * 10.0 / Conv::speed_up_notevole_indicizzazioni);
+    return (grado <= 10)? grado : 10;
+}
+
+
+
+
+float DBDev::bonusStipendio() const{
+
+    float bouns_performance_DB = calcoloBonusLineare(0.6 , gradoPerformance()/10.0 , Conv::bonus_performance_DB_ottime);
+
+    return BackDev::bonusStipendio() + bouns_performance_DB;
+}
+
+
+float DBDev::valoreLavoro() const{
+
+    float valore_lavoro = BackDev::valoreLavoro();
+    // il lavoro del DBDev acquista valore ulteriore solo se si attiene al suo orientamento e consegue i sui obbiettivi con successo
+    if( isOrientatoOrtogonalita() )
+        valore_lavoro += calcoloBonusLineare( 0.5, gradoOrtogonalita()/10.0, Conv::valore_rispetto_orientamento);
+
+    return valore_lavoro;
 }

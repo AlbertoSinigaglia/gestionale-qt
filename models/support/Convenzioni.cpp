@@ -140,8 +140,14 @@ namespace Conv{         // CONVENZIONI
 // DBDEV
 // ----- 
 
+    const float remunerazione_ora_routine_DBDev = 10;
 
+    const double media_attributi_ridondanti_per_entita = 0.2;
+    const double moltiplicatore_ricicli_ortogonalita_10 = 2;
+                 // indica di quante volte BackDev::riutilizzabilita() incrementa sulla base di quanto è ortogonale il codice
+    const double speed_up_notevole_indicizzazioni = 2.0;
 
+    const float valore_rispetto_orientamento = 100;
 
 // --------
 // FRONTDEV
@@ -238,6 +244,8 @@ namespace Conv{         // CONVENZIONI
 // -----
 // DBDEV
 // -----
+
+    const float bonus_performance_DB_ottime = 100;
 
 // --------
 // FRONTDEV

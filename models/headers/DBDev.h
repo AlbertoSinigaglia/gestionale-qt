@@ -10,14 +10,8 @@ public:
 
     DBDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiDatabase dati_database);
 
-    /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
-    virtual bool produttivo() const override;
-
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const;
-
-    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
 
     /**     GRADO ORTOGONALITa              (metodo intero da 1 a 10)
      * Il metodo restituisce il grado (da 1 a 10) dell'ortogonalita che viene mantenuta nei database progettati 
@@ -43,9 +37,6 @@ private:
      * dal DBDev in questione 
      */
     unsigned int gradoPerformance() const;
-
-    static const float VALORE_ORA_ROUTINE_BASE = 10;
-    static const double MEDIA_ATTRIBUTI_RIDONDANTI_PER_ENTITa = 0.2;
 
 /*
 * CAMPI x PROGETTO
