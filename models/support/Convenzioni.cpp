@@ -147,8 +147,6 @@ namespace Conv{         // CONVENZIONI
                  // indica di quante volte BackDev::riutilizzabilita() incrementa sulla base di quanto è ortogonale il codice
     const double speed_up_notevole_indicizzazioni = 2.0;
 
-    const float valore_rispetto_orientamento = 100;
-
 // --------
 // FRONTDEV
 // --------
@@ -171,7 +169,13 @@ namespace Conv{         // CONVENZIONI
 // GUIDEV
 // ------
 
+    const float remunerazione_ora_routine_GUIDev = 10;
 
+
+// --------------
+// GUIDEV & DBDEV
+// --------------
+    const float valore_rispetto_orientamento = 100;
 
 
 // ---------
@@ -257,6 +261,10 @@ namespace Conv{         // CONVENZIONI
 // ------
 // GUIDEV
 // ------
+
+    const float bonus_stile_GUI = 100;
+    const float bonus_intuitivita_ottima = 100;
+    const float bonus_professionalita_ottima = 100;
 
 // ---------
 // FULLSTACK

@@ -10,33 +10,24 @@ public:
 
     GUIDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_lato_client, DatiInterfacceUtente dati_interfaccia_utente);
 
-    /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
-    virtual bool produttivo() const override;
-
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const;
 
-    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
-
-    /**     GRADO INTUITIVITa               (metodo intero da 1 a 10)
-     * Il metodo restituisce il grado (da 1 a 10) di intuitivita che viene rispettata nelle  
+    /**     GRADO INTUITIVITÀ               (metodo intero da 1 a 10)
+     * Il metodo restituisce il grado (da 1 a 10) di intuitività che viene rispettata nelle  
      * Grafic User Interface del GUIDev in questione.
      */
-    unsigned int gradoIntuitiva() const;
+    unsigned int gradoIntuitivita() const;
 
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
-    virtual unsigned int riutilizzabilita() const;
-
-    /**     GRADO PROFESSIONALITa             (metodo intero da 1 a 10)
+    /**     GRADO PROFESSIONALITÀ             (metodo intero da 1 a 10)
      * Il metodo restituisce il grado (da 1 a 10) di professionalita delle funzionalita proposte nella  
      * Grafic User Interface del GUIDev in questione. Una funzionalita professionale è una funzionalita
-     * che per priorita antepone alla semplicita e univocita l'incremento delle performance 
+     * che per priorità antepone alla semplicita e univocita l'incremento delle performance 
      * sulla base di un lavoro professionale e consapevole.
      */
     unsigned int gradoProfessionalita() const;
@@ -47,12 +38,13 @@ protected:
 
 private:
 
-    static const float VALORE_ORA_ROUTINE_BASE = 10;
-
     bool quary_predefinite;
     bool stile_minimalista;
 
+    // il numero massimo di passi necessari che devo compiere per giungere su una sezione del sistema
     unsigned int lunghezza_max_percorso;
+
+    //nuumero medio di percorsi diversi che permettono di giungere a una stessa sezione del sistema
     unsigned int num_medio_percorsi_sezione;
 
 };
