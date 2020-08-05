@@ -19,6 +19,8 @@ public:
     /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
     virtual double velocitaScrittura() const;
 
+    double getPercCapoProgetto() const;
+
 protected:
 
     /*      INFLUENZA PROGETTO              (metodo che eredita l'obbiettivo della classe base)*/

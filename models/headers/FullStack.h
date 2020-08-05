@@ -16,9 +16,6 @@ public:
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const;
 
-    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
-
     /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
     virtual double velocitaScrittura() const;
 
@@ -27,17 +24,13 @@ protected:
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual float valoreLavoro() const;
 
-    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
+    /**     RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
     virtual unsigned int riutilizzabilita() const;
 
     /**     REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
     virtual float remunerazioneOraRoutine() const;
 
 private:
-
-    static const float VALORE_ORA_ROUTINE_BASE = 10;                                           // se modellazione, prove correttezza ecc..
-    static const double perc_minima_capo_progetti = 0.4;
-
 
     double perc_lavoro_back;                                                            // (1 - perc_lavoro_back) = perc_lavoro_front
 

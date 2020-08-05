@@ -183,6 +183,12 @@ namespace Conv{         // CONVENZIONI
 // ---------
 
 
+    const float remunerazione_ora_routine_FullStack = 10;                                           // se modellazione, prove correttezza ecc..
+    const double perc_minima_capo_progetti_FullStack = 0.4;
+
+    const double malus_velocita_separazione_interfacce = 0.8;
+
+
 
 
 // ------------------------------------------------------------------

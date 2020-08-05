@@ -68,3 +68,14 @@ float BackDev::valoreLavoro() const {
 
     return Software::valoreLavoro() + valore_leadership_nel_mese;
 }
+
+
+
+
+
+
+
+
+double BackDev::getPercCapoProgetto() const{
+    return perc_capo_progetto;
+}
