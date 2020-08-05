@@ -15,7 +15,10 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QFile>
+#include <QScrollArea>
+#include <QListWidget>
 #include "gestionalebutton.h"
+#include "employeelistelement.h"
 
 class Gestionale : public QWidget{
 	Q_OBJECT

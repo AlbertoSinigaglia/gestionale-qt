@@ -3,11 +3,15 @@
 
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent){
-	mainLayout = new QHBoxLayout(this);
+    mainLayout = new QHBoxLayout(this);
+    this->setMinimumSize(1280, 800);
+    mainLayout->setAlignment(Qt::AlignTop);
+    mainLayout->setContentsMargins(0,0,0,0);
+    mainLayout->setSpacing(0);
 	addBoxSinistro();
 	addBoxDestro();
 	setStyle();
-	setLayout(mainLayout);
+    setLayout(mainLayout);
 }
 
 Gestionale::~Gestionale(){}
@@ -15,18 +19,28 @@ Gestionale::~Gestionale(){}
 
 void Gestionale::addBoxSinistro()
 {
-	QGroupBox* Gestione = new QGroupBox(this);
-	Gestione->setFixedSize(250,500);
-	Gestione->setTitle("Gestione Dipendenti");
-	layoutGestione = new QVBoxLayout(Gestione);
-	addComboBox();
-	addFirstBox();
-	mainLayout->addWidget(Gestione);
+    auto* Gestione = new QFrame(this);
+    Gestione->setFixedWidth(250);
+    layoutGestione = new QVBoxLayout(Gestione);
+    layoutGestione->setAlignment(Qt::AlignTop);
+    addComboBox();
+    addFirstBox();
+    addAzioni();
+    auto scroll = new QScrollArea();
+    scroll->setWidgetResizable(true);
+    scroll->setObjectName("scroll-left");
+    scroll->setFixedWidth(270);
+    scroll->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    scroll->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    scroll->setWidget(Gestione);
+    scroll->setAlignment(Qt::AlignHCenter);
+    mainLayout->addWidget(scroll);
 }
 
 void Gestionale::addComboBox()
 {
-	QLabel* Visualizza = new QLabel("Dipendenti da visualizzare:", this, Qt::WindowFlags());
+    QLabel* Visualizza = new QLabel("Metriche visualizzazione:", this, Qt::WindowFlags());
+    Visualizza->setObjectName("title-left");
 	layoutGestione->addWidget(Visualizza);
 	QComboBox* Dipendenti = new QComboBox(this);
 	Dipendenti->addItems({
@@ -47,20 +61,20 @@ void Gestionale::addComboBox()
 
 void Gestionale::addFirstBox()
 {
-	Visualizzare = new QGroupBox(this);
+    Visualizzare = new QGroupBox(this);
 	Visualizzare->setTitle("Cosa Visualizzare");
-	LayoutVisualizzare = new QVBoxLayout(Visualizzare);
+    LayoutVisualizzare = new QVBoxLayout(Visualizzare);
 	addBoxPersona();
-	addBoxLavoro();
+    addBoxLavoro();
 	layoutGestione->addWidget(Visualizzare);
 }
 
 void Gestionale::addBoxPersona()
 {
-	QGroupBox* DatiPersona = new QGroupBox(this);
+    QGroupBox* DatiPersona = new QGroupBox(this);
 	DatiPersona->setObjectName("DatiPersona");
 	DatiPersona->setTitle("Dati della persona");
-	QVBoxLayout* layoutDatiPersona = new QVBoxLayout(DatiPersona);
+    QVBoxLayout* layoutDatiPersona = new QVBoxLayout(DatiPersona);
 	QCheckBox* Cognome = new QCheckBox("Cognome",this);
 	layoutDatiPersona->addWidget(Cognome);
 	QCheckBox* Nome = new QCheckBox("Nome",this);
@@ -81,22 +95,11 @@ void Gestionale::addBoxLavoro()
 	layoutDatiDip->addWidget(DataA);
 	QCheckBox* DataFineContratto = new QCheckBox("Data fine contratto",this);
 	layoutDatiDip->addWidget(DataFineContratto);
-	QCheckBox* StipendioBase = new QCheckBox("Stipendio Base Mensile",this);
+    QCheckBox* StipendioBase = new QCheckBox("Stipendio Base \nMensile",this);
 	layoutDatiDip->addWidget(StipendioBase);
-	QCheckBox* OreLavoro= new QCheckBox("Ore di lavoro settimanale",this);
+    QCheckBox* OreLavoro= new QCheckBox("Ore di lavoro \nsettimanale",this);
 	layoutDatiDip->addWidget(OreLavoro);
 	LayoutVisualizzare->addWidget(DatiDip);
-}
-
-void Gestionale::addBoxDestro()
-{
-	QGroupBox* Visualizza = new QGroupBox(this);
-	Visualizza->setTitle("Visualizzazione Dipendenti");
-	layoutVisualizza = new QVBoxLayout(Visualizza);
-	QTableView* Tabella = new QTableView();
-	layoutVisualizza->addWidget(Tabella);
-	addAzioni();
-	mainLayout->addWidget(Visualizza);
 }
 
 void Gestionale::addAzioni()
@@ -104,6 +107,7 @@ void Gestionale::addAzioni()
 
 	QGroupBox* Azioni = new QGroupBox(this);
 	Azioni->setTitle("Azioni sui dipendenti");
+    Azioni->setObjectName("azioni-left");
 	QVBoxLayout* layoutAzioni = new QVBoxLayout(Azioni);
 	QPushButton* Inserisci = new QPushButton("Inserisci",Azioni);
 	layoutAzioni->addWidget(Inserisci);
@@ -112,6 +116,27 @@ void Gestionale::addAzioni()
 	QPushButton* Elimina = new QPushButton("Elimina",Azioni);
 	layoutAzioni->addWidget(Elimina);
 	layoutGestione->addWidget(Azioni);
+}
+
+void Gestionale::addBoxDestro()
+{
+    auto scroll = new QScrollArea();
+    scroll->setContentsMargins(0,0,0,0);
+    scroll->setWidgetResizable(true);
+    scroll->setObjectName("scroll-right");
+    scroll->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    scroll->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    auto* Visualizza = new QFrame(this);
+    auto layoutLista = new QVBoxLayout(Visualizza);
+    layoutLista->setAlignment(Qt::AlignTop);
+    scroll->setWidget(Visualizza);
+    Visualizza->setObjectName("frame-right");
+    Visualizza->setContentsMargins(0,0,0,0);
+    Visualizza->layout()->setContentsMargins(0,0,0,0);
+    layoutLista->setSpacing(0);
+    for(auto i = 0; i < 30; i++)
+        layoutLista->addWidget(new EmployeeListElement(this));
+    mainLayout->addWidget(scroll);
 }
 
 void Gestionale::setStyle()
