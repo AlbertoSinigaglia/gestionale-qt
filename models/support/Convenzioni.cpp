@@ -276,6 +276,7 @@ namespace Conv{         // CONVENZIONI
 // FULLSTACK
 // ---------
 
+    const float bonus_separazione_interfaccie = 100;
 
 
 

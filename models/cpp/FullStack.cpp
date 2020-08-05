@@ -41,9 +41,13 @@ bool FullStack::produttivo() const{
 
 float FullStack::bonusStipendio() const{
 
+    float bonus_strutturazione = (separa_interfacce && isOrientatoOrtogonalita())? Conv::bonus_separazione_interfaccie : 0;
+    
+    return bonus_strutturazione + BackDev::bonusStipendio() + FrontDev::bonusStipendio();
 }
 
 
 float FullStack::valoreLavoro() const{
 
+    return BackDev::valoreLavoro()*perc_lavoro_back + FrontDev::valoreLavoro()*(1-perc_lavoro_back);
 }
