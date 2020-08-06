@@ -19,48 +19,50 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     models/support/Convenzioni.cpp \
     models/support/Data.cpp \
-#    models/cpp/BackDev.cpp \
+    models/cpp/BackDev.cpp \
     models/cpp/Employee.cpp \
-#    models/cpp/FullStack.cpp \
-#    models/cpp/Hardware.cpp \
-#    models/cpp/Manutenzione.cpp \
-#    models/cpp/Software.cpp \
-#    models/cpp/DBDev.cpp \
-#    models/cpp/FrontDev.cpp \
-#    models/cpp/GUIDev.cpp \
-#    models/cpp/ITSecurityDev.cpp \
-#    models/cpp/Persona.cpp \
-#    models/cpp/Tecnico.cpp \
+    models/cpp/FullStack.cpp \
+    models/cpp/Hardware.cpp \
+    models/cpp/Manutenzione.cpp \
+    models/cpp/Software.cpp \
+    models/cpp/DBDev.cpp \
+    models/cpp/FrontDev.cpp \
+    models/cpp/GUIDev.cpp \
+    models/cpp/ITSecurityDev.cpp \
+    models/cpp/Persona.cpp \
+    models/cpp/Tecnico.cpp \
     controller.cpp \
-    employeelistelement.cpp \
+    widgets/employeelistelement.cpp \
     main.cpp \
     gestionale.cpp \
-    model.cpp
+    model.cpp \
+    widgets/employeeslist.cpp
 
 HEADERS += \
     CSV/CSVParser.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
     models/support/TipiRaggruppamento.h \
-#    models/headers/BackDev.h \
+    models/headers/BackDev.h \
     models/headers/Employee.h \
-#    models/headers/FullStack.h \
-#    models/headers/Hardware.h \
-#    models/headers/Manutenzione.h \
-#    models/headers/Software.h \
-#    models/headers/DBDev.h \
-#    models/headers/FrontDev.h \
-#    models/headers/GUIDev.h \
-#    models/headers/ITSecurityDev.h \
-#    models/headers/Persona.h \
-#    models/headers/Tecnico.h \
+    models/headers/FullStack.h \
+    models/headers/Hardware.h \
+    models/headers/Manutenzione.h \
+    models/headers/Software.h \
+    models/headers/DBDev.h \
+    models/headers/FrontDev.h \
+    models/headers/GUIDev.h \
+    models/headers/ITSecurityDev.h \
+    models/headers/Persona.h \
+    models/headers/Tecnico.h \
     collections/DynamicArray.h \
     azioneModifica.h \
     controller.h \
-    employeelistelement.h \
+    widgets/employeelistelement.h \
     gestionale.h \
     model.h \
-    models/support/UsefullMath.h
+    models/support/UsefullMath.h \
+    widgets/employeeslist.h
 
 FORMS += \
     gestionale.ui
