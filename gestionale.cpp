@@ -12,7 +12,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
 	addBoxDestro();
     setStyle();
     setEmployees({
-        new BackDev();
+        //new BackDev();
     });
     setLayout(mainLayout);
 }
