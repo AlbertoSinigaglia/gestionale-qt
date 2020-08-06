@@ -8,7 +8,7 @@
 class FullStack: public FrontDev, public BackDev{
 public:
 
-    FullStack(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiLatoClient dati_lato_client)
+    FullStack(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiLatoClient& dati_lato_client, const DatiFullStack& dati_fullstack);
 
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
     virtual bool produttivo() const override;

@@ -31,14 +31,14 @@ public:
 private:
 	QHBoxLayout* mainLayout;
 	//Layout Sinistro con tutti i suoi componenti
-	QVBoxLayout* layoutGestione;
+    QVBoxLayout* layoutFrameFiltri;
 	QGroupBox* Visualizzare;
 	QVBoxLayout* LayoutVisualizzare;
 	//Layout Destro con tutti i suoi componenti
 	QHBoxLayout* Left;
 	QVBoxLayout* layoutVisualizza;
 
-
+    void addTitleSinistro();
 	void addBoxDestro();
 	void addBoxSinistro();
 	void addComboBox();

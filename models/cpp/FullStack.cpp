@@ -1,9 +1,11 @@
 
 #include "../headers/FullStack.h"
+#include "models/support/UsefullMath.h"
 
-
-FullStack::FullStack(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiLatoClient dati_lato_client, DatiFullStack dati_fullstack):
-            Software(persona, dati_lavoratore, dati_developing), BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server), FrontDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
+FullStack::FullStack(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiLatoClient& dati_lato_client, const DatiFullStack& dati_fullstack):
+            Software(persona, dati_lavoratore, dati_developing),
+            BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
+            FrontDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
             perc_lavoro_back(dati_fullstack.perc_lavoro_back),
             separa_interfacce(dati_fullstack.separa_interfacce){}
 

@@ -1,5 +1,5 @@
 #include"Data.h"
-#include"Convenzioni.cpp"
+#include"Convenzioni.h"
 
 
 // Campi dati estesi dalla classe Employee

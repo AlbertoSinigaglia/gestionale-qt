@@ -2,7 +2,7 @@
 #include "../headers/DBDev.h"
 
 
-DBDev::DBDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiDatabase dati_database):
+DBDev::DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiDatabase& dati_database):
             BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
             num_attributi_ridondanti_per_entita(dati_database.num_attributi_ridondanti_per_entita),
             speed_up_indicizzazioni(dati_database.speed_up_indicizzazioni),

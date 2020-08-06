@@ -1,6 +1,6 @@
 
 #include "../headers/Manutenzione.h"
- 
+#include "models/support/UsefullMath.h"
 
 Manutenzione::Manutenzione(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione):
                 Employee(persona,dati_lavoratore),
@@ -30,7 +30,7 @@ float Manutenzione::bonusStipendio() const{
 
     float bonus_competenza = calcoloBonusLineare( Conv::status_accettabile, perc_ripristino_medio, Conv::bonus_status_ottimo );
     
-    unsigned int n_riparazioni_considerevoli_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno / 31 ;
+    unsigned int n_riparazioni_considerevoli_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno() / 31 ;
     float bonus_quantita_riparazioni = calcoloBonusLineare( 0.5,
                                                             n_riparazioni_mese / n_riparazioni_considerevoli_nel_mese,
                                                             Conv::bonus_n_riparazioni_considerevole );

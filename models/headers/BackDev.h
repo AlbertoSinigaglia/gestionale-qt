@@ -3,31 +3,31 @@
  
 
 #include "Software.h"
-
+#include "Persona.h"
 class BackDev : virtual public Software{
 
 public: 
 
-    BackDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server);
+    BackDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server);
     
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
     virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;
+    virtual float bonusStipendio() const override;
 
     /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual double velocitaScrittura() const;
+    virtual double velocitaScrittura() const override;
 
     double getPercCapoProgetto() const;
 
 protected:
 
     /*      INFLUENZA PROGETTO              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual double influenzaProgetto() const; 
+    virtual double influenzaProgetto() const override;
 
     /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
-    virtual unsigned int riutilizzabilita() const;
+    virtual unsigned int riutilizzabilita() const override;
 
     bool isOrientatoOrtogonalita() const;
 
