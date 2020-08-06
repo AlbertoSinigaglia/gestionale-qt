@@ -180,7 +180,7 @@ std::istream &operator>>(std::istream & input, Data &data) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Data &data) {
-    return os << data.giorno << "/" << data.mese+1 << "/" << data.anno;
+    return os << static_cast<std::string>(data);
 }
 
 Data operator+(const Data &d, const DifferenzaDate &diff) {
@@ -209,3 +209,8 @@ Data &Data::operator+=(const DifferenzaDate &diff) {
 std::ostream& operator<<(std::ostream& os, const DifferenzaDate& d){
      return os<<d.giorni<<" giorni, "<< d.mesi << " mesi, "<<d.anni<<" anni";
 }
+
+Data::operator std::string() const{
+    return std::to_string(giorno)+ std::string("/") + std::to_string(mese+1) + std::string("/") + std::to_string(anno);
+}
+

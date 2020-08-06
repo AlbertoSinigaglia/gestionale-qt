@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <string>
 struct DifferenzaDate{
     int giorni = 0;
     int mesi = 0;
@@ -81,6 +82,7 @@ public:
      */
     DifferenzaDate operator-(const Data &d) const;
     Data& operator+=(const DifferenzaDate& diff);
+    operator std::string() const;
 
 
     /*
