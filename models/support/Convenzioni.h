@@ -8,7 +8,7 @@ namespace Conv{         // CONVENZIONI
 //                          EXTRA AZIENDALI
 // ------------------------------------------------------------------
 
-    enum Linguaggio {
+   enum Linguaggio {
         PYTHON = 0,
         JAVA = 1,
         PHP = 2,
@@ -41,7 +41,7 @@ namespace Conv{         // CONVENZIONI
     * coeff_liquidazione:                      (Modificabile)
     *  coefficente (del TFR) * calcolaStipendio() -> ultima retribuzione per una possibile liquidazione
     */
-    const double coeff_liquidazione = 0.889;
+    extern const double coeff_liquidazione{0.889};
 
     /**     PERCENTUALE REMUNERAZIONE
      * Stabilisce il raporto tra:      la remunerazione (per l'impiegato) del suo lavoro

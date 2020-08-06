@@ -1,7 +1,7 @@
 #include "../headers/Employee.h"
 #include "../support/Data.h"
-#include "../support/Convenzioni.cpp"
-#include "../support/UsefullMath.cpp"
+#include "../support/Convenzioni.h"
+#include "../support/UsefullMath.h"
 #include <math.h>
  
 
@@ -27,7 +27,7 @@ float Employee::calcolaStipendio() const{
 }
 
 
-unsigned int Employee::risarcimentoLiquidazione() const{
+float Employee::risarcimentoLiquidazione() const{
     return calcolaStipendio() * static_cast<float>(Conv::coeff_liquidazione);
 }
 
@@ -56,7 +56,7 @@ bool Employee::produttivo() const {
      * importante: "valuta se il valore che da all'azienda è maggiore di quanto recepisce"
      * QUESTA È UNA CONDIZIONE NON STRETTAMENTE NECESSARIA ALLA PRODUTTIVITÀ
      */
-    float remunerazione_effettiva = calcolaStipendio() * static_cast<float>(Data::oggi().getGiono) / 31.0f;
+    float remunerazione_effettiva = calcolaStipendio() * static_cast<float>(Data::oggi().getGiorno()) / 31.0f;
     float remunerazione_meritata = valoreLavoro() * Conv::perc_remunerazione;
 
     return (remunerazione_meritata >= remunerazione_effettiva);

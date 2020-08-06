@@ -6,10 +6,10 @@
 #include <ostream>
 #include "../support/TipiRaggruppamento.h"
 #include "../support/Data.h"
-#include "../support/Convenzioni.cpp"
+#include "../support/Convenzioni.h"
 #include "Persona.h"
 
-class Employee: private Persona{
+class Employee: protected Persona{
 
 
 // --------------------------------------------------------------------------------------------------------------
@@ -146,7 +146,6 @@ private:
 
 
 public:
-
     virtual ~Employee();
 
 

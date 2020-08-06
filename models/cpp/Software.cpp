@@ -1,15 +1,16 @@
 #include "../headers/Software.h"
+#include "models/headers/Persona.h"
+#include "models/support/UsefullMath.h"
+#include "models/support/Convenzioni.h"
 
-  
-
-Software(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing):
+Software::Software(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing):
                 Employee(persona,dati_lavoratore),
                 linguaggio(dati_developing.linguaggio),
                 perc_ore_programmazione(dati_developing.perc_ore_programmazione),
                 n_righe_totali(dati_developing.n_righe_totali),
                 n_progetti_conclusi_mese(dati_developing.n_progetti_conclusi_mese),
-                n_righe_mese(dati_developing.n_righe_mese),
-                {}
+                n_righe_mese(dati_developing.n_righe_mese)
+                {};
 
 
 void Software::aggiornaMese(){
@@ -43,7 +44,7 @@ double Software::velocitaScrittura() const{
 
 DifferenzaDate Software::durataCodice() const{
     // sulla base della stima del numero dei progetti a cui puo sopravvivere il codice calcolo il tempo di vita del codice
-    return static_const<DifferenzaDate> ( riutilizzabilita() * static_const<int>(Conv::durata_progetto_medio) );
+    return static_cast<DifferenzaDate> ( riutilizzabilita() * static_cast<int>(Conv::durata_progetto_medio.inGiorni()) );
 }
 
 

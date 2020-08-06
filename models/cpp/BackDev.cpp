@@ -2,13 +2,12 @@
 #include "../headers/BackDev.h"
 
  
-BackDev::BackDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_server):
+BackDev::BackDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_server):
             Software(persona, dati_lavoratore, dati_developing),
             perc_capo_progetto(dati_server.perc_capo_progetto),
             livello_astrazione(dati_server.livello_astrazione),
             prove_correttezza(dati_server.prove_correttezza),
-            orientato_ortogonalita(dati_server.orientato_ortogonalita){}
-};
+            orientato_ortogonalita(dati_server.orientato_ortogonalita){};
 
 
 double BackDev::velocitaScrittura() const{

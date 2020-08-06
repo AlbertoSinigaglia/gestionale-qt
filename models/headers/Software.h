@@ -9,7 +9,7 @@ class Software: virtual public Employee{
 
 public: 
 
-    Software(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing);
+    Software(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing);
 
 // ---------------
 // METODI VIRTUALI

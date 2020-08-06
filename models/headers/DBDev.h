@@ -7,8 +7,7 @@
 class DBDev : public BackDev{
 
 public:
-
-    DBDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoServer dati_lato_server, DatiDatabase dati_database);
+    DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiDatabase& dati_database);
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const;
