@@ -7,7 +7,7 @@
 class FrontDev : virtual public Software{
 public:
 
-    FrontDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_lato_client)
+    FrontDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_lato_client);
     
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
     virtual bool produttivo() const override;

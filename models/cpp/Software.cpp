@@ -106,7 +106,7 @@ float Software::bonusStipendio() const {
     // Ppercio adatto conseguentemmente calcoloBonusLineare(..)
     float bonus_influenza_progetti = calcoloBonusLineare(0.5, influenzaProgetto() / 2.0, Conv::bonus_influenza_progetto_doppia);    
 
-    float bonus_linguaggio = bonus_complessita_CPP * complessita_linguaggio[linguaggio];
+    float bonus_linguaggio = Conv::bonus_complessita_CPP * Conv::complessita_linguaggio[linguaggio];
 
     return  Employee::bonusStipendio() + bonus_influenza_progetti + bonus_linguaggio;
 }
