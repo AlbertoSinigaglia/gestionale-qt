@@ -17,20 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    models/cpp/Convenzioni.cpp \
+    models/support/Convenzioni.cpp \
     models/support/Data.cpp \
-    models/cpp/BackDev.cpp \
+#    models/cpp/BackDev.cpp \
     models/cpp/Employee.cpp \
-    models/cpp/FullStack.cpp \
-    models/cpp/Hardware.cpp \
-    models/cpp/Manutenzione.cpp \
-    models/cpp/Software.cpp \
-    models/cpp/DBDev.cpp \
-    models/cpp/FrontDev.cpp \
-    models/cpp/GUIDev.cpp \
-    models/cpp/ITSecurityDev.cpp \
-    models/cpp/Persona.cpp \
-    models/cpp/Tecnico.cpp \
+#    models/cpp/FullStack.cpp \
+#    models/cpp/Hardware.cpp \
+#    models/cpp/Manutenzione.cpp \
+#    models/cpp/Software.cpp \
+#    models/cpp/DBDev.cpp \
+#    models/cpp/FrontDev.cpp \
+#    models/cpp/GUIDev.cpp \
+#    models/cpp/ITSecurityDev.cpp \
+#    models/cpp/Persona.cpp \
+#    models/cpp/Tecnico.cpp \
     controller.cpp \
     employeelistelement.cpp \
     main.cpp \
@@ -42,18 +42,18 @@ HEADERS += \
     models/support/Convenzioni.h \
     models/support/Data.h \
     models/support/TipiRaggruppamento.h \
-    models/headers/BackDev.h \
+#    models/headers/BackDev.h \
     models/headers/Employee.h \
-    models/headers/FullStack.h \
-    models/headers/Hardware.h \
-    models/headers/Manutenzione.h \
-    models/headers/Software.h \
-    models/headers/DBDev.h \
-    models/headers/FrontDev.h \
-    models/headers/GUIDev.h \
-    models/headers/ITSecurityDev.h \
-    models/headers/Persona.h \
-    models/headers/Tecnico.h \
+#    models/headers/FullStack.h \
+#    models/headers/Hardware.h \
+#    models/headers/Manutenzione.h \
+#    models/headers/Software.h \
+#    models/headers/DBDev.h \
+#    models/headers/FrontDev.h \
+#    models/headers/GUIDev.h \
+#    models/headers/ITSecurityDev.h \
+#    models/headers/Persona.h \
+#    models/headers/Tecnico.h \
     collections/DynamicArray.h \
     azioneModifica.h \
     controller.h \
