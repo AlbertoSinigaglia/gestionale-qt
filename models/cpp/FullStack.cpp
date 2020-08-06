@@ -43,7 +43,7 @@ float FullStack::bonusStipendio() const{
 
     float bonus_strutturazione = (separa_interfacce && isOrientatoOrtogonalita())? Conv::bonus_separazione_interfaccie : 0;
     
-    return bonus_strutturazione + BackDev::bonusStipendio() + FrontDev::bonusStipendio();
+    return bonus_strutturazione + BackDev::bonusStipendio() + FrontDev::bonusStipendio() - Software::bonusStipendio();
 }
 
 
