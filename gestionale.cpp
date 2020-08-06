@@ -3,14 +3,14 @@
 
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent){
-    mainLayout = new QHBoxLayout(this);
     this->setMinimumSize(1280, 800);
+    mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);
     mainLayout->setSpacing(0);
 	addBoxSinistro();
 	addBoxDestro();
-	setStyle();
+    setStyle();
     setLayout(mainLayout);
 }
 
@@ -19,29 +19,33 @@ Gestionale::~Gestionale(){}
 
 void Gestionale::addBoxSinistro()
 {
-    auto* Gestione = new QFrame(this);
-    Gestione->setFixedWidth(250);
-    layoutGestione = new QVBoxLayout(Gestione);
-    layoutGestione->setAlignment(Qt::AlignTop);
-    addComboBox();
-    addFirstBox();
-    addAzioni();
+    auto* frameFiltri = new QFrame(this);
+    frameFiltri->setFixedWidth(250);
+    layoutFrameFiltri = new QVBoxLayout(frameFiltri);
+    layoutFrameFiltri->setAlignment(Qt::AlignTop);
+
     auto scroll = new QScrollArea();
     scroll->setWidgetResizable(true);
     scroll->setObjectName("scroll-left");
     scroll->setFixedWidth(270);
     scroll->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     scroll->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-    scroll->setWidget(Gestione);
+    scroll->setWidget(frameFiltri);
     scroll->setAlignment(Qt::AlignHCenter);
     mainLayout->addWidget(scroll);
+    addTitleSinistro();
+    addComboBox();
+    addFirstBox();
+    addAzioni();
 }
 
-void Gestionale::addComboBox()
-{
+void Gestionale::addTitleSinistro(){
     QLabel* Visualizza = new QLabel("Metriche visualizzazione:", this, Qt::WindowFlags());
     Visualizza->setObjectName("title-left");
-	layoutGestione->addWidget(Visualizza);
+    layoutFrameFiltri->addWidget(Visualizza);
+}
+void Gestionale::addComboBox()
+{
 	QComboBox* Dipendenti = new QComboBox(this);
 	Dipendenti->addItems({
 		"Tutti",
@@ -56,7 +60,7 @@ void Gestionale::addComboBox()
 		"ITSecurityDev",
 		"Tecnico"
 	});
-	layoutGestione->addWidget(Dipendenti);
+    layoutFrameFiltri->addWidget(Dipendenti);
 }
 
 void Gestionale::addFirstBox()
@@ -64,15 +68,15 @@ void Gestionale::addFirstBox()
     Visualizzare = new QGroupBox(this);
 	Visualizzare->setTitle("Cosa Visualizzare");
     LayoutVisualizzare = new QVBoxLayout(Visualizzare);
+    layoutFrameFiltri->addWidget(Visualizzare);
 	addBoxPersona();
     addBoxLavoro();
-	layoutGestione->addWidget(Visualizzare);
 }
 
 void Gestionale::addBoxPersona()
 {
     QGroupBox* DatiPersona = new QGroupBox(this);
-	DatiPersona->setObjectName("DatiPersona");
+    DatiPersona->setObjectName("dati-persona-left");
 	DatiPersona->setTitle("Dati della persona");
     QVBoxLayout* layoutDatiPersona = new QVBoxLayout(DatiPersona);
 	QCheckBox* Cognome = new QCheckBox("Cognome",this);
@@ -82,7 +86,7 @@ void Gestionale::addBoxPersona()
 	QCheckBox* Sesso = new QCheckBox("Sesso",this);
 	layoutDatiPersona->addWidget(Sesso);
 	QCheckBox* Eta = new QCheckBox("Eta'",this);
-	layoutDatiPersona->addWidget(Eta);
+    layoutDatiPersona->addWidget(Eta);
 	LayoutVisualizzare->addWidget(DatiPersona);
 }
 
@@ -104,7 +108,6 @@ void Gestionale::addBoxLavoro()
 
 void Gestionale::addAzioni()
 {
-
 	QGroupBox* Azioni = new QGroupBox(this);
 	Azioni->setTitle("Azioni sui dipendenti");
     Azioni->setObjectName("azioni-left");
@@ -115,7 +118,7 @@ void Gestionale::addAzioni()
 	layoutAzioni->addWidget(Modifica);
 	QPushButton* Elimina = new QPushButton("Elimina",Azioni);
 	layoutAzioni->addWidget(Elimina);
-	layoutGestione->addWidget(Azioni);
+    layoutFrameFiltri->addWidget(Azioni);
 }
 
 void Gestionale::addBoxDestro()
@@ -134,8 +137,6 @@ void Gestionale::addBoxDestro()
     Visualizza->setContentsMargins(0,0,0,0);
     Visualizza->layout()->setContentsMargins(0,0,0,0);
     layoutLista->setSpacing(0);
-    for(auto i = 0; i < 30; i++)
-        layoutLista->addWidget(new EmployeeListElement(this));
     mainLayout->addWidget(scroll);
 }
 
