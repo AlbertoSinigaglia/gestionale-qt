@@ -67,15 +67,6 @@ float Employee::bonusStipendio() const{
     return bonus_esperienza;
 }
 
-
-
-
-
-
-
-
-
-
 float Employee::calcoloBonusLineare(double percBase, double perc, float bonus_max){
     
     if(perc < percBase) return 0;
@@ -84,7 +75,6 @@ float Employee::calcoloBonusLineare(double percBase, double perc, float bonus_ma
     // che fa corrispondere perc. = percBase a bonus = 0  e  perc. = 1  a bonus = bonusMax
     return (bonus_max / (1-percBase)) * (perc - percBase);
 }
-
 
 unsigned int Employee::oreLavoroNelMese() const{
 

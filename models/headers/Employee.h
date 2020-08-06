@@ -9,7 +9,7 @@
 #include "../support/Convenzioni.h"
 #include "Persona.h"
 
-class Employee: protected Persona{
+class Employee: public Persona{
 
 
 // --------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,6 @@ class Employee: protected Persona{
 // --------------------------------------------------------------------------------------------------------------
  
 public:
-
     /**     COSTRUTTORE
      * Utilizzabile sia al momento dell'assunzione sia "On Running"
      */
