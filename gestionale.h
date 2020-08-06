@@ -18,15 +18,19 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include "gestionalebutton.h"
-#include "employeelistelement.h"
-
+#include "widgets/employeelistelement.h"
+#include <vector>
+#include "models/headers/Employee.h"
+#include "widgets/employeeslist.h"
 class Gestionale : public QWidget{
 	Q_OBJECT
 
 public:
 	Gestionale(QWidget *parent = nullptr);
 	~Gestionale();
-
+    void setEmployees(const std::vector<Employee*>& empl){
+        this->employeesList->addEmployees(empl);
+    }
 
 private:
 	QHBoxLayout* mainLayout;
@@ -37,6 +41,7 @@ private:
 	//Layout Destro con tutti i suoi componenti
 	QHBoxLayout* Left;
 	QVBoxLayout* layoutVisualizza;
+    EmployeesList* employeesList;
 
     void addTitleSinistro();
 	void addBoxDestro();

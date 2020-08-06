@@ -1,6 +1,6 @@
 #include "gestionale.h"
 #include "ui_gestionale.h"
-
+#include "models/headers/BackDev.h"
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent){
     this->setMinimumSize(1280, 800);
@@ -11,6 +11,9 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
 	addBoxSinistro();
 	addBoxDestro();
     setStyle();
+    setEmployees({
+        new BackDev();
+    });
     setLayout(mainLayout);
 }
 
@@ -129,14 +132,8 @@ void Gestionale::addBoxDestro()
     scroll->setObjectName("scroll-right");
     scroll->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     scroll->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-    auto* Visualizza = new QFrame(this);
-    auto layoutLista = new QVBoxLayout(Visualizza);
-    layoutLista->setAlignment(Qt::AlignTop);
-    scroll->setWidget(Visualizza);
-    Visualizza->setObjectName("frame-right");
-    Visualizza->setContentsMargins(0,0,0,0);
-    Visualizza->layout()->setContentsMargins(0,0,0,0);
-    layoutLista->setSpacing(0);
+    employeesList = new EmployeesList(this);
+    scroll->setWidget(employeesList);
     mainLayout->addWidget(scroll);
 }
 
