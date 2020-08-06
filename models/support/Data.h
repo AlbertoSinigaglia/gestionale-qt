@@ -50,9 +50,9 @@ public:
     /*
      * Getter
      */
-    inline unsigned int getGiorno() const;
-    inline unsigned int getMese() const;
-    inline int getAnno() const;
+    unsigned int getGiorno() const;
+    unsigned int getMese() const;
+    int getAnno() const;
 
     /*
      * Setter Helpers

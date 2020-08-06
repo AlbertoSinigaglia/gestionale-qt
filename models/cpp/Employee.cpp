@@ -63,7 +63,7 @@ bool Employee::produttivo() const {
 }
 
 float Employee::bonusStipendio() const{
-    float bonus_esperienza = calcoloBonusLineare(0.6, gradoEsperienza() /10.0, Conv::bonus_esperienza_generica_max );
+    float bonus_esperienza = calcoloBonusLineare(0.6, gradoEsperienza() /10.0, 10 /*Conv::bonus_esperienza_generica_max*/ );
     return bonus_esperienza;
 }
 

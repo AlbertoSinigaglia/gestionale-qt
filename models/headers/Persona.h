@@ -10,7 +10,7 @@ class Persona{
 
 public:
     Persona(std::string nome_, std::string cognome_, std::string cf_, Data nascita_);
-    virtual ~Persona();
+    virtual ~Persona() = default;
 
     std::string getNome();
     std::string getCognome();
