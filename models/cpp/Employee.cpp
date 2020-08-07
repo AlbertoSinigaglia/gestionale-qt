@@ -1,7 +1,4 @@
 #include "../headers/Employee.h"
-#include "../support/Data.h"
-#include "../support/Convenzioni.h"
-#include "../support/UsefullMath.h"
 #include <math.h>
  
 
