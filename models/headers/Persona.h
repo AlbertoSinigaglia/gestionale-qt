@@ -3,23 +3,40 @@
 
 #include <string>
 #include "../support/Data.h"
+#include "../support/TipiRaggruppamento.h"
+#include "../support/Data.h"
+#include "../support/Convenzioni.h"
+#include "../support/UsefullMath.h"
 
 
 
 class Persona{
 
 public:
-    Persona(std::string nome_, std::string cognome_, std::string cf_, Data nascita_);
+    Persona(const std::string & nome_, const std::string & cognome_, const std::string & cf_, const Data & nascita_);
     virtual ~Persona() = default;
 
-    std::string getNome();
-    std::string getCognome();
-    std::string getCF();
-    Data getNascita();
+    Persona getPersona() const;
     
-private: 
+    void setNome(const std::string &value);
 
-    /**     DATI PERSONA 
+    void setCognome(const std::string &value);
+
+    void setCF(const std::string &value);
+
+    void setNascita(const Data &value);
+
+    std::string getNome() const;
+
+    std::string getCognome() const;
+
+    std::string getCF() const;
+
+    Data getNascita() const;
+
+private:
+
+    /**     DATI PERSONA
      * Nome, Cognome, Codice Fiscale, Data di Nascita
      */
     std::string nome;

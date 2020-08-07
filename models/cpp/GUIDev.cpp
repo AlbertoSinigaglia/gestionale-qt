@@ -2,12 +2,14 @@
 #include "../headers/GUIDev.h"
 
 
-GUIDev::GUIDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_lato_client, DatiInterfacceUtente dati_GUI):
-            GUIDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
-            quary_predefinite(GUIDev.quary_predefinite),
-            stile_minimalista(GUIDev.stile_minimalista),
-            lunghezza_max_percorso(GUIDev.lunghezza_max_percorso),
-            num_medio_percorsi_sezione(GUIDev.num_medio_percorsi_sezione){}
+GUIDev::GUIDev(const Persona & persona, const DatiLavoratore & dati_lavoratore, const DatiDeveloping & dati_developing, const DatiLatoClient & dati_lato_client, const DatiInterfacceUtente & dati_GUI):
+            Employee(persona, dati_lavoratore),
+            Software(persona, dati_lavoratore, dati_developing),
+            FrontDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
+            quary_predefinite(dati_GUI.quary_predefinite),
+            stile_minimalista(dati_GUI.stile_minimalista),
+            lunghezza_max_percorso(dati_GUI.lunghezza_max_percorso),
+            num_medio_percorsi_sezione(dati_GUI.num_medio_percorsi_sezione){}
 
 
 unsigned int GUIDev::gradoIntuitivita() const{
@@ -22,15 +24,12 @@ unsigned int GUIDev::gradoIntuitivita() const{
 
 
 unsigned int GUIDev::gradoProfessionalita() const{
-    //fun : funzione inversamente proporzionale rispetto al parametro 
-    double fun(unsigned int l){     // 1->1 , 2->3/4 , 3->5/6 ... 
-        return static_cast<double>(1+l)/static_cast<double>(2*l);}
-
     double grado = (quary_predefinite) ? 10u : 8u;
-    //quanti più è lungo il percoso massimo tanto decrementa il grado di professionalità:  
-    grado *= fun(lunghezza_max_percorso);
+    //quanti più è lungo il percoso massimo tanto decrementa il grado di professionalità
+    //perciò introduco un coefficiente inversamente proporzionale a lunghezza_max_percorso:
+    grado *= static_cast<double>(1+lunghezza_max_percorso)/static_cast<double>(2*lunghezza_max_percorso);
 
-    return static_cast<unsigned int>(grado);
+    return (grado <= 10)? static_cast<unsigned int>(grado) : 10u;
 }
 
 
@@ -41,11 +40,9 @@ float GUIDev::remunerazioneOraRoutine() const{
 
 
 
-
-
 float GUIDev::bonusStipendio() const{
 
-    float bonus_stile = (stile_minimalista) ? Conv::bonus_stile_GUI : 0;   
+    float bonus_stile = (stile_minimalista) ? Conv::bonus_stile_GUI : 0;
     float bonus_intuitivita = calcoloBonusLineare(0.8 , gradoIntuitivita()/10.0 , Conv::bonus_intuitivita_ottima);
     float bonus_professionalita = calcoloBonusLineare(0.8 , gradoProfessionalita()/10.0 , Conv::bonus_professionalita_ottima);
 
@@ -61,3 +58,32 @@ float GUIDev::valoreLavoro() const{
 
     return FrontDev::valoreLavoro() + valore_orientamento;
 }
+
+
+
+void GUIDev::setNumMedioPercorsiSezione(unsigned int value)
+{
+    num_medio_percorsi_sezione = value;
+}
+
+void GUIDev::setLunghezzaMaxPercorso(unsigned int value)
+{
+    lunghezza_max_percorso = value;
+}
+
+void GUIDev::setStileMinimalista(bool value)
+{
+    stile_minimalista = value;
+}
+
+void GUIDev::setQuaryPredefinite(bool value)
+{
+    quary_predefinite = value;
+}
+
+
+
+DatiInterfacceUtente GUIDev::getDatiInterfacceUtente() const{
+    return DatiInterfacceUtente{quary_predefinite, stile_minimalista, lunghezza_max_percorso, num_medio_percorsi_sezione};
+}
+

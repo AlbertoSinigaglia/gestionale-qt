@@ -2,8 +2,8 @@
 #include "../headers/Hardware.h"
 
  
-Hardware::Hardware(Persona persona, DatiLavoratore dati_lavoratore, DatiSistemi dati_sistemi):
-                Employee(persona,dati_sistemi.dati_lavoratore),
+Hardware::Hardware(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiSistemi& dati_sistemi):
+                Employee(persona, dati_lavoratore),
                 n_sistemi_gestiti(dati_sistemi.n_sistemi_gestiti),
                 n_sistemi_malfunzionanti(dati_sistemi.n_sistemi_malfunzionanti),
                 n_sistemi_gestiti_totale(dati_sistemi.n_sistemi_gestiti_totale),
@@ -39,22 +39,43 @@ float Hardware::bonusStipendio() const{
 
     // calcolo un bonus che viene assegnato a chi gestisce molti sistemi, questo richiede una lavoro maggiore di organizzazione
     float bonus_quantitativo = calcoloBonusLineare(0.5, static_cast<double>(n_sistemi_gestiti) / 20.0, Conv::bonus_dei_20_sistemi);
-    return Employee::bonusStipendio() + Conv::bonus_responsabilita + bonus_quantitativo;
+    return Employee::bonusStipendio() + bonus_quantitativo;
 }
-
-
-
-
 
 
 
 unsigned int Hardware::getNSistemiMalfunzionanti() const{
-
+    return n_sistemi_malfunzionanti;
 }
 unsigned int Hardware::getNSistemiGestiti() const{
-
-}
-unsigned int Hardware::getPercSistemiSussistenza() const{
-
+    return n_sistemi_gestiti;
 }
 
+
+
+
+void Hardware::setNSistemiGestitiTotale(unsigned int value)
+{
+    n_sistemi_gestiti_totale = value;
+}
+
+void Hardware::setNSistemiMalfunzionanti(unsigned int value)
+{
+    n_sistemi_malfunzionanti = value;
+}
+
+void Hardware::setNSistemiGestiti(unsigned int value)
+{
+    n_sistemi_gestiti = value;
+}
+
+void Hardware::setNuoviGestiti(unsigned int value)
+{
+    nuovi_gestiti = value;
+}
+
+
+
+DatiSistemi Hardware::getDatiSistemi() const{
+    return DatiSistemi{n_sistemi_gestiti, n_sistemi_malfunzionanti, n_sistemi_gestiti_totale, nuovi_gestiti};
+}

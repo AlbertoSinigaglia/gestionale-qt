@@ -6,7 +6,7 @@
  
 
 
-Employee::Employee(Persona persona, DatiLavoratore dati_lavoratore): 
+Employee::Employee(const Persona& persona, const DatiLavoratore& dati_lavoratore):
                     Persona(persona),
                     data_assunzione(dati_lavoratore.data_assunzione), 
                     fine_contratto(dati_lavoratore.fine_contratto), 
@@ -63,7 +63,7 @@ bool Employee::produttivo() const {
 }
 
 float Employee::bonusStipendio() const{
-    float bonus_esperienza = calcoloBonusLineare(0.6, gradoEsperienza() /10.0, 10 /*Conv::bonus_esperienza_generica_max*/ );
+    float bonus_esperienza = calcoloBonusLineare(0.6, gradoEsperienza() /10.0, Conv::bonus_esperienza_generica_max );
     return bonus_esperienza;
 }
 
@@ -82,9 +82,40 @@ unsigned int Employee::oreLavoroNelMese() const{
 }
 
 
-Data Employee::getDataAssunzione() const{
 
+Data Employee::getDataAssunzione() const{
+    return data_assunzione;
 }
 unsigned int Employee::getOreLavoroSett() const{
-
+    return ore_lavoro_sett;
 }
+
+
+
+
+void Employee::setQuotaAggiuntiva(float value)
+{
+    quota_aggiuntiva = value;
+}
+
+void Employee::setOreLavoroSett(unsigned int value)
+{
+    ore_lavoro_sett = value;
+}
+
+void Employee::setFineContratto(const Data &value)
+{
+    fine_contratto = value;
+}
+
+void Employee::setDataAssunzione(const Data &value)
+{
+    data_assunzione = value;
+}
+
+
+
+DatiLavoratore Employee::getDatiLavoratore() const{
+    return DatiLavoratore{data_assunzione, fine_contratto, ore_lavoro_sett, quota_aggiuntiva};
+}
+

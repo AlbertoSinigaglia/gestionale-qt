@@ -1,8 +1,7 @@
 
 #include "../headers/Manutenzione.h"
-#include "models/support/UsefullMath.h"
 
-Manutenzione::Manutenzione(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione):
+Manutenzione::Manutenzione(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiManutenzione& dati_manutenzione):
                 Employee(persona,dati_lavoratore),
                 perc_riparazioni_inefficaci(dati_manutenzione.perc_riparazioni_inefficaci),
                 perc_ripristino_medio(dati_manutenzione.perc_ripristino_medio),
@@ -49,15 +48,36 @@ float Manutenzione::valoreLavoro() const{
 
 
 
-
 unsigned int Manutenzione::getPercRiparazioniInefficaci() const{
-
+    return perc_riparazioni_inefficaci;
 }
 
 unsigned int Manutenzione::getNRiparazioniMese() const{
-
+    return n_riparazioni_mese;
 }
 
-void Manutenzione::setNRiparazioniMese(unsigned int riparazioni){
 
+
+
+void Manutenzione::setPercRipristinoMedio(double value)
+{
+    perc_ripristino_medio = value;
 }
+
+void Manutenzione::setNRiparazioniMese(unsigned int value)
+{
+    n_riparazioni_mese = value;
+}
+
+void Manutenzione::setPercRiparazioniInefficaci(unsigned int value)
+{
+    perc_riparazioni_inefficaci = value;
+}
+
+
+
+DatiManutenzione Manutenzione::getDatiManutenzione() const{
+    return DatiManutenzione{perc_riparazioni_inefficaci, perc_ripristino_medio, n_riparazioni_mese};
+}
+
+

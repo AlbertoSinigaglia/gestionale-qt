@@ -31,11 +31,6 @@ unsigned int BackDev::riutilizzabilita() const{
 }
 
 
-bool BackDev::isOrientatoOrtogonalita() const{
-    return orientato_ortogonalita;
-}
-
-
 double BackDev::influenzaProgetto() const{
     // livello astrazione 1 diminuisce del 10% l'influenza sul progetto, astrazione 5 la incrementa del 10%
     return Software::influenzaProgetto() * (0.85 + livello_astrazione/20.0);
@@ -71,10 +66,40 @@ float BackDev::valoreLavoro() const {
 
 
 
-
-
-
-
 double BackDev::getPercCapoProgetto() const{
     return perc_capo_progetto;
+}
+
+bool BackDev::isOrientatoOrtogonalita() const{
+    return orientato_ortogonalita;
+}
+
+
+
+
+
+void BackDev::setOrientatoOrtogonalita(bool value)
+{
+    orientato_ortogonalita = value;
+}
+
+void BackDev::setProveCorrettezza(bool value)
+{
+    prove_correttezza = value;
+}
+
+void BackDev::setLivelloAstrazione(unsigned int value)
+{
+    livello_astrazione = value;
+}
+
+void BackDev::setPercCapoProgetto(double value)
+{
+    perc_capo_progetto = value;
+}
+
+
+
+DatiLatoServer BackDev::getDatiLatoServer() const{
+    return DatiLatoServer{perc_capo_progetto, livello_astrazione, prove_correttezza, orientato_ortogonalita};
 }

@@ -1,7 +1,7 @@
 #include "../headers/Tecnico.h"
 
 
-Tecnico::Tecnico(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione, DatiSistemi dati_sistemi, DatiRiparazioneSistemi dati_riparazione_sistemi):
+Tecnico::Tecnico(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiManutenzione& dati_manutenzione, const DatiSistemi& dati_sistemi, const DatiRiparazioneSistemi& dati_riparazione_sistemi):
                 Employee(persona, dati_lavoratore), Manutenzione(persona, dati_lavoratore, dati_manutenzione), Hardware(persona, dati_lavoratore, dati_sistemi),
                 perc_riparazioni_sussistenti(dati_riparazione_sistemi.perc_riparazioni_sussistenti),
                 ore_stallo_mensili(dati_riparazione_sistemi.ore_stallo_mensili),
@@ -42,13 +42,13 @@ unsigned int Tecnico::orePiccolaRiparazione() const{
 }
 
 
-virtual float Tecnico::valoreMedioRiparazione() const{
+float Tecnico::valoreMedioRiparazione() const{
 
     return UFMath::mediaPonderata( orePiccolaRiparazione(), Conv::valore_piccola_riparazione, oreRiparazioneStallo(), Conv::valore_riparazione_sussistente ) ;
 }
 
 
-unsigned int quantitaConsiderevoleRiparazioni() const{
+unsigned int Tecnico::quantitaConsiderevoleRiparazioni() const{
     return Conv::n_riparazioni_considervole_tecnico;
 }
 
@@ -56,8 +56,8 @@ unsigned int quantitaConsiderevoleRiparazioni() const{
 double Tecnico::percRipristino() const{
 
     // Ogni tipo di manutenzione (con o senza stallo) e pesata per il numero di ore che quel tipo di manutenzione comporta
-    peso_stallo = oreRiparazioneStallo();
-    peso_piccola_riparazione = orePiccolaRiparazione();
+    double peso_stallo = oreRiparazioneStallo();
+    double peso_piccola_riparazione = orePiccolaRiparazione();
 
     // calcolo il peso della manutenzione prevista fino alla fine del mese, (perc_riparazioni_sussistenti mi da una stima di che tipo di manutenzioni posso aspettarmi )
     double peso_manutenzione_prevista = getNSistemiMalfunzionanti() * ( perc_riparazioni_sussistenti * peso_stallo
@@ -71,7 +71,7 @@ double Tecnico::percRipristino() const{
 }
 
 
-unsigned int oreRisparmiateStalli() const{
+unsigned int Tecnico::oreRisparmiateStalli() const{
 
     unsigned int caso_pessimo_ore_stalli_incontrati = Conv::ore_ripristino_stallo_pessimo * static_cast<int>( getNRiparazioniMese() * perc_riparazioni_sussistenti );
     unsigned int ore_risparmiate_di_stalli = caso_pessimo_ore_stalli_incontrati - ore_straordinari;
@@ -80,16 +80,19 @@ unsigned int oreRisparmiateStalli() const{
 }
 
 
+
+
+
 bool Tecnico::produttivo() const{
 
     // se il tecnico non ha risparmiato ore rispetto al caso pessimo allora e stato inefficace
     if ( oreRisparmiateStalli() == 0 ) return false;
-        else{
-        unsigned int n_riparazioni_considerevole_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno / 31 ;
+    else{
+        unsigned int n_riparazioni_considerevole_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno() / 31 ;
 
         return ( Manutenzione::produttivo() && Hardware::produttivo() ) || 
                 // un altro modo per dimostrare la produttivita e richiedere straordinari mantenendo una velocita apprezzabile di riparazioni
-                ( ( ore_straordinari > 0 ) && ( getNRiparazioniMese() > n_riparazioni_considerevole_nel_mese /2) )
+                ( ( ore_straordinari > 0 ) && ( getNRiparazioniMese() > n_riparazioni_considerevole_nel_mese /2) );
         }
 }
 
@@ -107,8 +110,30 @@ float Tecnico::bonusStipendio() const{
 
     float bonus_quantita_sussistenti_gestiti = calcoloBonusLineare(0.5, perc_riparazioni_sussistenti, Conv::bonus_solo_sussistenza); 
 
-    return Matutenzione::bonusStipendio() + Hardware::bonusStipendio() + bonus_quantita_sussistenti_gestiti;
+    return Manutenzione::bonusStipendio() + Hardware::bonusStipendio() + bonus_quantita_sussistenti_gestiti;
 }
 
 
 
+
+
+void Tecnico::setOreStraordinari(unsigned int value)
+{
+    ore_straordinari = value;
+}
+
+void Tecnico::setOreStalloMensili(unsigned int value)
+{
+    ore_stallo_mensili = value;
+}
+
+void Tecnico::setPercRiparazioniSussistenti(unsigned int value)
+{
+    perc_riparazioni_sussistenti = value;
+}
+
+
+
+DatiRiparazioneSistemi Tecnico::getDatiRiparazioneSistemi() const{
+    return DatiRiparazioneSistemi{perc_riparazioni_sussistenti, ore_stallo_mensili, ore_straordinari};
+}

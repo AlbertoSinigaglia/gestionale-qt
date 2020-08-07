@@ -1,12 +1,11 @@
 
 #include "../headers/FrontDev.h"
    
-FrontDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_client):
+FrontDev::FrontDev(const Persona & persona, const DatiLavoratore & dati_lavoratore, const DatiDeveloping & dati_developing, const DatiLatoClient & dati_client):
             Software(persona, dati_lavoratore, dati_developing),
             libreria(dati_client.libreria),
             orientato_professionalita(dati_client.orientato_professionalita),
             perc_codice_perfezionato(dati_client.perc_codice_perfezionato){}
-};
 
 
 double FrontDev::velocitaScrittura() const{
@@ -21,18 +20,12 @@ unsigned int FrontDev::riutilizzabilita() const{
 
     // assumo che il numero di progetti futuri in cui verra riutilizzato il codice sia proporzionale a lla prospettiva di 
     // miglioramento (evoluzione) della libreria usata per quel codice
-    int num_ricicli_per_libreria = Conv::riutilizzo_codice_angular * evolvibilita_libreria[ libreria ]; 
+    int num_ricicli_per_libreria = Conv::riutilizzo_codice_angular * Conv::evolvibilita_libreria[ libreria ];
     int num_ricicli_per_qualita_codice = Software::riutilizzabilita();
 
     if(num_ricicli_per_libreria > num_ricicli_per_qualita_codice) 
         return num_ricicli_per_libreria;   else   return num_ricicli_per_qualita_codice;
-    return 
 }
-
-
- bool FrontDev::isOrientatoProfessionalita() const{
-     return orientato_professionaita;
- }
 
 
 
@@ -48,7 +41,39 @@ unsigned int FrontDev::riutilizzabilita() const{
 float FrontDev::bonusStipendio() const{
 
     float bonus_adattamento =  (perc_codice_perfezionato > 0.5)  ? Conv::bonus_meta_codice_adattato : 0;
-    float bonus_orientamento = (orientato_professionaita)? Conv::bonus_orientamento_professionalita : 0;
+    float bonus_orientamento = (orientato_professionalita)? Conv::bonus_orientamento_professionalita : 0;
 
     return Software::bonusStipendio() + bonus_adattamento + bonus_orientamento;
 }
+
+
+bool FrontDev::isOrientatoProfessionalita() const{
+    return orientato_professionalita;
+}
+
+
+
+
+
+void FrontDev::setPercCodicePerfezionato(double value)
+{
+    perc_codice_perfezionato = value;
+}
+
+void FrontDev::setOrientatoProfessionalita(bool value)
+{
+    orientato_professionalita = value;
+}
+
+void FrontDev::setLibreria(const Conv::Libreria &value)
+{
+    libreria = value;
+}
+
+
+
+DatiLatoClient FrontDev::getDatiLatoClient() const{
+    return DatiLatoClient{libreria, orientato_professionalita, perc_codice_perfezionato};
+}
+
+

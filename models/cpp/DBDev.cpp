@@ -3,6 +3,8 @@
 
 
 DBDev::DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiDatabase& dati_database):
+            Employee(persona, dati_lavoratore),
+            Software(persona, dati_lavoratore, dati_developing),
             BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
             num_attributi_ridondanti_per_entita(dati_database.num_attributi_ridondanti_per_entita),
             speed_up_indicizzazioni(dati_database.speed_up_indicizzazioni),
@@ -10,7 +12,7 @@ DBDev::DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, cons
 
 
 unsigned int DBDev::gradoOrtogonalita() const{
-    // istituisco un malus che è dirett proporzionale al surplus di entità ridondanti rispetto alla media
+    // introduco un malus che è dirett proporzionale al surplus di entità ridondanti rispetto alla media
     double malus_ridondanza = Conv::media_attributi_ridondanti_per_entita / num_attributi_ridondanti_per_entita;
     // limito il malus
     if (malus_ridondanza < 0.5) malus_ridondanza = 0.5;
@@ -41,7 +43,6 @@ unsigned int DBDev::gradoPerformance() const{
 
 
 
-
 float DBDev::bonusStipendio() const{
 
     float bouns_performance_DB = calcoloBonusLineare(0.6 , gradoPerformance()/10.0 , Conv::bonus_performance_DB_ottime);
@@ -58,4 +59,26 @@ float DBDev::valoreLavoro() const{
         valore_lavoro += calcoloBonusLineare( 0.5, gradoOrtogonalita()/10.0, Conv::valore_rispetto_orientamento);
 
     return valore_lavoro;
+}
+
+
+
+void DBDev::setPercEntitaFormaNormale(double value)
+{
+    perc_entita_forma_normale = value;
+}
+
+void DBDev::setSpeedUpIndicizzazioni(double value)
+{
+    speed_up_indicizzazioni = value;
+}
+
+void DBDev::setNumAttributiRidondantiPerEntita(double value)
+{
+    num_attributi_ridondanti_per_entita = value;
+}
+
+
+DatiDatabase DBDev::getDatiDatabase() const{
+    return DatiDatabase{num_attributi_ridondanti_per_entita, speed_up_indicizzazioni, perc_entita_forma_normale};
 }

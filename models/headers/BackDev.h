@@ -4,6 +4,7 @@
 
 #include "Software.h"
 #include "Persona.h"
+
 class BackDev : virtual public Software{
 
 public: 
@@ -16,20 +17,36 @@ public:
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
     virtual float bonusStipendio() const override;
 
-    /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
+    /*      VELOCITÀ SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
     virtual double velocitaScrittura() const override;
 
-    double getPercCapoProgetto() const;
+
+
+    void setPercCapoProgetto(double value);
+
+    void setLivelloAstrazione(unsigned int value);
+
+    void setProveCorrettezza(bool value);
+
+    void setOrientatoOrtogonalita(bool value);
+
+
+    DatiLatoServer getDatiLatoServer() const;
 
 protected:
+
+    /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
+    virtual float valoreLavoro() const override;
 
     /*      INFLUENZA PROGETTO              (metodo che eredita l'obbiettivo della classe base)*/
     virtual double influenzaProgetto() const override;
 
-    /**     RIUTILIZZABILITa                (metodo che eredita l'obbiettivo della classe base)*/
+    /*      RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
     virtual unsigned int riutilizzabilita() const override;
 
     bool isOrientatoOrtogonalita() const;
+
+    double getPercCapoProgetto() const;
 
 private:
 

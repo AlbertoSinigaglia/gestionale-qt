@@ -1,8 +1,8 @@
 
 #include "../headers/FullStack.h"
-#include "models/support/UsefullMath.h"
 
 FullStack::FullStack(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiLatoClient& dati_lato_client, const DatiFullStack& dati_fullstack):
+            Employee(persona, dati_lavoratore),
             Software(persona, dati_lavoratore, dati_developing),
             BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
             FrontDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
@@ -25,17 +25,15 @@ unsigned int FullStack::riutilizzabilita() const{
 
 
 float FullStack::remunerazioneOraRoutine() const{
-    Conv::remunerazione_ora_routine_FullStack;
+    return Conv::remunerazione_ora_routine_FullStack;
 }
 
 
 
 
-
-
 bool FullStack::produttivo() const{    
-     
-    bool sufficentemente_autorevole = ( getPercCapoProgetto() >= Conv::perc_minima_capo_progetti_FullStack ); 
+
+    bool sufficentemente_autorevole = ( getPercCapoProgetto() >= Conv::perc_minima_capo_progetti_FullStack );
 
     return sufficentemente_autorevole && ( BackDev::produttivo() && FrontDev::produttivo() );
 }
@@ -51,5 +49,23 @@ float FullStack::bonusStipendio() const{
 
 float FullStack::valoreLavoro() const{
 
-    return BackDev::valoreLavoro()*perc_lavoro_back + FrontDev::valoreLavoro()*(1-perc_lavoro_back);
+    return BackDev::valoreLavoro()*perc_lavoro_back + Software::valoreLavoro()*(1-perc_lavoro_back);
 }
+
+
+
+void FullStack::setSeparaInterfacce(bool value)
+{
+    separa_interfacce = value;
+}
+
+void FullStack::setPercLavoroBack(double value)
+{
+    perc_lavoro_back = value;
+}
+
+
+DatiFullStack FullStack::getDatiFullStack() const{
+    return DatiFullStack{perc_lavoro_back, separa_interfacce};
+}
+

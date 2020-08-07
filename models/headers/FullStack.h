@@ -14,21 +14,30 @@ public:
     virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;
+    virtual float bonusStipendio() const override;
 
-    /**     VELOCITa SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual double velocitaScrittura() const;
+    /*      VELOCITÀ SCRITTURA              (metodo che eredita l'obbiettivo della classe base)*/
+    virtual double velocitaScrittura() const override;
+
+
+
+    void setPercLavoroBack(double value);
+
+    void setSeparaInterfacce(bool value);
+
+    DatiFullStack getDatiFullStack() const;
+
 
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const;
+    virtual float valoreLavoro() const override;
 
-    /**     RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
-    virtual unsigned int riutilizzabilita() const;
+    /*      RIUTILIZZABILITÀ                (metodo che eredita l'obbiettivo della classe base)*/
+    virtual unsigned int riutilizzabilita() const override;
 
-    /**     REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
-    virtual float remunerazioneOraRoutine() const;
+    /*      REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
+    virtual float remunerazioneOraRoutine() const override;
 
 private:
 

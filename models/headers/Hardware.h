@@ -8,28 +8,39 @@ class Hardware: virtual public Employee{
 
 public:
 
-    Hardware(Persona persona, DatiLavoratore dati_lavoratore, DatiSistemi dati_sistemi);
+    Hardware(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiSistemi& dati_sistemi);
 
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
-    virtual bool produttivo() const;
+    virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;                                                                       //solo con certificato
+    virtual float bonusStipendio() const override;                                                                       //solo con certificato
 
-    /**     AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
+    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
+    virtual void aggiornaMese() override;
 
     /*      GRADO ESPERIENZA                (metodo che eredita l'obbiettivo della classe base)
     * Viene calcolato sulla base del numero di sistemi gestiti totale
     */
-    virtual unsigned int gradoEsperienza()  const;  
+    virtual unsigned int gradoEsperienza() const override;
 
+
+
+    void setNuoviGestiti(unsigned int value);
+
+    void setNSistemiGestiti(unsigned int value);
+
+    void setNSistemiMalfunzionanti(unsigned int value);
+
+    void setNSistemiGestitiTotale(unsigned int value);
+
+
+    DatiSistemi getDatiSistemi() const;
 
 protected:
 
-unsigned int getNSistemiMalfunzionanti() const;
-unsigned int getNSistemiGestiti() const;
-unsigned int getPercSistemiSussistenza() const;
+    unsigned int getNSistemiMalfunzionanti() const;
+    unsigned int getNSistemiGestiti() const;
 
 
 private:

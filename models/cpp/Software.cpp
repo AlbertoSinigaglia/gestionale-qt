@@ -1,7 +1,4 @@
 #include "../headers/Software.h"
-#include "models/headers/Persona.h"
-#include "models/support/UsefullMath.h"
-#include "models/support/Convenzioni.h"
 
 Software::Software(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing):
                 Employee(persona,dati_lavoratore),
@@ -44,7 +41,7 @@ double Software::velocitaScrittura() const{
 
 DifferenzaDate Software::durataCodice() const{
     // sulla base della stima del numero dei progetti a cui puo sopravvivere il codice calcolo il tempo di vita del codice
-    return static_cast<DifferenzaDate> ( riutilizzabilita() * static_cast<int>(Conv::durata_progetto_medio.inGiorni()) );
+    return DifferenzaDate{0,0,static_cast<int>(riutilizzabilita() *Conv::durata_progetto_medio.inGiorni())};
 }
 
 
@@ -109,4 +106,41 @@ float Software::bonusStipendio() const {
     float bonus_linguaggio = Conv::bonus_complessita_CPP * Conv::complessita_linguaggio[linguaggio];
 
     return  Employee::bonusStipendio() + bonus_influenza_progetti + bonus_linguaggio;
+}
+
+
+unsigned int Software::getNProgettiConclusiMese() const{
+    return n_progetti_conclusi_mese;
+}
+
+unsigned int Software::getNRigheMese() const{
+    return n_righe_mese;
+}
+
+
+
+void Software::setPercOreProgrammazione(double value)
+{
+    perc_ore_programmazione = value;
+}
+
+void Software::setNRigheTotali(unsigned int value)
+{
+    n_righe_totali = value;
+}
+
+void Software::setNProgettiConclusiMese(unsigned int value)
+{
+    n_progetti_conclusi_mese = value;
+}
+
+void Software::setNRigheMese(unsigned int value)
+{
+    n_righe_mese = value;
+}
+
+
+
+DatiDeveloping Software::getDatiDeveloping() const{
+    return DatiDeveloping{linguaggio, perc_ore_programmazione, n_righe_totali, n_righe_mese, n_progetti_conclusi_mese};
 }

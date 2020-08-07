@@ -8,23 +8,36 @@ class GUIDev : public FrontDev{
 
 public:
 
-    GUIDev(Persona persona, DatiLavoratore dati_lavoratore, DatiDeveloping dati_developing, DatiLatoClient dati_lato_client, DatiInterfacceUtente dati_interfaccia_utente);
+    GUIDev(const Persona & persona, const DatiLavoratore & dati_lavoratore, const DatiDeveloping & dati_developing, const DatiLatoClient & dati_lato_client, const DatiInterfacceUtente & dati_interfaccia_utente);
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;
+    virtual float bonusStipendio() const override;
 
-    /**     GRADO INTUITIVITÀ               (metodo intero da 1 a 10)
+    /*      GRADO INTUITIVITÀ               (metodo intero da 1 a 10)
      * Il metodo restituisce il grado (da 1 a 10) di intuitività che viene rispettata nelle  
      * Grafic User Interface del GUIDev in questione.
      */
     unsigned int gradoIntuitivita() const;
 
+
+
+    void setQuaryPredefinite(bool value);
+
+    void setStileMinimalista(bool value);
+
+    void setLunghezzaMaxPercorso(unsigned int value);
+
+    void setNumMedioPercorsiSezione(unsigned int value);
+
+    DatiInterfacceUtente getDatiInterfacceUtente() const;
+
+
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const;
+    virtual float valoreLavoro() const override;
 
-    /**     GRADO PROFESSIONALITÀ             (metodo intero da 1 a 10)
+    /*      GRADO PROFESSIONALITÀ             (metodo intero da 1 a 10)
      * Il metodo restituisce il grado (da 1 a 10) di professionalita delle funzionalita proposte nella  
      * Grafic User Interface del GUIDev in questione. Una funzionalita professionale è una funzionalita
      * che per priorità antepone alla semplicita e univocita l'incremento delle performance 
@@ -32,8 +45,8 @@ protected:
      */
     unsigned int gradoProfessionalita() const;
 
-    /**     REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
-    virtual float remunerazioneOraRoutine() const;
+    /*      REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
+    virtual float remunerazioneOraRoutine() const override;
 
 
 private:

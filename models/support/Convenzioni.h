@@ -106,7 +106,7 @@ namespace Conv{         // CONVENZIONI
 
     extern const unsigned int tolleranza_n_problemi_aperti_mese;
 
-
+    extern const unsigned int n_problemi_sicurezza_nella_produzione_progetto;
 
 // -------
 // BACKDEV

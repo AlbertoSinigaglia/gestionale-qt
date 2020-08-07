@@ -17,39 +17,50 @@ class Tecnico : public Manutenzione, public Hardware{
 
 public:
 
-    Tecnico(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione, DatiSistemi dati_sistemi, DatiRiparazioneSistemi dati_riparazione_sistemi);
+    Tecnico(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiManutenzione& dati_manutenzione, const DatiSistemi& dati_sistemi, const DatiRiparazioneSistemi& dati_riparazione_sistemi);
 
-    /**     PERCENTUALE RIPRISTINO          (metodo che eredita l'obbiettivo della classe base Manutenzione)*/
-    virtual double percRipristino() const;
+    /*      PERCENTUALE RIPRISTINO          (metodo che eredita l'obbiettivo della classe base Manutenzione)*/
+    virtual double percRipristino() const override;
 
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
     virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;
+    virtual float bonusStipendio() const override;
 
-    /**     AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
+    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
+    virtual void aggiornaMese() override;
 
 
-protected:                       
+
+    void setPercRiparazioniSussistenti(unsigned int value);
+
+    void setOreStalloMensili(unsigned int value);
+
+    void setOreStraordinari(unsigned int value);
+
+
+    DatiRiparazioneSistemi getDatiRiparazioneSistemi() const;
+
+
+protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const = 0;
+    virtual float valoreLavoro() const override= 0;
 
-    /**     REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
-    virtual float remunerazioneOraRoutine() const;
+    /*      REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
+    virtual float remunerazioneOraRoutine() const override;
 
     /*      VALORE RIPARAZIONE              (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreMedioRiparazione() const;
+    virtual float valoreMedioRiparazione() const override;
 
-    /**     ORE LAVORO NEL MESE             (metodo che eredita l'obbiettivo della classe: Employee)
+    /*      ORE LAVORO NEL MESE             (metodo che eredita l'obbiettivo della classe: Employee)
      *  in più aggiungo gli straordinari di riparazioni
     */
-    virtual unsigned int oreLavoroNelMese() const;
+    virtual unsigned int oreLavoroNelMese() const override;
 
-    /*      QUANTITa CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base)*/  
-    virtual unsigned int quantitaConsiderevoleRiparazioni() const;
+    /*      QUANTITÀ CONSIDEREVOLE RIPARAZIONI         (metodo che eredita l'obbiettivo della classe base)*/
+    virtual unsigned int quantitaConsiderevoleRiparazioni() const override;
 
 
 private:

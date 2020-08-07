@@ -8,9 +8,9 @@ class Manutenzione: virtual public Employee{
  
 public:
 
-    Manutenzione(Persona persona, DatiLavoratore dati_lavoratore, DatiManutenzione dati_manutenzione);
+    Manutenzione(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiManutenzione& dati_manutenzione);
 
-    /**     PERCENTUALE RIPRISTINO                  (metodo reale  da 0 a 1)
+    /*      PERCENTUALE RIPRISTINO                  (metodo reale  da 0 a 1)
      * Il metodo indica con una percentuale il grado di ripristino della situazione di normalita sulla base del lavoro svolto
      * a partire da inizio mese fin ora. 
      *          La situazione di normalita è uno stato del sistema produttivo dove non sono più necessari gli interventi
@@ -19,25 +19,36 @@ public:
     virtual double percRipristino() const = 0;
 
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
-    virtual bool produttivo() const;
+    virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;
+    virtual float bonusStipendio() const override;
 
-    /**     AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
+    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
+    virtual void aggiornaMese() override;
+
+
+    void setPercRiparazioniInefficaci(unsigned int value);
+
+    void setNRiparazioniMese(unsigned int value);
+
+    void setPercRipristinoMedio(double value);
+
+
+    DatiManutenzione getDatiManutenzione() const;
+
 
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const;
+    virtual float valoreLavoro() const override;
 
-    /**     VALORE MEDIO RIPARAZIONE
+    /*      VALORE MEDIO RIPARAZIONE
      * Il metodo restituisce il valore medio che da all'azionda 1 riparazione
      */
     virtual float valoreMedioRiparazione() const = 0;
 
-    /**     QUANTITa CONSIDEREVOLE RIPARAZIONI 
+    /*      QUANTITa CONSIDEREVOLE RIPARAZIONI
      * Il metodo ritorna la quantita di manutenzioni che è considerata meritevole (per il tipo di mansione che svolge)
      * in un mese per aggiudicarsi il bonus: bonus_n_riparazioni_considerevole (convenzione)
      */
@@ -45,7 +56,8 @@ protected:
 
     unsigned int getPercRiparazioniInefficaci() const;
     unsigned int getNRiparazioniMese() const;
-    void setNRiparazioniMese(unsigned int);
+
+
 
 
 private:

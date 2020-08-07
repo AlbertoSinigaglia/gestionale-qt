@@ -51,6 +51,7 @@ namespace Conv{         // CONVENZIONI
    const double perc_pessimistica_manutenzioni_critiche = 100;
    const unsigned int media_n_righe_manutenzione_critica = 23;
    const unsigned int tolleranza_n_problemi_aperti_mese = 5;
+   const unsigned int n_problemi_sicurezza_nella_produzione_progetto= 10;
    const double perc_media_capo_progetto = 0.4;
    const double perc_velocita_astrazione_5 = 0.8;
    const double malus_velocita_prove_corettezza = 0.8;
@@ -70,6 +71,10 @@ namespace Conv{         // CONVENZIONI
    const float remunerazione_ora_routine_FullStack = 10;                                           // se modellazione, prove correttezza ecc..
    const double perc_minima_capo_progetti_FullStack = 0.4;
    const double malus_velocita_separazione_interfacce = 0.8;
+   const float bonus_esperienza_generica_max = 10;
+   const float bonus_influenza_progetto_doppia = 10;
+   const float bonus_complessita_CPP = 10;
+   const float malus_inseperto_scrittura = 10;
    const float bonus_status_ottimo = 100;
    const float bonus_n_riparazioni_considerevole = 10;
    const float bonus_dei_20_sistemi = 100;

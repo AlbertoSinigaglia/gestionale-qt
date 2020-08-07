@@ -2,7 +2,7 @@
 #define CSVPARSER_SOFTWARE_H 
 
 
-#include "Employee.h"  
+#include "../headers/Employee.h"
 
 
 class Software: virtual public Employee{
@@ -16,21 +16,21 @@ public:
 // ---------------
 
 
-    /**     AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual void aggiornaMese();
+    /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
+    virtual void aggiornaMese() override;
 
     /*      PRODUTTIVO                      (metodo che eredita l'obbiettivo della classe base)*/
-    virtual bool produttivo() const;
+    virtual bool produttivo() const override;
 
     /*      BOUNS STIPENDIO                 (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float bonusStipendio() const;  
+    virtual float bonusStipendio() const override;
 
     /*      GRADO ESPERIENZA                (metodo che eredita l'obbiettivo della classe base)
     * Viene calcolato sulla base del numero di righe di codice prodotte dalla data di assunzione
     */
-    virtual unsigned int gradoEsperienza()  const; 
+    virtual unsigned int gradoEsperienza()  const override;
  
-    /**     VELOCITa SCRITTURA              (metodo reale)
+    /*      VELOCITÀ SCRITTURA              (metodo reale)
      * Il metodo offre una stima della velocita di produzione di codice (# righe all' ora) che ci si aspetta dall'impiegato.
      * viene calcolato sulla base del linguaggio usato, l'esperienza e altre caratteristiche dei vari ambiti di impiego
      * Quindi e un valore indipendente dalle caratteristiche di efficienza e produttivita dell'impiegato
@@ -43,7 +43,7 @@ public:
 // -------------------
 
 
-    /**     DURATA CODICE                   (metodo di tipo: Data)
+    /*      DURATA CODICE                   (metodo di tipo: Data)
      * Il metodo ritorna il tempo stimato di vita del codice 
      * Il periodo puo andare oltre al tempo di vita del progetto per cui e scritto se il codice viene
      * direttamente implementato in un altro progetto
@@ -51,24 +51,36 @@ public:
     DifferenzaDate durataCodice() const;
 
 
+    void setNRigheMese(unsigned int value);
+
+    void setNProgettiConclusiMese(unsigned int value);
+
+    void setNRigheTotali(unsigned int value);
+
+    void setPercOreProgrammazione(double value);
+
+
+    DatiDeveloping getDatiDeveloping() const;
+
+
 protected:
 
 
-// ---------------
-// METODI VIRTUALI
-// ---------------
+    // ---------------
+    // METODI VIRTUALI
+    // ---------------
 
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const;
+    virtual float valoreLavoro() const override;
 
-    /**     RIUTILIZZABILITa                (metodo intero)
+    /*      RIUTILIZZABILITÀ                (metodo intero)
      * Il metodo ritorna un valore corrispondente a una stima del numero di progetti che potrebbero riutilizzare il codice
      * scritto dalo sviluppatroe software in questione.
      */
     virtual unsigned int riutilizzabilita() const;
 
-    /**     INFLUENZA PROGETTO              (metodo reale)
+    /*      INFLUENZA PROGETTO              (metodo reale)
      * Il metodo ritorna un rapporto che esprime una maggiore o minore influenza nella produzione del progetto
      * Il contributo che da lo sviluppatore in questione viene rapportato a quello di un generico sviluppatore
      * percio il contributo dello sviluppatore = influenzaProgetto() * contributo sviluppatore medio ( = dimensione_progetto/n_impiegati_per_progetto)
@@ -81,16 +93,23 @@ protected:
 // -------------------
 
 
-    /**     ORE PER PROGETTO                (metodo intero)
+    /*      ORE PER PROGETTO                (metodo intero)
      * Il metodo ritorna il numero di ore che in media lo sviluppatore software in questione produce
      * per terminare i suoi incarichi nel progetto
      */
     unsigned int orePerProgetto() const;
 
-    /**     RIGHE PER PROGETTO              (metodo intero)
+    /*      RIGHE PER PROGETTO              (metodo intero)
      * Il metodo ritorna il numero di righe che in media lo sviluppatore software in questione impiega per concludere un progetto
      */
     unsigned int righePerProgetto() const; 
+
+
+
+    unsigned int getNProgettiConclusiMese() const;
+    unsigned int getNRigheMese() const;
+
+
 
 
 private:         
