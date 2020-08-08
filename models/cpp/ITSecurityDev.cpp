@@ -105,7 +105,7 @@ float ITSecurityDev::bonusStipendio() const{
 
     float bonus_quantita_criticita_gestite = (0.5, n_criticita_nel_mese / 50.0 , Conv::bonus_delle_50_criticita);
 
-    return Manutenzione::bonusStipendio() + Software::bonusStipendio() + bonus_quantita_criticita_gestite;
+    return bonus_quantita_criticita_gestite + Manutenzione::bonusStipendio() + Software::bonusStipendio() - Employee::bonusStipendio();
 
 }
 

@@ -110,7 +110,7 @@ float Tecnico::bonusStipendio() const{
 
     float bonus_quantita_sussistenti_gestiti = calcoloBonusLineare(0.5, perc_riparazioni_sussistenti, Conv::bonus_solo_sussistenza); 
 
-    return Manutenzione::bonusStipendio() + Hardware::bonusStipendio() + bonus_quantita_sussistenti_gestiti;
+    return bonus_quantita_sussistenti_gestiti + Manutenzione::bonusStipendio() + Hardware::bonusStipendio() - Employee::bonusStipendio() ;
 }
 
 

@@ -4,8 +4,8 @@
 FullStack::FullStack(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiLatoClient& dati_lato_client, const DatiFullStack& dati_fullstack):
             Employee(persona, dati_lavoratore),
             Software(persona, dati_lavoratore, dati_developing),
-            BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
             FrontDev(persona, dati_lavoratore, dati_developing, dati_lato_client),
+            BackDev(persona, dati_lavoratore, dati_developing, dati_lato_server),
             perc_lavoro_back(dati_fullstack.perc_lavoro_back),
             separa_interfacce(dati_fullstack.separa_interfacce){}
 
