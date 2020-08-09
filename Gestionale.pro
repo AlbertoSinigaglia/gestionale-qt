@@ -30,7 +30,6 @@ SOURCES += \
     models/cpp/FrontDev.cpp \
     models/cpp/GUIDev.cpp \
     models/cpp/ITSecurityDev.cpp \
-    models/cpp/Persona.cpp \
     models/cpp/Tecnico.cpp \
     controller.cpp \
     widgets/employeelistelement.cpp \

@@ -3,7 +3,7 @@
 
 
 Persona::Persona(const std::string &nome_, const std::string &cognome_, const std::string &cf_, const Data &nascita_):
-        nome(nome_), cognome(cognome_), CF(cf_), nascita(nascita_){}
+        nome(nome_), cognome(cognome_), CF(cf_), nascita(nascita_){};
 
 void Persona::setNome(const std::string &value)
 {
