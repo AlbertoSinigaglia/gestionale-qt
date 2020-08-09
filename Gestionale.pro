@@ -17,9 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    models/cpp/Persona.cpp \
     models/support/Convenzioni.cpp \
     models/support/Data.cpp \
+    models/cpp/Persona.cpp \
     models/cpp/BackDev.cpp \
     models/cpp/Employee.cpp \
     models/cpp/FullStack.cpp \
@@ -31,18 +31,20 @@ SOURCES += \
     models/cpp/GUIDev.cpp \
     models/cpp/ITSecurityDev.cpp \
     models/cpp/Tecnico.cpp \
-    controller.cpp \
     widgets/employeelistelement.cpp \
+    widgets/employeeslist.cpp \
+    controller.cpp \
     main.cpp \
     gestionale.cpp \
-    model.cpp \
-    widgets/employeeslist.cpp
+    model.cpp
 
 HEADERS += \
+    collections/DynamicArray.h \
     CSV/CSVParser.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
     models/support/TipiRaggruppamento.h \
+    models/support/UsefullMath.h \
     models/headers/BackDev.h \
     models/headers/Employee.h \
     models/headers/FullStack.h \
@@ -55,14 +57,12 @@ HEADERS += \
     models/headers/ITSecurityDev.h \
     models/headers/Persona.h \
     models/headers/Tecnico.h \
-    collections/DynamicArray.h \
+    widgets/employeelistelement.h \
+    widgets/employeeslist.h \
     azioneModifica.h \
     controller.h \
-    widgets/employeelistelement.h \
     gestionale.h \
-    model.h \
-    models/support/UsefullMath.h \
-    widgets/employeeslist.h
+    model.h
 
 FORMS += \
     gestionale.ui

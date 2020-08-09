@@ -1,3 +1,6 @@
+#ifndef CONVENZIONI_GERARCHIA_H
+#define CONVENZIONI_GERARCHIA_H
+
 #include"Data.h"
 
 
@@ -8,9 +11,24 @@ namespace Conv{         // CONVENZIONI
 //                          EXTRA AZIENDALI
 // ------------------------------------------------------------------
 
-   enum Linguaggio : short;
-
-    enum Libreria : short;
+    enum Libreria : short{
+        BOOTSTRAP = 0,
+        JQUERY = 1,
+        TREEJS = 2,
+        ANGULAR = 3,
+        VUEJS = 4
+    };
+    enum Linguaggio :short {
+         PYTHON = 0,
+         JAVA = 1,
+         PHP = 2,
+         CPP = 3,
+         SWIFT = 4,
+         JAVASCRIPT = 5,
+         RUBY = 6,
+         SQL =7,
+         TYPESCRIPT =8
+    };
 
 
 // ------------------------------------------------------------------
@@ -263,3 +281,4 @@ namespace Conv{         // CONVENZIONI
     extern const float bonus_separazione_interfaccie ;
 
 }
+#endif // CONVENZIONI_GERARCHIA_H

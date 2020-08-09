@@ -42,6 +42,7 @@ private:
 	QHBoxLayout* Left;
 	QVBoxLayout* layoutVisualizza;
     EmployeesList* employeesList;
+    QPushButton* modifica;
 
     void addTitleSinistro();
 	void addBoxDestro();
@@ -53,6 +54,13 @@ private:
 	void addAzioni();
 
 	void setStyle();
+signals:
+    void modifyEmployeeEvent(Employee*);
+public slots:
+    void modifyButtonClicked(){
+        qDebug() << "modifica cliccato";
+        emit modifyEmployeeEvent(employeesList->getCurrent());
+    }
 };
 
 #endif // GESTIONALE_H

@@ -15,6 +15,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
         //new BackDev();
     });
     setLayout(mainLayout);
+    connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
 }
 
 Gestionale::~Gestionale(){}
@@ -117,8 +118,8 @@ void Gestionale::addAzioni()
 	QVBoxLayout* layoutAzioni = new QVBoxLayout(Azioni);
 	QPushButton* Inserisci = new QPushButton("Inserisci",Azioni);
 	layoutAzioni->addWidget(Inserisci);
-	QPushButton* Modifica = new QPushButton("Modifica",Azioni);
-	layoutAzioni->addWidget(Modifica);
+    modifica = new QPushButton("Modifica",Azioni);
+    layoutAzioni->addWidget(modifica);
 	QPushButton* Elimina = new QPushButton("Elimina",Azioni);
 	layoutAzioni->addWidget(Elimina);
     layoutFrameFiltri->addWidget(Azioni);
