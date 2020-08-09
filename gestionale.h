@@ -41,8 +41,12 @@ private:
 	//Layout Destro con tutti i suoi componenti
 	QHBoxLayout* Left;
 	QVBoxLayout* layoutVisualizza;
+
+
     EmployeesList* employeesList;
     QPushButton* modifica;
+    QPushButton* inserisci;
+    QPushButton* elimina;
 
     void addTitleSinistro();
 	void addBoxDestro();
@@ -56,10 +60,21 @@ private:
 	void setStyle();
 signals:
     void modifyEmployeeEvent(Employee*);
+    void employeeListElementDoubleClickedEvent(Employee*);
+    void deleteEmployeeEvent(Employee *);
+    void insertEmployeeEvent();
 public slots:
+    void deleteButtonClicked(){
+        emit deleteEmployeeEvent(employeesList->getCurrent());
+    }
+    void insertButtonClicked(){
+        emit insertEmployeeEvent();
+    }
     void modifyButtonClicked(){
-        qDebug() << "modifica cliccato";
         emit modifyEmployeeEvent(employeesList->getCurrent());
+    }
+    void employeeListElementDoubleClicked(EmployeeListElement* e){
+        emit employeeListElementDoubleClickedEvent(e->getEmployee());
     }
 };
 

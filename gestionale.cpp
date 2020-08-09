@@ -15,7 +15,10 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
         //new BackDev();
     });
     setLayout(mainLayout);
+    connect(elimina, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
+    connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
+    connect(employeesList, SIGNAL(ListElementDoubleClicked(EmployeeListElement*)), this, SLOT(employeeListElementDoubleClicked( EmployeeListElement* )));
 }
 
 Gestionale::~Gestionale(){}
@@ -116,12 +119,12 @@ void Gestionale::addAzioni()
 	Azioni->setTitle("Azioni sui dipendenti");
     Azioni->setObjectName("azioni-left");
 	QVBoxLayout* layoutAzioni = new QVBoxLayout(Azioni);
-	QPushButton* Inserisci = new QPushButton("Inserisci",Azioni);
-	layoutAzioni->addWidget(Inserisci);
+    inserisci = new QPushButton("Inserisci",Azioni);
+    layoutAzioni->addWidget(inserisci);
     modifica = new QPushButton("Modifica",Azioni);
     layoutAzioni->addWidget(modifica);
-	QPushButton* Elimina = new QPushButton("Elimina",Azioni);
-	layoutAzioni->addWidget(Elimina);
+    elimina = new QPushButton("Elimina",Azioni);
+    layoutAzioni->addWidget(elimina);
     layoutFrameFiltri->addWidget(Azioni);
 }
 

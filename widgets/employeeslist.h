@@ -44,6 +44,8 @@ public:
         return current ? current->getEmployee() : nullptr;
     }
     ~EmployeesList() {}
+signals:
+    void ListElementDoubleClicked(EmployeeListElement*);
 public slots:
     void childPressedEvent(EmployeeListElement* e){
         if(e != current){
@@ -52,7 +54,6 @@ public slots:
                 if(current != e)
                     e->updateStatus(false);
             current->updateStatus(true);
-            qDebug() << "clicked child";
         } else {
             current->updateStatus(false);
             current = nullptr;
@@ -60,14 +61,8 @@ public slots:
         // do something
     }
     void childClickedEvent(EmployeeListElement* e){
-        qDebug() << "double clicked child";
-        QMessageBox msgBox;
-        msgBox.setText("Hai cliccato un utente");
-        msgBox.setInformativeText("Vuoi che lo faccia esplodere?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        int ret = msgBox.exec();
         // do something
+        emit ListElementDoubleClicked(e);
     }
 };
 
