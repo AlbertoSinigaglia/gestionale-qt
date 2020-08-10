@@ -129,6 +129,7 @@ protected:
 
     Data getDataAssunzione() const;
     unsigned int getOreLavoroSett() const;
+    Persona getPersona() const;
 
 
 private:
