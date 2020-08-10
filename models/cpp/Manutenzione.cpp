@@ -41,7 +41,7 @@ float Manutenzione::bonusStipendio() const{
 float Manutenzione::valoreLavoro() const{
     //tolgo un malus (derivato dalle riparazioni inefficaci) al valore del suo lavoro ottenuto dal valore di tutte le sue riparazioni
     float valore_riparzioni = (n_riparazioni_mese * (1.0 - perc_riparazioni_inefficaci)) * valoreMedioRiparazione();
-    return Employee::valoreLavoro() + valore_riparzioni;
+    return valore_riparzioni;
 }
 
 

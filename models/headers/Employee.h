@@ -108,7 +108,7 @@ protected:
      * Il metodo ritorna un approssimazione (in euro) del valore LORDO che sta apportando un impiegato all'azienda fin ora nel mese
      * secondo stime sui rececenti sviluppi del suo lavoro ed eventi ecezionali (nel mese attuale)
      */
-    virtual float valoreLavoro() const{ return 10.; };
+    virtual float valoreLavoro() const = 0;
 
     /*      ORE LAVORO NEL MESE             (metodo intero)
      * Il metodo ritorna il numero di ore di lavoro dell'impiegato da inizio mese fino adesso
