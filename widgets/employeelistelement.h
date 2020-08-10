@@ -119,7 +119,6 @@ signals:
     void doubleClicked(EmployeeListElement *);
 public slots:
     void changeVisibility(int prop, int visibility){
-        qDebug() << prop << " " << visibility;
         if(prop & EmployeeListElement::Name)
             updateVisibility(&EmployeeListElement::name, visibility);
         if(prop & EmployeeListElement::Surname)
