@@ -989,7 +989,7 @@ dynamic_array_iterator<T> DynamicArray<T>::insert(const const_dynamic_array_iter
 template<class T>
 dynamic_array_iterator<T> DynamicArray<T>::erase(const const_dynamic_array_iterator<T> &pos) {
     if(pos != end() && !empty()) {
-        for (int i = pos.pos; i < size_; ++i) {
+        for (int i = pos.pos; i < size_- 1; ++i) {
             p[i] = std::move(p[i+1]);
         }
         --size_;
