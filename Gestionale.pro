@@ -35,8 +35,7 @@ SOURCES += \
     widgets/employeeslist.cpp \
     controller.cpp \
     main.cpp \
-    gestionale.cpp \
-    model.cpp
+    gestionale.cpp
 
 HEADERS += \
     collections/DynamicArray.h \
@@ -59,10 +58,8 @@ HEADERS += \
     models/headers/Tecnico.h \
     widgets/employeelistelement.h \
     widgets/employeeslist.h \
-    azioneModifica.h \
     controller.h \
-    gestionale.h \
-    model.h
+    gestionale.h
 
 FORMS += \
     gestionale.ui
