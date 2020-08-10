@@ -49,6 +49,7 @@ float FullStack::bonusStipendio() const{
 
 float FullStack::valoreLavoro() const{
 
+    // ricordo che Software::valoreLavoro() == valoreLavoro() di un FrontDev()
     return BackDev::valoreLavoro()*perc_lavoro_back + Software::valoreLavoro()*(1-perc_lavoro_back);
 }
 

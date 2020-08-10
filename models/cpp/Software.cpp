@@ -83,7 +83,7 @@ float Software::valoreLavoro() const{
     // Dal valore totale dei progetti ricavo il valore apportato all'azienda dallo sviluppatore (rispetto al suo contributo)
     float valore_relativo_progetti = (valore_totale_progetti / Conv::n_impiegati_progetto_medio) * influenzaProgetto();
 
-    return Employee::valoreLavoro() + valore_relativo_progetti;
+    return valore_relativo_progetti;
 }
 
 
