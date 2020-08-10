@@ -12,9 +12,6 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
 	addBoxSinistro();
 	addBoxDestro();
     setStyle();
-    setEmployees({
-        //new BackDev();
-    });
     setLayout(mainLayout);
     connect(
         c_nome,&QCheckBox::stateChanged,
@@ -147,7 +144,6 @@ void Gestionale::addBoxDestro()
     scroll->setContentsMargins(0,0,0,0);
     scroll->setWidgetResizable(true);
     scroll->setObjectName("scroll-right");
-    scroll->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     scroll->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     employeesList = new EmployeesList(this);
     scroll->setWidget(employeesList);

@@ -64,8 +64,8 @@ private:
 
 	void setStyle();
 signals:
-    void modifyEmployeeEvent(Employee*);
     void employeeListElementDoubleClickedEvent(Employee*);
+    void modifyEmployeeEvent(Employee*);
     void deleteEmployeeEvent(Employee *);
     void insertEmployeeEvent();
 public slots:

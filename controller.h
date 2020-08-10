@@ -43,7 +43,7 @@ public:
         /* ottiene employee da file */
         view->setEmployees(getEmployee());
         connect(view, SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
-        connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmlployee()));
+        connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
         connect(view, SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
         connect(view, SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(openEmployeeInfo(Employee*)));
     }
@@ -60,10 +60,10 @@ public slots:
         } else {
             QMessageBox::StandardButton reply;
             reply = QMessageBox::question(view, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
-            if(reply == QMessageBox::Yes) this->insertNewEmlployee() ;
+            if(reply == QMessageBox::Yes) this->insertNewEmployee() ;
         }
     }
-    void insertNewEmlployee(){
+    void insertNewEmployee(){
         QMessageBox::information(view, "inserimento dipendente", "Stai per inserire un nuovo dipendente");
     }
     void openEmployeeInfo(Employee* e){
@@ -80,7 +80,7 @@ public slots:
         } else {
             QMessageBox::StandardButton reply;
             reply = QMessageBox::question(view, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
-            if(reply == QMessageBox::Yes) this->insertNewEmlployee() ;
+            if(reply == QMessageBox::Yes) this->insertNewEmployee() ;
         }
     }
 

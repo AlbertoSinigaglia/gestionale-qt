@@ -34,8 +34,7 @@ class EmployeeListElement : public QWidget
         QString styleSheet = QLatin1String(file.readAll());
         this->setStyleSheet(styleSheet);
     }
-    void paintEvent(QPaintEvent* event)
-    {
+    void paintEvent(QPaintEvent* event){
          QStyleOption opt;
          opt.init(this);
          QPainter p(this);
@@ -52,10 +51,11 @@ class EmployeeListElement : public QWidget
     }
 public:
     enum{
-        Name = 1,
-        Surname = 2,
-        DateOfBirth = 4,
-        DateOfEmployment = 8,
+        Name = 1<<0,
+        Surname = 1<<1,
+        DateOfBirth = 1<<2,
+        DateOfEmployment = 1<<3,
+        DateEndOfContract = 1<<4,
     };
     Employee* getEmployee() const{
         return e_;
@@ -128,7 +128,8 @@ public slots:
             updateVisibility(&EmployeeListElement::date_of_birth, visibility);
         if(prop & EmployeeListElement::DateOfEmployment)
             updateVisibility(&EmployeeListElement::date_of_empl, visibility);
-
+        if(prop & EmployeeListElement::DateEndOfContract)
+            updateVisibility(&EmployeeListElement::date_end_of_contract, visibility);
     }
 private:
     void updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){
