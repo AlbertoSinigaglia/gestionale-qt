@@ -1,6 +1,6 @@
 #include<vector>
 #include "Data.h"
-
+#include<QDebug>
 
 
 
@@ -15,7 +15,10 @@ Data Data::oggi() {
     tm *lt = localtime(&now);
     return Data(lt->tm_year + 1900, lt->tm_mon + 1 , lt->tm_mday);
 }
-
+Data::Data(const std::string& date): anno(0), mese(0), giorno(0){
+    std::istringstream is(date);
+    is >> *this;
+}
 Data::Data(int a, unsigned int m, unsigned int g) : anno(a), mese(m-1), giorno(g) {
     if ( mese > 11 )
         throw std::invalid_argument("Mese non valido");
@@ -166,13 +169,14 @@ std::istream &operator>>(std::istream & input, Data &data) {
     auto pos_s = s.find('/');
     if(pos_s == std::string::npos)
         throw std::invalid_argument("L'input fornito non è nel formato GG/MM/(-)YYYY");
+
     std::istringstream (s.substr(0, pos_s)) >> m;
     s = s.substr(pos_s+1);
 
     std::istringstream (s) >> y;
 
     try {
-        data = Data(y, m-1, d);
+        data = Data(y, m, d);
     } catch (const std::invalid_argument& e ){
         throw std::invalid_argument("L'input fornito non è valido");
     }

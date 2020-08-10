@@ -38,6 +38,7 @@ public:
     /*
      * Costruttori
      */
+    explicit Data(const std::string& date);
     explicit Data(int num_giorni = 0);     //dalla data base (0,1,1)
     explicit Data(int a, unsigned int m, unsigned int g);
 
