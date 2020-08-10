@@ -18,6 +18,16 @@ class EmployeeListElement : public QWidget
 {
     Q_OBJECT
     Employee* e_;
+    QLabel* name;
+    QLabel* surname;
+    QLabel* date_of_birth;
+    QLabel* cf;
+
+    QLabel* date_of_empl;
+    QLabel* date_end_of_contract;
+    QLabel* salary;
+    QLabel* weekly_hours;
+
     void setStyle(){
         QFile file(":/resources/employee_list_element.css");
         file.open(QFile::ReadOnly);
@@ -41,6 +51,12 @@ class EmployeeListElement : public QWidget
         emit doubleClicked(this);
     }
 public:
+    enum{
+        Name = 1,
+        Surname = 2,
+        DateOfBirth = 4,
+        DateOfEmployment = 8,
+    };
     Employee* getEmployee() const{
         return e_;
     }
@@ -53,17 +69,37 @@ public:
         this->setContentsMargins(20,20,20,20);
         this->setMouseTracking(true);
 
-        auto name = new QLabel(QString(e->getNome().c_str()));
-        name->setFixedWidth(150);
-        auto surname = new QLabel(QString(e->getCognome().c_str()));
-        surname->setFixedWidth(150);
-        auto date_of_empl = new QLabel(QString(static_cast<std::string>(e->getNascita()).c_str()));
-        date_of_empl->setFixedWidth(150);
+        name = new QLabel(QString(e->getNome().c_str()));
+        surname = new QLabel(QString(e->getCognome().c_str()));
+        date_of_birth = new QLabel(QString(static_cast<std::string>(e->getNascita()).c_str()));
+        cf = new QLabel(QString(e->getCF().c_str()));
 
+        // seg fault inizio
+        date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
+        date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
+        salary = new QLabel(QString(std::to_string(e->calcolaStipendio()).c_str()));
+        weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
+        // seg fault fine
+
+        name->setFixedWidth(150);
+        surname->setFixedWidth(150);
+        date_of_birth->setFixedWidth(150);
+        cf->setFixedWidth(150);
+        date_of_empl->setFixedWidth(150);
+        date_end_of_contract->setFixedWidth(150);
+        salary->setFixedWidth(150);
+        weekly_hours->setFixedWidth(150);
 
         layout->addWidget(name);
         layout->addWidget(surname);
         layout->addWidget(date_of_empl);
+        layout->addWidget(cf);
+
+        layout->addWidget(date_of_empl);
+        layout->addWidget(date_end_of_contract);
+        layout->addWidget(salary);
+        layout->addWidget(weekly_hours);
+
         setStyle();
         updateStatus(false);
     }
@@ -81,6 +117,23 @@ public:
 signals:
     void clicked(EmployeeListElement*);
     void doubleClicked(EmployeeListElement *);
+public slots:
+    void changeVisibility(int prop, int visibility){
+        qDebug() << prop << " " << visibility;
+        if(prop & EmployeeListElement::Name)
+            updateVisibility(&EmployeeListElement::name, visibility);
+        if(prop & EmployeeListElement::Surname)
+            updateVisibility(&EmployeeListElement::surname, visibility);
+        if(prop & EmployeeListElement::DateOfBirth)
+            updateVisibility(&EmployeeListElement::date_of_birth, visibility);
+        if(prop & EmployeeListElement::DateOfEmployment)
+            updateVisibility(&EmployeeListElement::date_of_empl, visibility);
+
+    }
+private:
+    void updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){
+        visibility ? (this->*elem)->show() : (this->*elem)->hide();
+    }
 };
 
 #endif // EMPLOYEELISTELEMENT_H

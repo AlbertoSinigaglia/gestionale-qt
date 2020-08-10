@@ -1,6 +1,7 @@
 #include "gestionale.h"
 #include "ui_gestionale.h"
 #include "models/headers/BackDev.h"
+#include "widgets/employeelistelement.h"
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent){
     this->setMinimumSize(1280, 800);
@@ -15,6 +16,13 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
         //new BackDev();
     });
     setLayout(mainLayout);
+    connect(
+        c_nome,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::Name, state);
+        }
+    );
+
     connect(elimina, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
@@ -86,14 +94,19 @@ void Gestionale::addBoxPersona()
     DatiPersona->setObjectName("dati-persona-left");
 	DatiPersona->setTitle("Dati della persona");
     QVBoxLayout* layoutDatiPersona = new QVBoxLayout(DatiPersona);
-	QCheckBox* Cognome = new QCheckBox("Cognome",this);
-	layoutDatiPersona->addWidget(Cognome);
-	QCheckBox* Nome = new QCheckBox("Nome",this);
-	layoutDatiPersona->addWidget(Nome);
-	QCheckBox* Sesso = new QCheckBox("Sesso",this);
-	layoutDatiPersona->addWidget(Sesso);
-	QCheckBox* Eta = new QCheckBox("Eta'",this);
-    layoutDatiPersona->addWidget(Eta);
+
+
+    c_cognome = new QCheckBox("Cognome",this);
+    layoutDatiPersona->addWidget(c_cognome);
+    c_nome = new QCheckBox("Nome",this);
+    layoutDatiPersona->addWidget(c_nome);
+    c_cf = new QCheckBox("Codice Fiscale",this);
+    layoutDatiPersona->addWidget(c_cf);
+    c_eta = new QCheckBox("Eta'",this);
+    layoutDatiPersona->addWidget(c_eta);
+    c_nome->setCheckState(Qt::CheckState::Checked);
+    c_cognome->setCheckState(Qt::CheckState::Checked);
+    c_eta->setCheckState(Qt::CheckState::Checked);
 	LayoutVisualizzare->addWidget(DatiPersona);
 }
 

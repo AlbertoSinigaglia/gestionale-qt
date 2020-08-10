@@ -47,6 +47,11 @@ private:
     QPushButton* modifica;
     QPushButton* inserisci;
     QPushButton* elimina;
+    QCheckBox* c_nome;
+    QCheckBox* c_cognome;
+    QCheckBox* c_sesso;
+    QCheckBox* c_eta;
+    QCheckBox* c_cf;
 
     void addTitleSinistro();
 	void addBoxDestro();

@@ -116,3 +116,7 @@ DatiLavoratore Employee::getDatiLavoratore() const{
     return DatiLavoratore{data_assunzione, fine_contratto, ore_lavoro_sett, quota_aggiuntiva};
 }
 
+Persona Employee::getPersona() const{
+    return static_cast<Persona>(*this);
+}
+

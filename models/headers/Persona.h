@@ -16,8 +16,6 @@ public:
     Persona(const std::string & nome_, const std::string & cognome_, const std::string & cf_, const Data & nascita_);
 
     virtual ~Persona() = default;
-
-    Persona getPersona() const;
     
     void setNome(const std::string &value);
 

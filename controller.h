@@ -4,7 +4,6 @@
 #include "models/support/Convenzioni.h"
 #include <QObject>
 #include <QMessageBox>
-#include <model.h>
 #include <gestionale.h>
 #include "models/headers/Employee.h"
 #include "models/headers/DBDev.h"

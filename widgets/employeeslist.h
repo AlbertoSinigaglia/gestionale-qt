@@ -12,6 +12,7 @@
 #include <QStyleOption>
 #include <QPainter>
 #include <QMessageBox>
+#include <QDebug>
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
 
@@ -36,6 +37,7 @@ public:
             auto el = new EmployeeListElement(e, this);
             children.push_back(el);
             this->layout()->addWidget(el);
+            connect(this,SIGNAL(changeListAttributeVisibilityEvent(int, int)), el, SLOT(changeVisibility(int, int)));
             connect(el, SIGNAL(clicked(EmployeeListElement *)), this,SLOT(childPressedEvent(EmployeeListElement*)));
             connect(el, SIGNAL(doubleClicked(EmployeeListElement *)), this,SLOT(childClickedEvent(EmployeeListElement*)));
         }
@@ -45,8 +47,12 @@ public:
     }
     ~EmployeesList() {}
 signals:
+    void changeListAttributeVisibilityEvent(int, int);
     void ListElementDoubleClicked(EmployeeListElement*);
 public slots:
+    void changeListAttributeVisibility(int props, int visibility){
+        emit changeListAttributeVisibilityEvent(props, visibility);
+    }
     void childPressedEvent(EmployeeListElement* e){
         if(e != current){
             current = e;
@@ -64,6 +70,7 @@ public slots:
         // do something
         emit ListElementDoubleClicked(e);
     }
+
 };
 
 #endif // EMPLOYEELIST_H
