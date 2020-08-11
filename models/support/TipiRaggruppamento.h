@@ -67,7 +67,6 @@ struct DatiSistemi{
 // Campi dati estesi dalla classe Tecnico
 
 struct DatiRiparazioneSistemi{
-    unsigned int n_riparazioni_senza_stallo;
     unsigned int perc_riparazioni_sussistenti;
     unsigned int ore_stallo_mensili;
     unsigned int ore_straordinari;

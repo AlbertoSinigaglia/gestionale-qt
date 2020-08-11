@@ -60,6 +60,7 @@ namespace Conv{         // CONVENZIONI
 
     extern const DifferenzaDate durata_progetto_medio;
     extern const unsigned int n_righe_progetto_medio;
+    extern const unsigned int ore_progetto_medio;
     extern const unsigned int n_impiegati_progetto_medio;
     extern const float valore_annuo_progetto_medio;
 
@@ -119,6 +120,7 @@ namespace Conv{         // CONVENZIONI
     extern const float valore_manutenzione_critica;
 
     extern const double perc_pessimistica_manutenzioni_critiche;
+    extern const double perc_pessimistica_manutenzioni_non_critiche;
 
     extern const unsigned int media_n_righe_manutenzione_critica;
 

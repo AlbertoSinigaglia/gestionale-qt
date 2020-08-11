@@ -58,21 +58,27 @@ unsigned int Software::riutilizzabilita() const{
 
 unsigned int Software::orePerProgetto() const{
     // calcolato sulla base di quanti progetti sono stati conclusi fino a questo punto del mese
+    if(n_progetti_conclusi_mese<2)
+        return Conv::ore_progetto_medio;
+        else   // se i dati sono sufficenti a dare una stima più precisa del caso specifico
     return  oreLavoroNelMese() / n_progetti_conclusi_mese;
 }
 
 
 unsigned int Software::righePerProgetto() const{
-
-    return  n_righe_mese / n_progetti_conclusi_mese;
+    int numero_medio_righe_per_progetto = Conv::n_righe_progetto_medio / Conv::n_impiegati_progetto_medio;
+    if(n_progetti_conclusi_mese>1 && n_righe_mese> numero_medio_righe_per_progetto)
+        return  n_righe_mese / n_progetti_conclusi_mese;
+        else// Se ho un insufficienza di dati per caclolare questo valore mi avvalgo di una media
+        return numero_medio_righe_per_progetto;
 }
 
 
 double Software::influenzaProgetto() const{
-    //calcolo la media di righe prodotte per un progetto da un sviluppantore generico
-    unsigned int media_righe_per_progetto = Conv::n_righe_progetto_medio / Conv::n_impiegati_progetto_medio;
+
     //restituisco il rapporto tra il num di righe che lui ha prodotto e quelle che produrrebbe uno sviluppatore generico 
-    return static_cast<double>(righePerProgetto()) / static_cast<double>(media_righe_per_progetto);
+    return static_cast<double>(righePerProgetto()) / static_cast<double>(Conv::n_righe_progetto_medio / Conv::n_impiegati_progetto_medio);
+
 }
 
 

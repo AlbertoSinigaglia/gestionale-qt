@@ -17,7 +17,7 @@ unsigned int GUIDev::gradoIntuitivita() const{
     if(stile_minimalista) return 10u;
     
     double grado_disambiguita_sistema = 10;
-    if(num_medio_percorsi_sezione > 1) grado_disambiguita_sistema /= num_medio_percorsi_sezione;
+    if(num_medio_percorsi_sezione > 1) grado_disambiguita_sistema /= num_medio_percorsi_sezione/2;
 
     return static_cast<unsigned int> (grado_disambiguita_sistema);
 }
@@ -27,7 +27,7 @@ unsigned int GUIDev::gradoProfessionalita() const{
     double grado = (quary_predefinite) ? 10u : 8u;
     //quanti più è lungo il percoso massimo tanto decrementa il grado di professionalità
     //perciò introduco un coefficiente inversamente proporzionale a lunghezza_max_percorso:
-    grado *= static_cast<double>(1+lunghezza_max_percorso)/static_cast<double>(2*lunghezza_max_percorso);
+    grado *= static_cast<double>(1+lunghezza_max_percorso)/static_cast<double>(1+2*lunghezza_max_percorso);
 
     return (grado <= 10)? static_cast<unsigned int>(grado) : 10u;
 }
