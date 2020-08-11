@@ -50,8 +50,12 @@ private:
     QCheckBox* c_nome;
     QCheckBox* c_cognome;
     QCheckBox* c_sesso;
-    QCheckBox* c_eta;
+    QCheckBox* c_dataNascita;
     QCheckBox* c_cf;
+    QCheckBox* DataA;
+    QCheckBox* DataFineContratto;
+    QCheckBox* StipendioBase;
+    QCheckBox* OreLavoro;
 
     void addTitleSinistro();
 	void addBoxDestro();

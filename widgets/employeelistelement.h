@@ -53,9 +53,13 @@ public:
     enum{
         Name = 1<<0,
         Surname = 1<<1,
-        DateOfBirth = 1<<2,
-        DateOfEmployment = 1<<3,
-        DateEndOfContract = 1<<4,
+        CF = 1<<2,
+        DateOfBirth = 1<<3,
+        DateOfEmployment = 1<<4,
+        DateEndOfContract = 1<<5,
+        Salary = 1<<6,
+        WeeklyHours = 1<<7
+
     };
     Employee* getEmployee() const{
         return e_;
@@ -123,12 +127,18 @@ public slots:
             updateVisibility(&EmployeeListElement::name, visibility);
         if(prop & EmployeeListElement::Surname)
             updateVisibility(&EmployeeListElement::surname, visibility);
+        if(prop & EmployeeListElement::CF)
+            updateVisibility(&EmployeeListElement::cf, visibility);
         if(prop & EmployeeListElement::DateOfBirth)
             updateVisibility(&EmployeeListElement::date_of_birth, visibility);
         if(prop & EmployeeListElement::DateOfEmployment)
             updateVisibility(&EmployeeListElement::date_of_empl, visibility);
         if(prop & EmployeeListElement::DateEndOfContract)
             updateVisibility(&EmployeeListElement::date_end_of_contract, visibility);
+        if(prop & EmployeeListElement::Salary)
+            updateVisibility(&EmployeeListElement::salary, visibility);
+        if(prop & EmployeeListElement::WeeklyHours)
+            updateVisibility(&EmployeeListElement::weekly_hours, visibility);
     }
 private:
     void updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){

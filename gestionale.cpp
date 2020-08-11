@@ -19,7 +19,49 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent){
             employeesList->changeListAttributeVisibility(EmployeeListElement::Name, state);
         }
     );
+    connect(
+        c_cognome,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::Surname, state);
+        }
+    );
+    connect(
+        c_cf,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::CF, state);
+        }
+    );
+    connect(
+        c_dataNascita,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::DateOfBirth, state);
+        }
+    );
 
+    connect(
+        DataA,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::DateOfEmployment, state);
+        }
+    );
+    connect(
+        DataFineContratto,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::DateEndOfContract, state);
+        }
+    );
+    connect(
+        StipendioBase,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::Salary, state);
+        }
+    );
+    connect(
+        OreLavoro,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::WeeklyHours, state);
+        }
+    );
     connect(elimina, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
@@ -99,11 +141,12 @@ void Gestionale::addBoxPersona()
     layoutDatiPersona->addWidget(c_nome);
     c_cf = new QCheckBox("Codice Fiscale",this);
     layoutDatiPersona->addWidget(c_cf);
-    c_eta = new QCheckBox("Eta'",this);
-    layoutDatiPersona->addWidget(c_eta);
+    c_dataNascita = new QCheckBox("Data di nascita",this);
+    layoutDatiPersona->addWidget(c_dataNascita);
     c_nome->setCheckState(Qt::CheckState::Checked);
     c_cognome->setCheckState(Qt::CheckState::Checked);
-    c_eta->setCheckState(Qt::CheckState::Checked);
+    c_cf->setCheckState(Qt::CheckState::Checked);
+    c_dataNascita->setCheckState(Qt::CheckState::Checked);
 	LayoutVisualizzare->addWidget(DatiPersona);
 }
 
@@ -112,14 +155,18 @@ void Gestionale::addBoxLavoro()
 	QGroupBox* DatiDip = new QGroupBox(this);
 	DatiDip->setTitle("Dati relativi al lavoro");
 	QVBoxLayout* layoutDatiDip = new QVBoxLayout(DatiDip);
-	QCheckBox* DataA = new QCheckBox("Data assunzione",this);
+    DataA = new QCheckBox("Data assunzione",this);
 	layoutDatiDip->addWidget(DataA);
-	QCheckBox* DataFineContratto = new QCheckBox("Data fine contratto",this);
+    DataFineContratto = new QCheckBox("Data fine contratto",this);
 	layoutDatiDip->addWidget(DataFineContratto);
-    QCheckBox* StipendioBase = new QCheckBox("Stipendio Base \nMensile",this);
+    StipendioBase = new QCheckBox("Stipendio Base \nMensile",this);
 	layoutDatiDip->addWidget(StipendioBase);
-    QCheckBox* OreLavoro= new QCheckBox("Ore di lavoro \nsettimanale",this);
-	layoutDatiDip->addWidget(OreLavoro);
+    OreLavoro= new QCheckBox("Ore di lavoro \nsettimanale",this);
+    layoutDatiDip->addWidget(OreLavoro);
+    DataA->setCheckState(Qt::CheckState::Checked);
+    DataFineContratto->setCheckState(Qt::CheckState::Checked);
+    StipendioBase->setCheckState(Qt::CheckState::Checked);
+    OreLavoro->setCheckState(Qt::CheckState::Checked);
 	LayoutVisualizzare->addWidget(DatiDip);
 }
 
