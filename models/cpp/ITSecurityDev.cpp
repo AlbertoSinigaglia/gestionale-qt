@@ -29,9 +29,11 @@ void ITSecurityDev::aggiornaMese(){
 }
 
 
-double ITSecurityDev::mediaNManutenzioniPerProgetto() const{
-
-    return getNRiparazioniMese() / getNProgettiConclusiMese();
+double ITSecurityDev::NManutenzioniPerProgetto() const{
+    if(getNProgettiConclusiMese()>2 && getNRiparazioniMese()>Conv::n_problemi_sicurezza_nella_produzione_progetto)
+        return getNRiparazioniMese() / getNProgettiConclusiMese();
+        else  // se le informazioni non sono sufficienti ritorno quella che è la media del numero di manutenzioni per un progetto
+        return Conv::n_problemi_sicurezza_nella_produzione_progetto;
 }
 
 
@@ -41,7 +43,7 @@ double ITSecurityDev::influenzaProgetto() const{
     double influenza_scrittura = Software::influenzaProgetto();  // probabilmente bassa a causa di un basso num di righe di codice scritte
 
     // Essere il manutentore del 60% dei problemi di sicurezza di un progetto è una condizione di influenza standard nel progetto (dal punto di vista della manutenzione)
-    double influenza_mantenimento_sicurezza = (mediaNManutenzioniPerProgetto() / Conv::n_problemi_sicurezza_nella_produzione_progetto) /0.6;
+    double influenza_mantenimento_sicurezza = (NManutenzioniPerProgetto() / Conv::n_problemi_sicurezza_nella_produzione_progetto) /0.6;
 
     return (influenza_scrittura + influenza_mantenimento_sicurezza) /2.0;
 }
@@ -58,23 +60,14 @@ unsigned int ITSecurityDev::riutilizzabilita() const{
 }
 
 
-
-unsigned int ITSecurityDev::righe1ManutenzioneNonCritica() const{
-
-    unsigned int righe_mese_manutenzione_non_critica = getNRigheMese() - n_criticita_risolte * Conv::media_n_righe_manutenzione_critica;
-
-    return righe_mese_manutenzione_non_critica / (getNRiparazioniMese() - n_criticita_risolte);
-}
-
-
 double ITSecurityDev::percRipristino() const{
 
     // Calcolo il numero di righe per le manutenzioni di problemi previsti nel caso pessimo in cui tra di loro ci sia un alto numero di problemi critici
     double n_manutenzioni_critiche_previste = n_problemi_irrsolti * Conv::perc_pessimistica_manutenzioni_critiche;
 
-    // Cerco di stimare il numero di righe che aspettano al ITSDev per ripristinare la situazione di normalita ponderandole nei casi Criticita / Non criticita
+    // Cerco di stimare il numero di righe che aspettano al ITSDev per ripristinare la situazione di normalita ponderandole nei casi criticita / Non criticita
     double righe_previste_di_manutanzione = n_manutenzioni_critiche_previste * Conv::media_n_righe_manutenzione_critica
-                                            + (n_problemi_irrsolti - n_manutenzioni_critiche_previste) * righe1ManutenzioneNonCritica();
+                                            + (n_problemi_irrsolti - n_manutenzioni_critiche_previste) * Conv::perc_pessimistica_manutenzioni_non_critiche;
 
     return getNRigheMese() / ( righe_previste_di_manutanzione + getNRigheMese() );
 }

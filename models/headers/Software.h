@@ -15,7 +15,6 @@ public:
 // METODI VIRTUALI
 // ---------------
 
-
     /*      AGGIORNA MESE                   (metodo che eredita l'obbiettivo della classe base)*/
     virtual void aggiornaMese() override;
 

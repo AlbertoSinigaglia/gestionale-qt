@@ -2,6 +2,7 @@
 #include "../headers/DBDev.h"
 
 
+
 DBDev::DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing, const DatiLatoServer& dati_lato_server, const DatiDatabase& dati_database):
             Employee(persona, dati_lavoratore),
             Software(persona, dati_lavoratore, dati_developing),
@@ -13,9 +14,9 @@ DBDev::DBDev(const Persona& persona, const DatiLavoratore& dati_lavoratore, cons
 
 unsigned int DBDev::gradoOrtogonalita() const{
     // introduco un malus che è dirett proporzionale al surplus di entità ridondanti rispetto alla media
-    double malus_ridondanza = Conv::media_attributi_ridondanti_per_entita / num_attributi_ridondanti_per_entita;
-    // limito il malus
-    if (malus_ridondanza < 0.5) malus_ridondanza = 0.5;
+    double malus_ridondanza=1;
+    if(num_attributi_ridondanti_per_entita>Conv::media_attributi_ridondanti_per_entita)
+        malus_ridondanza= Conv::media_attributi_ridondanti_per_entita / num_attributi_ridondanti_per_entita;
 
     unsigned int grado = static_cast<unsigned int> (perc_entita_forma_normale * 10.0 * malus_ridondanza);
     return (grado <= 10)? grado : 10;

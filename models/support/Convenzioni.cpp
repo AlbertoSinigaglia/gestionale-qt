@@ -7,6 +7,7 @@ namespace Conv{
    const unsigned int soglia_anni_esperto{20};
    const DifferenzaDate durata_progetto_medio{DifferenzaDate{1,0,0}};
    const unsigned int n_righe_progetto_medio{10000};
+   const unsigned int ore_progetto_medio{100};
    const unsigned int n_impiegati_progetto_medio{5};
    const float valore_annuo_progetto_medio{100000.};
    const double perc_codice_scritto{0.2};
@@ -28,6 +29,7 @@ namespace Conv{
    const float valore_manutenzione_non_critica = 10;
    const float valore_manutenzione_critica = 10;
    const double perc_pessimistica_manutenzioni_critiche = 100;
+   const double perc_pessimistica_manutenzioni_non_critiche = 100;
    const unsigned int media_n_righe_manutenzione_critica = 23;
    const unsigned int tolleranza_n_problemi_aperti_mese = 5;
    const unsigned int n_problemi_sicurezza_nella_produzione_progetto= 10;
