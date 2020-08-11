@@ -72,7 +72,8 @@ struct DatiRiparazioneSistemi{
     unsigned int ore_stallo_mensili;
     unsigned int ore_straordinari;
 
-    DatiRiparazioneSistemi(unsigned int prs = 0, unsigned int osm = 0, unsigned int os = 0):
+    DatiRiparazioneSistemi(unsigned int prs = 0, unsigned int osm = 0, unsigned int os = 0, unsigned int nrss = 0):
+            n_riparazioni_senza_stallo(nrss),
             perc_riparazioni_sussistenti(prs),
             ore_stallo_mensili(osm),
             ore_straordinari(os){}
