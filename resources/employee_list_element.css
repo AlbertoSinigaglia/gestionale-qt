@@ -8,8 +8,10 @@ EmployeeListElement{
 EmployeeListElement > QLabel{
     width:50px;
 }
-
 #is_clicked{
+    background-color: blue;
+}
+#is_clicked *{
     background-color: blue;
 }
 #is_clicked > QLabel{
@@ -19,6 +21,9 @@ EmployeeListElement > QLabel{
 
 
 #is_not_clicked{
+    background-color: white;
+}
+#is_not_clicked *{
     background-color: white;
 }
 #is_not_clicked > QLabel{

@@ -1,47 +1,80 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-
+#include "CSV/CSVWriter.h"
 #include "models/support/Convenzioni.h"
 #include <QObject>
 #include <QMessageBox>
 #include <gestionale.h>
 #include "models/headers/Employee.h"
 #include "models/headers/DBDev.h"
+#include<QFileDialog>
+#include<QDebug>
 class Controller : public QObject
 {
     Q_OBJECT
     Gestionale* view;
+    void updatefile(){
+        DynamicArray<Employee*> dyn = {
+                            new DBDev(
+                                Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
+                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+                                DatiLatoServer{0,0,0,0},
+                                DatiDatabase{0,0,0}
+                            ),
+                            new DBDev(
+                                Persona{"Riccardo", "Calcagno", "ASDGEIWIJFIK", Data::oggi()},
+                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+                                DatiLatoServer{0,0,0,0},
+                                DatiDatabase{0,0,0}
+                            ),
+                            new DBDev(
+                                Persona{"Sara", "Privitera", "ASDGEIWIJFIK", Data::oggi()},
+                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+                                DatiLatoServer{0,0,0,0},
+                                DatiDatabase{0,0,0}
+                            )
+                    };
+        CSVWriter::write(QFileDialog::getOpenFileName(view,"Salvataggio Dipendenti", "", "Files (*.qcsv)"), dyn);
+    }
+    DynamicArray<Employee*> readFile() const{
+        return CSVReader::parse(QFileDialog::getOpenFileName(view,"Carica Dipendenti", "", "Files (*.qcsv)"));
+    }
 
-    std::vector<Employee*> getEmployee() const{
-        return std::vector<Employee*>{
-            new DBDev(
-                Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
-                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                DatiLatoServer{0,0,0,0},
-                DatiDatabase{0,0,0}
-            ),
-            new DBDev(
-                Persona{"Riccardo", "Calcagno", "ASDGEIWIJFIK", Data::oggi()},
-                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                DatiLatoServer{0,0,0,0},
-                DatiDatabase{0,0,0}
-            ),
-            new DBDev(
-                Persona{"Sara", "Privitera", "ASDGEIWIJFIK", Data::oggi()},
-                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                DatiLatoServer{0,0,0,0},
-                DatiDatabase{0,0,0}
-            )
-        };
+    DynamicArray<Employee*> getEmployee() const{
+//        auto my_vector= std::vector<Employee*>{
+//                new DBDev(
+//                    Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
+//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+//                    DatiLatoServer{0,0,0,0},
+//                    DatiDatabase{0,0,0}
+//                ),
+//                new DBDev(
+//                    Persona{"Riccardo", "Calcagno", "ASDGEIWIJFIK", Data::oggi()},
+//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+//                    DatiLatoServer{0,0,0,0},
+//                    DatiDatabase{0,0,0}
+//                ),
+//                new DBDev(
+//                    Persona{"Sara", "Privitera", "ASDGEIWIJFIK", Data::oggi()},
+//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
+//                    DatiLatoServer{0,0,0,0},
+//                    DatiDatabase{0,0,0}
+//                )
+//        };
+        return readFile();
     }
 public:
     explicit Controller(QObject *parent = nullptr, Gestionale* view_ = new Gestionale): QObject(parent), view(view_){
         view->show();
-        /* ottiene employee da file */
-        view->setEmployees(getEmployee());
+        auto tmp = getEmployee();
+        qDebug() << tmp.size();
+        view->setEmployees(tmp);
         connect(view, SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
         connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
         connect(view, SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));

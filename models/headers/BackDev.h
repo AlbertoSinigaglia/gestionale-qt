@@ -3,7 +3,6 @@
  
 
 #include "Software.h"
-#include "Persona.h"
 
 class BackDev : virtual public Software{
 

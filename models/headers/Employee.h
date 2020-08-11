@@ -3,7 +3,7 @@
  
 
 #include <string> 
-#include <ostream>
+#include <iostream>
 #include "../headers/Persona.h"
 
 class Employee: public Persona{
@@ -22,7 +22,6 @@ public:
 // ---------------
 // METODI VIRTUALI
 // ---------------
-
 
     /*      PRODUTTIVO                      (metodo booleano)
      * Mostra se l'impiegato è produttivo, in caso affermativo l'impiegato impegna il suo tempo in modo completo

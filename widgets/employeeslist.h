@@ -15,6 +15,7 @@
 #include <QDebug>
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
+#include "collections/DynamicArray.h"
 
 class EmployeesList : public QFrame
 {
@@ -30,9 +31,10 @@ public:
         this->setContentsMargins(0,0,0,0);
         this->layout()->setContentsMargins(0,0,0,0);
         this->layout()->setSpacing(0);
+        this->setStyleSheet("background-color:white;");
 
     }
-    void addEmployees(const std::vector<Employee*> empl){
+    void addEmployees(const DynamicArray<Employee*> empl){
         for (auto e : empl) {
             auto el = new EmployeeListElement(e, this);
             children.push_back(el);

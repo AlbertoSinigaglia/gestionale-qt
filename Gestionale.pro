@@ -38,8 +38,12 @@ SOURCES += \
     gestionale.cpp
 
 HEADERS += \
+    CSV/CSVReader.h \
+    CSV/CSVWriter.h \
+    CSV/support/Mapper.h \
     collections/DynamicArray.h \
     CSV/CSVParser.h \
+    CSV/support/Mapper.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
     models/support/TipiRaggruppamento.h \

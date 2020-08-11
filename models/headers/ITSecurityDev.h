@@ -67,9 +67,7 @@ protected:
 
 private:
 
-    unsigned int righe1ManutenzioneNonCritica() const;
-
-    double mediaNManutenzioniPerProgetto() const;
+    double NManutenzioniPerProgetto() const;
 
 /**
  * CAMPI MENSILI

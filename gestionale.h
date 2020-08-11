@@ -22,13 +22,15 @@
 #include <vector>
 #include "models/headers/Employee.h"
 #include "widgets/employeeslist.h"
+#include "collections/DynamicArray.h"
+#include<QDebug>
 class Gestionale : public QWidget{
 	Q_OBJECT
 
 public:
 	Gestionale(QWidget *parent = nullptr);
 	~Gestionale();
-    void setEmployees(const std::vector<Employee*>& empl){
+    void setEmployees(const DynamicArray<Employee*>& empl){
         this->employeesList->addEmployees(empl);
     }
 

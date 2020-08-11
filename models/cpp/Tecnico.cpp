@@ -30,7 +30,7 @@ unsigned int Tecnico::oreLavoroNelMese() const{
 
 unsigned int Tecnico::oreRiparazioneStallo() const{
 
-    return ore_stallo_mensili / ( getNRiparazioniMese() * perc_riparazioni_sussistenti );
+    return ore_stallo_mensili / (1+ getNRiparazioniMese() * perc_riparazioni_sussistenti );
 }
 
 
@@ -59,7 +59,7 @@ double Tecnico::percRipristino() const{
     double peso_stallo = oreRiparazioneStallo();
     double peso_piccola_riparazione = orePiccolaRiparazione();
 
-    // calcolo il peso della manutenzione prevista fino alla fine del mese, (perc_riparazioni_sussistenti mi da una stima di che tipo di manutenzioni posso aspettarmi )
+    // calcolo il peso in ore della manutenzione prevista fino alla fine del mese, (perc_riparazioni_sussistenti mi da una stima di che tipo di manutenzioni posso aspettarmi )
     double peso_manutenzione_prevista = getNSistemiMalfunzionanti() * ( perc_riparazioni_sussistenti * peso_stallo
                                                                         + (1 - perc_riparazioni_sussistenti) * peso_piccola_riparazione );
 
@@ -67,14 +67,14 @@ double Tecnico::percRipristino() const{
     // nel peggiore dei casi (cioe solo con il tipo di manutenzione più ponderante)
     double peso_manutenzione_totale = getNSistemiGestiti() * ( (peso_stallo > peso_piccola_riparazione)? peso_stallo : peso_piccola_riparazione );
 
-    return peso_manutenzione_prevista / peso_manutenzione_totale;
+    return 1- peso_manutenzione_prevista / peso_manutenzione_totale;
 }
 
 
 unsigned int Tecnico::oreRisparmiateStalli() const{
 
     unsigned int caso_pessimo_ore_stalli_incontrati = Conv::ore_ripristino_stallo_pessimo * static_cast<int>( getNRiparazioniMese() * perc_riparazioni_sussistenti );
-    unsigned int ore_risparmiate_di_stalli = caso_pessimo_ore_stalli_incontrati - ore_straordinari;
+    int ore_risparmiate_di_stalli = caso_pessimo_ore_stalli_incontrati - ore_straordinari;
 
     return (ore_risparmiate_di_stalli >= 0)? ore_risparmiate_di_stalli : 0;
 }
