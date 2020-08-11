@@ -9,72 +9,28 @@
 #include "models/headers/DBDev.h"
 #include<QFileDialog>
 #include<QDebug>
+#include"employeesmanagement.h"
+#include <algorithm>
 class Controller : public QObject
 {
     Q_OBJECT
     Gestionale* view;
-    void updatefile(){
-        DynamicArray<Employee*> dyn = {
-                            new DBDev(
-                                Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
-                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                                DatiLatoServer{0,0,0,0},
-                                DatiDatabase{0,0,0}
-                            ),
-                            new DBDev(
-                                Persona{"Riccardo", "Calcagno", "ASDGEIWIJFIK", Data::oggi()},
-                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                                DatiLatoServer{0,0,0,0},
-                                DatiDatabase{0,0,0}
-                            ),
-                            new DBDev(
-                                Persona{"Sara", "Privitera", "ASDGEIWIJFIK", Data::oggi()},
-                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                                DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-                                DatiLatoServer{0,0,0,0},
-                                DatiDatabase{0,0,0}
-                            )
-                    };
-        CSVWriter::write(QFileDialog::getOpenFileName(view,"Salvataggio Dipendenti", "", "Files (*.qcsv)"), dyn);
+    EmployeesManagement* model;
+    void update(bool want_to_export = false){
+        QString path =
+                want_to_export ?
+                QFileDialog::getOpenFileName(view,"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
+                model->getOriginalSource();
+        model->save(path);
     }
-    DynamicArray<Employee*> readFile() const{
-        return CSVReader::parse(QFileDialog::getOpenFileName(view,"Carica Dipendenti", "", "Files (*.qcsv)"));
-    }
-
-    DynamicArray<Employee*> getEmployee() const{
-//        auto my_vector= std::vector<Employee*>{
-//                new DBDev(
-//                    Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
-//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-//                    DatiLatoServer{0,0,0,0},
-//                    DatiDatabase{0,0,0}
-//                ),
-//                new DBDev(
-//                    Persona{"Riccardo", "Calcagno", "ASDGEIWIJFIK", Data::oggi()},
-//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-//                    DatiLatoServer{0,0,0,0},
-//                    DatiDatabase{0,0,0}
-//                ),
-//                new DBDev(
-//                    Persona{"Sara", "Privitera", "ASDGEIWIJFIK", Data::oggi()},
-//                    DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-//                    DatiDeveloping(Conv::Linguaggio::PYTHON, 0, 0, 0, 0),
-//                    DatiLatoServer{0,0,0,0},
-//                    DatiDatabase{0,0,0}
-//                )
-//        };
-        return readFile();
+    QString getFilePath(const QString info) const{
+        return QFileDialog::getOpenFileName(view,info, "", "Files (*.qcsv)");
     }
 public:
     explicit Controller(QObject *parent = nullptr, Gestionale* view_ = new Gestionale): QObject(parent), view(view_){
         view->show();
-        auto tmp = getEmployee();
-        qDebug() << tmp.size();
-        view->setEmployees(tmp);
+        model = new EmployeesManagement(getFilePath("Carica Dipendenti"));
+        view->setEmployees(model->getEmployees());
         connect(view, SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
         connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
         connect(view, SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
@@ -84,16 +40,13 @@ public:
 public slots:
     void deleteEmployee(Employee * e){
         if(e){
-            QMessageBox msgBox(view);
-            msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
-            msgBox.setInformativeText("Sicuro di voler procedere?");
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            msgBox.exec();
-        } else {
-            QMessageBox::StandardButton reply;
-            reply = QMessageBox::question(view, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
-            if(reply == QMessageBox::Yes) this->insertNewEmployee() ;
+            auto employees = model->getEmployees();
+            for(auto it = employees.begin(); it != employees.end(); ++it){
+                if(*it == e){
+                    employees
+                }
+            }
+            qDebug() << empl.size();
         }
     }
     void insertNewEmployee(){

@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    employeesmanagement.cpp \
     models/support/Convenzioni.cpp \
     models/support/Data.cpp \
     models/cpp/Persona.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     collections/DynamicArray.h \
     CSV/CSVParser.h \
     CSV/support/Mapper.h \
+    employeesmanagement.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
     models/support/TipiRaggruppamento.h \

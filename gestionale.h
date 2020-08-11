@@ -72,7 +72,21 @@ signals:
     void insertEmployeeEvent();
 public slots:
     void deleteButtonClicked(){
-        emit deleteEmployeeEvent(employeesList->getCurrent());
+        auto e = employeesList->getCurrent();
+        if(e){
+            QMessageBox msgBox(this);
+            msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
+            msgBox.setInformativeText("Sicuro di voler procedere?");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::No);
+            int resp = msgBox.exec();
+            if(resp == QMessageBox::Yes)
+                emit deleteEmployeeEvent(employeesList->getCurrent());
+        } else {
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
+            if(reply == QMessageBox::Yes) this->insertButtonClicked() ;
+        }
     }
     void insertButtonClicked(){
         emit insertEmployeeEvent();
