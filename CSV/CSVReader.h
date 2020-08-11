@@ -11,7 +11,8 @@ public:
         QFile file(path);
         file.open(QIODevice::ReadOnly);
         CSVParser csv;
-        csv.parseText(file.readAll().toStdString());
+        auto content = file.readAll().toStdString();
+        csv.parseText(content);
         DynamicArray<Employee*> dyn;
         auto table = csv.getTable();
         for(size_t i = 0; i < csv.size(); ++i){

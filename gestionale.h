@@ -24,17 +24,24 @@
 #include "widgets/employeeslist.h"
 #include "collections/DynamicArray.h"
 #include<QDebug>
+#include "employeesmanagement.h"
 class Gestionale : public QWidget{
 	Q_OBJECT
 
 public:
 	Gestionale(QWidget *parent = nullptr);
-	~Gestionale();
-    void setEmployees(const DynamicArray<Employee*>& empl){
-        this->employeesList->addEmployees(empl);
+    ~Gestionale();
+    void setModel(EmployeesManagement* model_){
+        model = model_;
+    }
+    void updateList() const{
+        if(model){
+            this->employeesList->setEmployees(*(model->getEmployees().get()));
+        }
     }
 
 private:
+    EmployeesManagement* model;
 	QHBoxLayout* mainLayout;
 	//Layout Sinistro con tutti i suoi componenti
     QVBoxLayout* layoutFrameFiltri;

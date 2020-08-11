@@ -27,7 +27,6 @@ class Mapper{
         if(dynamic_cast<ITSecurityDev*>(e)) return e_ITSecurityDev;
         if(dynamic_cast<Tecnico*>(e)) return e_Tecnico;
         if(dynamic_cast<BackDev*>(e)) return e_BackDev;
-        qDebug() << typeid(e).name();
         throw std::invalid_argument("Tipo non supportato, potrebbe essere causato da incompatibilità tra versioni");
     }
 public:

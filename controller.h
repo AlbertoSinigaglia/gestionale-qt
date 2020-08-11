@@ -16,7 +16,7 @@ class Controller : public QObject
     Q_OBJECT
     Gestionale* view;
     EmployeesManagement* model;
-    void update(bool want_to_export = false){
+    void updateModel(bool want_to_export = false){
         QString path =
                 want_to_export ?
                 QFileDialog::getOpenFileName(view,"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
@@ -30,7 +30,8 @@ public:
     explicit Controller(QObject *parent = nullptr, Gestionale* view_ = new Gestionale): QObject(parent), view(view_){
         view->show();
         model = new EmployeesManagement(getFilePath("Carica Dipendenti"));
-        view->setEmployees(*(model->getEmployees().get()));
+        view->setModel(model);
+        view->updateList();
         connect(view, SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
         connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
         connect(view, SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
@@ -39,15 +40,17 @@ public:
 
 public slots:
     void deleteEmployee(Employee * e){
-//        if(e){
-//            auto employees = model->getEmployees();
-//            for(auto it = employees.begin(); it != employees.end(); ++it){
-//                if(*it == e){
-//                    employees
-//                }
-//            }
-//            qDebug() << empl.size();
-//        }
+        if(e){
+            auto employees = model->getEmployees();
+            for(auto it = employees->begin(); it != employees->end(); ++it){
+                if(*it == e){
+                    employees->erase(it);
+                    break;
+                }
+            }
+            view->updateList();
+            updateModel();
+        }
     }
     void insertNewEmployee(){
         QMessageBox::information(view, "inserimento dipendente", "Stai per inserire un nuovo dipendente");

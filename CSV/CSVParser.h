@@ -70,10 +70,12 @@ public:
      * @param column_delimiter : il delimitatore della colonna, di default è ","
      * @param row_delimiter : il delimitatore della riga, di default è "\n" (new line)
      */
-    void parseText(const std::string& text, char column_delimiter = ',', char row_delimiter = '\n'){
+    void parseText(std::string& text, char column_delimiter = ',', char row_delimiter = '\n'){
         //resetto l'oggetto corrente
         *this = CSVParser();
-
+        trim(text, ' ');
+        trim(text, '\t');
+        trim(text, '\n');
         // "esplodo" il testo rispetto al delimitatore di righe
         std::vector<std::string> rows ( explode_rows(text, row_delimiter) );
         // se non è vuoto
@@ -306,6 +308,13 @@ private:
                 // sovrascrivo il valore della nuova riga (elemento da inserire) con il valore che ha in quella colonna l'oggetto da inserire
                 table.at(new_col).back() = row.at(new_col);
             }
+        }
+    }
+    void trim(std::string& str, char to_trim = '\n'){
+        size_t first = str.find_first_not_of(to_trim);
+        if (std::string::npos == first){
+            size_t last = str.find_last_not_of(to_trim);
+            str =  str.substr(first, (last - first + 1));
         }
     }
 };

@@ -22,19 +22,26 @@ class EmployeesList : public QFrame
     Q_OBJECT
     EmployeeListElement* current = nullptr;
     std::vector<EmployeeListElement*> children;
+    auto getNewLayout(){
+        auto layout = new QVBoxLayout(this);
+        layout->setContentsMargins(0,0,0,0);
+        layout->setSpacing(0);
+        layout->setAlignment(Qt::AlignTop);
+        return layout;
+    }
 public:
     EmployeesList( QWidget *parent = 0): QFrame( parent )
     {
-        auto layout = new QVBoxLayout(this);
-        layout->setAlignment(Qt::AlignTop);
+        this->setLayout(getNewLayout());
         this->setObjectName("frame-right");
         this->setContentsMargins(0,0,0,0);
-        this->layout()->setContentsMargins(0,0,0,0);
-        this->layout()->setSpacing(0);
         this->setStyleSheet("background-color:white;");
 
     }
-    void addEmployees(const DynamicArray<Employee*> empl){
+    void setEmployees(const DynamicArray<Employee*>& empl){
+        for(auto c: children)
+            delete c;
+        children.erase(children.begin(), children.end());
         for (auto e : empl) {
             auto el = new EmployeeListElement(e, this);
             children.push_back(el);

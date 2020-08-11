@@ -3,7 +3,7 @@
 #include "models/headers/BackDev.h"
 #include "widgets/employeelistelement.h"
 
-Gestionale::Gestionale(QWidget *parent): QWidget(parent){
+Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
     mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
