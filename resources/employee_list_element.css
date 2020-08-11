@@ -8,7 +8,6 @@ EmployeeListElement{
 EmployeeListElement > QLabel{
     width:50px;
 }
-
 #is_clicked{
     background-color: blue;
 }

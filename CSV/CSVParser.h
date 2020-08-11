@@ -14,6 +14,14 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+class illformed_file_exception: public std::exception{
+    const std::string message_;
+public:
+    illformed_file_exception(const std::string& message = "the submited text is illformed"): std::exception(), message_(message){};
+    const char* what() const throw() override{
+        return message_.c_str();
+    }
+};
 namespace CSVParserDesign{
     template<class InIter, class T, class Funct>
     void split(InIter first, InIter last, const T&t, Funct f){
@@ -37,12 +45,7 @@ class CSVParser{
     // numero di elementi che la mia tabella contiene
     unsigned int n_elem = 0;
 public:
-    explicit CSVParser(const std::vector<std::string>& columns = {}): n_elem(0){
-        // preparo le colonne della tabella (se necessarie)
-        std::for_each(columns.begin(), columns.end(),[&](auto& col){
-            table.emplace(col, std::vector<std::string>());
-        });
-    }
+    explicit CSVParser(): n_elem(0){}
     /**
      * implementazione di default
      * @param csv elemento da copiare in this
@@ -55,19 +58,11 @@ public:
         }
         return *this;
     }
-    /**
-     * aggiunge row all'oggetto di invocazione, facendo l'escaping dei valori particolari
-     * @param row
-     */
-    void addRow(const std::map<std::string, std::string>& row){
-        // creo una mappa su cui assegnare i valori con l'escape
-        std::map<std::string, std::string> map;
-        // per ogni elemento di row
-        for(auto &[key, value]: row)
-            // aggiungo alla mappa una nuova colonna con il nome di colonna con gli escape necessari con il valore associato, il valore originale con gli escape necessari
-            map[escape(key, TO_ESCAPE)] = escape(value, TO_ESCAPE);
-        // aggiungo alla mappa dell'oggetto di invocazione questo nuovo elemento (appunto con gli escape necessari)
-        addRawRow(map);
+    auto getTable() const{
+        return table;
+    }
+    unsigned int size() const{
+        return n_elem;
     }
     /**
      * Popola l'oggetto di invocazione con i dati ottenuti dal parsing della stringa data in input (senza effettuare nessuna operazione di escaping e unescaping)
@@ -76,6 +71,9 @@ public:
      * @param row_delimiter : il delimitatore della riga, di default è "\n" (new line)
      */
     void parseText(const std::string& text, char column_delimiter = ',', char row_delimiter = '\n'){
+        //resetto l'oggetto corrente
+        *this = CSVParser();
+
         // "esplodo" il testo rispetto al delimitatore di righe
         std::vector<std::string> rows ( explode_rows(text, row_delimiter) );
         // se non è vuoto
@@ -85,8 +83,6 @@ public:
             // rimuovo le " iniziali dai nomi delle colonne
             remove_quotes(columns_name);
 
-            //resetto l'oggetto corrente
-            *this = CSVParser(columns_name);
 
             // rimuovo la prima riga (che erano i nomi delle colonne)
             rows.erase(rows.begin());
@@ -106,115 +102,20 @@ public:
                     for(unsigned int i = 0; i < datas.size() && i < columns_name.size(); ++i){
                         tmp.emplace(columns_name[i], datas[i]);
                     }
+
+                    if(tmp.size() != columns_name.size()){
+                        std::cerr << "da: " << table.size() << " a: " << tmp.size();
+                        throw illformed_file_exception("Il file è malformato");
+                    }
                     // aggiungo al mio oggetto questa nuova mappa con la riga corrente
                     addRawRow(tmp);
                 }
             }
         }
     }
-    /**
-     * produce una stringa contente la serializzazione dell'oggetto di invocazione (principalmente da usare per output su stream di salvataggio)
-     * @param row_delimiter : il delimitatore della riga, di default è "\n" (new line)
-     * @param column_delimiter : il delimitatore della colonna, di default è ","
-     * @return serializzazione degli oggetti passati sottoforma di CSV
-     */
-    std::string toString(char row_delimiter = '\n', char column_delimiter = ','){
-        std::stringstream ss;
-        // per ogni elemnto della tabella
-        for(auto iter = table.begin() ; iter != table.end();){
-            // stampo "nome_colonna"
-            ss << '"' << iter->first << '"' ;
-            // se non sono alla fine, metto il delimitatore di colonna
-            if(++iter != table.end())
-                ss<< column_delimiter;
-        }
-        // se ho elementi nella tabella
-        if( n_elem > 0) {
-            // inserisco il delimitatore di riga (separare tra la prima riga [nome colonne] e questi che saranno i valori)
-            ss << row_delimiter;
-            //per ogni elemento inserito nella tabella
-            for (unsigned int i = 0; i < n_elem;) {
-                //per ogni colonna della tabella
-                for (auto iter = table.begin(); iter != table.end();) {
-                    // stampo "valore_corrente"
-                    ss << '"' << iter->second[i] << '"';
-                    // se non sono alla fine metto il delimitatore di colonna
-                    if (++iter != table.end())
-                        ss << column_delimiter;
-                }
-                // se non sono alla fine (all'ultima riga) metto il delimitatore di fine riga
-                if (++i < n_elem)
-                    ss << row_delimiter;
-            }
-        }
-        return ss.str();
-    }
+
 private:
-    /**
-     * effettua l'escape della stringa data in input
-     * @param source : stringa di cui fare l'escape
-     * @param to_escape : carattere di cui fare l'escape
-     * @param escape : carattere con cui fare l'escape
-     */
-    static void escape_all(std::string& source, char to_escape, char escape = '\\'){
-        // cenco nella stringa il valore di cui fare l'escape
-        auto pos = source.find(to_escape);
-        //finchè quella posizione non è la la fine
-        while (pos != std::string::npos) {
-            // valore con cui rimpiazzare
-            std::string to_replace = {escape, to_escape};
-            // gestisco i casi particolare di tab e new line
-            if (to_escape=='\n')
-                to_replace = {escape, 'n'};
-            else if (to_escape=='\t')
-                to_replace = {escape, 't'};
-            // sosituisco il vecchio valore con quello con l'escape
-            source.replace(pos, 1, to_replace);
-            // cerco il prossimo valore di vui fare l'escape dalla (posizione corrente + la dimensione del valore) con l'escape in poi
-            pos = source.find(to_escape, pos + to_replace.size());
-        }
-    }
-    /**
-     * effettua l'escape della stringa data di tutti i caratteri passati
-     * @param source : stringa di cui fare l'escape
-     * @param to_escape : vettore di caratteri di cui fare l'escape
-     * @param escape : carattere con cui fare l'escape
-     * @return stringa con l'escape dei caratteri passati
-     *
-     * @note : non passare il valore di scape dentro al vettore dei caratteri di cui fare l'escape
-     */
-    static std::string escape(const std::string& source, const  std::vector<char>& to_escape, char escape ='\\') {
-        // copia della stringa di input su cui lavorare e poi ritornare
-        auto to_return(source);
-        // facendo l'escape del valore di escape
-        escape_all(to_return, escape, escape);
 
-        //per ogni carattere di cui fare l'escape, faccio l'escape
-        for (const auto &e : to_escape)
-            // controllo di non fare due volte l'escape del valore di escape
-            if(e != escape)
-                // faccio l'escape sulla stringa del carattere corrente
-                escape_all(to_return, e, escape);
-        return to_return;
-    }
-    /**
-     * TODO: vedere se escape si può fare così
-     */
-    /*
-
-    std::string escape(const std::string& source) {
-        std::string res;
-        for (const char ch : source) {
-            switch(ch) {
-                default: res += ch; break;
-                case '\n': res += "\\n"; break;
-                case '\\': res += "\\\\"; break;
-                case '\"': res += "\\\""; break;
-            }
-        }
-        return res;
-    }
-    */
     /**
      * effettua l'unescape della stringa data in input
      * @param source : stringa di cui fare l'unescape
@@ -230,7 +131,7 @@ private:
             to_find = "\\t";
         else
             to_find = escape + to_unescape;
-        auto index = 0;
+        size_t index = 0;
         while (true) {
             // cerco la stringa di cui fare l'unescape
             index = source.find(to_find, index);
@@ -303,7 +204,7 @@ private:
     static std::vector<std::string> explode_rows(const std::string &str,char delimiter ='\n'){
         std::vector<std::string> exploded_strings;
         // posizione carattere corrente
-        int i=0;
+        size_t i=0;
         //posizione dell'ultimo delimiter trovato
         int k=0;
         while( i<str.length() ){
@@ -343,7 +244,7 @@ private:
         // posizione dell'ultimo delimiter
         auto oldpos = 0;
 
-        for(int i = 0; i < str.length() ; ++i){
+        for(size_t i = 0; i < str.length() ; ++i){
             // se il carattere corrente è il delimiter
             if(str[i] == delimiter){
                 // sottostringa dall'ultimo delimiter a posizione corrente

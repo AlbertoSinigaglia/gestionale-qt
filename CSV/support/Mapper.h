@@ -223,7 +223,6 @@ public:
                     {"dlavoratore.quota_aggiuntiva", std::to_string(dlavoratore.quota_aggiuntiva)},
                     {"driparazionesistemi.ore_straordinari", std::to_string(driparazionesistemi.ore_straordinari)},
                     {"driparazionesistemi.ore_stallo_mensili", std::to_string(driparazionesistemi.ore_stallo_mensili)},
-                    {"driparazionesistemi.n_riparazioni_senza_stallo", std::to_string(driparazionesistemi.n_riparazioni_senza_stallo)},
                     {"driparazionesistemi.perc_riparazioni_sussistenti", std::to_string(driparazionesistemi.perc_riparazioni_sussistenti)},
                     {"dmanutenzione.n_riparazioni_mese", std::to_string(dmanutenzione.n_riparazioni_mese)},
                     {"dmanutenzione.perc_ripristino_medio", std::to_string(dmanutenzione.perc_ripristino_medio)},
@@ -315,7 +314,7 @@ private:
          return DatiSistemi(std::stoi(map.at("dsistemi.n_sistemi_gestiti")), std::stoi(map.at("dsistemi.n_sistemi_gestiti_totale")), std::stoi(map.at("dsistemi.n_sistemi_malfunzionanti")), std::stoi(map.at("dsistemi.nuovi_gestiti")));
     }
     static DatiRiparazioneSistemi getDatiRiparazioneSistemi(const std::map<std::string, std::string>& map){
-         return DatiRiparazioneSistemi(std::stoi(map.at("driparazionesistemi.perc_riparazioni_sussistenti")),std::stoi(map.at("driparazionesistemi.ore_stallo_mensili")),std::stoi(map.at("driparazionesistemi.ore_straordinari")),std::stoi(map.at("driparazionesistemi.n_riparazioni_senza_stallo")));
+         return DatiRiparazioneSistemi(std::stoi(map.at("driparazionesistemi.perc_riparazioni_sussistenti")),std::stoi(map.at("driparazionesistemi.ore_stallo_mensili")),std::stoi(map.at("driparazionesistemi.ore_straordinari")));
     }
     static DatiLatoServer getDatiLatoServer(const std::map<std::string, std::string>& map){
         return DatiLatoServer(std::stod(map.at("dlatoserver.perc_capo_progetto")), std::stoi(map.at("dlatoserver.livello_astrazione")), std::stoi(map.at("dlatoserver.prove_correttezza")), std::stoi(map.at("dlatoserver.orientato_ortogonalita")));
