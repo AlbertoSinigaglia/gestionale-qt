@@ -37,7 +37,7 @@ class Controller : public QObject
                                 DatiDatabase{0,0,0}
                             )
                     };
-        CSVWriter::write(QString("/home/alberto/Scrivania/employees.qcsv"), dyn);
+        CSVWriter::write(QFileDialog::getOpenFileName(view,"Salvataggio Dipendenti", "", "Files (*.qcsv)"), dyn);
     }
     DynamicArray<Employee*> readFile() const{
         return CSVReader::parse(QFileDialog::getOpenFileName(view,"Carica Dipendenti", "", "Files (*.qcsv)"));
