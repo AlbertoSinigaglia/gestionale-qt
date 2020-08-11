@@ -247,14 +247,14 @@ public:
                             getDatiRipristinoSicurezza(map)
                         );
             }
-//            case e_Tecnico:{
-//                return new Tecnico(
-//                            getPersona(map),
-//                            getDatiLavoratore(map),
-//                            getDatiManutenzione(map),
-//                            getDatiSistemi(map),
-//                            getDatiRiparazioneSistemi(map));
-//            }
+            case e_Tecnico:{
+                return new Tecnico(
+                            getPersona(map),
+                            getDatiLavoratore(map),
+                            getDatiManutenzione(map),
+                            getDatiSistemi(map),
+                            getDatiRiparazioneSistemi(map));
+            }
             case e_FullStack:{
                 return new FullStack(
                             getPersona(map),
