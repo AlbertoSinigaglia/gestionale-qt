@@ -30,7 +30,7 @@ public:
     explicit Controller(QObject *parent = nullptr, Gestionale* view_ = new Gestionale): QObject(parent), view(view_){
         view->show();
         model = new EmployeesManagement(getFilePath("Carica Dipendenti"));
-        view->setEmployees(model->getEmployees());
+        view->setEmployees(*(model->getEmployees().get()));
         connect(view, SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
         connect(view, SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
         connect(view, SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
@@ -39,15 +39,15 @@ public:
 
 public slots:
     void deleteEmployee(Employee * e){
-        if(e){
-            auto employees = model->getEmployees();
-            for(auto it = employees.begin(); it != employees.end(); ++it){
-                if(*it == e){
-                    employees
-                }
-            }
-            qDebug() << empl.size();
-        }
+//        if(e){
+//            auto employees = model->getEmployees();
+//            for(auto it = employees.begin(); it != employees.end(); ++it){
+//                if(*it == e){
+//                    employees
+//                }
+//            }
+//            qDebug() << empl.size();
+//        }
     }
     void insertNewEmployee(){
         QMessageBox::information(view, "inserimento dipendente", "Stai per inserire un nuovo dipendente");

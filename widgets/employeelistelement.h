@@ -96,7 +96,7 @@ public:
 
         layout->addWidget(name);
         layout->addWidget(surname);
-        layout->addWidget(date_of_empl);
+        layout->addWidget(date_of_birth);
         layout->addWidget(cf);
 
         layout->addWidget(date_of_empl);
