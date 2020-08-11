@@ -46,7 +46,7 @@ public:
 protected:
 
     /*      VALORE LAVORO                   (metodo che eredita l'obbiettivo della classe base)*/
-    virtual float valoreLavoro() const override= 0;
+    virtual float valoreLavoro() const override;
 
     /*      REMUNERAZIONE ORA ROUTINE       (metodo che eredita l'obbiettivo della classe: Employee)*/
     virtual float remunerazioneOraRoutine() const override;
