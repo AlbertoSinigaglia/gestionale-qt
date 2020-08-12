@@ -31,17 +31,17 @@ class Gestionale : public QWidget{
 public:
 	Gestionale(QWidget *parent = nullptr);
     ~Gestionale();
-    void setModel(EmployeesManagement* model_){
+    void setModel(std::shared_ptr<EmployeesManagement> model_){
         model = model_;
     }
     void updateList() const{
         if(model){
-            this->employeesList->setEmployees(*(model->getEmployees().get()));
+            this->employeesList->setEmployees(*model->getEmployees());
         }
     }
 
 private:
-    EmployeesManagement* model;
+    std::shared_ptr<EmployeesManagement> model;
 	QHBoxLayout* mainLayout;
 	//Layout Sinistro con tutti i suoi componenti
     QVBoxLayout* layoutFrameFiltri;
