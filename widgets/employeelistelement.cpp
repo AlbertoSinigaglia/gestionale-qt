@@ -40,7 +40,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     // seg fault inizio
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
-    salary = new QLabel("stipendio che non va" /*QString(std::to_string(e->calcolaStipendio()).c_str())*/);
+    salary = new QLabel("stipendio che non vaaaaaaaaaaaaaaa" /*QString(std::to_string(e->calcolaStipendio()).c_str())*/);
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
     // seg fault fine
 
@@ -65,6 +65,16 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     date_end_of_contract->setFixedWidth(150);
     salary->setFixedWidth(150);
     weekly_hours->setFixedWidth(150);
+
+
+    name->setWordWrap(true);
+    surname->setWordWrap(true);
+    date_of_birth->setWordWrap(true);
+    cf->setWordWrap(true);
+    date_of_empl->setWordWrap(true);
+    date_end_of_contract->setWordWrap(true);
+    salary->setWordWrap(true);
+    weekly_hours->setWordWrap(true);
 
     layout->addWidget(name);
     layout->addWidget(surname);

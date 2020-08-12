@@ -119,12 +119,11 @@ void CSVWriter::write(const QString& path, const DynamicArray<Employee*>& c){
     QFile file(path);
     CSVWriterTable table;
     if(file.exists() && file.open(QIODevice::WriteOnly | QIODevice::Text)){
-        // We're going to streaming text to the file
           for(auto& e: c){
               table.addRow(Mapper::toMap(e));
           }
           QTextStream stream(&file);
           stream << table.toString().c_str();
           file.close();
-    }
+    } else throw std::invalid_argument("il path fornito non è valido");
 }

@@ -16,7 +16,7 @@ class Controller : public QObject
     Q_OBJECT
     std::shared_ptr<Gestionale> view;
     std::shared_ptr<EmployeesManagement> model;
-    void updateModel(bool want_to_export = false);
+    bool updateModel(bool want_to_export = false);
     QString getFilePath(const QString info) const;
 public:
     explicit Controller(QObject *parent = nullptr, Gestionale* view_ = new Gestionale);
