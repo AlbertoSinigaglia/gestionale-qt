@@ -100,14 +100,14 @@ void Gestionale::addTitleSinistro(){
 }
 void Gestionale::addComboBox()
 {
-	QComboBox* Dipendenti = new QComboBox(this);
+    Dipendenti = new QComboBox(this);
 	Dipendenti->addItems({
 		"Tutti",
 		"Manutentore",
 		"Hardware",
 		"Software",
-		"BackDev",
-		"FrontDev",
+        "BackDeveloper",
+        "FrontDeveloper",
 		"FullStack",
 		"BDDeveloper",
 		"GUIDeveloper",
@@ -125,6 +125,7 @@ void Gestionale::addFirstBox()
     layoutFrameFiltri->addWidget(Visualizzare);
 	addBoxPersona();
     addBoxLavoro();
+    addBoxSpecifico();
 }
 
 void Gestionale::addBoxPersona()
@@ -168,6 +169,46 @@ void Gestionale::addBoxLavoro()
     StipendioBase->setCheckState(Qt::CheckState::Checked);
     OreLavoro->setCheckState(Qt::CheckState::Checked);
 	LayoutVisualizzare->addWidget(DatiDip);
+}
+
+void Gestionale::addBoxSpecifico()
+{
+    QGroupBox* DatiSpecifici = new QGroupBox(this);
+    DatiSpecifici->setTitle("Dati specifici");
+    QVBoxLayout* layoutDatiSpecifici = new QVBoxLayout(DatiSpecifici);
+    if(Dipendenti->currentText()=="Manutentore"){
+        QCheckBox* totRiparazioni = new QCheckBox("Totale riparazioni mese in corso",this);
+        layoutDatiSpecifici->addWidget(totRiparazioni);};
+    if(Dipendenti->currentText()=="BackDeveloper"){
+        QCheckBox* percCapo = new QCheckBox("Percentuale capo progetto",this);
+        layoutDatiSpecifici->addWidget(percCapo);};
+    if(Dipendenti->currentText()=="FrontDeveloper"){
+        QCheckBox* libreria = new QCheckBox("Libreria",this);
+        layoutDatiSpecifici->addWidget(libreria);};
+    if(Dipendenti->currentText()=="FullStack"){
+        QCheckBox* percBack = new QCheckBox("Percentuale lavoro back",this);
+        layoutDatiSpecifici->addWidget(percBack);};
+    if(Dipendenti->currentText()=="GUIDeveloper"){
+        QCheckBox* professionalita = new QCheckBox("Grado di professionalità",this);
+        layoutDatiSpecifici->addWidget(professionalita);};
+    if(Dipendenti->currentText()=="Hardware"){
+        QCheckBox* SistemiGestiti = new QCheckBox("Numero sistemi gestiti",this);
+        layoutDatiSpecifici->addWidget(SistemiGestiti);};
+    if(Dipendenti->currentText()=="ITSecurityDev"){
+        QCheckBox* criticitaRisolte = new QCheckBox("Numero criticità risolte",this);
+        layoutDatiSpecifici->addWidget(criticitaRisolte);};
+    if(Dipendenti->currentText()=="Software"){
+        QCheckBox* linguaggio = new QCheckBox("Linguaggio usato",this);
+        layoutDatiSpecifici->addWidget(linguaggio);
+        QCheckBox* progConclusi = new QCheckBox("Numero progetti conclusi nel mese in corso",this);
+        layoutDatiSpecifici->addWidget(progConclusi);};
+    if(Dipendenti->currentText()=="Tecnico"){
+        QCheckBox* percRipSussistenti = new QCheckBox("Percentuale riparazioni sussistenti",this);
+        layoutDatiSpecifici->addWidget(percRipSussistenti);};
+    if(Dipendenti->currentText()=="Tutti"){
+        QCheckBox* produttivo = new QCheckBox("Produttivo",this);
+        layoutDatiSpecifici->addWidget(produttivo);};
+    LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
 void Gestionale::addAzioni()

@@ -30,17 +30,32 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     this->setContentsMargins(20,20,20,20);
     this->setMouseTracking(true);
 
+    //dati relativi alla persona
     name = new QLabel(QString(e->getNome().c_str()));
     surname = new QLabel(QString(e->getCognome().c_str()));
     date_of_birth = new QLabel(QString(static_cast<std::string>(e->getNascita()).c_str()));
     cf = new QLabel(QString(e->getCF().c_str()));
 
+    //dati relativi al lavoro
     // seg fault inizio
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
     salary = new QLabel("stipendio che non va" /*QString(std::to_string(e->calcolaStipendio()).c_str())*/);
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
     // seg fault fine
+
+    //dati specifici del lavoratore
+    /*riparazioni = new QLabel(QString(static_cast<std::string>(e->).c_str()));
+    percentualeCapo
+    libreria
+    percentualeBack
+    gradoProfessionalita
+    numSistemiGestiti
+    numCriticitaRisolte
+    linguaggio
+    numProgConclusi
+    ripSussistenti
+    Produttivo*/
 
     name->setFixedWidth(150);
     surname->setFixedWidth(150);

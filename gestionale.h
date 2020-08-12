@@ -50,6 +50,7 @@ private:
     QPushButton* modifica;
     QPushButton* inserisci;
     QPushButton* elimina;
+    QComboBox* Dipendenti;
     QCheckBox* c_nome;
     QCheckBox* c_cognome;
     QCheckBox* c_sesso;
@@ -67,6 +68,7 @@ private:
 	void addFirstBox();
 	void addBoxPersona();
 	void addBoxLavoro();
+    void addBoxSpecifico();
 	void addAzioni();
 
 	void setStyle();
