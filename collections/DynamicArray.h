@@ -587,9 +587,9 @@ private:
 };
 
 
-/********************************/
+/**********************************************/
 /***         dynamic_array_iterator         ***/
-/********************************/
+/**********************************************/
 template<class T>
 dynamic_array_iterator<T> operator+(const dynamic_array_iterator<T> &iter, int diff) {
     return dynamic_array_iterator(iter.arr, iter.pos + diff);
@@ -684,9 +684,9 @@ dynamic_array_iterator<T>::operator const_dynamic_array_iterator<T>() const{
 }
 
 
-/********************************/
+/**********************************************/
 /***      const_dynamic_array_iterator      ***/
-/********************************/
+/**********************************************/
 template<class T>
 const_dynamic_array_iterator<T> operator+(const const_dynamic_array_iterator<T> &iter, int diff) {
     return const_dynamic_array_iterator(iter.arr, iter.pos + diff);
@@ -802,7 +802,10 @@ DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray &ar) {
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(DynamicArray &&ar) noexcept  : size_(ar.size_), capacity_(ar.capacity_) , p(std::move(ar.p)){}
+DynamicArray<T>::DynamicArray(DynamicArray &&ar) noexcept  :
+    p(std::move(ar.p)),
+    size_(ar.size_),
+    capacity_(ar.capacity_){}
 
 template<class T>
 DynamicArray<T> &DynamicArray<T>::operator=(std::initializer_list<T> l) {
@@ -927,7 +930,7 @@ template<class T>
 void DynamicArray<T>::reserve(unsigned int new_cap) {
     if(new_cap > capacity_) {
         auto new_p = std::make_unique<T[]>(new_cap);
-        for(int i = 0; i < capacity_ ;++i)
+        for(unsigned int i = 0; i < capacity_ ;++i)
             new_p[i] = std::move(p[i]);
         p = std::move(new_p);
         capacity_ = new_cap;
@@ -989,7 +992,7 @@ dynamic_array_iterator<T> DynamicArray<T>::insert(const const_dynamic_array_iter
 template<class T>
 dynamic_array_iterator<T> DynamicArray<T>::erase(const const_dynamic_array_iterator<T> &pos) {
     if(pos != end() && !empty()) {
-        for (int i = pos.pos; i < size_- 1; ++i) {
+        for (unsigned int i = pos.pos; i < size_- 1; ++i) {
             p[i] = std::move(p[i+1]);
         }
         --size_;
