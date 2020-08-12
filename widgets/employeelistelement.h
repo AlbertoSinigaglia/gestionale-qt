@@ -50,17 +50,6 @@ class EmployeeListElement : public QWidget
         emit doubleClicked(this);
     }
 public:
-    ~EmployeeListElement(){
-        delete name;
-        delete surname;
-        delete date_of_birth;
-        delete cf;
-
-        delete date_of_empl;
-        delete date_end_of_contract;
-        delete salary;
-        delete weekly_hours;
-    }
     enum{
         Name = 1<<0,
         Surname = 1<<1,
@@ -72,9 +61,6 @@ public:
         WeeklyHours = 1<<7
 
     };
-    Employee* getEmployee() const{
-        return e_;
-    }
     EmployeeListElement(Employee *e, QWidget *parent = 0): QWidget( parent ), e_(e)
     {
         QHBoxLayout *layout = new QHBoxLayout( this );
@@ -118,12 +104,30 @@ public:
         setStyle();
         updateStatus(false);
     }
+    ~EmployeeListElement(){
+        delete name;
+        delete surname;
+        delete date_of_birth;
+        delete cf;
+
+        delete date_of_empl;
+        delete date_end_of_contract;
+        delete salary;
+        delete weekly_hours;
+    }
+    // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
+    EmployeeListElement(const EmployeeListElement& e) = delete;
+    EmployeeListElement& operator= (const EmployeeListElement& e) = delete;
+
     void updateStatus(bool new_status){
         if(new_status)
             setObjectName("is_clicked");
         else
             setObjectName("is_not_clicked");
         setStyle();
+    }
+    Employee* getEmployee() const{
+        return e_;
     }
 
 

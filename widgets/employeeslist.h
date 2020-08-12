@@ -38,6 +38,11 @@ public:
         this->setStyleSheet("background-color:white;");
 
     }
+    ~EmployeesList() {}
+    // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
+    EmployeesList(const EmployeesList& e) = delete;
+    EmployeesList& operator= (const EmployeesList& e) = delete;
+
     void setEmployees(const DynamicArray<Employee*>& empl){
         for(auto c: children)
             delete c;
@@ -54,7 +59,6 @@ public:
     Employee * getCurrent() const{
         return current ? current->getEmployee() : nullptr;
     }
-    ~EmployeesList() {}
 signals:
     void changeListAttributeVisibilityEvent(int, int);
     void ListElementDoubleClicked(EmployeeListElement*);
