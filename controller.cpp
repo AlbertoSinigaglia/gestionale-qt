@@ -46,7 +46,7 @@ void Controller::deleteEmployee(Employee * e){
                 break;
             }
         }
-        if(updateModel(true))
+        if(updateModel(false))
             view->updateList();
         else
             *(model->getEmployees()) = backup;
