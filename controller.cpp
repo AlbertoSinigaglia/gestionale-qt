@@ -18,7 +18,7 @@ bool Controller::updateModel(bool want_to_export){
     do{
         QString path =
                 want_to_export ?
-                QFileDialog::getOpenFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.*)"):
+                QFileDialog::getSaveFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
                 model->getOriginalSource();
         try {
             model->save(path);

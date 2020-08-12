@@ -17,7 +17,7 @@ bool EmployeesManagement::import(const QString& path){
     }
 }
 void EmployeesManagement::save(const QString& source_){
-    CSVWriter::write(source_, *employees);
+    CSVWriter::write(source_.endsWith("qcsv") ? source_ : source_ + ".qcsv", *employees);
 }
  std::shared_ptr<DynamicArray<Employee*>> EmployeesManagement::getEmployees() const{
     return employees;
