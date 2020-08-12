@@ -26,7 +26,11 @@ public slots:
     void insertNewEmployee();
     void openEmployeeInfo(Employee* e);
     void modifyButtonClicked(Employee * e);
-
+    void importFile();
+    void exportToFile();
+    void exitApplication();
+signals:
+    void exitEvent();
 };
 
 #endif // CONTROLLER_H

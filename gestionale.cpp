@@ -9,6 +9,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);
     mainLayout->setSpacing(0);
+    addMenu();
 	addBoxSinistro();
 	addBoxDestro();
     setStyle();
@@ -66,6 +67,9 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
     connect(employeesList, SIGNAL(ListElementDoubleClicked(EmployeeListElement*)), this, SLOT(employeeListElementDoubleClicked( EmployeeListElement* )));
+    connect(a_import, &QAction::triggered, this, &Gestionale::importFile);
+    connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
+    connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
 }
 
 Gestionale::~Gestionale(){}
@@ -238,6 +242,25 @@ void Gestionale::addBoxDestro()
     mainLayout->addWidget(scroll);
 }
 
+void Gestionale::addMenu(){
+    QMenuBar* menuBar = new QMenuBar();
+    menuBar->setStyleSheet("color:white; background-color:#424242;");
+    QMenu * menu = new QMenu("File");
+    menuBar->addMenu(menu);
+    a_import = new QAction("Importa da...", menuBar);
+    a_import->setIcon(QIcon(":/resources/import_icon.png"));
+    a_export = new QAction("Esporta a...", menuBar);
+    a_export->setIcon(QIcon(":/resources/export_icon.png"));
+    a_exit = new QAction("Esci", menuBar);
+    a_exit->setIcon(QIcon(":/resources/exit_icon.png"));
+    menu->addAction(a_import);
+    menu->addAction(a_export);
+    menu->addSeparator();
+    menu->addAction(a_exit);
+    menu->setMinimumWidth(200);
+    mainLayout->setMenuBar(menuBar);
+}
+
 void Gestionale::setStyle()
 {
 	QFile file(":/resources/style.css");
@@ -282,4 +305,14 @@ void Gestionale::updateList() const{
     if(model){
         this->employeesList->setEmployees(*model->getEmployees());
     }
+}
+void Gestionale::importFile(){
+    emit importFileRequestEvent();
+}
+
+void Gestionale::exportToFile(){
+    emit exportToFileRequestEvent();
+}
+void Gestionale::exitApplication(){
+    emit exitApplicationEvent();
 }

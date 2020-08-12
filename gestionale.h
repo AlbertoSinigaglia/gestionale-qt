@@ -20,6 +20,7 @@
 #include "gestionalebutton.h"
 #include "widgets/employeelistelement.h"
 #include <vector>
+#include <QAction>
 #include "models/headers/Employee.h"
 #include "widgets/employeeslist.h"
 #include "collections/DynamicArray.h"
@@ -60,6 +61,9 @@ private:
     QCheckBox* DataFineContratto;
     QCheckBox* StipendioBase;
     QCheckBox* OreLavoro;
+    QAction* a_import;
+    QAction* a_export;
+    QAction* a_exit;
 
     void addTitleSinistro();
 	void addBoxDestro();
@@ -70,6 +74,7 @@ private:
 	void addBoxLavoro();
     void addBoxSpecifico();
 	void addAzioni();
+    void addMenu();
 
 	void setStyle();
 signals:
@@ -77,11 +82,17 @@ signals:
     void modifyEmployeeEvent(Employee*);
     void deleteEmployeeEvent(Employee *);
     void insertEmployeeEvent();
+    void importFileRequestEvent();
+    void exportToFileRequestEvent();
+    void exitApplicationEvent();
 public slots:
     void deleteButtonClicked();
     void insertButtonClicked();
     void modifyButtonClicked();
     void employeeListElementDoubleClicked(EmployeeListElement* e);
+    void importFile();
+    void exportToFile();
+    void exitApplication();
 };
 
 #endif // GESTIONALE_H

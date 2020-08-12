@@ -15,7 +15,8 @@ public:
      * @brief Costruttore della classe
      * @param source_ : path da cui ricostruire i dipendenti
      */
-    EmployeesManagement(const QString& source_);
+    EmployeesManagement();
+    bool import(const QString& path);
     /**
      * @brief salva sul path fornito una serializzazione della collezione dei dipendenti corrente
      * @param source_
