@@ -9,12 +9,28 @@ Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), vie
     connect(view.get(), SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
     connect(view.get(), SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(openEmployeeInfo(Employee*)));
 }
-void Controller::updateModel(bool want_to_export){
-    QString path =
-            want_to_export ?
-            QFileDialog::getOpenFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
-            model->getOriginalSource();
-    model->save(path);
+bool Controller::updateModel(bool want_to_export){
+    bool sent = false;
+    do{
+        QString path =
+                want_to_export ?
+                QFileDialog::getOpenFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.*)"):
+                model->getOriginalSource();
+        try {
+            model->save(path);
+            return true;
+        } catch (...) {
+            QMessageBox msgBox(view.get());
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.setText(QString("Errore durante il salvataggio"));
+            msgBox.setStyleSheet("QLabel{min-width: 300px;}");
+            msgBox.setInformativeText("Il path fornito non è valido o il file non è accessibile, vuoi selezionare un'altro file per il salvataggio?");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::No);
+            sent = msgBox.exec() == QMessageBox::Yes;
+        }
+    } while(sent);
+    return false;
 }
 
 QString Controller::getFilePath(const QString info) const{
@@ -22,6 +38,7 @@ QString Controller::getFilePath(const QString info) const{
 }
 void Controller::deleteEmployee(Employee * e){
     if(e){
+        auto backup = DynamicArray<Employee*>(*(model->getEmployees()));
         auto employees = model->getEmployees();
         for(auto it = employees->begin(); it != employees->end(); ++it){
             if(*it == e){
@@ -29,8 +46,10 @@ void Controller::deleteEmployee(Employee * e){
                 break;
             }
         }
-        view->updateList();
-        updateModel();
+        if(updateModel(true))
+            view->updateList();
+        else
+            *(model->getEmployees()) = backup;
     }
 }
 void Controller::insertNewEmployee(){
