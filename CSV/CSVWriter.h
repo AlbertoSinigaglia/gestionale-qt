@@ -154,7 +154,6 @@ public:
     static void write(const QString& path, const DynamicArray<Employee*>& c){
         QFile file(path);
         CSVWriterTable table;
-        Employee* e = nullptr;
         if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
             // We're going to streaming text to the file
               for(auto& e: c){
