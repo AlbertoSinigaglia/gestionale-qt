@@ -36,7 +36,15 @@ public:
      * @return l'oggetto corrente
      */
     CSVParser& operator=(const CSVParser& csv);
+    /**
+     * @brief getter per tabella costruita fino ad ora
+     * @return tabella con i dati parsati
+     */
     std::map<std::string, std::vector<std::string>> getTable() const;
+    /**
+     * @brief getter per numero di elementi trovati fino ad ora dentro alla sorgente fornita
+     * @return numero elementi dentro a tabella (equivalete a this->getTable().begin()->second.size())
+     */
     unsigned int size() const;
     /**
      * Popola l'oggetto di invocazione con i dati ottenuti dal parsing della stringa data in input (senza effettuare nessuna operazione di escaping e unescaping)
@@ -100,6 +108,11 @@ private:
      * @param row : nuova riga da inserire nell'oggetto di invocazione
      */
     void addRawRow(const std::map<std::string, std::string>& row);
+    /**
+     * @brief effettua il trim (rimossione spazi iniziali e finali) sulla stringa fornita
+     * @param str: sorgente su cui fare il trim
+     * @param to_trim : carattere di cui fare il trim a inizio e fine riga
+     */
     void trim(std::string& str, char to_trim = '\n');
 };
 
