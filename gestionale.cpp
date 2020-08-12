@@ -14,6 +14,8 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
 	addBoxDestro();
     setStyle();
     setLayout(mainLayout);
+
+
     connect(
         c_nome,&QCheckBox::stateChanged,
         [=](int state){
@@ -73,7 +75,6 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
 }
 
 Gestionale::~Gestionale(){}
-
 
 void Gestionale::addBoxSinistro()
 {
@@ -249,10 +250,13 @@ void Gestionale::addMenu(){
     menuBar->addMenu(menu);
     a_import = new QAction("Importa da...", menuBar);
     a_import->setIcon(QIcon(":/resources/import_icon.png"));
+    a_import->setShortcut(Qt::Key_I | Qt::CTRL);
     a_export = new QAction("Esporta a...", menuBar);
     a_export->setIcon(QIcon(":/resources/export_icon.png"));
+    a_export->setShortcut(Qt::Key_E | Qt::CTRL);
     a_exit = new QAction("Esci", menuBar);
     a_exit->setIcon(QIcon(":/resources/exit_icon.png"));
+    a_exit->setShortcut(Qt::Key_Q | Qt::CTRL);
     menu->addAction(a_import);
     menu->addAction(a_export);
     menu->addSeparator();

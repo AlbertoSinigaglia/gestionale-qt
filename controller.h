@@ -11,6 +11,7 @@
 #include<QDebug>
 #include"employeesmanagement.h"
 #include <algorithm>
+#include <QShortcut>
 class Controller : public QObject
 {
     Q_OBJECT
