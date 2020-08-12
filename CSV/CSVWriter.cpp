@@ -118,7 +118,7 @@ std::string CSVWriterTable::toString(char row_delimiter , char column_delimiter 
 void CSVWriter::write(const QString& path, const DynamicArray<Employee*>& c){
     QFile file(path);
     CSVWriterTable table;
-    if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+    if(file.exists() && file.open(QIODevice::WriteOnly | QIODevice::Text)){
         // We're going to streaming text to the file
           for(auto& e: c){
               table.addRow(Mapper::toMap(e));

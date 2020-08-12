@@ -1,8 +1,7 @@
 #include "CSV/CSVReader.h"
 DynamicArray<Employee*> CSVReader::parse(const QString& path){
         QFile file(path);
-        if(file.exists()){
-            file.open(QIODevice::ReadOnly);
+        if(file.exists() && file.open(QIODevice::ReadOnly)){
             CSVParser csv;
             auto content = file.readAll().toStdString();
             csv.parseText(content);
