@@ -88,8 +88,7 @@ void CSVParser::unescape_all(std::string& source, const std::string& to_unescape
         // cerco la stringa di cui fare l'unescape
         index = source.find(to_find, index);
         //se index è npos -> non l'ho trovato e quindi esco dal ciclo
-        if (index >= std::string::npos) break;
-        // altrimenti faccio la sostituzione
+        if (index >= std::string::npos) break;        // altrimenti faccio la sostituzione
         source.replace(index, to_find.length(), to_unescape);
         // faccio avanzare l'indice fino a dopo la stringa che ho sostituito
         index += to_unescape.length();
@@ -234,7 +233,7 @@ void CSVParser::addRawRow(const std::map<std::string, std::string>& row){
 
 void CSVParser::trim(std::string& str, char to_trim ){
     size_t first = str.find_first_not_of(to_trim);
-    if (std::string::npos == first){
+    if (std::string::npos != first){
         size_t last = str.find_last_not_of(to_trim);
         str =  str.substr(first, (last - first + 1));
     }
