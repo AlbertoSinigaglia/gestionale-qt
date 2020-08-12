@@ -39,7 +39,6 @@ public slots:
     void changeListAttributeVisibility(int props, int visibility);
     void childPressedEvent(EmployeeListElement* e);
     void childClickedEvent(EmployeeListElement* e);
-
 };
 
 #endif // EMPLOYEELIST_H
