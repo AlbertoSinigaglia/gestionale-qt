@@ -206,3 +206,39 @@ void Gestionale::setStyle()
 }
 
 
+
+void Gestionale::deleteButtonClicked(){
+    auto e = employeesList->getCurrent();
+    if(e){
+        QMessageBox msgBox(this);
+        msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
+        msgBox.setInformativeText("Sicuro di voler procedere?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int resp = msgBox.exec();
+        if(resp == QMessageBox::Yes)
+            emit deleteEmployeeEvent(employeesList->getCurrent());
+    } else {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
+        if(reply == QMessageBox::Yes) this->insertButtonClicked() ;
+    }
+}
+void Gestionale::insertButtonClicked(){
+    emit insertEmployeeEvent();
+}
+void Gestionale::modifyButtonClicked(){
+    emit modifyEmployeeEvent(employeesList->getCurrent());
+}
+void Gestionale::employeeListElementDoubleClicked(EmployeeListElement* e){
+    emit employeeListElementDoubleClickedEvent(e->getEmployee());
+}
+
+void Gestionale::setModel(std::shared_ptr<EmployeesManagement> model_){
+    model = model_;
+}
+void Gestionale::updateList() const{
+    if(model){
+        this->employeesList->setEmployees(*model->getEmployees());
+    }
+}

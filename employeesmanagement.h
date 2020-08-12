@@ -11,18 +11,10 @@ class EmployeesManagement
     std::shared_ptr<DynamicArray<Employee*>> employees;
     QString source;
 public:
-    EmployeesManagement(const QString& source_): source(source_){
-         employees = std::make_shared<DynamicArray<Employee*>>(CSVReader::parse(source));
-    }
-    void save(const QString& source_){
-        CSVWriter::write(source_, *employees);
-    }
-     std::shared_ptr<DynamicArray<Employee*>> getEmployees() const{
-        return employees;
-    }
-    QString getOriginalSource() const{
-        return source;
-    }
+    EmployeesManagement(const QString& source_);
+    void save(const QString& source_);
+     std::shared_ptr<DynamicArray<Employee*>> getEmployees() const;
+    QString getOriginalSource() const;
 };
 
 #endif // EMPLOYEESMANAGEMENT_H

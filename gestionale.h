@@ -31,14 +31,8 @@ class Gestionale : public QWidget{
 public:
 	Gestionale(QWidget *parent = nullptr);
     ~Gestionale();
-    void setModel(std::shared_ptr<EmployeesManagement> model_){
-        model = model_;
-    }
-    void updateList() const{
-        if(model){
-            this->employeesList->setEmployees(*model->getEmployees());
-        }
-    }
+    void setModel(std::shared_ptr<EmployeesManagement> model_);
+    void updateList() const;
 
 private:
     std::shared_ptr<EmployeesManagement> model;
@@ -82,32 +76,10 @@ signals:
     void deleteEmployeeEvent(Employee *);
     void insertEmployeeEvent();
 public slots:
-    void deleteButtonClicked(){
-        auto e = employeesList->getCurrent();
-        if(e){
-            QMessageBox msgBox(this);
-            msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
-            msgBox.setInformativeText("Sicuro di voler procedere?");
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            int resp = msgBox.exec();
-            if(resp == QMessageBox::Yes)
-                emit deleteEmployeeEvent(employeesList->getCurrent());
-        } else {
-            QMessageBox::StandardButton reply;
-            reply = QMessageBox::question(this, "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
-            if(reply == QMessageBox::Yes) this->insertButtonClicked() ;
-        }
-    }
-    void insertButtonClicked(){
-        emit insertEmployeeEvent();
-    }
-    void modifyButtonClicked(){
-        emit modifyEmployeeEvent(employeesList->getCurrent());
-    }
-    void employeeListElementDoubleClicked(EmployeeListElement* e){
-        emit employeeListElementDoubleClickedEvent(e->getEmployee());
-    }
+    void deleteButtonClicked();
+    void insertButtonClicked();
+    void modifyButtonClicked();
+    void employeeListElementDoubleClicked(EmployeeListElement* e);
 };
 
 #endif // GESTIONALE_H
