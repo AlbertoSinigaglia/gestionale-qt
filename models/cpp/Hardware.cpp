@@ -12,7 +12,7 @@ Hardware::Hardware(const Persona& persona, const DatiLavoratore& dati_lavoratore
 
 void Hardware::aggiornaMese(){
 
-    n_sistemi_gestiti_totale = nuovi_gestiti;
+    n_sistemi_gestiti_totale += nuovi_gestiti;
     nuovi_gestiti = 0;
 }
 

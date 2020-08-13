@@ -67,7 +67,7 @@ double ITSecurityDev::percRipristino() const{
 
     // Cerco di stimare il numero di righe che aspettano al ITSDev per ripristinare la situazione di normalita ponderandole nei casi criticita / Non criticita
     double righe_previste_di_manutanzione = n_manutenzioni_critiche_previste * Conv::media_n_righe_manutenzione_critica
-                                            + (n_problemi_irrsolti - n_manutenzioni_critiche_previste) * Conv::perc_pessimistica_manutenzioni_non_critiche;
+                                            + (n_problemi_irrsolti - n_manutenzioni_critiche_previste) * Conv::media_n_righe_manutenzione_non_critica;
 
     return getNRigheMese() / ( righe_previste_di_manutanzione + getNRigheMese() );
 }
@@ -81,13 +81,13 @@ float ITSecurityDev::valoreLavoro() const{
 
     float valore_scampate_brecce = static_cast<float>( n_criticita_risolte * Conv::perdita_breccia );
 
-    return Manutenzione::valoreLavoro() + Software::valoreLavoro() + valore_scampate_brecce;
+    return Manutenzione::valoreLavoro() + valore_scampate_brecce;
 }
 
 
 bool ITSecurityDev::produttivo() const{
 
-    bool condizione_sicurezza_accettabile = n_problemi_irrsolti > Conv::tolleranza_n_problemi_aperti_mese;
+    bool condizione_sicurezza_accettabile = n_problemi_irrsolti < Conv::tolleranza_n_problemi_aperti_mese;
     return condizione_sicurezza_accettabile && ( Manutenzione::produttivo() && Software::produttivo() );
 }
 
@@ -127,11 +127,6 @@ void ITSecurityDev::setNCriticitaRisolte(unsigned int value)
     n_criticita_risolte = value;
 }
 
-void ITSecurityDev::setNProgettiInArrivo(unsigned int value)
-{
-    n_progetti_in_arrivo = value;
-}
-
 void ITSecurityDev::setNProblemiIrrsolti(unsigned int value)
 {
     n_problemi_irrsolti = value;
@@ -140,5 +135,5 @@ void ITSecurityDev::setNProblemiIrrsolti(unsigned int value)
 
 
 DatiRipristinoSicurezza ITSecurityDev::getDatiRipristinoSicurezza() const{
-    return DatiRipristinoSicurezza{n_problemi_irrsolti, n_progetti_in_arrivo, n_criticita_risolte};
+    return DatiRipristinoSicurezza{n_problemi_irrsolti, n_criticita_risolte};
     }

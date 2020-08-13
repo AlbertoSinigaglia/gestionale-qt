@@ -29,7 +29,6 @@ unsigned int FrontDev::riutilizzabilita() const{
 
 
 
-
  bool FrontDev::produttivo() const{
      
      unsigned int righe_adattate_per_progetto = righePerProgetto() * perc_codice_perfezionato;

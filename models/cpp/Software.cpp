@@ -41,16 +41,16 @@ double Software::velocitaScrittura() const{
 
 DifferenzaDate Software::durataCodice() const{
     // sulla base della stima del numero dei progetti a cui puo sopravvivere il codice calcolo il tempo di vita del codice
-    return DifferenzaDate{0,0,static_cast<int>(riutilizzabilita() *Conv::durata_progetto_medio.inGiorni())};
+    return DifferenzaDate{0,0,static_cast<int>(riutilizzabilita() *Conv::durata_progetto_medio_in_giorni)};
 }
 
 
 unsigned int Software::riutilizzabilita() const{
     // impiegato di esperienza nella media produce un codice che mediamente viene riutilizzato in 3 progetti
-    float peso_esperienza = UFMath::proporzionaleAMedia(3.0f, gradoEsperienza() );
+    float peso_esperienza = UFMath::proporzionaleAMedia(4.0f, gradoEsperienza() );
     // maggiore sara il rapporto: progettazione/sviluppo per un progetto migliori saranno le possibilita di riutilizzo del codice 
     // questo se 
-    float peso_progettazione = UFMath::proporzionaleAMedia(10.0f, (1 - perc_ore_programmazione) );
+    float peso_progettazione = UFMath::proporzionaleAMedia(5.0f, (1 - perc_ore_programmazione) );
     // return la media dei due pesi
     return static_cast<unsigned int> ( (peso_esperienza+peso_progettazione)/2 );
 }
@@ -67,7 +67,7 @@ unsigned int Software::orePerProgetto() const{
 
 unsigned int Software::righePerProgetto() const{
     int numero_medio_righe_per_progetto = Conv::n_righe_progetto_medio / Conv::n_impiegati_progetto_medio;
-    if(n_progetti_conclusi_mese>1 && n_righe_mese> numero_medio_righe_per_progetto)
+    if(n_progetti_conclusi_mese>1 && n_righe_mese > numero_medio_righe_per_progetto)
         return  n_righe_mese / n_progetti_conclusi_mese;
         else// Se ho un insufficienza di dati per caclolare questo valore mi avvalgo di una media
         return numero_medio_righe_per_progetto;
@@ -85,7 +85,7 @@ double Software::influenzaProgetto() const{
 float Software::valoreLavoro() const{
     /* Calcolo il valore che l'impiegato ha dato all'azienda dal punto di vista del contributo che ha dato ai progetti*/
     // calcolo il valore dei progetti in cui compare il codice che produce lo sviluppatore in questo mese
-    float valore_totale_progetti = (n_progetti_conclusi_mese * durataCodice().anni) * Conv::valore_annuo_progetto_medio;
+    float valore_totale_progetti = (n_progetti_conclusi_mese * durataCodice().giorni) * Conv::valore_al_giorno_progetto_medio;
     // Dal valore totale dei progetti ricavo il valore apportato all'azienda dallo sviluppatore (rispetto al suo contributo)
     float valore_relativo_progetti = (valore_totale_progetti / Conv::n_impiegati_progetto_medio) * influenzaProgetto();
 
@@ -94,6 +94,8 @@ float Software::valoreLavoro() const{
 
 
 bool Software::produttivo() const{
+    //se uno sviluppatore ha un influenza inferiore alla metà di uno sviluppatore generico nel progetto allora non è produttivo
+    if(influenzaProgetto() < 0.5) return false;
     // Calcolo quante righe si aspetterebbe che venissero prodotte da uno sviluppatore 
     // con le caratteristiche DA CONTRATTO dello sviluppantore in questione
     double ore_programmazione_tot = static_cast<double>(orePerProgetto()) * perc_ore_programmazione;
