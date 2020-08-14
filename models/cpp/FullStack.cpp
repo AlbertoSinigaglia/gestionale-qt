@@ -70,3 +70,9 @@ DatiFullStack FullStack::getDatiFullStack() const{
     return DatiFullStack{perc_lavoro_back, separa_interfacce};
 }
 
+
+void FullStack::setDatiFullStack(const DatiFullStack& d){
+        perc_lavoro_back=d.perc_lavoro_back;
+        separa_interfacce=d.separa_interfacce;
+}
+

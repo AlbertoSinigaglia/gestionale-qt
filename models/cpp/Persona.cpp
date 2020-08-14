@@ -26,6 +26,17 @@ void Persona::setNascita(const Data &value)
 }
 
 
+DatiPersona Persona::getDatiPersona() const{
+    return DatiPersona(nome,cognome,CF,nascita);
+}
+
+void Persona::setDatiPersona(const DatiPersona& d){
+    CF=d.CF;
+    nome=d.nome;
+    cognome=d.cognome;
+    nascita=d.nascita;
+}
+
 
 std::string Persona::getNome() const
 {

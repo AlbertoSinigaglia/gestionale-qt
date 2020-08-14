@@ -137,3 +137,9 @@ void ITSecurityDev::setNProblemiIrrsolti(unsigned int value)
 DatiRipristinoSicurezza ITSecurityDev::getDatiRipristinoSicurezza() const{
     return DatiRipristinoSicurezza{n_problemi_irrsolti, n_criticita_risolte};
     }
+
+
+void ITSecurityDev::setDatiRipristinoSicurezza(const DatiRipristinoSicurezza& d){
+    n_criticita_risolte=d.n_criticita_risolte;
+    n_problemi_irrsolti=d.n_problemi_irrsolti;
+}

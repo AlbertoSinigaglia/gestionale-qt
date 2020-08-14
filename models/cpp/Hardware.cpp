@@ -79,3 +79,11 @@ void Hardware::setNuoviGestiti(unsigned int value)
 DatiSistemi Hardware::getDatiSistemi() const{
     return DatiSistemi{n_sistemi_gestiti, n_sistemi_malfunzionanti, n_sistemi_gestiti_totale, nuovi_gestiti};
 }
+
+
+void Hardware::setDatiSistemi(const DatiSistemi& d){
+    nuovi_gestiti=d.nuovi_gestiti;
+    n_sistemi_gestiti=d.n_sistemi_gestiti;
+    n_sistemi_gestiti_totale=d.n_sistemi_gestiti_totale;
+    n_sistemi_malfunzionanti=d.n_sistemi_malfunzionanti;
+}

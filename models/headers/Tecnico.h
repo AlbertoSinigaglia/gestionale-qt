@@ -41,6 +41,7 @@ public:
 
 
     DatiRiparazioneSistemi getDatiRiparazioneSistemi() const;
+    void setDatiRiparazioneSistemi(const DatiRiparazioneSistemi& d);
 
 
 protected:

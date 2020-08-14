@@ -42,6 +42,7 @@ public:
 
 
     DatiRipristinoSicurezza getDatiRipristinoSicurezza() const;
+    void setDatiRipristinoSicurezza(const DatiRipristinoSicurezza& d);
 
 
 protected:

@@ -36,6 +36,7 @@ public:
 
 
     DatiManutenzione getDatiManutenzione() const;
+    void setDatiManutenzione(const DatiManutenzione& d);
 
 
 protected:

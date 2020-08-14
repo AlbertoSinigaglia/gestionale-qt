@@ -30,6 +30,7 @@ public:
 
 
     DatiLatoClient getDatiLatoClient() const;
+    void setDatiLatoClient(const DatiLatoClient& d);
 
 
 protected:

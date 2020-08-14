@@ -152,3 +152,12 @@ void Software::setNRigheMese(unsigned int value)
 DatiDeveloping Software::getDatiDeveloping() const{
     return DatiDeveloping{linguaggio, perc_ore_programmazione, n_righe_totali, n_righe_mese, n_progetti_conclusi_mese};
 }
+
+
+void Software::setDatiDeveloping(const DatiDeveloping& d){
+    linguaggio=d.linguaggio;
+    n_righe_mese=d.n_righe_mese;
+    n_righe_totali=d.n_righe_totali;
+    perc_ore_programmazione=d.perc_ore_programmazione;
+    n_progetti_conclusi_mese=d.n_progetti_conclusi_mese;
+}

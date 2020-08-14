@@ -36,6 +36,7 @@ public:
 
 
     DatiSistemi getDatiSistemi() const;
+    void setDatiSistemi(const DatiSistemi& d);
 
 protected:
 

@@ -120,3 +120,11 @@ Persona Employee::getPersona() const{
     return static_cast<Persona>(*this);
 }
 
+
+void Employee::setDatiLavoratore(const DatiLavoratore& d){
+            fine_contratto=d.fine_contratto;
+            data_assunzione=d.data_assunzione;
+            ore_lavoro_sett=d.ore_lavoro_sett;
+            quota_aggiuntiva=d.quota_aggiuntiva;
+}
+

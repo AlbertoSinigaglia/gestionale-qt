@@ -26,6 +26,7 @@
 #include "collections/DynamicArray.h"
 #include<QDebug>
 #include "employeesmanagement.h"
+
 class Gestionale : public QWidget{
 	Q_OBJECT
 

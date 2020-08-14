@@ -81,3 +81,8 @@ DatiManutenzione Manutenzione::getDatiManutenzione() const{
 }
 
 
+void Manutenzione::setDatiManutenzione(const DatiManutenzione& d){
+    n_riparazioni_mese=d.n_riparazioni_mese;
+    perc_ripristino_medio=d.perc_ripristino_medio;
+    perc_riparazioni_inefficaci=d.perc_riparazioni_inefficaci;
+}

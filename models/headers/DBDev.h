@@ -29,6 +29,7 @@ public:
 
 
     DatiDatabase getDatiDatabase() const;
+    void setDatiDatabase(const DatiDatabase& d);
 
 
 protected:

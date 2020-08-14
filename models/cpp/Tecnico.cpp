@@ -116,3 +116,9 @@ void Tecnico::setPercRiparazioniSussistenti(unsigned int value)
 DatiRiparazioneSistemi Tecnico::getDatiRiparazioneSistemi() const{
     return DatiRiparazioneSistemi{perc_riparazioni_sussistenti, ore_stallo_mensili, ore_straordinari};
 }
+
+void Tecnico::setDatiRiparazioneSistemi(const DatiRiparazioneSistemi& d){
+    ore_straordinari=d.ore_straordinari;
+    ore_stallo_mensili=d.ore_stallo_mensili;
+    perc_riparazioni_sussistenti=d.perc_riparazioni_sussistenti;
+}
