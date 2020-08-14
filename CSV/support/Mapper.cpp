@@ -34,7 +34,6 @@ std::map<std::string, std::string> Mapper::toMap(Employee* e){
                 {"dlavoratore.quota_aggiuntiva", std::to_string(dlavoratore.quota_aggiuntiva)},
                 {"dripristinosicurezza.n_criticita_risolte", std::to_string(dripristinosicurezza.n_criticita_risolte)},
                 {"dripristinosicurezza.n_problemi_irrsolti", std::to_string(dripristinosicurezza.n_problemi_irrsolti)},
-                {"dripristinosicurezza.n_progetti_in_arrivo", std::to_string(dripristinosicurezza.n_progetti_in_arrivo)},
                 {"ddevelping.linguaggio", std::to_string(ddevelping.linguaggio)},
                 {"ddevelping.n_righe_mese", std::to_string(ddevelping.n_righe_mese)},
                 {"ddevelping.n_righe_totali", std::to_string(ddevelping.n_righe_totali)},
@@ -284,7 +283,7 @@ DatiDeveloping Mapper::getDatiDeveloping(const std::map<std::string, std::string
     return DatiDeveloping(static_cast<Conv::Linguaggio>(std::stoi(map.at("ddevelping.linguaggio"))), std::stod(map.at("ddevelping.perc_ore_programmazione")), std::stoi(map.at("ddevelping.n_righe_totali")),std::stoi(map.at("ddevelping.n_righe_mese")), std::stoi(map.at("ddevelping.n_progetti_conclusi_mese")));
 }
 DatiRipristinoSicurezza Mapper::getDatiRipristinoSicurezza(const std::map<std::string, std::string>& map){
-    return DatiRipristinoSicurezza(std::stoi(map.at("dripristinosicurezza.n_problemi_irrsolti")), std::stoi(map.at("dripristinosicurezza.n_progetti_in_arrivo")), std::stoi(map.at("dripristinosicurezza.n_criticita_risolte")));
+    return DatiRipristinoSicurezza(std::stoi(map.at("dripristinosicurezza.n_problemi_irrsolti")), std::stoi(map.at("dripristinosicurezza.n_criticita_risolte")));
 }
 DatiSistemi Mapper::getDatiSistemi(const std::map<std::string, std::string>& map){
      return DatiSistemi(std::stoi(map.at("dsistemi.n_sistemi_gestiti")), std::stoi(map.at("dsistemi.n_sistemi_gestiti_totale")), std::stoi(map.at("dsistemi.n_sistemi_malfunzionanti")), std::stoi(map.at("dsistemi.nuovi_gestiti")));

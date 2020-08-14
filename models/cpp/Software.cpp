@@ -46,11 +46,11 @@ DifferenzaDate Software::durataCodice() const{
 
 
 unsigned int Software::riutilizzabilita() const{
-    // impiegato di esperienza nella media produce un codice che mediamente viene riutilizzato in 3 progetti
-    float peso_esperienza = UFMath::proporzionaleAMedia(4.0f, gradoEsperienza() );
+    // impiegato di esperienza ottima produce un codice che mediamente viene riutilizzato in 5 progetti
+    float peso_esperienza = calcoloBonusLineare( 0 , (gradoEsperienza()/10.0) , 5);
     // maggiore sara il rapporto: progettazione/sviluppo per un progetto migliori saranno le possibilita di riutilizzo del codice 
     // questo se 
-    float peso_progettazione = UFMath::proporzionaleAMedia(5.0f, (1 - perc_ore_programmazione) );
+    float peso_progettazione = calcoloBonusLineare( 0 , (1 - perc_ore_programmazione) , 8);
     // return la media dei due pesi
     return static_cast<unsigned int> ( (peso_esperienza+peso_progettazione)/2 );
 }
