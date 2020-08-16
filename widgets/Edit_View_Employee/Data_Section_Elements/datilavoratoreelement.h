@@ -11,6 +11,9 @@
 
 #include"widgets/Edit_View_Employee/abstsectionelement.h"
 
+#include"widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
 
 
 class DatiLavoratoreElement: public AbstSectionElement{
@@ -25,14 +28,15 @@ private:
 
 
     //  LISTA DI QWIDGET che mostrano i valori dei campi
-    QLabel* data_assunzione_label;
-    QLabel* fine_contratto_label;
-    QLabel* ore_lavoro_sett_label;
-    QLabel* quota_aggiuntiva_label;
+
+    DateEditAttribute* data_assunzione_widget;
+    DateEditAttribute* fine_contratto_widget;
+    SlideAttribute* ore_lavoro_sett_widget;
+    LineEditAttribute* quota_aggiuntiva_widget;
 
 
-    const std::string nome_campi[4] = {"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
-    const std::string descrizione_campi[4];
+    static QString nome_campi[4];
+    static QString descrizione_campi[4];
 
 
     void addCampi(const DatiLavoratore& dati, bool editable);
@@ -40,6 +44,7 @@ private:
 
 };
 
+QString DatiLavoratoreElement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
 
 
 #endif // DATILAVORATOREELEMENT_H

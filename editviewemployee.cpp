@@ -1,24 +1,30 @@
 #include"editviewemployee.h"
 
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, bool editable, QWidget *parent): QWidget(parent){
+        QLabel* nome;
+        if(editable)
+            nome = new QLabel(QString("Modifica Impiegato"));
+            else nome = new QLabel(QString("Visualizza Impiegato"));
+        nome->setFixedWidth(200);
 
         this->setFixedSize(800, 700);
         mainLayout = new QVBoxLayout(this);
-        mainLayout->setAlignment(Qt::AlignTop);
         mainLayout->setContentsMargins(0,0,0,0);
-        mainLayout->setSpacing(0);
+        mainLayout->setSpacing(10);
+        mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedSize(750,500);
-        impiegato->setLayout(buildSections(dati_, editable));
+        impiegato->setFixedSize(750,600);
+        impiegato->setLayout(buildSections(dati_, editable, impiegato));
 
         QPushButton* salva_button = new QPushButton("Salva e Esci", this);
         QPushButton* esci_button = new QPushButton("Esci", this);
         QHBoxLayout* options =new QHBoxLayout(this);
         options->addWidget(salva_button);
         options->addWidget(esci_button);
-        options->setAlignment(Qt::AlignLeft);
+        options->setAlignment(Qt::AlignRight);
 
+        mainLayout->addWidget(nome);
         mainLayout->addWidget(impiegato);
         mainLayout->addLayout(options);
 
@@ -42,12 +48,17 @@ void EditViewEmployee::chooseAndSend() const{
 
 
 
-QVBoxLayout* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& dati_, bool editable){
+QVBoxLayout* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& dati_, bool editable, QWidget* parent){
 
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    QVBoxLayout* layout = new QVBoxLayout(parent);
+    layout->setSpacing(20);
 
-    for(DynamicArray<AbstDataSection*>::const_iterator i = dati_.begin(); i!=dati_.end(); i++){
-        layout->addWidget(new QPushButton("bohhh",this));}
+
+    DatiLavoratore* d;
+    for(auto i = dati_.begin(); i!=dati_.end(); i++){
+        d=dynamic_cast<DatiLavoratore*>(*i);
+        if(d) layout->addWidget(new DatiLavoratoreElement(*d,editable,this));
+    }
 /*
     for(DynamicArray<AbstDataSection*>::const_iterator i = dati_.begin(); i!=dati_.end(); i++){
         AbstDataSection* objct = *i;

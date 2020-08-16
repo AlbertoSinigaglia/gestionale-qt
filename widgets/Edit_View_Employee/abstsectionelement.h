@@ -2,6 +2,8 @@
 #define ABSTSECTIONELEMENT_H
 
 #include <QWidget>
+#include<QVBoxLayout>
+#include<QLabel>
 #include "models/support/TipiRaggruppamento.h"
 
 class AbstSectionElement: public QWidget
@@ -10,7 +12,7 @@ class AbstSectionElement: public QWidget
 
 public:
 
-    AbstSectionElement(QWidget *parent = 0);
+    AbstSectionElement(QString nome_sezione, QWidget *parent = 0);
 
     bool isModifyed() const;
 
@@ -18,6 +20,8 @@ public:
 
 protected:
     bool is_modifyed;
+
+    QVBoxLayout* layout;
 
 private slots:
     // questo viene chiamato quando un sotto componente viene alterato (SIGNAL)

@@ -8,6 +8,8 @@
 #include<QVBoxLayout>
 #include <QPushButton>
 #include<QScrollArea>
+#include<QLabel>
+#include<QFile>
 
 #include"models/headers/GUIDev.h"
 #include"models/headers/DBDev.h"
@@ -16,7 +18,6 @@
 #include"models/headers/Tecnico.h"
 
 
-#include"widgets/Edit_View_Employee/abstsectionelement.h"
 #include"widgets/Edit_View_Employee/Data_Section_Elements/datilavoratoreelement.h"
 
 
@@ -27,7 +28,6 @@ Q_OBJECT
 public:
 
     EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, bool editable =false, QWidget *parent =0);
-
 
 public slots:
 
@@ -47,7 +47,7 @@ private:
     QVBoxLayout* mainLayout;
 
     // Metodo per costruttore
-    QVBoxLayout* buildSections(const DynamicArray<AbstDataSection*>& dati_, bool editable);
+    QVBoxLayout* buildSections(const DynamicArray<AbstDataSection*>& dati_, bool editable, QWidget* parent);
 
 
 
