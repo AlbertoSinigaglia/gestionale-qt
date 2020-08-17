@@ -42,7 +42,18 @@ SOURCES += \
     widgets/Edit_View_Employee/Attribute_Elements/flagattribute.cpp \
     widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.cpp \
     widgets/Edit_View_Employee/Attribute_Elements/slideattribute.cpp \
-    widgets/Edit_View_Employee/Data_Section_Elements/datilavoratoreelement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiDatabaseElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiDevelopingElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiFullstackElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiInterfacciaUtenteElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoClientElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoServerElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLavoratoreElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiManutenzioneElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiPersonaElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiRiparazioneSistemiElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiRipristinoSicurezzaElement.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiSistemiElement.cpp \
     widgets/Edit_View_Employee/abstattribute.cpp \
     widgets/Edit_View_Employee/abstsectionelement.cpp \
     widgets/employeelistelement.cpp \
@@ -81,7 +92,18 @@ HEADERS += \
     widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h \
-    widgets/Edit_View_Employee/Data_Section_Elements/datilavoratoreelement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiDatabaseElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiDevelopingElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiFullstackElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiInterfacciaUtenteElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoClientElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoServerElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiLavoratoreElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiManutenzioneElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiPersonaElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiRiparazioneSistemiElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiRipristinoSicurezzaElement.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/DatiSistemiElement.h \
     widgets/Edit_View_Employee/abstattribute.h \
     widgets/Edit_View_Employee/abstsectionelement.h \
     widgets/employeelistelement.h \

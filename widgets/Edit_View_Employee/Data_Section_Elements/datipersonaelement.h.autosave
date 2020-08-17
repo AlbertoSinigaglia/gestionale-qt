@@ -1,0 +1,49 @@
+#ifndef DATIPERSONAELEMENT_H
+#define DATIPERSONAELEMENT_H
+
+#include"models/support/TipiRaggruppamento.h"
+#include"collections/DynamicArray.h"
+#include <qwidget.h>
+#include <iostream>
+#include <QPushButton>
+#include <QLabel>
+#include "models/support/Data.h"
+
+#include"widgets/Edit_View_Employee/abstsectionelement.h"
+
+#include"widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
+
+class datipersonaelement : public AbstSectionElement
+{
+public:
+    datipersonaelement(const DatiPersona& dati_, bool editable=false, QWidget *parent = 0);
+    
+    AbstDataSection* getData() const;
+    
+private:
+    LineEditAttribute* nome;
+    LineEditAttribute* cognome;
+    LineEditAttribute* cf;
+    DateEditAttribute* dataNascita;
+    
+    
+    static QString nome_campi[4];
+    static QString descrizione_campi[4];
+
+
+    void addCampi(const DatiPersona& dati, bool editable);
+};
+
+QString datipersonaelement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
+
+#endif // DATIPERSONAELEMENT_H
+
+
+
+
+
+
+    
+
+

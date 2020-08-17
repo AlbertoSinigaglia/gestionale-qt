@@ -1,4 +1,6 @@
-#include "datilavoratoreelement.h"
+#ifndef DATILAVORATOREELEMENT_CPP
+#define DATILAVORATOREELEMENT_CPP
+#include "DatiLavoratoreElement.h"
 
 
 
@@ -39,7 +41,7 @@ void DatiLavoratoreElement::addCampi(const DatiLavoratore& dati, bool editable){
 }
 
 
-
+#endif //DATIALVORATOREELEMENT_CPP
 
 
 

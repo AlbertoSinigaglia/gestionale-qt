@@ -47,4 +47,4 @@ private:
 QString DatiLavoratoreElement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
 
 
-#endif // DATILAVORATOREELEMENT_H
+#endif //DATILAVORATOREELEMENT_H
