@@ -73,11 +73,9 @@ private:
 /**
  * CAMPI MENSILI
  */
-    unsigned int n_problemi_irrsolti;   
-
-    unsigned int n_progetti_in_arrivo;   
+    unsigned int n_problemi_irrsolti;       // LINE_EDIT ( val minimo = 0, solo integer)
            
-    unsigned int n_criticita_risolte;                                          
+    unsigned int n_criticita_risolte;       // LINE_EDIT ( val minimo = 0, solo integer)
 };
 
 #endif //CSVPARSER_ITSECURITYDEV_H

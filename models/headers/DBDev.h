@@ -54,11 +54,11 @@ private:
 /*
 * CAMPI x PROGETTO
 */
-    double num_attributi_ridondanti_per_entita;
+    double num_attributi_ridondanti_per_entita;     //LINE_EDIT  (accetta double, non accetta val negativi)
 
-    double speed_up_indicizzazioni;
+    double speed_up_indicizzazioni;                 //LINE_EDIT  (accetta double, non accetta val negativi)
 
-    double perc_entita_forma_normale;
+    double perc_entita_forma_normale;               // SLIDE (da 0 a 1, approx= 2)
 
 };
 

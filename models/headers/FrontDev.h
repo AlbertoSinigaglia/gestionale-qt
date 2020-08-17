@@ -42,11 +42,12 @@ protected:
 
 private:
 
-    Conv::Libreria libreria;
+    Conv::Libreria libreria;                // COMBO BOX (scelta tutte le librerie)
 
-    bool orientato_professionalita;
+    bool orientato_professionalita;         // FLAG
 
-    double perc_codice_perfezionato;   // percentuale di codice esterno (derivante da cut&paste) adattato per il progetto
+    double perc_codice_perfezionato;        // SLIDE (da 0 a 1 , approx =2)
+    // percentuale di codice esterno (derivante da cut&paste) adattato per il progetto
 
 };
  

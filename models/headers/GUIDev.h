@@ -52,14 +52,14 @@ protected:
 
 private:
 
-    bool quary_predefinite;
-    bool stile_minimalista;
+    bool quary_predefinite;                     //FLAG
+    bool stile_minimalista;                     //FLAG
 
     // il numero massimo di passi necessari che devo compiere per giungere su una sezione del sistema
-    unsigned int lunghezza_max_percorso;
+    unsigned int lunghezza_max_percorso;        //LINE_EDIT ( val minimo = 1, solo integer)
 
     //nuumero medio di percorsi diversi che permettono di giungere a una stessa sezione del sistema
-    unsigned int num_medio_percorsi_sezione;
+    unsigned int num_medio_percorsi_sezione;    //LINE_EDIT ( val minimo = 1, solo integer)
 
 };
 

@@ -48,7 +48,7 @@ float Manutenzione::valoreLavoro() const{
 
 
 
-unsigned int Manutenzione::getPercRiparazioniInefficaci() const{
+double Manutenzione::getPercRiparazioniInefficaci() const{
     return perc_riparazioni_inefficaci;
 }
 
@@ -69,7 +69,7 @@ void Manutenzione::setNRiparazioniMese(unsigned int value)
     n_riparazioni_mese = value;
 }
 
-void Manutenzione::setPercRiparazioniInefficaci(unsigned int value)
+void Manutenzione::setPercRiparazioniInefficaci(double value)
 {
     perc_riparazioni_inefficaci = value;
 }

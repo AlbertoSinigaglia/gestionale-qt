@@ -47,11 +47,11 @@ protected:
 private:
 
     //     CAMPO MENSILE
-    unsigned int nuovi_gestiti;                
+    unsigned int nuovi_gestiti;                 // LINE_EDIT ( val minimo = 0, solo integer)
 
-    unsigned int n_sistemi_gestiti;
-    unsigned int n_sistemi_malfunzionanti;
-    unsigned int n_sistemi_gestiti_totale;    
+    unsigned int n_sistemi_gestiti;             // LINE_EDIT ( val minimo = 0, solo integer)
+    unsigned int n_sistemi_malfunzionanti;      // LINE_EDIT ( val minimo = 0, solo integer)
+    unsigned int n_sistemi_gestiti_totale;      // LINE_EDIT ( val minimo = 0, solo integer)
 };
 
 

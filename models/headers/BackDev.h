@@ -50,12 +50,12 @@ protected:
 
 private:
 
-    double perc_capo_progetto;
+    double perc_capo_progetto;          // SLIDE ( da 0 a 1, cifre_approx = 2)
 
-    unsigned int livello_astrazione;
+    unsigned int livello_astrazione;    // SLIDE ( da 1 a 5, cifre_approx = 0)
 
-    bool prove_correttezza;
-    bool orientato_ortogonalita;
+    bool prove_correttezza;             // FLAG
+    bool orientato_ortogonalita;        // FLAG
     
 };
 

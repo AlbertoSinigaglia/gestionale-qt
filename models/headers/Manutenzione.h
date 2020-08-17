@@ -28,7 +28,7 @@ public:
     virtual void aggiornaMese() override;
 
 
-    void setPercRiparazioniInefficaci(unsigned int value);
+    void setPercRiparazioniInefficaci(double value);
 
     void setNRiparazioniMese(unsigned int value);
 
@@ -55,7 +55,7 @@ protected:
      */
     virtual unsigned int quantitaConsiderevoleRiparazioni() const = 0;
 
-    unsigned int getPercRiparazioniInefficaci() const;
+    double getPercRiparazioniInefficaci() const;
     unsigned int getNRiparazioniMese() const;
 
 
@@ -63,11 +63,11 @@ protected:
 
 private:
 
-    unsigned int perc_riparazioni_inefficaci;
+    double perc_riparazioni_inefficaci;       // SLIDE (da 0 a 1, approx =2)
 
-    unsigned int n_riparazioni_mese;
+    unsigned int n_riparazioni_mese;                // LINE_EDIT ( val minimo = 0, solo integer)
 
-    double perc_ripristino_medio;
+    double perc_ripristino_medio;                   // SLIDE (da 0 a 1, approx = 2)
 
 };
 

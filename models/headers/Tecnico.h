@@ -33,7 +33,7 @@ public:
 
 
 
-    void setPercRiparazioniSussistenti(unsigned int value);
+    void setPercRiparazioniSussistenti(double value);
 
     void setOreStalloMensili(unsigned int value);
 
@@ -71,11 +71,11 @@ private:
 /**
  * CAMPI MENSILI
  */
-    unsigned int perc_riparazioni_sussistenti;
+    double perc_riparazioni_sussistenti;      // SLIDE (da 0 a 1, approx =2)
 
-    unsigned int ore_stallo_mensili;
+    unsigned int ore_stallo_mensili;                // LINE_EDIT (solo integer, val minimo 0)
     
-    unsigned int ore_straordinari;
+    unsigned int ore_straordinari;                  // LINE_EDIT (solo integer, val minimo 0)
 };
 
 

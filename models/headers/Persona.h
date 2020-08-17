@@ -43,10 +43,10 @@ private:
     /**     DATI PERSONA
      * Nome, Cognome, Codice Fiscale, Data di Nascita
      */
-    std::string nome;
-    std::string cognome;
-    std::string CF;
-    Data nascita;
+    std::string nome;           // LINE_EDIT (accetta string -> nessuna restrizione di tipo per il parsing)
+    std::string cognome;        // LINE_EDIT (accetta string -> nessuna restrizione di tipo per il parsing)
+    std::string CF;             // LINE_EDIT (accetta string -> nessuna restrizione di tipo per il parsing)
+    Data nascita;               // DATE_EDIT
 
 
 };

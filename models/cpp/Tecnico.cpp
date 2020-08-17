@@ -106,7 +106,7 @@ void Tecnico::setOreStalloMensili(unsigned int value)
     ore_stallo_mensili = value;
 }
 
-void Tecnico::setPercRiparazioniSussistenti(unsigned int value)
+void Tecnico::setPercRiparazioniSussistenti(double value)
 {
     perc_riparazioni_sussistenti = value;
 }
