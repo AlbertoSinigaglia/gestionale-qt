@@ -30,6 +30,7 @@ public:
     void setNumMedioPercorsiSezione(unsigned int value);
 
     DatiInterfacceUtente getDatiInterfacceUtente() const;
+    void setDatiInterfacceUtente(const DatiInterfacceUtente& d);
 
 
 protected:

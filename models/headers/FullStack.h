@@ -26,6 +26,7 @@ public:
     void setSeparaInterfacce(bool value);
 
     DatiFullStack getDatiFullStack() const;
+    void setDatiFullStack(const DatiFullStack& d);
 
 
 protected:

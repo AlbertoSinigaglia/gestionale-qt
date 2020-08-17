@@ -18,9 +18,7 @@ float Employee::calcolaStipendio() const{
     float ore_al_mese = static_cast<float>(ore_lavoro_sett) * 30.0f / 7.0f;
     float stipendio_contratto = remunerazioneOraRoutine() * ore_al_mese;
 
-    // TODO: segfault
-
-    float result = stipendio_contratto + 0 ;//bonusStipendio() + quota_aggiuntiva;
+    float result = stipendio_contratto + bonusStipendio() + quota_aggiuntiva;
     // e arrotondo il risultato alla seconda cifra decimale; (risultato in euro)
     return static_cast<float>(round(result*100))/100.0f;
 }
@@ -120,5 +118,13 @@ DatiLavoratore Employee::getDatiLavoratore() const{
 
 Persona Employee::getPersona() const{
     return static_cast<Persona>(*this);
+}
+
+
+void Employee::setDatiLavoratore(const DatiLavoratore& d){
+            fine_contratto=d.fine_contratto;
+            data_assunzione=d.data_assunzione;
+            ore_lavoro_sett=d.ore_lavoro_sett;
+            quota_aggiuntiva=d.quota_aggiuntiva;
 }
 

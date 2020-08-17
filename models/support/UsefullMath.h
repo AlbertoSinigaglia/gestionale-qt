@@ -1,26 +1,6 @@
 
 namespace UFMath{
 
-    /**     PROPORZIONALE A MEDIA
-     * La funzione templetizzata ritorna il valore calcolato proporzionalemente sulla base
-     * di un valore medio che corrisponde alla percentuale media ( 0.5 )
-     */
-    //assunzione 1 : T implementa operatore < * > e conversione double -> T
-    template <class T>
-    T proporzionaleAMedia(T media, double percentuale){
-        return media * static_cast<T>(0.5 / percentuale);
-    }
-
-    /**     PROPORZIONALE A MEDIA
-     * La funzione templetizzata ritorna il valore calcolato proporzionalemente sulla base
-     * di un valore medio che corrisponde al grado medio ( 5 )
-     */
-    //assunzione 1 : T implementa operatore < * > e conversione double -> T
-    template <class T>
-    T proporzionaleAMedia(T media, unsigned int grado){
-        return media * static_cast<T>(5 / grado);
-    }
-
     /**     MEDIA PONDERATA
      * La funzione ritorna la media ponderata di due valori con i rispettivi pesi
      */

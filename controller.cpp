@@ -1,6 +1,6 @@
 #include "controller.h"
 #include <QDebug>
-Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), view(view_){
+Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), view(view_),considered_employee(nullptr),edit_view(nullptr){
     view->show();
     model = std::make_shared<EmployeesManagement>();
     view->setModel(model);
@@ -12,6 +12,7 @@ Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), vie
     connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
     connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
     connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
+
 }
 bool Controller::updateModel(bool want_to_export){
     bool sent = false;
@@ -61,9 +62,25 @@ void Controller::insertNewEmployee(){
 }
 void Controller::openEmployeeInfo(Employee* e){
     QMessageBox::information(view.get(), "Info dipendente", QString("Stai modificando ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
+
+
+
+    OpenEditView(e,false);
+
+
+
+
 }
 void Controller::modifyButtonClicked(Employee * e){
     if(e){
+
+
+
+
+        OpenEditView(e,true);
+
+
+
         QMessageBox msgBox(view.get());
         msgBox.setText(QString("Stai modificando ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
         msgBox.setInformativeText("Vuoi che lo faccia esplodere?");
@@ -85,6 +102,7 @@ void Controller::exportToFile(){
     this->updateModel(true);
 }
 void Controller::exitApplication(){
+    if(edit_view) ExitEditView();
     QMessageBox msgBox(view.get());
     msgBox.setText(QString("Sicuro di voler uscire?"));
     msgBox.setStyleSheet("QLabel{min-width: 300px;}");
@@ -93,3 +111,86 @@ void Controller::exitApplication(){
     if(msgBox.exec() == QMessageBox::Yes)
         emit exitEvent();
 }
+
+
+
+
+
+void Controller::OpenEditView(Employee* considerato, bool editable){
+
+    considered_employee = considerato;
+
+    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), editable);
+    edit_view->show();
+    view->setEnabled(false);
+
+    connect(edit_view, SIGNAL(handleExitEditView()), this, SLOT(ExitEditView()));
+    connect(edit_view, SIGNAL(SaveDataConsiderd(AbstDataSection*)), this, SLOT(SaveChanges(AbstDataSection*)));
+
+}
+
+
+
+void Controller::SaveChanges(AbstDataSection* data_){
+
+      if(typeid(*data_)==typeid(DatiPersona)){
+        considered_employee->setDatiPersona(*dynamic_cast<DatiPersona*>(data_));
+      }else if(typeid(*data_)==typeid(DatiLavoratore)){
+        considered_employee->setDatiLavoratore(*dynamic_cast<DatiLavoratore*>(data_));
+      }else if(typeid(*data_)==typeid(DatiDeveloping)){
+        DatiDeveloping* p = dynamic_cast<DatiDeveloping*>(data_);
+        if(p) dynamic_cast<Software*>(considered_employee)->setDatiDeveloping(*p);
+            else {throw std::invalid_argument("Inserimento non valido");}
+      }else if(typeid(*data_)==typeid(DatiLatoServer)){
+        DatiLatoServer* p = dynamic_cast<DatiLatoServer*>(data_);
+        if(p) dynamic_cast<BackDev*>(considered_employee)->setDatiLatoServer(*p);
+            else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiLatoClient)){
+        DatiLatoClient* p = dynamic_cast<DatiLatoClient*>(data_);
+        if(p) dynamic_cast<FrontDev*>(considered_employee)->setDatiLatoClient(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiFullStack)){
+          DatiFullStack* p = dynamic_cast<DatiFullStack*>(data_);
+          if(p) dynamic_cast<FullStack*>(considered_employee)->setDatiFullStack(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiDatabase)){
+          DatiDatabase* p = dynamic_cast<DatiDatabase*>(data_);
+          if(p) dynamic_cast<DBDev*>(considered_employee)->setDatiDatabase(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiInterfacceUtente)){
+          DatiInterfacceUtente* p = dynamic_cast<DatiInterfacceUtente*>(data_);
+          if(p) dynamic_cast<GUIDev*>(considered_employee)->setDatiInterfacceUtente(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiManutenzione)){
+          DatiManutenzione* p = dynamic_cast<DatiManutenzione*>(data_);
+          if(p) dynamic_cast<Manutenzione*>(considered_employee)->setDatiManutenzione(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiSistemi)){
+          DatiSistemi* p = dynamic_cast<DatiSistemi*>(data_);
+          if(p) dynamic_cast<Hardware*>(considered_employee)->setDatiSistemi(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiRiparazioneSistemi)){
+          DatiRiparazioneSistemi* p = dynamic_cast<DatiRiparazioneSistemi*>(data_);
+          if(p) dynamic_cast<Tecnico*>(considered_employee)->setDatiRiparazioneSistemi(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+      }else  if(typeid(*data_)==typeid(DatiRipristinoSicurezza)){
+          DatiRipristinoSicurezza* p = dynamic_cast<DatiRipristinoSicurezza*>(data_);
+          if(p) dynamic_cast<ITSecurityDev*>(considered_employee)->setDatiRipristinoSicurezza(*p);
+              else {throw std::invalid_argument("Inserimento non valido");}
+            }
+
+    delete data_;
+}
+
+
+
+void Controller::ExitEditView(){
+    edit_view->close();
+    considered_employee=nullptr;
+    delete edit_view;
+    view->setEnabled(true);
+}
+
+
+
+

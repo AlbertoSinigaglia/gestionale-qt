@@ -25,6 +25,7 @@ public:
 
     void setNascita(const Data &value);
 
+
     std::string getNome() const;
 
     std::string getCognome() const;
@@ -32,6 +33,10 @@ public:
     std::string getCF() const;
 
     Data getNascita() const;
+
+    DatiPersona getDatiPersona() const;
+    void setDatiPersona(const DatiPersona& d);
+
 
 private:
 

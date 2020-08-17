@@ -2,13 +2,20 @@
 #define EMPLOYEESMANAGEMENT_H
 #include "collections/DynamicArray.h"
 #include <QString>
-#include "models/headers/Employee.h"
 #include"CSV/CSVReader.h"
 #include <QFileDialog>
 #include"CSV/CSVWriter.h"
+
+#include"models/headers/GUIDev.h"
+#include"models/headers/DBDev.h"
+#include"models/headers/FullStack.h"
+#include"models/headers/ITSecurityDev.h"
+#include"models/headers/Tecnico.h"
+
 class EmployeesManagement
 {
     std::shared_ptr<DynamicArray<Employee*>> employees;
+
     QString source;
 public:
     /**
@@ -32,6 +39,12 @@ public:
      * @return path file originale
      */
     QString getOriginalSource() const;
+
+    /**
+     * @brief serializza i dati dell'impiegato in un insieme di macro raggruppamenti ordinato
+     * @return l'insieme delle tipi raggruppamento
+     */
+    static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
 };
 
 #endif // EMPLOYEESMANAGEMENT_H

@@ -29,7 +29,6 @@ unsigned int FrontDev::riutilizzabilita() const{
 
 
 
-
  bool FrontDev::produttivo() const{
      
      unsigned int righe_adattate_per_progetto = righePerProgetto() * perc_codice_perfezionato;
@@ -76,4 +75,8 @@ DatiLatoClient FrontDev::getDatiLatoClient() const{
     return DatiLatoClient{libreria, orientato_professionalita, perc_codice_perfezionato};
 }
 
-
+void FrontDev::setDatiLatoClient(const DatiLatoClient& d){
+        libreria=d.libreria;
+        perc_codice_perfezionato=d.perc_codice_perfezionato;
+        orientato_professionalita=d.orientato_professionalita;
+}

@@ -4,8 +4,8 @@
 Manutenzione::Manutenzione(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiManutenzione& dati_manutenzione):
                 Employee(persona,dati_lavoratore),
                 perc_riparazioni_inefficaci(dati_manutenzione.perc_riparazioni_inefficaci),
-                perc_ripristino_medio(dati_manutenzione.perc_ripristino_medio),
-                n_riparazioni_mese(dati_manutenzione.n_riparazioni_mese){}
+                n_riparazioni_mese(dati_manutenzione.n_riparazioni_mese),
+                perc_ripristino_medio(dati_manutenzione.perc_ripristino_medio){}
 
 
 void Manutenzione::aggiornaMese(){
@@ -81,3 +81,8 @@ DatiManutenzione Manutenzione::getDatiManutenzione() const{
 }
 
 
+void Manutenzione::setDatiManutenzione(const DatiManutenzione& d){
+    n_riparazioni_mese=d.n_riparazioni_mese;
+    perc_ripristino_medio=d.perc_ripristino_medio;
+    perc_riparazioni_inefficaci=d.perc_riparazioni_inefficaci;
+}

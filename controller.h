@@ -12,11 +12,18 @@
 #include"employeesmanagement.h"
 #include <algorithm>
 #include <QShortcut>
+
+#include"editviewemployee.h"
+
 class Controller : public QObject
 {
     Q_OBJECT
     std::shared_ptr<Gestionale> view;
     std::shared_ptr<EmployeesManagement> model;
+
+    EditViewEmployee* edit_view;
+    Employee* considered_employee;
+
     bool updateModel(bool want_to_export = false);
     QString getFilePath(const QString info) const;
 public:
@@ -30,6 +37,13 @@ public slots:
     void importFile();
     void exportToFile();
     void exitApplication();
+
+    void SaveChanges(AbstDataSection* data_);
+    void ExitEditView();
+
+private:
+    void OpenEditView(Employee* considerato, bool editable =false);
+
 signals:
     void exitEvent();
 };

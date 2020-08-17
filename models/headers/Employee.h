@@ -86,6 +86,7 @@ public:
     void setQuotaAggiuntiva(float value);
 
     DatiLavoratore getDatiLavoratore() const;
+    void setDatiLavoratore(const DatiLavoratore& d);
 
 
 

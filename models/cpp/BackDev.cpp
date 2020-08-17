@@ -103,3 +103,10 @@ void BackDev::setPercCapoProgetto(double value)
 DatiLatoServer BackDev::getDatiLatoServer() const{
     return DatiLatoServer{perc_capo_progetto, livello_astrazione, prove_correttezza, orientato_ortogonalita};
 }
+
+void BackDev::setDatiLatoServer(const DatiLatoServer& d){
+    prove_correttezza=d.prove_correttezza;
+    livello_astrazione=d.livello_astrazione;
+    perc_capo_progetto=d.perc_capo_progetto;
+    orientato_ortogonalita=d.orientato_ortogonalita;
+}

@@ -87,3 +87,9 @@ DatiInterfacceUtente GUIDev::getDatiInterfacceUtente() const{
     return DatiInterfacceUtente{quary_predefinite, stile_minimalista, lunghezza_max_percorso, num_medio_percorsi_sezione};
 }
 
+void GUIDev::setDatiInterfacceUtente(const DatiInterfacceUtente& d){
+quary_predefinite=d.quary_predefinite;
+stile_minimalista=d.stile_minimalista;
+lunghezza_max_percorso=d.lunghezza_max_percorso;
+num_medio_percorsi_sezione=d.num_medio_percorsi_sezione;
+}

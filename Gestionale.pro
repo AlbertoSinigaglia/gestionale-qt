@@ -21,6 +21,7 @@ SOURCES += \
     CSV/CSVReader.cpp \
     CSV/CSVWriter.cpp \
     CSV/support/Mapper.cpp \
+    editviewemployee.cpp \
     employeesmanagement.cpp \
     models/support/Convenzioni.cpp \
     models/support/Data.cpp \
@@ -36,6 +37,13 @@ SOURCES += \
     models/cpp/GUIDev.cpp \
     models/cpp/ITSecurityDev.cpp \
     models/cpp/Tecnico.cpp \
+    widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.cpp \
+    widgets/Edit_View_Employee/Attribute_Elements/flagattribute.cpp \
+    widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.cpp \
+    widgets/Edit_View_Employee/Attribute_Elements/slideattribute.cpp \
+    widgets/Edit_View_Employee/Data_Section_Elements/datilavoratoreelement.cpp \
+    widgets/Edit_View_Employee/abstattribute.cpp \
+    widgets/Edit_View_Employee/abstsectionelement.cpp \
     widgets/employeelistelement.cpp \
     widgets/employeeslist.cpp \
     controller.cpp \
@@ -49,6 +57,7 @@ HEADERS += \
     collections/DynamicArray.h \
     CSV/CSVParser.h \
     CSV/support/Mapper.h \
+    editviewemployee.h \
     employeesmanagement.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
@@ -66,6 +75,13 @@ HEADERS += \
     models/headers/ITSecurityDev.h \
     models/headers/Persona.h \
     models/headers/Tecnico.h \
+    widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h \
+    widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h \
+    widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h \
+    widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h \
+    widgets/Edit_View_Employee/Data_Section_Elements/datilavoratoreelement.h \
+    widgets/Edit_View_Employee/abstattribute.h \
+    widgets/Edit_View_Employee/abstsectionelement.h \
     widgets/employeelistelement.h \
     widgets/employeeslist.h \
     controller.h \

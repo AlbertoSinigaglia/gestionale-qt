@@ -28,12 +28,6 @@ unsigned int Tecnico::oreLavoroNelMese() const{
 }
 
 
-unsigned int Tecnico::oreRiparazioneStallo() const{
-
-    return ore_stallo_mensili / (1+ getNRiparazioniMese() * perc_riparazioni_sussistenti );
-}
-
-
 unsigned int Tecnico::orePiccolaRiparazione() const{
      // ottengo le ore che ha dedicato fin ora per le piccole riparazioni togliendo le ore di stallo che non sono andate a sforare negli straordinari
     unsigned int ore_piccole_riparazioni = oreLavoroNelMese() - ( ore_stallo_mensili - ore_straordinari );
@@ -44,7 +38,7 @@ unsigned int Tecnico::orePiccolaRiparazione() const{
 
 float Tecnico::valoreMedioRiparazione() const{
 
-    return UFMath::mediaPonderata( orePiccolaRiparazione(), Conv::valore_piccola_riparazione, oreRiparazioneStallo(), Conv::valore_riparazione_sussistente ) ;
+    return UFMath::mediaPonderata( orePiccolaRiparazione(), Conv::valore_piccola_riparazione, Conv::ore_ripristino_stallo, Conv::valore_riparazione_sussistente ) ;
 }
 
 
@@ -56,7 +50,7 @@ unsigned int Tecnico::quantitaConsiderevoleRiparazioni() const{
 double Tecnico::percRipristino() const{
 
     // Ogni tipo di manutenzione (con o senza stallo) e pesata per il numero di ore che quel tipo di manutenzione comporta
-    double peso_stallo = oreRiparazioneStallo();
+    double peso_stallo = Conv::ore_ripristino_stallo;
     double peso_piccola_riparazione = orePiccolaRiparazione();
 
     // calcolo il peso in ore della manutenzione prevista fino alla fine del mese, (perc_riparazioni_sussistenti mi da una stima di che tipo di manutenzioni posso aspettarmi )
@@ -71,35 +65,20 @@ double Tecnico::percRipristino() const{
 }
 
 
-unsigned int Tecnico::oreRisparmiateStalli() const{
-
-    unsigned int caso_pessimo_ore_stalli_incontrati = Conv::ore_ripristino_stallo_pessimo * static_cast<int>( getNRiparazioniMese() * perc_riparazioni_sussistenti );
-    int ore_risparmiate_di_stalli = caso_pessimo_ore_stalli_incontrati - ore_straordinari;
-
-    return (ore_risparmiate_di_stalli >= 0)? ore_risparmiate_di_stalli : 0;
-}
-
-
-
-
-
 bool Tecnico::produttivo() const{
 
-    // se il tecnico non ha risparmiato ore rispetto al caso pessimo allora e stato inefficace
-    if ( oreRisparmiateStalli() == 0 ) return false;
-    else{
-        unsigned int n_riparazioni_considerevole_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno() / 31 ;
+    unsigned int n_riparazioni_considerevole_nel_mese = quantitaConsiderevoleRiparazioni() * Data::oggi().getGiorno() / 31 ;
 
-        return ( Manutenzione::produttivo() && Hardware::produttivo() ) || 
+    return ( Manutenzione::produttivo() && Hardware::produttivo() ) ||
                 // un altro modo per dimostrare la produttivita e richiedere straordinari mantenendo una velocita apprezzabile di riparazioni
                 ( ( ore_straordinari > 0 ) && ( getNRiparazioniMese() > n_riparazioni_considerevole_nel_mese /2) );
-        }
+
 }
 
 
 float Tecnico::valoreLavoro() const{
     // il valore riparazione stalli e il valore che l'azienda ha risparmiato  (perdita_di_sussistenza = perdita all'ora dell'azienda in stallo)
-    float valore_risparmiato_stalli = oreRisparmiateStalli() * Conv::perdita_di_sussistenza;
+    float valore_risparmiato_stalli = ore_straordinari * Conv::perdita_di_sussistenza;
 
     return Manutenzione::valoreLavoro() + valore_risparmiato_stalli;
 
@@ -136,4 +115,10 @@ void Tecnico::setPercRiparazioniSussistenti(unsigned int value)
 
 DatiRiparazioneSistemi Tecnico::getDatiRiparazioneSistemi() const{
     return DatiRiparazioneSistemi{perc_riparazioni_sussistenti, ore_stallo_mensili, ore_straordinari};
+}
+
+void Tecnico::setDatiRiparazioneSistemi(const DatiRiparazioneSistemi& d){
+    ore_straordinari=d.ore_straordinari;
+    ore_stallo_mensili=d.ore_stallo_mensili;
+    perc_riparazioni_sussistenti=d.perc_riparazioni_sussistenti;
 }

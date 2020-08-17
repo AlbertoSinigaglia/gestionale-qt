@@ -31,6 +31,7 @@ public:
 
 
     DatiLatoServer getDatiLatoServer() const;
+    void setDatiLatoServer(const DatiLatoServer& d);
 
 protected:
 

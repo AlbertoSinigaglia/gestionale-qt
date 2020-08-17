@@ -41,6 +41,7 @@ public:
 
 
     DatiRiparazioneSistemi getDatiRiparazioneSistemi() const;
+    void setDatiRiparazioneSistemi(const DatiRiparazioneSistemi& d);
 
 
 protected:
@@ -65,12 +66,7 @@ protected:
 
 private:
 
-
-    unsigned int oreRiparazioneStallo() const;
-
     unsigned int orePiccolaRiparazione() const;
-
-    unsigned int oreRisparmiateStalli() const;
 
 /**
  * CAMPI MENSILI

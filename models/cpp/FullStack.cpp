@@ -14,7 +14,7 @@ double FullStack::velocitaScrittura() const{
     // velocità di scrittura dipende da quanto tempo passa a lavorare nel lato server e quanto in quello client
     double velocita_media = UFMath::mediaPonderata(perc_lavoro_back, BackDev::velocitaScrittura(), 1-perc_lavoro_back, FrontDev::velocitaScrittura());
 
-    return (separa_interfacce)? velocita_media * Conv::malus_velocita_separazione_interfacce : velocita_media;
+    return (separa_interfacce)? velocita_media * (1-Conv::malus_velocita_separazione_interfacce) : velocita_media;
 }
 
 
@@ -68,5 +68,11 @@ void FullStack::setPercLavoroBack(double value)
 
 DatiFullStack FullStack::getDatiFullStack() const{
     return DatiFullStack{perc_lavoro_back, separa_interfacce};
+}
+
+
+void FullStack::setDatiFullStack(const DatiFullStack& d){
+        perc_lavoro_back=d.perc_lavoro_back;
+        separa_interfacce=d.separa_interfacce;
 }
 

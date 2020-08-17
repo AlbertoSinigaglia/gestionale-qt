@@ -60,6 +60,7 @@ public:
 
 
     DatiDeveloping getDatiDeveloping() const;
+    void setDatiDeveloping(const DatiDeveloping& d);
 
 
 protected:

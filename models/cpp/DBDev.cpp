@@ -83,3 +83,11 @@ void DBDev::setNumAttributiRidondantiPerEntita(double value)
 DatiDatabase DBDev::getDatiDatabase() const{
     return DatiDatabase{num_attributi_ridondanti_per_entita, speed_up_indicizzazioni, perc_entita_forma_normale};
 }
+
+
+void DBDev::setDatiDatabase(const DatiDatabase& d){
+    speed_up_indicizzazioni=d.speed_up_indicizzazioni;
+    perc_entita_forma_normale=d.perc_entita_forma_normale;
+    num_attributi_ridondanti_per_entita= d.num_attributi_ridondanti_per_entita;
+
+}

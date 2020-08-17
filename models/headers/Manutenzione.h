@@ -36,6 +36,7 @@ public:
 
 
     DatiManutenzione getDatiManutenzione() const;
+    void setDatiManutenzione(const DatiManutenzione& d);
 
 
 protected:
@@ -49,7 +50,7 @@ protected:
     virtual float valoreMedioRiparazione() const = 0;
 
     /*      QUANTITa CONSIDEREVOLE RIPARAZIONI
-     * Il metodo ritorna la quantita di manutenzioni che è considerata meritevole (per il tipo di mansione che svolge)
+     * Il metodo ritorna la quantita di manutenzioni che è considerata necessaria (per il tipo di mansione che svolge)
      * in un mese per aggiudicarsi il bonus: bonus_n_riparazioni_considerevole (convenzione)
      */
     virtual unsigned int quantitaConsiderevoleRiparazioni() const = 0;

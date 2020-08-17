@@ -1,10 +1,33 @@
+#ifndef TIPIRAGGRUPPAMENTO_H
+#define TIPIRAGGRUPPAMENTO_H
+
 #include"Data.h"
 #include"Convenzioni.h"
 
 
+struct AbstDataSection{
+    virtual ~AbstDataSection() {}
+};
+
+
+// Campi dati estesi dalla classe Persona
+
+struct DatiPersona: public AbstDataSection{
+    std::string nome;
+    std::string cognome;
+    std::string CF;
+    Data nascita;
+
+    DatiPersona(std::string nome_, std::string cognome_, std::string CF_, Data nascita_):
+            nome(nome_),
+            cognome(cognome_),
+            CF(CF_),
+            nascita(nascita_){}
+};
+
 // Campi dati estesi dalla classe Employee
 
-struct DatiLavoratore{
+struct DatiLavoratore: public AbstDataSection{
     Data data_assunzione;
     Data fine_contratto; 
     unsigned int ore_lavoro_sett; 
@@ -19,7 +42,7 @@ struct DatiLavoratore{
 
 // Campi dati estesi dalla classe Software
 
-struct DatiDeveloping{
+struct DatiDeveloping: public AbstDataSection{
     Conv::Linguaggio linguaggio;
     double perc_ore_programmazione;
     unsigned int n_righe_totali;  
@@ -37,7 +60,7 @@ struct DatiDeveloping{
 
 // Campi dati estesi dalla classe Manutentore
 
-struct DatiManutenzione{
+struct DatiManutenzione: public AbstDataSection{
     unsigned int perc_riparazioni_inefficaci;
     double perc_ripristino_medio;
     unsigned int n_riparazioni_mese;
@@ -50,7 +73,7 @@ struct DatiManutenzione{
 
 // Campi dati estesi dalla classe Hardware
 
-struct DatiSistemi{
+struct DatiSistemi: public AbstDataSection{
     unsigned int n_sistemi_gestiti;     
     unsigned int n_sistemi_malfunzionanti;
     unsigned int n_sistemi_gestiti_totale;   
@@ -66,7 +89,7 @@ struct DatiSistemi{
 
 // Campi dati estesi dalla classe Tecnico
 
-struct DatiRiparazioneSistemi{
+struct DatiRiparazioneSistemi: public AbstDataSection{
     unsigned int perc_riparazioni_sussistenti;
     unsigned int ore_stallo_mensili;
     unsigned int ore_straordinari;
@@ -79,20 +102,18 @@ struct DatiRiparazioneSistemi{
 
 // Campi dati estesi dalla classe ITSecurityDev
 
-struct DatiRipristinoSicurezza{
-    unsigned int n_problemi_irrsolti;   
-    unsigned int n_progetti_in_arrivo;          
+struct DatiRipristinoSicurezza: public AbstDataSection{
+    unsigned int n_problemi_irrsolti;
     unsigned int n_criticita_risolte;
 
-    DatiRipristinoSicurezza(unsigned int npi = 0, unsigned int npin = 0, unsigned int ncr = 0):
+    DatiRipristinoSicurezza(unsigned int npi = 0, unsigned int ncr = 0):
             n_problemi_irrsolti(npi),
-            n_progetti_in_arrivo(npin),
             n_criticita_risolte(ncr){}
 };
 
 // Campi dati estesi dalla classe BackDev
 
-struct DatiLatoServer{
+struct DatiLatoServer: public AbstDataSection{
     double perc_capo_progetto;
     unsigned int livello_astrazione;
     bool prove_correttezza;
@@ -107,7 +128,7 @@ struct DatiLatoServer{
 
 // Campi dati estesi dalla classe DBDev
 
-struct DatiDatabase{
+struct DatiDatabase: public AbstDataSection{
     double num_attributi_ridondanti_per_entita;
     double speed_up_indicizzazioni;
     double perc_entita_forma_normale;
@@ -120,7 +141,7 @@ struct DatiDatabase{
 
 // Campi dati estesi dalla classe FrontDev
 
-struct DatiLatoClient{
+struct DatiLatoClient: public AbstDataSection{
     Conv::Libreria libreria;
     bool orientato_professionalita;     
     double perc_codice_perfezionato; 
@@ -133,7 +154,7 @@ struct DatiLatoClient{
 
 // Campi dati estesi dalla classe GUIDev
 
-struct DatiInterfacceUtente{
+struct DatiInterfacceUtente: public AbstDataSection{
     bool quary_predefinite;
     bool stile_minimalista;
     unsigned int lunghezza_max_percorso;
@@ -148,7 +169,7 @@ struct DatiInterfacceUtente{
 
 // Campi dati estesi dalla classe FullStack
 
-struct DatiFullStack{
+struct DatiFullStack: public AbstDataSection{
     double perc_lavoro_back;                                                  
     bool separa_interfacce;   
 
@@ -156,3 +177,5 @@ struct DatiFullStack{
             perc_lavoro_back(plb),
             separa_interfacce(si){}
 };
+
+#endif

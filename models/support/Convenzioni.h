@@ -58,13 +58,11 @@ namespace Conv{         // CONVENZIONI
 // SOFTWARE
 // --------
 
-    extern const DifferenzaDate durata_progetto_medio;
+    extern const unsigned int durata_progetto_medio_in_giorni;
     extern const unsigned int n_righe_progetto_medio;
     extern const unsigned int ore_progetto_medio;
     extern const unsigned int n_impiegati_progetto_medio;
-    extern const float valore_annuo_progetto_medio;
-
-    extern const double perc_codice_scritto;
+    extern const float valore_al_giorno_progetto_medio;
 
     extern const double velocita_cpp;   // righe all'ora
 
@@ -104,7 +102,7 @@ namespace Conv{         // CONVENZIONI
 
     extern const float perdita_di_sussistenza;  // esprime quanto perde l'azienda all'ora in stallo a causa dell' assenza di un sistema di sussistenza
 
-    extern const unsigned int ore_ripristino_stallo_pessimo;
+    extern const unsigned int ore_ripristino_stallo;
 
 
 // -------------
@@ -120,8 +118,8 @@ namespace Conv{         // CONVENZIONI
     extern const float valore_manutenzione_critica;
 
     extern const double perc_pessimistica_manutenzioni_critiche;
-    extern const double perc_pessimistica_manutenzioni_non_critiche;
 
+    extern const unsigned int media_n_righe_manutenzione_non_critica;
     extern const unsigned int media_n_righe_manutenzione_critica;
 
     extern const unsigned int tolleranza_n_problemi_aperti_mese;
