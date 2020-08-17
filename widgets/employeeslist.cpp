@@ -52,3 +52,4 @@ void EmployeesList::childClickedEvent(EmployeeListElement* e){
     // do something
     emit ListElementDoubleClicked(e);
 }
+

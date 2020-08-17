@@ -29,6 +29,8 @@ public:
     // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
     EmployeesList(const EmployeesList& e) = delete;
     EmployeesList& operator= (const EmployeesList& e) = delete;
+    template<class T>
+    void filter();
 
     void setEmployees(const DynamicArray<Employee*>& empl);
     Employee * getCurrent() const;
@@ -40,5 +42,13 @@ public slots:
     void childPressedEvent(EmployeeListElement* e);
     void childClickedEvent(EmployeeListElement* e);
 };
-
+template<class T>
+void EmployeesList::filter()
+{
+    for(auto &e:children)
+        if(dynamic_cast<T*>(e->getEmployee()))
+            e->show();
+        else
+            e->hide();
+}
 #endif // EMPLOYEELIST_H

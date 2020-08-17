@@ -72,6 +72,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(a_import, &QAction::triggered, this, &Gestionale::importFile);
     connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
     connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
+    connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
 }
 
 Gestionale::~Gestionale(){}
@@ -181,13 +182,13 @@ void Gestionale::addBoxSpecifico()
     QGroupBox* DatiSpecifici = new QGroupBox(this);
     DatiSpecifici->setTitle("Dati specifici");
     QVBoxLayout* layoutDatiSpecifici = new QVBoxLayout(DatiSpecifici);
-    if(Dipendenti->currentText()=="Manutentore"){
-        QCheckBox* totRiparazioni = new QCheckBox("Totale riparazioni mese in corso",this);
-        layoutDatiSpecifici->addWidget(totRiparazioni);};
-    if(Dipendenti->currentText()=="BackDeveloper"){
-        QCheckBox* percCapo = new QCheckBox("Percentuale capo progetto",this);
-        layoutDatiSpecifici->addWidget(percCapo);};
-    if(Dipendenti->currentText()=="FrontDeveloper"){
+    totRiparazioni = new QCheckBox("Totale riparazioni \nmese in corso",this);
+    layoutDatiSpecifici->addWidget(totRiparazioni);
+    totRiparazioni->hide();
+    percCapo = new QCheckBox("Percentuale capo progetto",this);
+    layoutDatiSpecifici->addWidget(percCapo);
+    percCapo->hide();
+    /*if(Dipendenti->currentText()=="FrontDeveloper"){
         QCheckBox* libreria = new QCheckBox("Libreria",this);
         layoutDatiSpecifici->addWidget(libreria);};
     if(Dipendenti->currentText()=="FullStack"){
@@ -212,7 +213,7 @@ void Gestionale::addBoxSpecifico()
         layoutDatiSpecifici->addWidget(percRipSussistenti);};
     if(Dipendenti->currentText()=="Tutti"){
         QCheckBox* produttivo = new QCheckBox("Produttivo",this);
-        layoutDatiSpecifici->addWidget(produttivo);};
+        layoutDatiSpecifici->addWidget(produttivo);};*/
     LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
@@ -319,4 +320,15 @@ void Gestionale::exportToFile(){
 }
 void Gestionale::exitApplication(){
     emit exitApplicationEvent();
+}
+
+void Gestionale::changeSelectedElementComboBox(const QString& selected)
+{
+    if(selected=="Manutentore"){
+        totRiparazioni->show();
+        employeesList->filter<Manutenzione>();
+    };
+    if(selected=="Tutti")
+        employeesList->filter<Employee>();
+
 }

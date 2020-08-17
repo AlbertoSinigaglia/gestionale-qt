@@ -64,6 +64,10 @@ private:
     QAction* a_import;
     QAction* a_export;
     QAction* a_exit;
+    QCheckBox* totRiparazioni;
+    QCheckBox* percCapo;
+
+
 
     void addTitleSinistro();
 	void addBoxDestro();
@@ -93,6 +97,7 @@ public slots:
     void importFile();
     void exportToFile();
     void exitApplication();
+    void changeSelectedElementComboBox(const QString& selected);
 };
 
 #endif // GESTIONALE_H
