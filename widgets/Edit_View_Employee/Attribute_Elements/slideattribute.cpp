@@ -1,6 +1,6 @@
 
 #include"slideattribute.h"
-
+#include"math.h"
 
 
 

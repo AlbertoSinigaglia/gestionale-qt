@@ -188,32 +188,33 @@ void Gestionale::addBoxSpecifico()
     percCapo = new QCheckBox("Percentuale capo progetto",this);
     layoutDatiSpecifici->addWidget(percCapo);
     percCapo->hide();
-    /*if(Dipendenti->currentText()=="FrontDeveloper"){
-        QCheckBox* libreria = new QCheckBox("Libreria",this);
-        layoutDatiSpecifici->addWidget(libreria);};
-    if(Dipendenti->currentText()=="FullStack"){
-        QCheckBox* percBack = new QCheckBox("Percentuale lavoro back",this);
-        layoutDatiSpecifici->addWidget(percBack);};
-    if(Dipendenti->currentText()=="GUIDeveloper"){
-        QCheckBox* professionalita = new QCheckBox("Grado di professionalità",this);
-        layoutDatiSpecifici->addWidget(professionalita);};
-    if(Dipendenti->currentText()=="Hardware"){
-        QCheckBox* SistemiGestiti = new QCheckBox("Numero sistemi gestiti",this);
-        layoutDatiSpecifici->addWidget(SistemiGestiti);};
-    if(Dipendenti->currentText()=="ITSecurityDev"){
-        QCheckBox* criticitaRisolte = new QCheckBox("Numero criticità risolte",this);
-        layoutDatiSpecifici->addWidget(criticitaRisolte);};
-    if(Dipendenti->currentText()=="Software"){
-        QCheckBox* linguaggio = new QCheckBox("Linguaggio usato",this);
-        layoutDatiSpecifici->addWidget(linguaggio);
-        QCheckBox* progConclusi = new QCheckBox("Numero progetti conclusi nel mese in corso",this);
-        layoutDatiSpecifici->addWidget(progConclusi);};
-    if(Dipendenti->currentText()=="Tecnico"){
-        QCheckBox* percRipSussistenti = new QCheckBox("Percentuale riparazioni sussistenti",this);
-        layoutDatiSpecifici->addWidget(percRipSussistenti);};
-    if(Dipendenti->currentText()=="Tutti"){
-        QCheckBox* produttivo = new QCheckBox("Produttivo",this);
-        layoutDatiSpecifici->addWidget(produttivo);};*/
+    libreria = new QCheckBox("Libreria",this);
+    layoutDatiSpecifici->addWidget(libreria);
+    libreria->hide();
+    percBack = new QCheckBox("Percentuale lavoro back",this);
+    layoutDatiSpecifici->addWidget(percBack);
+    percBack->hide();
+    professionalita = new QCheckBox("Grado di professionalità",this);
+    layoutDatiSpecifici->addWidget(professionalita);
+    professionalita->hide();
+    SistemiGestiti = new QCheckBox("Numero sistemi gestiti",this);
+    layoutDatiSpecifici->addWidget(SistemiGestiti);
+    SistemiGestiti->hide();
+    criticitaRisolte = new QCheckBox("Numero criticità risolte",this);
+    layoutDatiSpecifici->addWidget(criticitaRisolte);
+    criticitaRisolte->hide();
+    linguaggio = new QCheckBox("Linguaggio usato",this);
+    layoutDatiSpecifici->addWidget(linguaggio);
+    linguaggio->hide();
+    progConclusi = new QCheckBox("Numero progetti conclusi nel mese in corso",this);
+    layoutDatiSpecifici->addWidget(progConclusi);
+    progConclusi->hide();
+    percRipSussistenti = new QCheckBox("Percentuale riparazioni sussistenti",this);
+    layoutDatiSpecifici->addWidget(percRipSussistenti);
+    percRipSussistenti->hide();
+    produttivo = new QCheckBox("Produttivo",this);
+    layoutDatiSpecifici->addWidget(produttivo);
+    produttivo->hide();
     LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
@@ -327,6 +328,41 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
     if(selected=="Manutentore"){
         totRiparazioni->show();
         employeesList->filter<Manutenzione>();
+    };
+    if(selected=="FrontDeveloper"){
+        libreria->show();
+        employeesList->filter<FrontDev>();
+    };
+    if(selected=="FullStack"){
+        percBack->show();
+        employeesList->filter<FullStack>();
+    };
+    if(selected=="GUIDeveloper"){
+        professionalita->show();
+        employeesList->filter<GUIDev>();
+    };
+    if(selected=="Hardware"){
+        SistemiGestiti->show();
+        employeesList->filter<Hardware>();
+    };
+    if(selected=="Software"){
+        linguaggio->show();
+        employeesList->filter<Software>();
+
+        progConclusi->show();
+        employeesList->filter<Software>();
+    };
+    if(selected=="ItSecurityDev"){
+        criticitaRisolte->show();
+        employeesList->filter<ITSecurityDev>();
+    };
+    if(selected=="Tecnico"){
+        percRipSussistenti->show();
+        employeesList->filter<Tecnico>();
+    };
+    if(selected=="BackDeveloper"){
+        percCapo->show();
+        employeesList->filter<BackDev>();
     };
     if(selected=="Tutti")
         employeesList->filter<Employee>();

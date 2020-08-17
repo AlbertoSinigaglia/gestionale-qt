@@ -67,6 +67,16 @@ private:
     QAction* a_exit;
     QCheckBox* totRiparazioni;
     QCheckBox* percCapo;
+    QCheckBox* libreria;
+    QCheckBox* percBack;
+    QCheckBox* professionalita;
+    QCheckBox* SistemiGestiti;
+    QCheckBox* criticitaRisolte;
+    QCheckBox* linguaggio;
+    QCheckBox* progConclusi;
+    QCheckBox* percRipSussistenti;
+    QCheckBox* produttivo;
+
 
 
 
