@@ -122,17 +122,19 @@ private:
     /**
      * MENSILI
      */
-    unsigned int n_righe_mese;        // Codice prodotto (che e diverso da codice scritto)
-    unsigned int n_progetti_conclusi_mese;
+    unsigned int n_righe_mese;                              //LINE_EDIT (solo integer, val minimo 0)
+    // Codice prodotto (che e diverso da codice scritto)
+
+    unsigned int n_progetti_conclusi_mese;                  //LINE_EDIT (solo integer, val minimo 0)
 
     /**
      * ESTEMPORANEI
      */
-    unsigned int n_righe_totali;       
-    double perc_ore_programmazione;
+    unsigned int n_righe_totali;                            // LINE_EDIT (solo integer, val minimo 0)
+    double perc_ore_programmazione;                         // SLIDE (da 0 a 1, approx =2)
     /* (1 - perc_ore_programmazione) = percentuale ore di progettazione
     */
-    Conv::Linguaggio linguaggio;
+    Conv::Linguaggio linguaggio;                            // COBO BOX( valori= <i vari linguaggi>)
 
 };
 

@@ -37,6 +37,7 @@ SOURCES += \
     models/cpp/GUIDev.cpp \
     models/cpp/ITSecurityDev.cpp \
     models/cpp/Tecnico.cpp \
+    widgets/Edit_View_Employee/Attribute_Elements/comboattribute.cpp \
     widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.cpp \
     widgets/Edit_View_Employee/Attribute_Elements/flagattribute.cpp \
     widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     models/headers/ITSecurityDev.h \
     models/headers/Persona.h \
     models/headers/Tecnico.h \
+    widgets/Edit_View_Employee/Attribute_Elements/comboattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h \

@@ -61,11 +61,11 @@ struct DatiDeveloping: public AbstDataSection{
 // Campi dati estesi dalla classe Manutentore
 
 struct DatiManutenzione: public AbstDataSection{
-    unsigned int perc_riparazioni_inefficaci;
+    double perc_riparazioni_inefficaci;
     double perc_ripristino_medio;
     unsigned int n_riparazioni_mese;
 
-    DatiManutenzione(unsigned int prp, double prm = 1, unsigned int nrm = 0):
+    DatiManutenzione(double prp, double prm = 1, unsigned int nrm = 0):
             perc_riparazioni_inefficaci(prp),
             perc_ripristino_medio(prm),
             n_riparazioni_mese(nrm){}
@@ -90,11 +90,11 @@ struct DatiSistemi: public AbstDataSection{
 // Campi dati estesi dalla classe Tecnico
 
 struct DatiRiparazioneSistemi: public AbstDataSection{
-    unsigned int perc_riparazioni_sussistenti;
+    double perc_riparazioni_sussistenti;
     unsigned int ore_stallo_mensili;
     unsigned int ore_straordinari;
 
-    DatiRiparazioneSistemi(unsigned int prs = 0, unsigned int osm = 0, unsigned int os = 0):
+    DatiRiparazioneSistemi(double prs = 0, unsigned int osm = 0, unsigned int os = 0):
             perc_riparazioni_sussistenti(prs),
             ore_stallo_mensili(osm),
             ore_straordinari(os){}

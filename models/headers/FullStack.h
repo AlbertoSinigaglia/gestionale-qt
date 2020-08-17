@@ -42,9 +42,9 @@ protected:
 
 private:
 
-    double perc_lavoro_back;                                                            // (1 - perc_lavoro_back) = perc_lavoro_front
+    double perc_lavoro_back;       //SLIDE (da 0 a 1, approx =2)                                                     // (1 - perc_lavoro_back) = perc_lavoro_front
 
-    bool separa_interfacce;          
+    bool separa_interfacce;        // FLAG
 
 
 };

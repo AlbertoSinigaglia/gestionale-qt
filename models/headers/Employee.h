@@ -150,7 +150,7 @@ private:
     /**
     quota modificabile deliberatamente che va ad aggiungersi allo stipendio stipulato a priori
     */
-    float quota_aggiuntiva;      //di costruzione a 0
+    float quota_aggiuntiva;
 
 
 
