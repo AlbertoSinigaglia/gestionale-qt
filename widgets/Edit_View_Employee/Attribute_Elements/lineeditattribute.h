@@ -9,6 +9,7 @@
 /**
  * @brief La classe si occuperà di getire la modifica e la visualizzazione
  * di tutti i campi dati (sia integer che real) che assumono valori non limitati
+ * oltre che a campi dati esplicitamente string
  */
 
 
@@ -16,10 +17,27 @@ class LineEditAttribute : public AbstAttribute
 {
     Q_OBJECT
 public:
-    explicit LineEditAttribute(QString nome, double valore_, bool editable=false,  QWidget *parent = nullptr);
+    enum TipoInserimento: short{
+        STRING,
+        INTEGER,
+        REAL
+    };
+
+    explicit LineEditAttribute(QString nome, TipoInserimento tipo, QString valore_, double min=0, double max=0, bool editable=false,  QWidget *parent = nullptr);
 
 private:
-    QLineEdit* setter_num;
+    QLineEdit* setter_str;
+    TipoInserimento tipo;
+    double val_min, val_max;
+
+    bool verify(QString s);
+    void setError();
+
+    void setValue(QString q);
+
+private slots:
+
+    void catchValue(QString q);
 
 signals:
 

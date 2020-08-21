@@ -6,6 +6,12 @@
 #include<QLabel>
 #include "models/support/TipiRaggruppamento.h"
 
+#include"widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/comboattribute.h"
+#include"widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h"
+
 class AbstSectionElement: public QWidget
 {
     Q_OBJECT

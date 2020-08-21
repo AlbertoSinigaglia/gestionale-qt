@@ -3,21 +3,26 @@
 
 #include"widgets/Edit_View_Employee/abstattribute.h"
 #include"collections/DynamicArray.h"
+#include <QComboBox>
 
-class ComboAttribute: public AbstAttribute
-{
-    Q_OBJECT
+class ComboAttribute: public AbstAttribute{
+Q_OBJECT
 
-    public:
-        explicit ComboAttribute(QString nome, DynamicArray<QString> opzioni, int index_valore_inizio, bool editable=false,  QWidget *parent = nullptr);
+public:
+    explicit ComboAttribute(QString nome,const DynamicArray<QString>& opzioni, int index_valore_inizio, bool editable=false,  QWidget *parent = nullptr);
 
+private:
 
-    private:
+    DynamicArray<QString> opzioni;
+    QComboBox* setter_combo;
 
+private slots:
 
-    signals:
+    void setValue(int i);
 
-        void isModify();
+signals:
+
+    void isModify();
 };
 
 #endif // COMBOATTRIBUTE_H

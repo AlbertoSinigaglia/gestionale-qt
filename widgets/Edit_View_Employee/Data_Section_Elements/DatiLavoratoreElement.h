@@ -11,10 +11,6 @@
 
 #include"widgets/Edit_View_Employee/abstsectionelement.h"
 
-#include"widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h"
-#include"widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h"
-#include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
-
 
 class DatiLavoratoreElement: public AbstSectionElement{
 

@@ -22,8 +22,11 @@ private:
 
     QSlider* setter_num;
 
+    void setValue(double v);
+
 private slots:
-    void setValue(double v=0.0);
+
+    void catchValue();
 
 signals:
 
