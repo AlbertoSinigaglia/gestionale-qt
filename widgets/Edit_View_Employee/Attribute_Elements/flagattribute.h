@@ -2,6 +2,7 @@
 #define FLAGATTRIBUTE_H
 
 #include <QWidget>
+#include <QCheckBox>
 
 #include"widgets/Edit_View_Employee/abstattribute.h"
 
@@ -11,8 +12,12 @@ Q_OBJECT
 public:
     explicit FlagAttribute(QString nome, bool valore, bool editable=false,  QWidget *parent = nullptr);
 
+    QCheckBox* setter_bool;
 
-private:
+
+private slots:
+
+    void setValue(int v);
 
 
 signals:

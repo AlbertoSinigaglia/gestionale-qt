@@ -1,18 +1,18 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-#include "CSV/CSVWriter.h"
-#include "models/support/Convenzioni.h"
+
 #include <QObject>
 #include <QMessageBox>
 #include <gestionale.h>
-#include "models/headers/Employee.h"
-#include "models/headers/DBDev.h"
 #include<QFileDialog>
 #include<QDebug>
-#include"employeesmanagement.h"
 #include <algorithm>
 #include <QShortcut>
 
+#include "CSV/CSVWriter.h"
+#include "models/support/Convenzioni.h"
+#include"employeesmanagement.h"
+#include "models/headers/Employee.h"
 #include"editviewemployee.h"
 
 class Controller : public QObject

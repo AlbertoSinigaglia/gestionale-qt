@@ -15,7 +15,7 @@ SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, doub
     setter_num->setSliderPosition(posizione_iniziale);
 
     connect(setter_num,SIGNAL(valueChanged(int)), this, SIGNAL(isModify()));
-    connect(setter_num,SIGNAL(valueChanged(int)), this, SLOT(setValue(int)));
+    connect(setter_num,SIGNAL(valueChanged(int)), this, SLOT(catchValue()));
 
     layout->addWidget(setter_num);
     }
@@ -23,14 +23,16 @@ SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, doub
     setValue(valore_);
 }
 
+void SlideAttribute::catchValue(){
+    double num = static_cast<double>(setter_num->sliderPosition()) * (end-start)/500.0 + start;
+    num= static_cast<double>(round(num*pow(10,cifre_approx)))/pow(10,cifre_approx);
+
+    setValue(num);
+}
 
 void SlideAttribute::setValue(double v){
-    double num;
-    if(editable){
-        num= static_cast<double>(setter_num->sliderPosition()) * (end-start)/500.0 + start;
-        num= static_cast<double>(round(num*pow(10,cifre_approx)))/pow(10,cifre_approx);
-    }else num = v;
-    str_value->setText(QString::number(num));
+
+    str_value->setText(QString::number(v));
 }
 
 
