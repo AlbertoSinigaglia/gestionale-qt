@@ -1,9 +1,8 @@
-#ifndef DATIRIPARAZIONESISTEMIELEMENT_CPP
-#define DATIRIPARAZIONESISTEMIELEMENT_CPP
 #include "DatiRiparazioneSistemiElement.h"
 
-DatiRiparazioneSistemiElement::DatiRiparazioneSistemiElement()
-{
+/*DatiRiparazioneSistemiElement::DatiRiparazioneSistemiElement(const DatiRiparazioneSistemi& dati_, bool editable, QWidget *parent)
+    : AbstSectionElement(QString("Dati Riparazione Sistemi"),parent ){
 
+    addCampi(dati_,editable);
 }
-#endif
+*/

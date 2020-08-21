@@ -34,7 +34,7 @@ private:
     void addCampi(const DatiPersona& dati, bool editable);
 };
 
-QString DatiPersonaElement::nome_campi[4] ={"Nome", "Cognome", "Codice Fiscale", "Data di nascita"};
+
 
 #endif // DATIPERSONAELEMENT_H
 

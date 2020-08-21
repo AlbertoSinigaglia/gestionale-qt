@@ -1,5 +1,3 @@
-#ifndef DATIPERSONAELEMENT_CPP
-#define DATIPERSONAELEMENT_CPP
 #include "DatiPersonaElement.h"
 
 DatiPersonaElement::DatiPersonaElement(const DatiPersona& dati_, bool editable, QWidget *parent)
@@ -34,5 +32,4 @@ AbstDataSection* DatiPersonaElement::getData() const{
     layout->addWidget(dataNascita_widget);
     connect(dataNascita_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 }*/
-
-#endif //DATIPERSONAELEMENT.CPP
+QString DatiPersonaElement::nome_campi[4] ={"Nome", "Cognome", "Codice Fiscale", "Data di nascita"};

@@ -1,10 +1,8 @@
-#ifndef DATIINTERFACCIAUTENTEELEMENT_CPP
-#define DATIINTERFACCIAUTENTEELEMENT_CPP
 #include "DatiInterfacciaUtenteElement.h"
 
-DatiInterfacciaUtenteElement::DatiInterfacciaUtenteElement()
-{
+/*DatiInterfacciaUtenteElement::DatiInterfacciaUtenteElement(const DatiInterfacceUtente& dati_, bool editable, QWidget *parent)
+    : AbstSectionElement(QString("Dati Interfacce Utente"),parent ){
 
+addCampi(dati_,editable);
 }
-
-#endif
+*/

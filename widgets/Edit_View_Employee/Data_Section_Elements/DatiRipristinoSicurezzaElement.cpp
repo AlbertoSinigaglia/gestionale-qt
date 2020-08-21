@@ -1,9 +1,8 @@
-#ifndef DATIRIPRISTINOSICUREZZAELEMENT_CPP
-#define DATIRIPRISTINOSICUREZZAELEMENT_CPP
 #include "DatiRipristinoSicurezzaElement.h"
 
-DatiRipristinoSicurezzaElement::DatiRipristinoSicurezzaElement()
-{
+/*DatiRipristinoSicurezzaElement::DatiRipristinoSicurezzaElement(const DatiRipristinoSicurezza& dati_, bool editable, QWidget *parent)
+    : AbstSectionElement(QString("Dati Ripristino Sicurezza"),parent ){
 
-}
-#endif
+    addCampi(dati_,editable);
+
+}*/

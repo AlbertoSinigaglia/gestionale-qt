@@ -325,6 +325,10 @@ void Gestionale::exitApplication(){
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected)
 {
+    if(selected=="Tutti"){
+        produttivo->show();
+        employeesList->filter<Employee>();
+    };
     if(selected=="Manutentore"){
         totRiparazioni->show();
         employeesList->filter<Manutenzione>();
@@ -347,12 +351,10 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
     };
     if(selected=="Software"){
         linguaggio->show();
-        employeesList->filter<Software>();
-
         progConclusi->show();
         employeesList->filter<Software>();
     };
-    if(selected=="ItSecurityDev"){
+    if(selected=="ITSecurityDev"){
         criticitaRisolte->show();
         employeesList->filter<ITSecurityDev>();
     };
@@ -364,7 +366,5 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
         percCapo->show();
         employeesList->filter<BackDev>();
     };
-    if(selected=="Tutti")
-        employeesList->filter<Employee>();
 
 }

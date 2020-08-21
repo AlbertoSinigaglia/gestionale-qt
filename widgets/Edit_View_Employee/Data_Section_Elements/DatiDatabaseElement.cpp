@@ -1,10 +1,8 @@
-#ifndef DATIDATABASEELEMENT_CPP
-#define DATIDATABASEELEMENT_CPP
 #include "DatiDatabaseElement.h"
 
-DatiDatabaseElement::DatiDatabaseElement()
-{
+/*DatiDatabaseElement::DatiDatabaseElement(const DatiDatabase& dati_, bool editable, QWidget *parent)
+    : AbstSectionElement(QString("Dati Database"),parent ){
 
-}
+addCampi(dati_,editable);
+}*/
 
-#endif //DATIDATABASEELEMENT_CPP

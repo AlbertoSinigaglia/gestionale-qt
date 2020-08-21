@@ -1,9 +1,7 @@
-#ifndef DATISISTEMIELEMENT_CPP
-#define DATISISTEMIELEMENT_CPP
 #include "DatiSistemiElement.h"
 
-DatiSistemiElement::DatiSistemiElement()
-{
+/*DatiSistemiElement::DatiSistemiElement(const DatiSistemi& dati_, bool editable, QWidget *parent)
+    : AbstSectionElement(QString("Dati Sistemi"),parent ){
 
-}
-#endif
+    addCampi(dati_,editable);
+}*/

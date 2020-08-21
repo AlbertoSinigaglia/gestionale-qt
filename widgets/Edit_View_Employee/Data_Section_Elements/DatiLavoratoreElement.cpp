@@ -1,5 +1,3 @@
-#ifndef DATILAVORATOREELEMENT_CPP
-#define DATILAVORATOREELEMENT_CPP
 #include "DatiLavoratoreElement.h"
 
 
@@ -39,9 +37,8 @@ void DatiLavoratoreElement::addCampi(const DatiLavoratore& dati, bool editable){
     layout->addWidget(quota_aggiuntiva_widget);
     connect(quota_aggiuntiva_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 }
+QString DatiLavoratoreElement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
 
-
-#endif //DATIALVORATOREELEMENT_CPP
 
 
 
