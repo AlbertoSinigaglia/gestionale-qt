@@ -16,15 +16,15 @@ AbstDataSection* DatiPersonaElement::getData() const{
     }
 /*void DatiPersonaElement::addCampi(const DatiPersona& dati, bool editable){
 
-    nome_widget = new LineEditAttribute(nome_campi[0],dati.nome,editable,this);
+    nome_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::STRING,dati.nome,0,0,editable,this);
     layout->addWidget(nome_widget);
     connect(nome_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 
-    cognome_widget = new LineEditAttribute(nome_campi[1],dati.cognome,editable,this);
+    cognome_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::STRING,dati.cognome,0,0,editable,this);
     layout->addWidget(cognome_widget);
     connect(cognome_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 
-    cf_widget = new LineEditAttribute(nome_campi[2],dati.CF,editable,this);
+    cf_widget = new LineEditAttribute(nome_campi[2],LineEditAttribute::TipoInserimento::STRING,dati.CF,0,0,editable,this);
     layout->addWidget(cf_widget);
     connect(cf_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 
