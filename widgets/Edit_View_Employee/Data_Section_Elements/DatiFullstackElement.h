@@ -30,8 +30,8 @@ private:
     SlideAttribute* perc_lavoro_back_widget;
 
 
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
+    static QString nome_campi[2];
+    static QString descrizione_campi[2];
 
 
     void addCampi(const DatiFullStack& dati, bool editable);

@@ -14,11 +14,11 @@ AbstDataSection* DatiDatabaseElement::getData() const{
     }
 void DatiDatabaseElement::addCampi(const DatiDatabase& dati, bool editable){
 
-    num_attributi_ridondanti_per_entita_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.num_attributi_ridondanti_per_entita),0,0,editable,this);
+    num_attributi_ridondanti_per_entita_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.num_attributi_ridondanti_per_entita),0,editable,this);
     layout->addWidget(num_attributi_ridondanti_per_entita_widget);
     connect(num_attributi_ridondanti_per_entita_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 
-    speed_up_indicizzazioni_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.speed_up_indicizzazioni),0,0,editable,this);
+    speed_up_indicizzazioni_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.speed_up_indicizzazioni),0,editable,this);
     layout->addWidget(speed_up_indicizzazioni_widget);
     connect(speed_up_indicizzazioni_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
 

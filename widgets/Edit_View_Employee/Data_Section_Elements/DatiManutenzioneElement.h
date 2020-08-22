@@ -25,8 +25,8 @@ private:
     SlideAttribute* perc_riparazioni_inefficaci_widget;
     SlideAttribute* perc_ripristino_medio_widget;
 
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
+    static QString nome_campi[3];
+    static QString descrizione_campi[3];
 
 
     void addCampi(const DatiManutenzione& dati, bool editable);
