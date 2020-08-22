@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include<QLineEdit>
-
+#include<math.h>
 #include"widgets/Edit_View_Employee/abstattribute.h"
 
 /**

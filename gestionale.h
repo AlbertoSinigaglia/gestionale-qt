@@ -75,6 +75,7 @@ private:
     QCheckBox* linguaggio;
     QCheckBox* progConclusi;
     QCheckBox* percRipSussistenti;
+    QCheckBox* percEntitaFN;
     QCheckBox* produttivo;
 
 

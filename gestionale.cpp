@@ -212,9 +212,12 @@ void Gestionale::addBoxSpecifico()
     percRipSussistenti = new QCheckBox("Percentuale riparazioni sussistenti",this);
     layoutDatiSpecifici->addWidget(percRipSussistenti);
     percRipSussistenti->hide();
+    percEntitaFN = new QCheckBox("Percentuale entità in forma normale",this);
+    layoutDatiSpecifici->addWidget(percEntitaFN);
+    percEntitaFN->hide();
     produttivo = new QCheckBox("Produttivo",this);
+    produttivo->show();
     layoutDatiSpecifici->addWidget(produttivo);
-    produttivo->hide();
     LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
@@ -325,24 +328,41 @@ void Gestionale::exitApplication(){
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected)
 {
-    if(selected=="Tutti"){
-        produttivo->show();
-        employeesList->filter<Employee>();
-    };
+    totRiparazioni->hide();
+    percCapo->hide();
+    libreria->hide();
+    percBack->hide();
+    professionalita->hide();
+    SistemiGestiti->hide();
+    criticitaRisolte->hide();
+    linguaggio->hide();
+    progConclusi->hide();
+    percRipSussistenti->hide();
+    percEntitaFN->hide();
+
     if(selected=="Manutentore"){
         totRiparazioni->show();
         employeesList->filter<Manutenzione>();
     };
     if(selected=="FrontDeveloper"){
         libreria->show();
+        linguaggio->show();
+        progConclusi->show();
         employeesList->filter<FrontDev>();
     };
     if(selected=="FullStack"){
         percBack->show();
+        libreria->show();
+        percCapo->show();
+        linguaggio->show();
+        progConclusi->show();
         employeesList->filter<FullStack>();
     };
     if(selected=="GUIDeveloper"){
         professionalita->show();
+        libreria->show();
+        linguaggio->show();
+        progConclusi->show();
         employeesList->filter<GUIDev>();
     };
     if(selected=="Hardware"){
@@ -356,15 +376,28 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
     };
     if(selected=="ITSecurityDev"){
         criticitaRisolte->show();
+        totRiparazioni->show();
+        linguaggio->show();
+        progConclusi->show();
         employeesList->filter<ITSecurityDev>();
     };
     if(selected=="Tecnico"){
         percRipSussistenti->show();
+        totRiparazioni->show();
+        SistemiGestiti->show();
         employeesList->filter<Tecnico>();
     };
     if(selected=="BackDeveloper"){
         percCapo->show();
+        linguaggio->show();
+        progConclusi->show();
         employeesList->filter<BackDev>();
     };
+    if(selected=="DBDeveloper"){
+        percEntitaFN->show();
+        linguaggio->show();
+        progConclusi->show();
+        employeesList->filter<DBDev>();
+    }
 
 }
