@@ -33,8 +33,8 @@ private:
     SlideAttribute* perc_codice_perfezionato_widget;
 
 
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
+    static QString nome_campi[3];
+    static QString descrizione_campi[3];
 
 
     void addCampi(const DatiLatoClient& dati, bool editable);

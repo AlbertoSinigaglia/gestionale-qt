@@ -26,11 +26,11 @@ private:
 
     //  LISTA DI QWIDGET che mostrano i valori dei campi
 
-    LineEditAttribute* num_problemi_irrisolti_widget;
+    LineEditAttribute* num_problemi_irrsolti_widget;
     LineEditAttribute* num_criticita_risolte_widget;
 
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
+    static QString nome_campi[2];
+    static QString descrizione_campi[2];
 
 
     void addCampi(const DatiRipristinoSicurezza& dati, bool editable);
