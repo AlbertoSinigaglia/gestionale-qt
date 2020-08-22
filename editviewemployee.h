@@ -10,6 +10,7 @@
 #include<QScrollArea>
 #include<QLabel>
 #include<QFile>
+#include<QIcon>
 
 #include"models/headers/GUIDev.h"
 #include"models/headers/DBDev.h"
@@ -19,6 +20,19 @@
 
 
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiLavoratoreElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiDatabaseElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiDevelopingElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiFullstackElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiInterfacciaUtenteElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoClientElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiLatoServerElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiManutenzioneElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiPersonaElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiRiparazioneSistemiElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiRipristinoSicurezzaElement.h"
+#include"widgets/Edit_View_Employee/Data_Section_Elements/DatiSistemiElement.h"
+
+#include"widgets/suggerimento.h"
 
 
 
@@ -27,27 +41,46 @@ Q_OBJECT
 
 public:
 
-    EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, bool editable =false, QWidget *parent =0);
+    enum Utilizzo: short{
+        CREAZIONE =0,
+        MODIFICA =1,
+        VISUALIZZA =2
+    };
 
-public slots:
+    EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo =Utilizzo::VISUALIZZA, QWidget *parent =0);
+
+    bool isModifyed() const;
 
     void chooseAndSend() const;
 
 signals:
 
-    void handleExitEditView() const;      // TO CONTROLLER
-
     void SaveDataConsiderd(AbstDataSection* dati_) const;     // TO CONTROLLER
 
+    void handleExitEditView() const;
 
 private:
+
+    Utilizzo stato;
+
+    bool isModify;
+    QPushButton* SalvaEsci;
 
     DynamicArray<AbstSectionElement*> lista_elementi;
 
     QVBoxLayout* mainLayout;
 
     // Metodo per costruttore
-    QVBoxLayout* buildSections(const DynamicArray<AbstDataSection*>& dati_, bool editable, QWidget* parent);
+    QVBoxLayout* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
+
+    QHBoxLayout* buildIntestazione();
+
+
+
+private slots:
+
+    void setModifed();
+
 
 
 

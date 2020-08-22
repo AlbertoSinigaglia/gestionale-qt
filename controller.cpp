@@ -60,33 +60,22 @@ void Controller::deleteEmployee(Employee * e){
 void Controller::insertNewEmployee(){
     QMessageBox::information(view.get(), "inserimento dipendente", "Stai per inserire un nuovo dipendente");
 }
+
 void Controller::openEmployeeInfo(Employee* e){
-    QMessageBox::information(view.get(), "Info dipendente", QString("Stai modificando ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
 
 
-
-    OpenEditView(e,false);
-
-
+    OpenEditView(e,EditViewEmployee::Utilizzo::VISUALIZZA);
 
 
 }
 void Controller::modifyButtonClicked(Employee * e){
+
     if(e){
 
 
+        OpenEditView(e,EditViewEmployee::Utilizzo::MODIFICA);
 
 
-        OpenEditView(e,true);
-
-
-
-        QMessageBox msgBox(view.get());
-        msgBox.setText(QString("Stai modificando ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
-        msgBox.setInformativeText("Vuoi che lo faccia esplodere?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        msgBox.exec();
     } else {
         QMessageBox::StandardButton reply;
         reply = QMessageBox::question(view.get(), "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
@@ -116,11 +105,11 @@ void Controller::exitApplication(){
 
 
 
-void Controller::OpenEditView(Employee* considerato, bool editable){
+void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo){
 
     considered_employee = considerato;
 
-    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), editable);
+    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
     edit_view->show();
     view->setEnabled(false);
 
@@ -185,12 +174,18 @@ void Controller::SaveChanges(AbstDataSection* data_){
 
 
 void Controller::ExitEditView(){
+
+    if(edit_view->isModifyed()){
+
+        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, "Modifiche","Vuoi che salvi le modifiche?",QMessageBox::Save | QMessageBox::Discard);
+        if(reply==QMessageBox::Save)
+            edit_view->chooseAndSend();
+    }
+
     edit_view->close();
     considered_employee=nullptr;
     delete edit_view;
     view->setEnabled(true);
 }
-
-
 
 

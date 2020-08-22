@@ -4,6 +4,7 @@
 #include <QWidget>
 #include<QHBoxLayout>
 #include<QLabel>
+#include"widgets/suggerimento.h"
 
 class AbstAttribute : public QWidget
 {
@@ -12,6 +13,8 @@ public:
     explicit AbstAttribute(QString nome, bool editable=false, QWidget *parent = nullptr);
 
     QString getValue() const;
+
+    void insertInfo(QString info);
 
 protected:
 

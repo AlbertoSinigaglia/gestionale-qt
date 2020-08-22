@@ -29,10 +29,12 @@ protected:
 
     QVBoxLayout* layout;
 
-private slots:
+signals:
     // questo viene chiamato quando un sotto componente viene alterato (SIGNAL)
     void setModifyed();
 
+private slots:
+    void setIs_Modifyed();
 };
 
 #endif // ABSTSECTIONELEMENT_H

@@ -20,6 +20,11 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
 }
 
 
+void AbstAttribute::insertInfo(QString info){
+    layout->insertWidget(1,new Suggerimento(info,this));
+}
+
+
 
 QString AbstAttribute::getValue() const{
     return str_value->text();

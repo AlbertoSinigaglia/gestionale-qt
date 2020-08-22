@@ -19,6 +19,6 @@ bool AbstSectionElement::isModifyed() const{
 }
 
 
-void AbstSectionElement::setModifyed(){
+void AbstSectionElement::setIs_Modifyed(){
     is_modifyed = true;
 }

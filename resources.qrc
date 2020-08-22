@@ -2,8 +2,9 @@
     <qresource prefix="/">
         <file>resources/style.css</file>
         <file>resources/employee_list_element.css</file>
-	<file>resources/import_icon.png</file>
-	<file>resources/export_icon.png</file>
-	<file>resources/exit_icon.png</file>
+        <file>resources/import_icon.png</file>
+        <file>resources/export_icon.png</file>
+        <file>resources/exit_icon.png</file>
+        <file>resources/Suggestion.png</file>
     </qresource>
 </RCC>

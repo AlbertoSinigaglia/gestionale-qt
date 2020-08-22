@@ -40,9 +40,10 @@ public slots:
 
     void SaveChanges(AbstDataSection* data_);
     void ExitEditView();
+    void handleSaveEditView(QAbstractButton *);
 
 private:
-    void OpenEditView(Employee* considerato, bool editable =false);
+    void OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo);
 
 signals:
     void exitEvent();

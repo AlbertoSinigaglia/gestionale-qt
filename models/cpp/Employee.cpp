@@ -28,12 +28,6 @@ float Employee::risarcimentoLiquidazione() const{
     return calcolaStipendio() * static_cast<float>(Conv::coeff_liquidazione);
 }
 
-
-void Employee::AumentoStipendo(float aumento){
-    quota_aggiuntiva+=aumento;
-}
-
-
 void Employee::prorogaContratto(DifferenzaDate aggiunta){          
      fine_contratto+=aggiunta;
 }

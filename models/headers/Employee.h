@@ -59,11 +59,6 @@ public:
      * Il metodo ritorna lo stipendio mensile totale in euro dell'impiegato
      */
     float calcolaStipendio() const;
- 
-    /*      AUMENTO STIPENDIO (reale)      (metodo VOID)
-     * Il metodo accetta una quota in euro da aggiungere deliberatamente allo stipendio mensile 
-     */ 
-    void AumentoStipendo(float aumento);
 
     /*      RISARCIMENTO LIQUIDAZIONE       (metodo reale)
      * Il metodo ritorna la somma in euro da risarcire all'impiegato (rispetto al suo stipendio) qualora egli venga licenziato 
