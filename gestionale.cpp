@@ -255,7 +255,6 @@ void Gestionale::addMenu(){
     QMenu * menu = new QMenu("File");
     menuBar->addMenu(menu);
     a_open = new QAction("Apri...", menuBar);
-    a_open->setIcon(QIcon(":/resources/save.png"));
     a_open->setShortcut(Qt::Key_O | Qt::CTRL);
     a_import = new QAction("Importa da...", menuBar);
     a_import->setIcon(QIcon(":/resources/import_icon.png"));
