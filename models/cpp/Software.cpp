@@ -2,12 +2,11 @@
 
 Software::Software(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiDeveloping& dati_developing):
                 Employee(persona,dati_lavoratore),
-                linguaggio(dati_developing.linguaggio),
-                perc_ore_programmazione(dati_developing.perc_ore_programmazione),
-                n_righe_totali(dati_developing.n_righe_totali),
+                n_righe_mese(dati_developing.n_righe_mese),
                 n_progetti_conclusi_mese(dati_developing.n_progetti_conclusi_mese),
-                n_righe_mese(dati_developing.n_righe_mese)
-                {};
+                n_righe_totali(dati_developing.n_righe_totali),
+                perc_ore_programmazione(dati_developing.perc_ore_programmazione),
+                linguaggio(dati_developing.linguaggio){};
 
 
 void Software::aggiornaMese(){
@@ -67,7 +66,7 @@ unsigned int Software::orePerProgetto() const{
 
 unsigned int Software::righePerProgetto() const{
     int numero_medio_righe_per_progetto = Conv::n_righe_progetto_medio / Conv::n_impiegati_progetto_medio;
-    if(n_progetti_conclusi_mese>1 && n_righe_mese > numero_medio_righe_per_progetto)
+    if(n_progetti_conclusi_mese>1 && static_cast<int>(n_righe_mese) > numero_medio_righe_per_progetto)
         return  n_righe_mese / n_progetti_conclusi_mese;
         else// Se ho un insufficienza di dati per caclolare questo valore mi avvalgo di una media
         return numero_medio_righe_per_progetto;
@@ -101,7 +100,7 @@ bool Software::produttivo() const{
     double ore_programmazione_tot = static_cast<double>(orePerProgetto()) * perc_ore_programmazione;
     int aspettativa_righe_per_progetto = static_cast<int>( velocitaScrittura() * ore_programmazione_tot );
     
-    return Employee::produttivo() || (righePerProgetto() > aspettativa_righe_per_progetto);
+    return Employee::produttivo() || (static_cast<int>(righePerProgetto()) > aspettativa_righe_per_progetto);
 }
 
 

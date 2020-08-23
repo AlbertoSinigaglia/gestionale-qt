@@ -4,10 +4,10 @@
  
 Hardware::Hardware(const Persona& persona, const DatiLavoratore& dati_lavoratore, const DatiSistemi& dati_sistemi):
                 Employee(persona, dati_lavoratore),
+                nuovi_gestiti(dati_sistemi.nuovi_gestiti),
                 n_sistemi_gestiti(dati_sistemi.n_sistemi_gestiti),
                 n_sistemi_malfunzionanti(dati_sistemi.n_sistemi_malfunzionanti),
-                n_sistemi_gestiti_totale(dati_sistemi.n_sistemi_gestiti_totale),
-                nuovi_gestiti(dati_sistemi.nuovi_gestiti){}
+                n_sistemi_gestiti_totale(dati_sistemi.n_sistemi_gestiti_totale){}
 
 
 void Hardware::aggiornaMese(){
@@ -31,7 +31,7 @@ bool Hardware::produttivo() const{
     float punto_del_mese = static_cast<float>(Data::oggi().getGiorno()) / 31.0f;
     int media_nuovi_sistemi_presente = static_cast<int>( punto_del_mese * Conv::media_n_nuovi_sistemi_mese );
 
-    return Employee::produttivo() || (nuovi_gestiti > media_nuovi_sistemi_presente);
+    return Employee::produttivo() || (static_cast<int>(nuovi_gestiti) > media_nuovi_sistemi_presente);
 }
 
 

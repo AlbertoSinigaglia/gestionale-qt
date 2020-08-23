@@ -9,7 +9,7 @@ addCampi(dati_,editable);
 AbstDataSection* DatiDevelopingElement::getData() const{
 
         int indx=0; QString val=linguaggio_widget->getValue();
-        while(indx<opzioni_linguaggio.size() && val!=opzioni_linguaggio[indx])
+        while(indx<static_cast<int>(opzioni_linguaggio.size()) && val!=opzioni_linguaggio[indx])
             indx++;
 
         return  new DatiDeveloping( static_cast<Conv::Linguaggio>(indx),

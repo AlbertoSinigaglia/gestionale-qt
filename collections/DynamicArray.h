@@ -827,14 +827,14 @@ DynamicArray<T> &DynamicArray<T>::operator=(DynamicArray &&l) noexcept {
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(unsigned int s, const T &el) : size_(s), capacity_(s), p(std::make_unique<T[]>(s)){
+DynamicArray<T>::DynamicArray(unsigned int s, const T &el) : p(std::make_unique<T[]>(s)), size_(s), capacity_(s){
     for(unsigned int i = 0; i < size_; ++i)
         p[i] = el;
 }
 
 template<class T>
 template<class InputIt, typename>
-DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last) {
+DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last): p(nullptr), size_(0), capacity_(0) {
     auto dist = std::distance(first, last);
     size_ = capacity_ = dist;
     p = std::make_unique<T[]>(dist);
@@ -846,7 +846,7 @@ DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last) {
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, const const_dynamic_array_iterator<T> &last) {
+DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, const const_dynamic_array_iterator<T> &last): p(nullptr), size_(0), capacity_(0) {
     auto dist = last - first;
     size_ = capacity_ = dist;
     p = std::make_unique<T[]>(dist);
@@ -858,7 +858,7 @@ DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, cons
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(std::initializer_list<T> l) : size_(l.size()), capacity_(l.size()), p(std::make_unique<T[]>(l.size())) {
+DynamicArray<T>::DynamicArray(std::initializer_list<T> l) : p(std::make_unique<T[]>(l.size())), wsize_(l.size()), capacity_(l.size()) {
     unsigned int i = 0;
     for(auto& el : l)
         p[i++] = el;

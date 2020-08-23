@@ -15,7 +15,7 @@ DynamicArray<QString> DatiLatoClientElement::opzioni_libreria = {"Bootstrap","Jq
 AbstDataSection* DatiLatoClientElement::getData() const{
 
         int indx=0; QString val=libreria_widget->getValue();
-        while(indx<opzioni_libreria.size() && val!=opzioni_libreria[indx])
+        while(indx<static_cast<int>(opzioni_libreria.size()) && val!=opzioni_libreria[indx])
             indx++;
 
         return  new DatiLatoClient( static_cast<Conv::Libreria>(indx),

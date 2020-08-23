@@ -1,6 +1,6 @@
 #include "controller.h"
 #include <QDebug>
-Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), view(view_),considered_employee(nullptr),edit_view(nullptr){
+Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), view(view_),edit_view(nullptr), considered_employee(nullptr){
     view->show();
     model = std::make_shared<EmployeesManagement>();
     view->setModel(model);
