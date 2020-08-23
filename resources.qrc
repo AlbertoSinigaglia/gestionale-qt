@@ -6,5 +6,6 @@
         <file>resources/export_icon.png</file>
         <file>resources/exit_icon.png</file>
         <file>resources/Suggestion.png</file>
+        <file>resources/save.png</file>
     </qresource>
 </RCC>

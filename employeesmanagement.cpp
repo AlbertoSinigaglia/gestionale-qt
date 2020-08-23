@@ -17,14 +17,11 @@ EmployeesManagement::EmployeesManagement():
 
 bool EmployeesManagement::import(const QString& path){
     try {
-        *employees = CSVReader::parse(path);
+        auto empls = CSVReader::parse(path);
+        employees->insert(employees->end(), empls.begin(), empls.end());
         source = path;
         return true;
-    } catch (std::invalid_argument& e) {
-        qDebug() << "Attenzione eccezione: " << e.what();
-        return false;
-    } catch (illformed_file_exception& e) {
-        qDebug() << "Attenzione eccezione: "<< e.what();
+    } catch (std::exception& e) {
         return false;
     }
 }

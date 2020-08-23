@@ -70,6 +70,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
     connect(employeesList, SIGNAL(ListElementDoubleClicked(EmployeeListElement*)), this, SLOT(employeeListElementDoubleClicked( EmployeeListElement* )));
     connect(a_import, &QAction::triggered, this, &Gestionale::importFile);
+    connect(a_open, &QAction::triggered, this, &Gestionale::importFile);
     connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
     connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
@@ -253,15 +254,21 @@ void Gestionale::addMenu(){
     menuBar->setStyleSheet("color:white; background-color:#424242;");
     QMenu * menu = new QMenu("File");
     menuBar->addMenu(menu);
+    a_open = new QAction("Apri...", menuBar);
+    a_open->setIcon(QIcon(":/resources/save.png"));
+    a_open->setShortcut(Qt::Key_O | Qt::CTRL);
     a_import = new QAction("Importa da...", menuBar);
     a_import->setIcon(QIcon(":/resources/import_icon.png"));
     a_import->setShortcut(Qt::Key_I | Qt::CTRL);
     a_export = new QAction("Esporta a...", menuBar);
     a_export->setIcon(QIcon(":/resources/export_icon.png"));
     a_export->setShortcut(Qt::Key_E | Qt::CTRL);
+    a_import->setDisabled(true);
+    a_export->setDisabled(true);
     a_exit = new QAction("Esci", menuBar);
     a_exit->setIcon(QIcon(":/resources/exit_icon.png"));
     a_exit->setShortcut(Qt::Key_Q | Qt::CTRL);
+    menu->addAction(a_open);
     menu->addAction(a_import);
     menu->addAction(a_export);
     menu->addSeparator();
@@ -314,6 +321,13 @@ void Gestionale::updateList() const{
     if(model){
         this->employeesList->setEmployees(*model->getEmployees());
     }
+}
+bool Gestionale::disableSaveEnableImport(){
+    bool to_r = a_open->isEnabled();
+    a_open->setDisabled(true);
+    a_import->setDisabled(false);
+    a_export->setDisabled(false);
+    return to_r;
 }
 void Gestionale::importFile(){
     emit importFileRequestEvent();

@@ -74,8 +74,15 @@ void Controller::modifyButtonClicked(Employee * e){
 }
 
 void Controller::importFile(){
-    model->import(getFilePath("Carica Dipendenti"));
-    view->updateList();
+    auto be_sure = true;
+    if(!view->disableSaveEnableImport()){
+        be_sure = (QMessageBox::question(view.get(), "Conferma importazione", "I dipendenti salvati nel file che verrà selezionato, saranno inseriti nel file corrente, confermi di voler procedere?",QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes);
+    }
+    if(be_sure){
+        model->import(getFilePath("Carica Dipendenti"));
+        updateModel(false);
+        view->updateList();
+    }
 }
 void Controller::exportToFile(){
     this->updateModel(true);

@@ -15,18 +15,18 @@ Data Data::oggi() {
     tm *lt = localtime(&now);
     return Data(lt->tm_year + 1900, lt->tm_mon + 1 , lt->tm_mday);
 }
-Data::Data(const std::string& date): anno(0), mese(0), giorno(0){
+Data::Data(const std::string& date): giorno(0),  mese(0), anno(0) {
     std::istringstream is(date);
     is >> *this;
 }
-Data::Data(int a, unsigned int m, unsigned int g) : anno(a), mese(m-1), giorno(g) {
+Data::Data(int a, unsigned int m, unsigned int g) :  giorno(g), mese(m-1), anno(a) {
     if ( mese > 11 )
         throw std::invalid_argument("Mese non valido");
-    else if(giorno > giorniDelMese(mese, anno) || giorno < 1)
+    else if(static_cast<int>(giorno) > giorniDelMese(mese, anno) || giorno < 1)
         throw std::invalid_argument("Giorno non valido");
 }
 
-Data::Data(int num_giorni) {
+Data::Data(int num_giorni) : giorno(0), mese(0), anno(0) {
     int a, m;
     a = num_giorni / (1461) * 4;   //366+365*3
     num_giorni = num_giorni % 1461;
@@ -111,7 +111,7 @@ void Data::addRemoveGiorni(int g) {
 void Data::addRemoveMesi(int m) {
     int a_ = m / 12;
     int m_ = m % 12;
-    if(m_ < 0 && -m > mese){
+    if(m_ < 0 && -m > static_cast<int>(mese)){
         mese = 12 - (-m - mese);
         a_ -= 1;
     }
@@ -125,14 +125,14 @@ void Data::addRemoveAnni(int a) {
 }
 
 void Data::setGiorno(unsigned int g) {
-    if( g > 0 && g<= giorniDelMese(mese, anno) )
+    if( g > 0 && static_cast<int>(g)<= giorniDelMese(mese, anno) )
         giorno = g;
     else
         throw std::invalid_argument("Giorno non valido");
 }
 
 void Data::setMese(unsigned int m) {
-    if( m > 0 && m <= 12 && giorno <= giorniDelMese(m - 1 , anno))
+    if( m > 0 && m <= 12 && static_cast<int>(giorno) <= giorniDelMese(m - 1 , anno))
         mese = m - 1;
     else
         throw std::invalid_argument("Mese non valido");

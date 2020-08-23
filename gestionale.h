@@ -35,7 +35,7 @@ public:
     ~Gestionale();
     void setModel(std::shared_ptr<EmployeesManagement> model_);
     void updateList() const;
-
+    bool disableSaveEnableImport();
 private:
     std::shared_ptr<EmployeesManagement> model;
 	QHBoxLayout* mainLayout;
@@ -65,6 +65,7 @@ private:
     QAction* a_import;
     QAction* a_export;
     QAction* a_exit;
+    QAction* a_open;
     QCheckBox* totRiparazioni;
     QCheckBox* percCapo;
     QCheckBox* libreria;
