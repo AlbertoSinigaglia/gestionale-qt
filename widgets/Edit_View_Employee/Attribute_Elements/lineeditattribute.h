@@ -23,7 +23,10 @@ public:
         REAL
     };
 
-    explicit LineEditAttribute(QString nome, TipoInserimento tipo, QString valore_, double min=0, double max=pow(10,20), bool editable=false,  QWidget *parent = nullptr);
+    explicit LineEditAttribute(QString nome, TipoInserimento tipo, QString valore_, bool editable=false,  QWidget *parent = nullptr);
+
+    void setValMin(double min);
+    void setValMax(double max);
 
 private:
     QLineEdit* setter_str;

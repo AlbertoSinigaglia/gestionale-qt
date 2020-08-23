@@ -16,20 +16,20 @@ AbstDataSection* DatiPersonaElement::getData() const{
     }
 void DatiPersonaElement::addCampi(const DatiPersona& dati, bool editable){
 
-    nome_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.nome),0,0,editable,this);
+    nome_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.nome),editable,this);
     layout->addWidget(nome_widget);
-    connect(nome_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(nome_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    cognome_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.cognome),0,0,editable,this);
+    cognome_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.cognome),editable,this);
     layout->addWidget(cognome_widget);
-    connect(cognome_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(cognome_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    cf_widget = new LineEditAttribute(nome_campi[2],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.CF),0,0,editable,this);
+    cf_widget = new LineEditAttribute(nome_campi[2],LineEditAttribute::TipoInserimento::STRING,QString::fromStdString(dati.CF),editable,this);
     layout->addWidget(cf_widget);
-    connect(cf_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(cf_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
     dataNascita_widget = new DateEditAttribute(nome_campi[3],dati.nascita,editable,this);
     layout->addWidget(dataNascita_widget);
-    connect(dataNascita_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(dataNascita_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }
 QString DatiPersonaElement::nome_campi[4] ={"Nome", "Cognome", "Codice Fiscale", "Data di nascita"};

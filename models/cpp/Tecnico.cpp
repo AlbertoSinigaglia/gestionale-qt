@@ -18,7 +18,6 @@ void Tecnico::aggiornaMese(){
     Manutenzione::aggiornaMese();
     Hardware::aggiornaMese();
 
-    perc_riparazioni_sussistenti = 0;
     ore_stallo_mensili = 0;
     ore_straordinari = 0;
 }

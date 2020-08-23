@@ -36,6 +36,8 @@ private:
     static QString nome_campi[3];
     static QString descrizione_campi[3];
 
+    static DynamicArray<QString> opzioni_libreria;
+
 
     void addCampi(const DatiLatoClient& dati, bool editable);
     // Il metodo (X il COSTRUTTORE) + stabilisce le connessioni

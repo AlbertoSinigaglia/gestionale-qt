@@ -7,6 +7,10 @@
 
 struct AbstDataSection{
     virtual ~AbstDataSection() {}
+
+    static double puntoDelMese(){
+        return static_cast<double>(Data::oggi().getGiorno()) / 31.0;
+    }
 };
 
 
@@ -42,9 +46,6 @@ struct DatiLavoratore: public AbstDataSection{
 
 // Campi dati estesi dalla classe Software
 
-double puntoDelMese(){
-    return static_cast<double>(Data::oggi().getGiorno()) / 31.0;
-}
 
 struct DatiDeveloping: public AbstDataSection{
     Conv::Linguaggio linguaggio;

@@ -1,7 +1,7 @@
 #include "lineeditattribute.h"
 #include"math.h"
-LineEditAttribute::LineEditAttribute(QString nome, TipoInserimento tipo_, QString valore_, double min_, double max_, bool editable,  QWidget *parent)
-    :AbstAttribute(nome,editable,parent), tipo(tipo_), val_min(min_), val_max(max_){
+LineEditAttribute::LineEditAttribute(QString nome, TipoInserimento tipo_, QString valore_, bool editable,  QWidget *parent)
+    :AbstAttribute(nome,editable,parent), tipo(tipo_), val_min(0), val_max(pow(10,9)){
 
     if(!verify(valore_)) throw std::invalid_argument("<valore_> non rispetta il formato di <tipo_>");
 
@@ -61,4 +61,11 @@ void LineEditAttribute::catchValue(QString q){
 
 void LineEditAttribute::setValue(QString q){
     str_value->setText(q);
+}
+
+void LineEditAttribute::setValMin(double min){
+    val_min=min;
+}
+void LineEditAttribute::setValMax(double max){
+    val_max=max;
 }

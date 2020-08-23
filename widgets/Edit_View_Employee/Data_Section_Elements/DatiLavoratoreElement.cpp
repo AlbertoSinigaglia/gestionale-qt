@@ -33,7 +33,7 @@ void DatiLavoratoreElement::addCampi(const DatiLavoratore& dati, bool editable){
     layout->addWidget(ore_lavoro_sett_widget);
     connect(ore_lavoro_sett_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    quota_aggiuntiva_widget = new LineEditAttribute(nome_campi[3],LineEditAttribute::TipoInserimento::REAL,QString::number(dati.quota_aggiuntiva),0,1000000,editable,this);
+    quota_aggiuntiva_widget = new LineEditAttribute(nome_campi[3],LineEditAttribute::TipoInserimento::REAL,QString::number(dati.quota_aggiuntiva),editable,this);
     layout->addWidget(quota_aggiuntiva_widget);
     connect(quota_aggiuntiva_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }

@@ -30,7 +30,7 @@ private:
 
     FlagAttribute* orientato_ortogonalita_widget;
     FlagAttribute* prove_correttezza_widget;
-    LineEditAttribute* livello_astrazione_widget;
+    SlideAttribute* livello_astrazione_widget;
     SlideAttribute* perc_capo_progetto_widget;
 
 

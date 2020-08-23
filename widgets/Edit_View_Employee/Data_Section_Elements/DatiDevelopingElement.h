@@ -30,8 +30,9 @@ private:
     LineEditAttribute* n_progetti_conclusi_mese_widget;
     SlideAttribute*  perc_ore_programmazione_widget;
 
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
+    static QString nome_campi[5];
+
+    static DynamicArray<QString> opzioni_linguaggio;
 
 
     void addCampi(const DatiDeveloping& dati, bool editable);

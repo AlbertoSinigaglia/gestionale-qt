@@ -20,6 +20,8 @@ public:
 
     AbstSectionElement(QString nome_sezione, QWidget *parent = 0);
 
+    virtual ~AbstSectionElement(){}
+
     bool isModifyed() const;
 
     virtual AbstDataSection* getData() const = 0;

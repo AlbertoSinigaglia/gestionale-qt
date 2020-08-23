@@ -15,22 +15,24 @@ AbstDataSection* DatiSistemiElement::getData() const{
     }
 void DatiSistemiElement::addCampi(const DatiSistemi& dati, bool editable){
 
-    num_sistemi_gestiti_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti),0,editable,this);
+    num_sistemi_gestiti_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti),editable,this);
+    num_sistemi_gestiti_widget->setValMax(20);
     layout->addWidget(num_sistemi_gestiti_widget);
-    connect(num_sistemi_gestiti_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(num_sistemi_gestiti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    num_sistemi_malfunzionanti_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_malfunzionanti),0,editable,this);
+    num_sistemi_malfunzionanti_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_malfunzionanti),editable,this);
+    num_sistemi_malfunzionanti_widget->setValMax(10);
     layout->addWidget(num_sistemi_malfunzionanti_widget);
-    connect(num_sistemi_malfunzionanti_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(num_sistemi_malfunzionanti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    num_sistemi_gestiti_totale_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti_totale),0,editable,this);
+    num_sistemi_gestiti_totale_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti_totale),editable,this);
     layout->addWidget(num_sistemi_gestiti_totale_widget);
-    connect(num_sistemi_gestiti_totale_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
+    connect(num_sistemi_gestiti_totale_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    nuovi_gestiti_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.nuovi_gestiti),0,editable,this);
+    nuovi_gestiti_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.nuovi_gestiti),editable,this);
+    nuovi_gestiti_widget->setValMax(5);
     layout->addWidget(nuovi_gestiti_widget);
-    connect(nuovi_gestiti_widget,SIGNAL(isModify()), this, SLOT(setModifyed()));
-
-
+    connect(nuovi_gestiti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }
-QString DatiSistemiElement::nome_campi[4] ={"Num sistemi gestiti", "Num sistemi malfunzionanti", "Num sistemi gestiti totale", "Nuovi gestiti"};
+
+QString DatiSistemiElement::nome_campi[4] ={"# sistemi gestiti nel mese", "# sistemi malfunzionanti", "# sistemi gestiti dall'assuzione", "# nuovi sistemi gestiti nel mese"};
