@@ -858,7 +858,7 @@ DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, cons
 }
 
 template<class T>
-DynamicArray<T>::DynamicArray(std::initializer_list<T> l) : p(std::make_unique<T[]>(l.size())), wsize_(l.size()), capacity_(l.size()) {
+DynamicArray<T>::DynamicArray(std::initializer_list<T> l) : p(std::make_unique<T[]>(l.size())), size_(l.size()), capacity_(l.size()) {
     unsigned int i = 0;
     for(auto& el : l)
         p[i++] = el;

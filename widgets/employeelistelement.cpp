@@ -40,7 +40,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     // seg fault inizio
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
-    salary = new QLabel("stipendio che non vaaaaaaaaaaaaaaa" /*QString(std::to_string(e->calcolaStipendio()).c_str())*/);
+    salary = new QLabel(QString(std::to_string(e->calcolaStipendio()).c_str()));
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
     // seg fault fine
 
