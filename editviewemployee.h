@@ -11,7 +11,8 @@
 #include<QLabel>
 #include<QFile>
 #include<QIcon>
-
+#include<QDialog>
+#include<QCloseEvent>
 #include"models/headers/GUIDev.h"
 #include"models/headers/DBDev.h"
 #include"models/headers/FullStack.h"
@@ -36,7 +37,7 @@
 
 
 
-class EditViewEmployee: public QWidget{
+class EditViewEmployee: public QDialog{
 Q_OBJECT
 
 public:
@@ -80,7 +81,7 @@ private:
 private slots:
 
     void setModifed();
-
+    void closeEvent(QCloseEvent *event) override;
 
 
 

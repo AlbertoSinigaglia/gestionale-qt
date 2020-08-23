@@ -2,7 +2,7 @@
 #include<QDebug>
 
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
-    QWidget(parent), stato(stato_utilizzo), isModify(false){
+    QDialog(parent), stato(stato_utilizzo), isModify(false){
 
         this->setFixedSize(800, 700);
         mainLayout = new QVBoxLayout(this);
@@ -131,7 +131,11 @@ bool EditViewEmployee::isModifyed() const{
     return isModify;
 }
 
-
+void EditViewEmployee::closeEvent(QCloseEvent *event)
+{
+        emit handleExitEditView();
+        event->accept();
+}
 void EditViewEmployee::setModifed(){
     isModify=true;
     SalvaEsci->setText("Esci...");

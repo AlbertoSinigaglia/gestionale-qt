@@ -62,23 +62,13 @@ void Controller::insertNewEmployee(){
 }
 
 void Controller::openEmployeeInfo(Employee* e){
-
-
     OpenEditView(e,EditViewEmployee::Utilizzo::VISUALIZZA);
-
-
 }
 void Controller::modifyButtonClicked(Employee * e){
-
     if(e){
-
-
         OpenEditView(e,EditViewEmployee::Utilizzo::MODIFICA);
-
-
     } else {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(view.get(), "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
+        auto reply = QMessageBox::question(view.get(), "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
         if(reply == QMessageBox::Yes) this->insertNewEmployee() ;
     }
 }
@@ -108,11 +98,11 @@ void Controller::exitApplication(){
 void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo){
 
     considered_employee = considerato;
-
-    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
-    edit_view->show();
     view->setEnabled(false);
 
+    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
+    edit_view->setModal(true);
+    edit_view->show();
     connect(edit_view, SIGNAL(handleExitEditView()), this, SLOT(ExitEditView()));
     connect(edit_view, SIGNAL(SaveDataConsiderd(AbstDataSection*)), this, SLOT(SaveChanges(AbstDataSection*)));
 
@@ -185,6 +175,7 @@ void Controller::ExitEditView(){
     edit_view->close();
     considered_employee=nullptr;
     delete edit_view;
+    edit_view=nullptr;
     view->setEnabled(true);
 }
 
