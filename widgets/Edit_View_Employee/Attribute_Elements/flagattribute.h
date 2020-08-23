@@ -20,9 +20,6 @@ private slots:
     void setValue(int v);
 
 
-signals:
-
-    void isModify();
 
 };
 

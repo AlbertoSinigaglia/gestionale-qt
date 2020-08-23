@@ -16,6 +16,9 @@ public:
 
     void insertInfo(QString info);
 
+signals:
+    void isModify();
+
 protected:
 
         QHBoxLayout* layout;

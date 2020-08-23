@@ -42,9 +42,6 @@ private slots:
 
     void catchValue(QString q);
 
-signals:
-
-    void isModify();
 
 };
 

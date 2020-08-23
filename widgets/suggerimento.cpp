@@ -4,6 +4,7 @@ Suggerimento::Suggerimento(QString testo_, QWidget* parent): QPushButton(parent)
 {
     setIcon(QIcon(":/resources/Suggestion.png"));
     setIconSize(QSize(16,16));
+    //setFixedSize(20,20);
 
     connect(this, SIGNAL(clicked()), this, SLOT(show()));
 
@@ -11,5 +12,6 @@ Suggerimento::Suggerimento(QString testo_, QWidget* parent): QPushButton(parent)
 
 
 void Suggerimento::show() const{
-    QMessageBox(QMessageBox::Information, "Suggerimento", testo, QMessageBox::Ok);
+    auto msg= QMessageBox(QMessageBox::Information, "Suggerimento", testo, QMessageBox::Ok);
+    msg.exec();
 }

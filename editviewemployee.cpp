@@ -1,4 +1,5 @@
 #include"editviewemployee.h"
+#include<QDebug>
 
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
     QWidget(parent), stato(stato_utilizzo), isModify(false){
@@ -11,7 +12,7 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
 
         QScrollArea* impiegato = new QScrollArea(this);
         impiegato->setFixedSize(750,600);
-        impiegato->setLayout(buildSections(dati_, impiegato));
+        impiegato->setWidget(buildSections(dati_, impiegato));
 
 
         SalvaEsci = new QPushButton("Esci", this);
@@ -67,61 +68,63 @@ void EditViewEmployee::chooseAndSend() const{
 
 
 
-QVBoxLayout* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent){
+QFrame* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent){
 
-    QVBoxLayout* layout = new QVBoxLayout(parent);
+    QFrame* frame = new QFrame(parent);
+    QVBoxLayout* layout = new QVBoxLayout(frame);
     layout->setSpacing(20);
 
     bool editable= (stato==Utilizzo::VISUALIZZA)? false: true;
 
     for(auto i = dati_.begin(); i!=dati_.end(); i++){
         AbstDataSection* objct = *i;
-        AbstSectionElement* sezione;
+        AbstSectionElement* sezione=nullptr;
 
-        if(typeid(objct)==typeid(Persona)) {
+        if(typeid(*objct)==typeid(DatiPersona)) {
             sezione = new DatiPersonaElement(*dynamic_cast<const DatiPersona*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(Employee)) {
+        else if(typeid(*objct)==typeid(DatiLavoratore)) {
             sezione = new DatiLavoratoreElement(*dynamic_cast<const DatiLavoratore*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(Software)) {
+        else if(typeid(*objct)==typeid(DatiDeveloping)) {
             sezione = new DatiDevelopingElement(*dynamic_cast<const DatiDeveloping*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(Manutenzione)) {
+        else if(typeid(*objct)==typeid(DatiManutenzione)) {
             sezione = new DatiManutenzioneElement(*dynamic_cast<const DatiManutenzione*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(Hardware)) {
+        else if(typeid(*objct)==typeid(DatiSistemi)) {
             sezione = new DatiSistemiElement(*dynamic_cast<const DatiSistemi*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(Tecnico)) {
+        else if(typeid(*objct)==typeid(DatiRiparazioneSistemi)) {
             sezione = new DatiRiparazioneSistemiElement(*dynamic_cast<const DatiRiparazioneSistemi*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(ITSecurityDev)) {
+        else if(typeid(*objct)==typeid(DatiRipristinoSicurezza)) {
             sezione = new DatiRipristinoSicurezzaElement(*dynamic_cast<const DatiRipristinoSicurezza*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(FrontDev)) {
+        else if(typeid(*objct)==typeid(DatiLatoClient)) {
             sezione = new DatiLatoClientElement(*dynamic_cast<const DatiLatoClient*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(BackDev)) {
+        else if(typeid(*objct)==typeid(DatiLatoServer)) {
             sezione = new DatiLatoServerElement(*dynamic_cast<const DatiLatoServer*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(FullStack)) {
+        else if(typeid(*objct)==typeid(DatiFullStack)) {
             sezione = new DatiFullstackElement(*dynamic_cast<const DatiFullStack*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(GUIDev)) {
+        else if(typeid(*objct)==typeid(DatiInterfacceUtente)) {
             sezione = new DatiInterfacciaUtenteElement(*dynamic_cast<const DatiInterfacceUtente*>(objct), editable, this);
         }
-        else if(typeid(objct)==typeid(DBDev)) {
+        else if(typeid(*objct)==typeid(DatiDatabase)) {
             sezione = new DatiDatabaseElement(*dynamic_cast<const DatiDatabase*>(objct), editable, this);
-        }
+        }else qDebug()<<"errore1";
 
         connect(sezione, SIGNAL(setModifyed()),this, SLOT(setModifed()));
         layout->addWidget(sezione);
         lista_elementi.push_back(sezione);
         delete objct;
     }
-
-    return layout;
+    std::cout<<frame;
+    frame->setLayout(layout);
+    return frame;
     }
 
 bool EditViewEmployee::isModifyed() const{

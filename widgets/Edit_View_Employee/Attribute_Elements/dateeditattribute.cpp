@@ -7,7 +7,7 @@ DateEditAttribute::DateEditAttribute(QString nome, const Data& valore_, bool edi
         setter_data->setSelectedDate(QDate(valore_.getAnno(),valore_.getMese(),valore_.getGiorno()));
 
         connect(setter_data,SIGNAL(selectionChanged()),this, SLOT(catchValue()));
-        connect(setter_data,SIGNAL(selectionChanged()),this, SLOT(isModify()));
+        connect(setter_data,SIGNAL(selectionChanged()),this, SIGNAL(isModify()));
 
         layout->addWidget(setter_data);
     }

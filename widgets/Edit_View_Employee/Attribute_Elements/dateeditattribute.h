@@ -23,9 +23,6 @@ private slots:
 
     void catchValue();
 
-signals:
-
-    void isModify();
 
 };
 

@@ -11,7 +11,7 @@ ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzion
         setter_combo->setCurrentIndex(index_valore_inizio);
 
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(setValue(int)));
-        connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(isModify()));
+        connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SIGNAL(isModify()));
     }
     setValue(index_valore_inizio);
 }

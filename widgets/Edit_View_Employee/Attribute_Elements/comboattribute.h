@@ -20,9 +20,6 @@ private slots:
 
     void setValue(int i);
 
-signals:
-
-    void isModify();
 };
 
 #endif // COMBOATTRIBUTE_H

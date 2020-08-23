@@ -71,7 +71,7 @@ private:
     QVBoxLayout* mainLayout;
 
     // Metodo per costruttore
-    QVBoxLayout* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
+    QFrame* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
 
     QHBoxLayout* buildIntestazione();
 
