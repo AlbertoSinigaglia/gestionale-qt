@@ -1,4 +1,5 @@
 #include "lineeditattribute.h"
+
 #include"math.h"
 LineEditAttribute::LineEditAttribute(QString nome, TipoInserimento tipo_, QString valore_, bool editable,  QWidget *parent)
     :AbstAttribute(nome,editable,parent), tipo(tipo_), val_min(0), val_max(pow(10,9)){

@@ -89,6 +89,7 @@ HEADERS += \
     models/headers/ITSecurityDev.h \
     models/headers/Persona.h \
     models/headers/Tecnico.h \
+    widgets/tableheader.h \
     widgets/Edit_View_Employee/Attribute_Elements/comboattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h \

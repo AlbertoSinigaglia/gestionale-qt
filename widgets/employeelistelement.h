@@ -26,6 +26,7 @@ class EmployeeListElement : public QWidget{
     QLabel* date_end_of_contract;
     QLabel* salary;
     QLabel* weekly_hours;
+    QLabel* produttivo;
 public:
     enum{
         Name = 1<<0,

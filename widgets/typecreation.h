@@ -3,11 +3,12 @@
 
 #include <QComboBox>
 #include <QLabel>
+#include <QDialog>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QHBoxLayout>
 
-class TypeCreation: public QFrame{
+class TypeCreation: public QDialog{
 Q_OBJECT
 
 public:
