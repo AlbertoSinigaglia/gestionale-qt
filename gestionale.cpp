@@ -65,6 +65,55 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
             employeesList->changeListAttributeVisibility(EmployeeListElement::WeeklyHours, state);
         }
     );
+    connect(
+        produttivo,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::Produttivo, state);
+        }
+    );
+    connect(
+        bonus_stipendio,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::BonusStipendio, state);
+        }
+    );
+    connect(
+        grado_esperienza,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::GradoEsperienza, state);
+        }
+    );
+    connect(
+        numero_righe_totali,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::NumeroRigheTotali, state);
+        }
+    );
+    connect(
+        linguaggio,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::Linguaggio, state);
+        }
+    );
+    connect(
+        percentuale_ripristino,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::PercentualeRipristino, state);
+        }
+    );
+    connect(
+        numero_criticita_risolte,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::NumeroCriticitaRisolte, state);
+        }
+    );
+    connect(
+        ore_straordinari,&QCheckBox::stateChanged,
+        [=](int state){
+            employeesList->changeListAttributeVisibility(EmployeeListElement::OreStraordinari, state);
+        }
+    );
+
     connect(elimina, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
@@ -116,7 +165,7 @@ void Gestionale::addComboBox()
         "BackDeveloper",
         "FrontDeveloper",
 		"FullStack",
-		"BDDeveloper",
+        "DBDeveloper",
 		"GUIDeveloper",
 		"ITSecurityDev",
 		"Tecnico"
@@ -171,6 +220,15 @@ void Gestionale::addBoxLavoro()
 	layoutDatiDip->addWidget(StipendioBase);
     OreLavoro= new QCheckBox("Ore di lavoro \nsettimanale",this);
     layoutDatiDip->addWidget(OreLavoro);
+
+
+    bonus_stipendio= new QCheckBox("Bonus stipendio",this);
+    grado_esperienza= new QCheckBox("Grado esperienza",this);
+    layoutDatiDip->addWidget(bonus_stipendio);
+    layoutDatiDip->addWidget(grado_esperienza);
+    bonus_stipendio->setCheckState(Qt::CheckState::Checked);
+    grado_esperienza->setCheckState(Qt::CheckState::Checked);
+
     DataA->setCheckState(Qt::CheckState::Checked);
     DataFineContratto->setCheckState(Qt::CheckState::Checked);
     StipendioBase->setCheckState(Qt::CheckState::Checked);
@@ -183,42 +241,36 @@ void Gestionale::addBoxSpecifico()
     QGroupBox* DatiSpecifici = new QGroupBox(this);
     DatiSpecifici->setTitle("Dati specifici");
     QVBoxLayout* layoutDatiSpecifici = new QVBoxLayout(DatiSpecifici);
-    totRiparazioni = new QCheckBox("Totale riparazioni \nmese in corso",this);
-    layoutDatiSpecifici->addWidget(totRiparazioni);
-    totRiparazioni->hide();
-    percCapo = new QCheckBox("Percentuale capo progetto",this);
-    layoutDatiSpecifici->addWidget(percCapo);
-    percCapo->hide();
-    libreria = new QCheckBox("Libreria",this);
-    layoutDatiSpecifici->addWidget(libreria);
-    libreria->hide();
-    percBack = new QCheckBox("Percentuale lavoro back",this);
-    layoutDatiSpecifici->addWidget(percBack);
-    percBack->hide();
-    professionalita = new QCheckBox("Grado di professionalità",this);
-    layoutDatiSpecifici->addWidget(professionalita);
-    professionalita->hide();
-    SistemiGestiti = new QCheckBox("Numero sistemi gestiti",this);
-    layoutDatiSpecifici->addWidget(SistemiGestiti);
-    SistemiGestiti->hide();
-    criticitaRisolte = new QCheckBox("Numero criticità risolte",this);
-    layoutDatiSpecifici->addWidget(criticitaRisolte);
-    criticitaRisolte->hide();
-    linguaggio = new QCheckBox("Linguaggio usato",this);
-    layoutDatiSpecifici->addWidget(linguaggio);
-    linguaggio->hide();
-    progConclusi = new QCheckBox("Numero progetti conclusi nel mese in corso",this);
-    layoutDatiSpecifici->addWidget(progConclusi);
-    progConclusi->hide();
-    percRipSussistenti = new QCheckBox("Percentuale riparazioni sussistenti",this);
-    layoutDatiSpecifici->addWidget(percRipSussistenti);
-    percRipSussistenti->hide();
-    percEntitaFN = new QCheckBox("Percentuale entità in forma normale",this);
-    layoutDatiSpecifici->addWidget(percEntitaFN);
-    percEntitaFN->hide();
     produttivo = new QCheckBox("Produttivo",this);
     produttivo->show();
+    produttivo->setCheckState(Qt::CheckState::Checked);
     layoutDatiSpecifici->addWidget(produttivo);
+
+    numero_righe_totali= new QCheckBox("Numero righe \ndi codice totali",this);
+    linguaggio= new QCheckBox("Linguaggio preferito",this);
+    percentuale_ripristino= new QCheckBox("Percentuale ripristino",this);
+    numero_criticita_risolte= new QCheckBox("Numero criticità \n risolte",this);
+    ore_straordinari= new QCheckBox("Ore straordinari",this);
+
+    layoutDatiSpecifici->addWidget(numero_righe_totali);
+    layoutDatiSpecifici->addWidget(linguaggio);
+    layoutDatiSpecifici->addWidget(percentuale_ripristino);
+    layoutDatiSpecifici->addWidget(numero_criticita_risolte);
+    layoutDatiSpecifici->addWidget(ore_straordinari);
+
+    numero_righe_totali->hide();
+    linguaggio->hide();
+    percentuale_ripristino->hide();
+    numero_criticita_risolte->hide();
+    ore_straordinari->hide();
+
+    numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
+    linguaggio->setCheckState(Qt::CheckState::Unchecked);
+    percentuale_ripristino->setCheckState(Qt::CheckState::Unchecked);
+    numero_criticita_risolte->setCheckState(Qt::CheckState::Unchecked);
+    ore_straordinari->setCheckState(Qt::CheckState::Unchecked);
+
+
     LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
@@ -341,76 +393,141 @@ void Gestionale::exitApplication(){
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected)
 {
-    totRiparazioni->hide();
-    percCapo->hide();
-    libreria->hide();
-    percBack->hide();
-    professionalita->hide();
-    SistemiGestiti->hide();
-    criticitaRisolte->hide();
+    numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
+    linguaggio->setCheckState(Qt::CheckState::Unchecked);
+    percentuale_ripristino->setCheckState(Qt::CheckState::Unchecked);
+    numero_criticita_risolte->setCheckState(Qt::CheckState::Unchecked);
+    ore_straordinari->setCheckState(Qt::CheckState::Unchecked);
+
+    numero_righe_totali->hide();
     linguaggio->hide();
-    progConclusi->hide();
-    percRipSussistenti->hide();
-    percEntitaFN->hide();
+    percentuale_ripristino->hide();
+    numero_criticita_risolte->hide();
+    ore_straordinari->hide();
+
+
+
+    employeesList->changeListAttributeVisibility(
+             EmployeeListElement::NumeroRigheTotali |
+             EmployeeListElement::Linguaggio |
+             EmployeeListElement::PercentualeRipristino |
+             EmployeeListElement::NumeroCriticitaRisolte |
+             EmployeeListElement::OreStraordinari ,
+             static_cast<int>(false)
+     );
 
     if(selected=="Manutentore"){
-        totRiparazioni->show();
+        percentuale_ripristino->show();
+
+        percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<Manutenzione>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::PercentualeRipristino, true
+        );
     };
     if(selected=="FrontDeveloper"){
-        libreria->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<FrontDev>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="FullStack"){
-        percBack->show();
-        libreria->show();
-        percCapo->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<FullStack>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="GUIDeveloper"){
-        professionalita->show();
-        libreria->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<GUIDev>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="Hardware"){
-        SistemiGestiti->show();
         employeesList->filter<Hardware>();
     };
     if(selected=="Software"){
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<Software>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="ITSecurityDev"){
-        criticitaRisolte->show();
-        totRiparazioni->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+        percentuale_ripristino->show();
+        numero_criticita_risolte->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+        percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
+        numero_criticita_risolte->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<ITSecurityDev>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::PercentualeRipristino | EmployeeListElement::NumeroCriticitaRisolte | EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="Tecnico"){
-        percRipSussistenti->show();
-        totRiparazioni->show();
-        SistemiGestiti->show();
+        percentuale_ripristino->show();
+        ore_straordinari->show();
+
+        percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
+        ore_straordinari->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<Tecnico>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::OreStraordinari | EmployeeListElement::PercentualeRipristino, true
+        );
     };
     if(selected=="BackDeveloper"){
-        percCapo->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<BackDev>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     };
     if(selected=="DBDeveloper"){
-        percEntitaFN->show();
         linguaggio->show();
-        progConclusi->show();
+        numero_righe_totali->show();
+
+        linguaggio->setCheckState(Qt::CheckState::Checked);
+        numero_righe_totali->setCheckState(Qt::CheckState::Checked);
+
         employeesList->filter<DBDev>();
+        employeesList->changeListAttributeVisibility(
+            EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
+        );
     }
 
 }
