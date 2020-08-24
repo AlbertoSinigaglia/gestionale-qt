@@ -5,14 +5,14 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
     QDialog(parent), stato(stato_utilizzo), isModify(false){
 
         topLevelWidget();
-        this->setFixedSize(800, 700);
+        this->setMinimumSize(800, 700);
         mainLayout = new QVBoxLayout(this);
-        mainLayout->setContentsMargins(0,0,0,0);
+        mainLayout->setContentsMargins(20,20,20,20);
         mainLayout->setSpacing(10);
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedSize(750,600);
+        impiegato->setMinimumSize(750,600);
         impiegato->setWidget(buildSections(dati_, impiegato));
 
         LSalvaEsci= new QHBoxLayout(this);
