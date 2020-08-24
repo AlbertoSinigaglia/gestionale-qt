@@ -16,13 +16,14 @@
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
 #include "collections/DynamicArray.h"
-
+#include "tableheader.h"
 class EmployeesList : public QFrame
 {
     Q_OBJECT
     EmployeeListElement* current = nullptr;
     std::vector<EmployeeListElement*> children;
     QVBoxLayout* getNewLayout();
+    TableHeader* header;
 public:
     EmployeesList( QWidget *parent = 0);
     ~EmployeesList() {}
