@@ -7,13 +7,27 @@ QVBoxLayout* EmployeesList::getNewLayout(){
     layout->setAlignment(Qt::AlignTop);
     return layout;
 }
-EmployeesList::EmployeesList( QWidget *parent): QFrame( parent )
+EmployeesList::EmployeesList( QWidget *parent): QFrame( parent ), header(new TableHeader(this))
 {
     this->setLayout(getNewLayout());
     this->setObjectName("frame-right");
     this->setContentsMargins(0,0,0,0);
     this->setStyleSheet("background-color:white;");
-
+    this->layout()->addWidget(header);
+    std::vector<QString> fields{
+        "Nome",
+        "Cognome",
+        "Data di nascita",
+        "Codice Fiscale",
+        "Data di assunzione",
+        "Data fine contratto",
+        "Salario",
+        "Ore lavoro settimanale",
+    };
+    std::for_each(fields.begin(), fields.end(), [&](auto &el){
+        header->addField(el);
+    });
+    header->show();
 }
 
 void EmployeesList::setEmployees(const DynamicArray<Employee*>& empl){
@@ -33,6 +47,14 @@ Employee * EmployeesList::getCurrent() const{
     return current ? current->getEmployee() : nullptr;
 }
 void EmployeesList::changeListAttributeVisibility(int props, int visibility){
+    if(props & EmployeeListElement::Name) header->setVisibility("Nome", visibility);
+    if(props & EmployeeListElement::Surname) header->setVisibility("Cognome", visibility);
+    if(props & EmployeeListElement::CF) header->setVisibility("Codice Fiscale", visibility);
+    if(props & EmployeeListElement::DateOfBirth) header->setVisibility("Data di nascita", visibility);
+    if(props & EmployeeListElement::DateOfEmployment) header->setVisibility("Data di assunzione", visibility);
+    if(props & EmployeeListElement::DateEndOfContract) header->setVisibility("Data fine contratto", visibility);
+    if(props & EmployeeListElement::Salary) header->setVisibility("Salario", visibility);
+    if(props & EmployeeListElement::WeeklyHours) header->setVisibility("Ore lavoro settimanale", visibility);
     emit changeListAttributeVisibilityEvent(props, visibility);
 }
 void EmployeesList::childPressedEvent(EmployeeListElement* e){
@@ -46,10 +68,8 @@ void EmployeesList::childPressedEvent(EmployeeListElement* e){
         current->updateStatus(false);
         current = nullptr;
     }
-    // do something
 }
 void EmployeesList::childClickedEvent(EmployeeListElement* e){
-    // do something
     emit ListElementDoubleClicked(e);
 }
 

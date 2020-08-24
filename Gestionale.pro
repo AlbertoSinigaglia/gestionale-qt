@@ -61,7 +61,8 @@ SOURCES += \
     controller.cpp \
     main.cpp \
     gestionale.cpp \
-    widgets/suggerimento.cpp
+    widgets/suggerimento.cpp \
+    widgets/tableheader.cpp
 
 HEADERS += \
     CSV/CSVReader.h \
@@ -111,7 +112,8 @@ HEADERS += \
     widgets/employeeslist.h \
     controller.h \
     gestionale.h \
-    widgets/suggerimento.h
+    widgets/suggerimento.h \
+    widgets/tableheader.h
 
 FORMS += \
     gestionale.ui
