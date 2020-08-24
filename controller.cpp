@@ -59,12 +59,13 @@ void Controller::deleteEmployee(Employee * e){
     }
 }
 void Controller::insertNewEmployee(){
-    TypeCreation scelta_inserimento=TypeCreation();
-    scelta_inserimento.show();
+    TypeCreation scelta_inserimento;
+    scelta_inserimento.setModal(true);
+    scelta_inserimento.exec();
+    qDebug() << "test";
 }
 
 void Controller::setTypeInsert(QString q){
-
     if(q=="GUIDev"){
         considered_employee=new GUIDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoClient(),DatiInterfacceUtente());
     }else if(q=="DatBaseDev"){

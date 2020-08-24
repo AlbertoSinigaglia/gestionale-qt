@@ -37,26 +37,13 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     cf = new QLabel(QString(e->getCF().c_str()));
 
     //dati relativi al lavoro
-    // seg fault inizio
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
     salary = new QLabel(QString(std::to_string(e->calcolaStipendio()).c_str()));
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
-    // seg fault fine
+    produttivo = new QLabel();
 
-    //dati specifici del lavoratore
-    /*riparazioni = new QLabel(QString(static_cast<std::string>(e->).c_str()));
-    percentualeCapo
-    libreria
-    percentualeBack
-    gradoProfessionalita
-    numSistemiGestiti
-    numCriticitaRisolte
-    linguaggio
-    numProgConclusi
-    ripSussistenti
-    Produttivo*/
-
+    produttivo->setFixedWidth(150);
     name->setFixedWidth(150);
     surname->setFixedWidth(150);
     date_of_birth->setFixedWidth(150);
@@ -76,6 +63,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     salary->setWordWrap(true);
     weekly_hours->setWordWrap(true);
 
+    layout->addWidget(produttivo);
     layout->addWidget(name);
     layout->addWidget(surname);
     layout->addWidget(date_of_birth);
@@ -85,6 +73,15 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     layout->addWidget(date_end_of_contract);
     layout->addWidget(salary);
     layout->addWidget(weekly_hours);
+
+
+    QPixmap produttivo_image;
+    QString path = e->produttivo() ? ":/resources/tick.png" : ":/resources/close.png";
+    if(produttivo_image.load(path)){
+        produttivo_image = produttivo_image.scaled(20, 20);
+        produttivo->setPixmap(produttivo_image);
+    }
+
 
     setStyle();
     updateStatus(false);

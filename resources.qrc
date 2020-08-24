@@ -7,5 +7,7 @@
         <file>resources/exit_icon.png</file>
         <file>resources/save.png</file>
         <file>resources/Suggestion.png</file>
+        <file>resources/tick.png</file>
+        <file>resources/close.png</file>
     </qresource>
 </RCC>

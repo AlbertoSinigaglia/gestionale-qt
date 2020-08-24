@@ -15,6 +15,7 @@ EmployeesList::EmployeesList( QWidget *parent): QFrame( parent ), header(new Tab
     this->setStyleSheet("background-color:white;");
     this->layout()->addWidget(header);
     std::vector<QString> fields{
+        "Produttivo",
         "Nome",
         "Cognome",
         "Data di nascita",

@@ -16,7 +16,7 @@
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
 #include "collections/DynamicArray.h"
-#include "tableheader.h"
+#include "widgets/tableheader.h"
 class EmployeesList : public QFrame
 {
     Q_OBJECT

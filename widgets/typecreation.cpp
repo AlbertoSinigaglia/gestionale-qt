@@ -3,7 +3,7 @@
 
 QStringList TypeCreation::testo_opzioni ={"GUIDev","DatBaseDev","FullStack","ITSecurityDev","Tecnico"};
 
-TypeCreation::TypeCreation(QWidget* parent): QFrame(parent){
+TypeCreation::TypeCreation(QWidget* parent): QDialog(parent){
 
     QVBoxLayout* layout = new QVBoxLayout(this);
     setMinimumSize(500, 400);
@@ -16,7 +16,7 @@ TypeCreation::TypeCreation(QWidget* parent): QFrame(parent){
     QPushButton* annulla = new QPushButton("Annulla", this);
 
     QWidget* pulsanti = new QWidget(this);
-    QHBoxLayout* Lpulsanti = new QHBoxLayout(this);
+    QHBoxLayout* Lpulsanti = new QHBoxLayout(pulsanti);
     Lpulsanti->addWidget(annulla); Lpulsanti->addWidget(ok);
     pulsanti->setLayout(Lpulsanti);
 
