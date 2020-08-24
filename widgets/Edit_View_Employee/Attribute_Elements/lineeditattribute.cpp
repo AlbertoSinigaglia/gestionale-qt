@@ -7,8 +7,9 @@ LineEditAttribute::LineEditAttribute(QString nome, TipoInserimento tipo_, QStrin
 
     if(editable){
         setter_str = new QLineEdit(valore_,this);
-        setter_str->setFixedWidth(100);
-        setter_str->setAlignment(Qt::AlignRight);
+        setter_str->setFixedWidth(240);
+        layout->setAlignment(setter_str,Qt::AlignRight);
+        setter_str->setMaxLength(30);
 
         connect(setter_str, SIGNAL(textEdited(QString)), this, SLOT(catchValue(QString)));
         connect(setter_str, SIGNAL(textEdited(QString)), this, SIGNAL(isModify()));

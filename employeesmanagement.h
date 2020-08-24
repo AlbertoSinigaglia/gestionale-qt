@@ -18,22 +18,32 @@ class EmployeesManagement
 
     QString source;
 public:
+
+    /**
+     * @brief Aggiunge un impiegato al vettore di impiegati del database
+     * @param puntatore all'impiegato da aggiungere
+     */
+    void addEmployee(Employee* e);
+
     /**
      * @brief Costruttore della classe
      * @param source_ : path da cui ricostruire i dipendenti
      */
     EmployeesManagement();
     bool import(const QString& path);
+
     /**
      * @brief salva sul path fornito una serializzazione della collezione dei dipendenti corrente
      * @param source_
      */
     void save(const QString& source_);
+
     /**
       * @brief getter per la collezione corrente di dipedenti
       * @return collezione corrente dei dipendenti
       */
      std::shared_ptr<DynamicArray<Employee*>> getEmployees() const;
+
      /**
      * @brief getter per il path del file che è stato usato alla creazione dell'oggetto
      * @return path file originale

@@ -1,17 +1,18 @@
 #include "controller.h"
 #include <QDebug>
-Controller::Controller(QObject *parent, Gestionale* view_): QObject(parent), view(view_),edit_view(nullptr), considered_employee(nullptr){
-    view->show();
-    model = std::make_shared<EmployeesManagement>();
-    view->setModel(model);
-    view->updateList();
-    connect(view.get(), SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
-    connect(view.get(), SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
-    connect(view.get(), SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
-    connect(view.get(), SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(openEmployeeInfo(Employee*)));
-    connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
-    connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
-    connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
+Controller::Controller(QObject *parent, Gestionale* view_):
+    QObject(parent), view(view_), edit_view(nullptr), considered_employee(nullptr){
+        view->show();
+        model = std::make_shared<EmployeesManagement>();
+        view->setModel(model);
+        view->updateList();
+        connect(view.get(), SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
+        connect(view.get(), SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
+        connect(view.get(), SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
+        connect(view.get(), SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(openEmployeeInfo(Employee*)));
+        connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
+        connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
+        connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
 
 }
 bool Controller::updateModel(bool want_to_export){
@@ -58,7 +59,25 @@ void Controller::deleteEmployee(Employee * e){
     }
 }
 void Controller::insertNewEmployee(){
-    QMessageBox::information(view.get(), "inserimento dipendente", "Stai per inserire un nuovo dipendente");
+    TypeCreation scelta_inserimento=TypeCreation();
+    scelta_inserimento.show();
+}
+
+void Controller::setTypeInsert(QString q){
+
+    if(q=="GUIDev"){
+        considered_employee=new GUIDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoClient(),DatiInterfacceUtente());
+    }else if(q=="DatBaseDev"){
+        considered_employee=new DBDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiDatabase());
+    }else if(q=="FullStack"){
+        considered_employee=new FullStack(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiLatoClient(),DatiFullStack());
+    }else if(q=="ITSecurityDev"){
+        considered_employee=new ITSecurityDev(Persona(),DatiLavoratore(),DatiManutenzione(),DatiDeveloping(),DatiRipristinoSicurezza());
+    }else if(q=="Tecnico"){
+        considered_employee=new Tecnico(Persona(),DatiLavoratore(),DatiManutenzione(),DatiSistemi(),DatiRiparazioneSistemi());
+    }else return;
+
+    OpenEditView(considered_employee,EditViewEmployee::Utilizzo::CREAZIONE);
 }
 
 void Controller::openEmployeeInfo(Employee* e){
@@ -172,14 +191,24 @@ void Controller::SaveChanges(AbstDataSection* data_){
 
 void Controller::ExitEditView(){
 
-    if(edit_view->isModifyed()){
+    bool is_creazione = edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE;
 
-        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, "Modifiche","Vuoi che salvi le modifiche?",QMessageBox::Save | QMessageBox::Discard);
-        if(reply==QMessageBox::Save)
+    if(edit_view->isModifyed()||is_creazione){
+
+        QString testo=(is_creazione)? "Creazione":"Modifica";
+        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi che salvi le modifiche?",QMessageBox::Save | QMessageBox::Discard);
+
+        if(reply==QMessageBox::Save){
             edit_view->chooseAndSend();
+
+            if(is_creazione)
+                model->addEmployee(considered_employee);
+
+            view->updateList();
+        }else if(is_creazione) delete considered_employee;
+
     }
 
-    edit_view->close();
     considered_employee=nullptr;
     delete edit_view;
     edit_view=nullptr;

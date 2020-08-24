@@ -13,7 +13,7 @@
 class Persona{
 
 public:
-    Persona(const std::string & nome_, const std::string & cognome_, const std::string & cf_, const Data & nascita_);
+    Persona(const std::string & nome_="", const std::string & cognome_="", const std::string & cf_="", const Data & nascita_=Data(1984,1,24));
 
     virtual ~Persona() = default;
     

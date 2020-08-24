@@ -9,9 +9,13 @@ ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzion
         for(auto i=opzioni.begin(); i!=opzioni.end(); i++)
             setter_combo->addItem(*i);
         setter_combo->setCurrentIndex(index_valore_inizio);
+        setter_combo->setFixedWidth(200);
 
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(setValue(int)));
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SIGNAL(isModify()));
+
+        layout->addWidget(setter_combo);
+        layout->setAlignment(setter_combo,Qt::AlignRight);
     }
     setValue(index_valore_inizio);
 }

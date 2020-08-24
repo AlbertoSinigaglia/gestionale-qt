@@ -11,6 +11,7 @@ AbstSectionElement::AbstSectionElement(QString nome_sezione, QWidget *parent): Q
         QLabel* titolo = new QLabel(nome_sezione, this);
         layout->addWidget(titolo);
         setLayout(layout);
+        connect(this, SIGNAL(setModifyed()), this, SLOT(setIs_Modifyed()));
     }
 
 

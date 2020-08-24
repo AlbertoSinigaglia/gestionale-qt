@@ -14,6 +14,7 @@
 #include"employeesmanagement.h"
 #include "models/headers/Employee.h"
 #include"editviewemployee.h"
+#include"widgets/typecreation.h"
 
 class Controller : public QObject
 {
@@ -40,6 +41,7 @@ public slots:
 
     void SaveChanges(AbstDataSection* data_);
     void ExitEditView();
+    void setTypeInsert(QString q);
 
 private:
     void OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo);

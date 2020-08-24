@@ -4,6 +4,7 @@
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
     QDialog(parent), stato(stato_utilizzo), isModify(false){
 
+        topLevelWidget();
         this->setFixedSize(800, 700);
         mainLayout = new QVBoxLayout(this);
         mainLayout->setContentsMargins(0,0,0,0);
@@ -23,10 +24,14 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         mainLayout->setAlignment(SalvaEsci,Qt::AlignRight);
 
 
-        connect(SalvaEsci, SIGNAL(clicked()), this, SIGNAL(handleExitEditView()));
+        connect(SalvaEsci, SIGNAL(clicked()), this, SLOT(closeButton()));
 
         setLayout(mainLayout);
         }
+
+void EditViewEmployee::closeButton(){
+    close();
+}
 
 
 QHBoxLayout* EditViewEmployee::buildIntestazione(){
@@ -60,7 +65,7 @@ void EditViewEmployee::chooseAndSend() const{
 
         for(auto i=lista_elementi.begin(); i!=lista_elementi.end(); i++){
             if((*i)->isModifyed())
-            emit SaveDataConsiderd((*i)->getData());
+               emit SaveDataConsiderd((*i)->getData());
             //Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
             //Questi verranno gestiti ed eliminati dalla destinazione : il Controller
         }
@@ -122,7 +127,6 @@ QFrame* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& da
         lista_elementi.push_back(sezione);
         delete objct;
     }
-    std::cout<<frame;
     frame->setLayout(layout);
     return frame;
     }
@@ -133,10 +137,14 @@ bool EditViewEmployee::isModifyed() const{
 
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
-        emit handleExitEditView();
-        event->accept();
+    emit handleExitEditView();
+    event->accept();
 }
 void EditViewEmployee::setModifed(){
     isModify=true;
     SalvaEsci->setText("Esci...");
+}
+
+EditViewEmployee::Utilizzo EditViewEmployee::getStato() const{
+    return stato;
 }

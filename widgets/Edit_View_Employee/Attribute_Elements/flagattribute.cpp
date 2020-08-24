@@ -7,6 +7,8 @@ FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget
         if(valore_) setter_bool->setCheckState(Qt::Checked);
         else setter_bool->setCheckState(Qt::Unchecked);
 
+        layout->setAlignment(setter_bool,Qt::AlignRight);
+
         connect(setter_bool, SIGNAL(stateChanged(int)), this, SIGNAL(isModify()));
         connect(setter_bool,SIGNAL(stateChanged(int)), this, SLOT(setValue(int)));
 

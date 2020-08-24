@@ -4,10 +4,10 @@ Suggerimento::Suggerimento(QString testo_, QWidget* parent): QPushButton(parent)
 {
     setIcon(QIcon(":/resources/Suggestion.png"));
     setIconSize(QSize(16,16));
-    //setFixedSize(20,20);
+    setFixedSize(28,24);
+    setFlat(true);
 
     connect(this, SIGNAL(clicked()), this, SLOT(show()));
-
 }
 
 

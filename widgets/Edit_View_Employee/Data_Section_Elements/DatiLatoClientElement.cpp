@@ -31,7 +31,7 @@ void DatiLatoClientElement::addCampi(const DatiLatoClient& dati, bool editable){
     connect(libreria_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
     orientato_professionalita_widget = new FlagAttribute(nome_campi[1],dati.orientato_professionalita,editable,this);
-    orientato_professionalita_widget->insertInfo(" PROPRIETÀ: Professionalità/n intendiamo un ambiente professionale l'ambiente che mette a disposizione strumenti per un lavoro ragionato e consapevole, che mira a minimizzare gli sforzi a sfovore dell'intuitività del sistema");
+    orientato_professionalita_widget->insertInfo("PROPRIETÀ: Professionalità\nintendiamo un ambiente professionale l'ambiente che mette a disposizione strumenti per un lavoro ragionato e consapevole, che mira a minimizzare gli sforzi a sfovore dell'intuitività del sistema");
     layout->addWidget(orientato_professionalita_widget);
     connect(orientato_professionalita_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 

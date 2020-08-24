@@ -8,20 +8,22 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
     layout->setSpacing(30);
 
     QLabel* title = new QLabel(nome, this);
-    title->setFixedWidth(500);
-    //title->setWordWrap(true);
-    layout->addWidget(title);
+    title->setWordWrap(true);
+    title->setFixedWidth(170);
+    title->setFixedHeight(30);
 
     str_value = new QLabel(this);
-    title->setFixedWidth(100);
-    layout->addWidget(str_value);
 
+    layout->addWidget(title);
+    layout->addWidget(str_value);
     setLayout(layout);
 }
 
 
 void AbstAttribute::insertInfo(QString info){
-    layout->insertWidget(1,new Suggerimento(info,this));
+    Suggerimento* s =new Suggerimento(info,this);
+    layout->insertWidget(2,s);
+    layout->setAlignment(s,Qt::AlignLeft);
 }
 
 

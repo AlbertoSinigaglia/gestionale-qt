@@ -54,6 +54,8 @@ public:
 
     void chooseAndSend() const;
 
+    Utilizzo getStato() const;
+
 signals:
 
     void SaveDataConsiderd(AbstDataSection* dati_) const;     // TO CONTROLLER
@@ -82,6 +84,7 @@ private slots:
 
     void setModifed();
     void closeEvent(QCloseEvent *event) override;
+    void closeButton();
 
 
 

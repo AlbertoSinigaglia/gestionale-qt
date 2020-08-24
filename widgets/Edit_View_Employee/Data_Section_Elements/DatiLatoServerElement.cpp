@@ -21,7 +21,7 @@ void DatiLatoServerElement::addCampi(const DatiLatoServer& dati, bool editable){
     layout->addWidget(perc_capo_progetto_widget);
     connect(perc_capo_progetto_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    livello_astrazione_widget = new SlideAttribute(nome_campi[0],dati.livello_astrazione,1,5,0,editable,this);
+    livello_astrazione_widget = new SlideAttribute(nome_campi[1],dati.livello_astrazione,1,5,0,editable,this);
     livello_astrazione_widget->insertInfo("maggiore è il suo livello di astrazione più è vicino a prendere decisioni architetturali del sistema");
     layout->addWidget(livello_astrazione_widget);
     connect(livello_astrazione_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
@@ -31,7 +31,7 @@ void DatiLatoServerElement::addCampi(const DatiLatoServer& dati, bool editable){
     connect(prove_correttezza_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
     orientato_ortogonalita_widget = new FlagAttribute(nome_campi[3],dati.orientato_ortogonalita,editable,this);
-    orientato_ortogonalita_widget->insertInfo(" PROPRIETÀ: Ortognoalità /n con ortogonalità intendiamo il principio sostenuto nella prospettiva AGLILE");
+    orientato_ortogonalita_widget->insertInfo("PROPRIETÀ: Ortognoalità \ncon ortogonalità intendiamo il principio sostenuto nella prospettiva AGLILE");
     layout->addWidget(orientato_ortogonalita_widget);
     connect(orientato_ortogonalita_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 

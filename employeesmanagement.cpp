@@ -75,3 +75,7 @@ DynamicArray<AbstDataSection*> EmployeesManagement::serializeEmployee(Employee* 
 
     return vett;
 }
+
+void EmployeesManagement::addEmployee(Employee* e){
+    employees->push_back(e);
+}

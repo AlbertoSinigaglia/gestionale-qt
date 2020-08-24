@@ -4,7 +4,7 @@ DatiPersonaElement::DatiPersonaElement(const DatiPersona& dati_, bool editable, 
     : AbstSectionElement(QString("Dati Persona"),parent ){
 
 
-    //addCampi(dati_, editable);
+    addCampi(dati_, editable);
 }
 
 AbstDataSection* DatiPersonaElement::getData() const{
