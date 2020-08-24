@@ -6,6 +6,7 @@
 #include <qwidget.h>
 #include <iostream>
 #include<QVBoxLayout>
+#include<QHBoxLayout>
 #include <QPushButton>
 #include<QScrollArea>
 #include<QLabel>
@@ -60,14 +61,17 @@ signals:
 
     void SaveDataConsiderd(AbstDataSection* dati_) const;     // TO CONTROLLER
 
-    void handleExitEditView() const;
+    void closeDirect();
+    void saveAndClose();
 
 private:
 
     Utilizzo stato;
 
     bool isModify;
-    QPushButton* SalvaEsci;
+
+    QHBoxLayout* LSalvaEsci;
+    QPushButton* Esci;
 
     DynamicArray<AbstSectionElement*> lista_elementi;
 
@@ -84,7 +88,6 @@ private slots:
 
     void setModifed();
     void closeEvent(QCloseEvent *event) override;
-    void closeButton();
 
 
 

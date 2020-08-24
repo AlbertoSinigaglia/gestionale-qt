@@ -107,8 +107,8 @@ float ITSecurityDev::bonusStipendio() const{
 
 
 float ITSecurityDev::valoreMedioRiparazione() const{
-
-    return UFMath::mediaPonderata( getNRiparazioniMese() - n_criticita_risolte, Conv::valore_manutenzione_non_critica, n_criticita_risolte, Conv::valore_manutenzione_critica ) ;
+    int p = getNRiparazioniMese() - n_criticita_risolte; if(p<0) p=0;
+    return UFMath::mediaPonderata( static_cast<unsigned int>(p) , Conv::valore_manutenzione_non_critica, n_criticita_risolte, Conv::valore_manutenzione_critica ) ;
 }
 
 unsigned int ITSecurityDev::quantitaConsiderevoleRiparazioni() const{

@@ -28,7 +28,7 @@ namespace Conv{
 
         const float remunerazione_ora_routine_ITSecurityDev = 10;
         const unsigned int n_riparazioni_considervole_ITSecurityDev = 110;
-        const float perdita_breccia = 100;
+        const float perdita_breccia = 80;
         const float valore_manutenzione_non_critica = 50;
         const float valore_manutenzione_critica = 70;
         const double perc_pessimistica_manutenzioni_critiche = 0.1;

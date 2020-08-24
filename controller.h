@@ -40,6 +40,7 @@ public slots:
     void exitApplication();
 
     void SaveChanges(AbstDataSection* data_);
+    void SaveEditView();
     void ExitEditView();
     void setTypeInsert(QString q);
 

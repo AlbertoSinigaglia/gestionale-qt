@@ -15,24 +15,22 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         impiegato->setFixedSize(750,600);
         impiegato->setWidget(buildSections(dati_, impiegato));
 
-
-        SalvaEsci = new QPushButton("Esci", this);
+        LSalvaEsci= new QHBoxLayout(this);
+        Esci = new QPushButton("Esci", this);
+        LSalvaEsci->addWidget(Esci);
+        if(stato_utilizzo==Utilizzo::CREAZIONE)
+            setModifed();
 
         mainLayout->addLayout(buildIntestazione());
         mainLayout->addWidget(impiegato);
-        mainLayout->addWidget(SalvaEsci);
-        mainLayout->setAlignment(SalvaEsci,Qt::AlignRight);
+        mainLayout->addLayout(LSalvaEsci);
+        mainLayout->setAlignment(LSalvaEsci,Qt::AlignRight);
 
 
-        connect(SalvaEsci, SIGNAL(clicked()), this, SLOT(closeButton()));
+        connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
 
         setLayout(mainLayout);
         }
-
-void EditViewEmployee::closeButton(){
-    close();
-}
-
 
 QHBoxLayout* EditViewEmployee::buildIntestazione(){
 
@@ -137,12 +135,18 @@ bool EditViewEmployee::isModifyed() const{
 
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
-    emit handleExitEditView();
+    emit closeDirect();
     event->accept();
 }
 void EditViewEmployee::setModifed(){
-    isModify=true;
-    SalvaEsci->setText("Esci...");
+    if(!isModify){
+        Esci->setText("Annulla");
+        QPushButton* salva = new QPushButton("Salva ed Esci",this);
+        LSalvaEsci->addWidget(salva);
+        connect(salva,SIGNAL(clicked()),this,SIGNAL(saveAndClose()));
+
+        isModify=true;
+    }
 }
 
 EditViewEmployee::Utilizzo EditViewEmployee::getStato() const{

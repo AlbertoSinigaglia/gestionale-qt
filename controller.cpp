@@ -129,7 +129,8 @@ void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo 
     edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
     edit_view->setModal(true);
     edit_view->show();
-    connect(edit_view, SIGNAL(handleExitEditView()), this, SLOT(ExitEditView()));
+    connect(edit_view, SIGNAL(closeDirect()), this, SLOT(ExitEditView()));
+    connect(edit_view, SIGNAL(saveAndClose()), this, SLOT(SaveEditView()));
     connect(edit_view, SIGNAL(SaveDataConsiderd(AbstDataSection*)), this, SLOT(SaveChanges(AbstDataSection*)));
 
 }
@@ -189,14 +190,14 @@ void Controller::SaveChanges(AbstDataSection* data_){
 
 
 
-void Controller::ExitEditView(){
+void Controller::SaveEditView(){
 
     bool is_creazione = edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE;
 
-    if(edit_view->isModifyed()||is_creazione){
+    if(edit_view->isModifyed()){
 
         QString testo=(is_creazione)? "Creazione":"Modifica";
-        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi che salvi le modifiche?",QMessageBox::Save | QMessageBox::Discard);
+        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi salvare le modifiche?",QMessageBox::Save | QMessageBox::Discard);
 
         if(reply==QMessageBox::Save){
             edit_view->chooseAndSend();
@@ -204,15 +205,23 @@ void Controller::ExitEditView(){
             if(is_creazione)
                 model->addEmployee(considered_employee);
 
+            considered_employee=nullptr;
             view->updateList();
-        }else if(is_creazione) delete considered_employee;
-
+        }
     }
+
+    ExitEditView();
+}
+
+
+void Controller::ExitEditView(){
+
+    if(edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE && considered_employee)
+        delete considered_employee;
 
     considered_employee=nullptr;
     delete edit_view;
     edit_view=nullptr;
     view->setEnabled(true);
 }
-
 
