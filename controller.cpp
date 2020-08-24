@@ -13,7 +13,6 @@ Controller::Controller(QObject *parent, Gestionale* view_):
         connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
         connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
         connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
-
 }
 bool Controller::updateModel(bool want_to_export){
     bool sent = false;
@@ -61,8 +60,8 @@ void Controller::deleteEmployee(Employee * e){
 void Controller::insertNewEmployee(){
     TypeCreation scelta_inserimento;
     scelta_inserimento.setModal(true);
+    connect(&scelta_inserimento, SIGNAL(choosed(QString)),this, SLOT(setTypeInsert(QString)));
     scelta_inserimento.exec();
-    qDebug() << "test";
 }
 
 void Controller::setTypeInsert(QString q){
