@@ -5,14 +5,14 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
     QDialog(parent), stato(stato_utilizzo), isModify(false){
 
         topLevelWidget();
-        this->setMinimumSize(800, 700);
+        this->setFixedSize(850, 730);
         mainLayout = new QVBoxLayout(this);
         mainLayout->setContentsMargins(20,20,20,20);
-        mainLayout->setSpacing(10);
+        mainLayout->setSpacing(12);
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setMinimumSize(750,600);
+        impiegato->setFixedSize(780,600);
         impiegato->setWidget(buildSections(dati_, impiegato));
 
         LSalvaEsci= new QHBoxLayout(this);
@@ -64,8 +64,8 @@ void EditViewEmployee::chooseAndSend() const{
         for(auto i=lista_elementi.begin(); i!=lista_elementi.end(); i++){
             if((*i)->isModifyed())
                emit SaveDataConsiderd((*i)->getData());
-            //Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
-            //Questi verranno gestiti ed eliminati dalla destinazione : il Controller
+            // Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
+            // Questi verranno gestiti ed eliminati dalla destinazione : il Controller
         }
     }
 

@@ -43,12 +43,12 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     //dati relativi al lavoro
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
-    salary = new QLabel(QString(std::to_string(e->calcolaStipendio()).c_str()));
+    salary = new QLabel(QString::number(e->calcolaStipendio())+" €");
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
     produttivo = new QLabel();
 
 
-     bonus_stipendio = new QLabel(std::to_string(e->bonusStipendio()).c_str());
+     bonus_stipendio = new QLabel(QString::number(e->bonusStipendio())+" €");
      grado_esperienza= new QLabel(std::to_string(e->gradoEsperienza()).c_str());
      numero_righe_totali = new QLabel("");
      linguaggio = new QLabel("");

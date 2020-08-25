@@ -36,6 +36,8 @@ public:
     void setModel(std::shared_ptr<EmployeesManagement> model_);
     void updateList() const;
     bool disableSaveEnableImport();
+    void showLiquidation(QString nome, float quota_liquidazione);
+
 private:
     std::shared_ptr<EmployeesManagement> model;
 	QHBoxLayout* mainLayout;

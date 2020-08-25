@@ -46,11 +46,14 @@ public:
     void addEmployee(Employee* e);
 
     /**
-     * @brief importa dipendenti da file
-     * @param path path del file da cui importare
-     * @return
-     *      true: è riuscito a importare i dipendenti
-     *      false: altrimenti
+     * @brief rimuove l'impiegato dal database
+     * @param il puntatore all'impiegato da rimuovere
+     */
+    void deleteEmployee(Employee* e);
+
+    /**
+     * @brief Costruttore della classe
+     * @param source_ : path da cui ricostruire i dipendenti
      */
     bool import(const QString& path);
 
@@ -73,9 +76,16 @@ public:
     QString getOriginalSource() const;
 
     /**
+     * @brief Viene ustato per aggiornare i campi dati di tutti gli impiegati nel dataBase sulla
+     * base del cambio del mese
+     */
+    void updateMonthAll();
+
+    /**
      * @brief serializza i dati dell'impiegato in un insieme di macro raggruppamenti ordinato
      * @return l'insieme delle tipi raggruppamento
      */
-    static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
+static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
+
 };
 #endif // EMPLOYEESMANAGEMENT_H

@@ -337,6 +337,14 @@ void Gestionale::setStyle()
 }
 
 
+void Gestionale::showLiquidation(QString nome, float quota_liquidazione){
+    QString testo= QString("Per liquidare ")+ nome
+            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+" €";
+    auto msg= QMessageBox(QMessageBox::Information, "Liquidazione", testo, QMessageBox::Ok);
+    msg.exec();
+}
+
+
 
 void Gestionale::deleteButtonClicked(){
     auto e = employeesList->getCurrent();

@@ -37,31 +37,64 @@
 #include"widgets/suggerimento.h"
 
 
-
+/*
+ * La vista < EditViewEmployee>  si  occupa  di  creare  un interfaccia  per  visualizzare
+ * sezioni indipendenti di dati di tipo <TipiRaggruppamento>, è con questi che interagisce
+ * e non direttamente su  un impiegato.
+ */
 class EditViewEmployee: public QDialog{
 Q_OBJECT
 
 public:
 
+    /* Utilizzo:
+     * La vista può essere aperta per visualizzare un impiegato (in questo caso genererà
+     * dei widget in sola lettura), oppure per modificarlo (in lettura/scrittura) o per
+     * crearlo.
+     */
     enum Utilizzo: short{
         CREAZIONE =0,
         MODIFICA =1,
         VISUALIZZA =2
     };
 
+    /**
+     * @brief Si occupa di creare una vista che rappresenta un impiegato composto da un certo numero di sezioni dati
+     * @param dati_
+     * @param stato_utilizzo (VISUALIZZA, CREAZIONE, MODIFICA)
+     * @param parent
+     */
     EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo =Utilizzo::VISUALIZZA, QWidget *parent =0);
 
+    /* IS MODIFYED
+     * Permette di capire se dal momento della creazione della vista l'utente
+     * ha eseguito una qualche azione sui widget per la modifica dei campi dati
+     */
     bool isModifyed() const;
 
+    /**
+     * @brief Si occupa di scegliere tra le varie sezioni dati quelle modificate
+     * e trasmetterle con un signal
+     */
     void chooseAndSend() const;
 
+    // GETTER STATO
     Utilizzo getStato() const;
 
 signals:
 
+    /**
+     * @brief Il segnale richiede che <dati_> venga intesa e gestita come la nuova
+     * versione modificata della sezione univocata dal suo tipo dinamico
+     * @param dati_
+     */
     void SaveDataConsiderd(AbstDataSection* dati_) const;     // TO CONTROLLER
 
+    //Il segnale richiama la gestione della chiusura della vista
     void closeDirect();
+
+    /*Il segnale richiama la gestione del salvataggio dei dati al momento della
+    Chiusura della vista*/
     void saveAndClose();
 
 private:
@@ -73,11 +106,18 @@ private:
     QHBoxLayout* LSalvaEsci;
     QPushButton* Esci;
 
+    // lista_elementi è un vettore di riferimenti ai widget che riguardano ogni sezione
+    // volutamente ridondante (mainLayout: *exist*)
     DynamicArray<AbstSectionElement*> lista_elementi;
 
     QVBoxLayout* mainLayout;
 
-    // Metodo per costruttore
+    /**
+     * @brief metodo x la costruzione, permette di generare e connettere i widget che
+     * gestiscono le varie sezioni di dati
+     * @param dati_
+     * @param parent
+     */
     QFrame* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
 
     QHBoxLayout* buildIntestazione();
@@ -86,7 +126,12 @@ private:
 
 private slots:
 
+    /**
+     * @brief si occupa di gestire a livello di vista l'avvenuta alterazione delle
+     * informazioni
+     */
     void setModifed();
+
     void closeEvent(QCloseEvent *event) override;
 
 
