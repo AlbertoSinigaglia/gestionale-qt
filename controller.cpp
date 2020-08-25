@@ -3,7 +3,7 @@
 Controller::Controller(QObject *parent, Gestionale* view_):
     QObject(parent), view(view_), edit_view(nullptr), considered_employee(nullptr){
         view->show();
-        model = std::make_shared<EmployeesManagement>();
+        model = EmployeesManagement::getInstance();
         view->setModel(model);
         view->updateList();
         connect(view.get(), SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
@@ -19,8 +19,8 @@ bool Controller::updateModel(bool want_to_export){
     do{
         QString path =
                 want_to_export ?
-                QFileDialog::getSaveFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
-                model->getOriginalSource();
+                    QFileDialog::getSaveFileName(view.get(),"Salvataggio Dipendenti", "", "Files (*.qcsv)"):
+                    model->getOriginalSource();
         try {
             model->save(path);
             return true;

@@ -1,20 +1,22 @@
 #include "employeesmanagement.h"
 
+std::shared_ptr<EmployeesManagement> EmployeesManagement::instance = nullptr;
+
 EmployeesManagement::EmployeesManagement():
     employees(std::make_shared<DynamicArray<Employee*>>()),
     source(){
-
-
-    Employee* impiegato1 = new DBDev(
-                                Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
-                                DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
-                                DatiDeveloping(Conv::Linguaggio::PYTHON, 1, 1, 1, 10),
-                                DatiLatoServer{0,0,0,0},
-                                DatiDatabase{0,0,0});
-    employees->push_back(impiegato1);
-
+          employees->push_back(new DBDev(
+             Persona{"Alberto", "Sinigaglia", "ASDGEIWIJFIK", Data::oggi()},
+             DatiLavoratore{Data::oggi(), Data::oggi(), 10, 10.},
+             DatiDeveloping(Conv::Linguaggio::PYTHON, 1, 1, 1, 10),
+             DatiLatoServer{0,0,0,0},
+             DatiDatabase{0,0,0})
+         );
 }
-
+std::shared_ptr<EmployeesManagement> EmployeesManagement::getInstance(){
+    if(!EmployeesManagement::instance) EmployeesManagement::instance = std::shared_ptr<EmployeesManagement>(new EmployeesManagement);
+    return EmployeesManagement::instance;
+}
 bool EmployeesManagement::import(const QString& path){
     try {
         auto empls = CSVReader::parse(path);

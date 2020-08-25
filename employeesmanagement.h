@@ -14,10 +14,30 @@
 
 class EmployeesManagement
 {
+    // contenitore dei dipendenti
     std::shared_ptr<DynamicArray<Employee*>> employees;
 
+    // instanza del singleton
+    static std::shared_ptr<EmployeesManagement> instance;
+
+    // path del primo file importato (che nella vista corrisponde al "apri")
     QString source;
+
+    /**
+     * @brief Costruttore della classe
+     * @param source_ : path da cui ricostruire i dipendenti
+     */
+    EmployeesManagement();
 public:
+    EmployeesManagement(const EmployeesManagement &) = delete;
+    EmployeesManagement& operator= (const EmployeesManagement &) = delete;
+    ~EmployeesManagement() = default;
+
+    /**
+     * @brief getter per singleton
+     * @return puntatore all'istanza
+     */
+    static std::shared_ptr<EmployeesManagement> getInstance();
 
     /**
      * @brief Aggiunge un impiegato al vettore di impiegati del database
@@ -26,10 +46,12 @@ public:
     void addEmployee(Employee* e);
 
     /**
-     * @brief Costruttore della classe
-     * @param source_ : path da cui ricostruire i dipendenti
+     * @brief importa dipendenti da file
+     * @param path path del file da cui importare
+     * @return
+     *      true: è riuscito a importare i dipendenti
+     *      false: altrimenti
      */
-    EmployeesManagement();
     bool import(const QString& path);
 
     /**
@@ -56,5 +78,4 @@ public:
      */
     static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
 };
-
 #endif // EMPLOYEESMANAGEMENT_H

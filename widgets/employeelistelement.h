@@ -37,32 +37,39 @@ class EmployeeListElement : public QWidget{
     QLabel* ore_straordinari;
 public:
     enum{
-        Name = 1<<0,
-        Surname = 1<<1,
-        CF = 1<<2,
-        DateOfBirth = 1<<3,
-        DateOfEmployment = 1<<4,
-        DateEndOfContract = 1<<5,
-        Salary = 1<<6,
-        WeeklyHours = 1<<7,
-        Produttivo = 1<<8,
+        Name                    = 1<<0,
+        Surname                 = 1<<1,
+        CF                      = 1<<2,
+        DateOfBirth             = 1<<3,
+        DateOfEmployment        = 1<<4,
+        DateEndOfContract       = 1<<5,
+        Salary                  = 1<<6,
+        WeeklyHours             = 1<<7,
+        Produttivo              = 1<<8,
+        BonusStipendio          = 1<<9,
+        GradoEsperienza         = 1<<10,
 
-        BonusStipendio = 1<<9, // employee
-        GradoEsperienza = 1<<10, // employee
-
-        NumeroRigheTotali = 1<<11, // software
-        Linguaggio = 1<<12, // software
-        PercentualeRipristino = 1<<13, // manutentore
-        NumeroCriticitaRisolte = 1<<14, // security
-        OreStraordinari = 1<<15 // tecnico
+        NumeroRigheTotali       = 1<<11,    // software
+        Linguaggio              = 1<<12,    // software
+        PercentualeRipristino   = 1<<13,    // manutentore
+        NumeroCriticitaRisolte  = 1<<14,    // security
+        OreStraordinari         = 1<<15     // tecnico
     };
     EmployeeListElement(Employee *e, QWidget *parent = 0);
     ~EmployeeListElement();
-    // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
+    // da: https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
     EmployeeListElement(const EmployeeListElement& e) = delete;
     EmployeeListElement& operator= (const EmployeeListElement& e) = delete;
 
+    /**
+     * @brief imposta lo stato di questo elemento (se selezionato o no)
+     * @param lo stato che deve assumere questo elemento
+     */
     void updateStatus(bool new_status);
+    /**
+     * @brief getter per il dipendente che questo elemento gestisce
+     * @return l'employee gestito
+     */
     Employee* getEmployee() const;
 
 
