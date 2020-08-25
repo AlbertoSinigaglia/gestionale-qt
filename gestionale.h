@@ -76,6 +76,7 @@ private:
     QCheckBox* percentuale_ripristino;
     QCheckBox* numero_criticita_risolte;
     QCheckBox* ore_straordinari;
+    QMenu* aboutUs;
 
 
 

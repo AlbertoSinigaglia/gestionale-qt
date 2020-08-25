@@ -327,6 +327,9 @@ void Gestionale::addMenu(){
     menu->addSeparator();
     menu->addAction(a_exit);
     menu->setMinimumWidth(200);
+    aboutUs = new QMenu("About Us");
+    menuBar->addMenu(aboutUs);
+    aboutUs->setMinimumWidth(200);
     mainLayout->setMenuBar(menuBar);
 }
 
@@ -371,6 +374,7 @@ void Gestionale::insertButtonClicked(){
 void Gestionale::modifyButtonClicked(){
     emit modifyEmployeeEvent(employeesList->getCurrent());
 }
+
 void Gestionale::employeeListElementDoubleClicked(EmployeeListElement* e){
     emit employeeListElementDoubleClickedEvent(e->getEmployee());
 }

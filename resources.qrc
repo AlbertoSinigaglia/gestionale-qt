@@ -11,5 +11,6 @@
         <file>resources/close.png</file>
         <file>resources/inserisci.css</file>
         <file>resources/modifica.css</file>
+        <file>resources/MyG.jpeg</file>
     </qresource>
 </RCC>

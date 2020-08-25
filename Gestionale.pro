@@ -56,6 +56,7 @@ SOURCES += \
     widgets/Edit_View_Employee/Data_Section_Elements/DatiSistemiElement.cpp \
     widgets/Edit_View_Employee/abstattribute.cpp \
     widgets/Edit_View_Employee/abstsectionelement.cpp \
+    widgets/aboutus.cpp \
     widgets/employeelistelement.cpp \
     widgets/employeeslist.cpp \
     controller.cpp \
@@ -89,6 +90,7 @@ HEADERS += \
     models/headers/ITSecurityDev.h \
     models/headers/Persona.h \
     models/headers/Tecnico.h \
+    widgets/aboutus.h \
     widgets/tableheader.h \
     widgets/Edit_View_Employee/Attribute_Elements/comboattribute.h \
     widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h \
