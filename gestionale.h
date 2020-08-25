@@ -66,6 +66,7 @@ private:
     QCheckBox* OreLavoro;
     QAction* a_import;
     QAction* a_export;
+    QAction* a_aboutUs;
     QAction* a_exit;
     QAction* a_open;
     QCheckBox* produttivo;

@@ -123,6 +123,11 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(a_open, &QAction::triggered, this, &Gestionale::importFile);
     connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
     connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
+    connect(a_aboutUs,&QAction::triggered, [=](){
+        AboutUs about;
+        about.setModal(true);
+        about.exec();
+    });
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
 
     setStyle();
@@ -329,7 +334,9 @@ void Gestionale::addMenu(){
     menu->addSeparator();
     menu->addAction(a_exit);
     menu->setMinimumWidth(200);
-    aboutUs = new QMenu("About Us");
+    aboutUs = new QMenu("Help");
+    a_aboutUs = new QAction("Informazioni su MyGestionale", aboutUs);
+    aboutUs->addAction(a_aboutUs);
     menuBar->addMenu(aboutUs);
     aboutUs->setMinimumWidth(200);
     mainLayout->setMenuBar(menuBar);
