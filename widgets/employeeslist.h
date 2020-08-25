@@ -25,7 +25,7 @@ class EmployeesList : public QFrame
     TableHeader* header;
 public:
     EmployeesList( QWidget *parent = 0);
-    ~EmployeesList() {}
+    ~EmployeesList() = default;
     // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
     EmployeesList(const EmployeesList& e) = delete;
     EmployeesList& operator= (const EmployeesList& e) = delete;
