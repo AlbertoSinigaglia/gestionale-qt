@@ -15,7 +15,7 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         impiegato->setFixedSize(780,600);
         impiegato->setWidget(buildSections(dati_, impiegato));
 
-        LSalvaEsci= new QHBoxLayout(this);
+        LSalvaEsci= new QHBoxLayout();
         Esci = new QPushButton("Esci", this);
         LSalvaEsci->addWidget(Esci);
         if(stato_utilizzo==Utilizzo::CREAZIONE)
@@ -49,7 +49,7 @@ QHBoxLayout* EditViewEmployee::buildIntestazione(){
 
     info = new Suggerimento(tx_info);
     testo_titolo->setFixedWidth(200);
-    QHBoxLayout* titolo =new QHBoxLayout(this);
+    QHBoxLayout* titolo =new QHBoxLayout();
 
     titolo->addWidget(testo_titolo);
     titolo->addWidget(info);
