@@ -12,7 +12,6 @@
 #include <QStyleOption>
 #include <QPainter>
 #include <QMessageBox>
-#include <QDebug>
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
 #include "collections/DynamicArray.h"

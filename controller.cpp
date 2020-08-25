@@ -146,52 +146,93 @@ void Controller::createEmployeeInfo(QString q){
 
 
 void Controller::SaveChanges(AbstDataSection* data_){
-
-      if(typeid(*data_)==typeid(DatiPersona)){
+    if (typeid(*data_) == typeid(DatiPersona)) {
         considered_employee->setDatiPersona(*dynamic_cast<DatiPersona*>(data_));
-      }else if(typeid(*data_)==typeid(DatiLavoratore)){
+    }
+    else if (typeid(*data_) == typeid(DatiLavoratore)) {
         considered_employee->setDatiLavoratore(*dynamic_cast<DatiLavoratore*>(data_));
-      }else if(typeid(*data_)==typeid(DatiDeveloping)){
+    }
+    else if (typeid(*data_) == typeid(DatiDeveloping)) {
         DatiDeveloping* p = dynamic_cast<DatiDeveloping*>(data_);
-        if(p) dynamic_cast<Software*>(considered_employee)->setDatiDeveloping(*p);
-            else {throw std::invalid_argument("Inserimento non valido");}
-      }else if(typeid(*data_)==typeid(DatiLatoServer)){
+        if (p)
+            dynamic_cast<Software*>(considered_employee)->setDatiDeveloping(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiLatoServer)) {
         DatiLatoServer* p = dynamic_cast<DatiLatoServer*>(data_);
-        if(p) dynamic_cast<BackDev*>(considered_employee)->setDatiLatoServer(*p);
-            else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiLatoClient)){
+        if (p)
+            dynamic_cast<BackDev*>(considered_employee)->setDatiLatoServer(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiLatoClient)) {
         DatiLatoClient* p = dynamic_cast<DatiLatoClient*>(data_);
-        if(p) dynamic_cast<FrontDev*>(considered_employee)->setDatiLatoClient(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiFullStack)){
-          DatiFullStack* p = dynamic_cast<DatiFullStack*>(data_);
-          if(p) dynamic_cast<FullStack*>(considered_employee)->setDatiFullStack(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiDatabase)){
-          DatiDatabase* p = dynamic_cast<DatiDatabase*>(data_);
-          if(p) dynamic_cast<DBDev*>(considered_employee)->setDatiDatabase(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiInterfacceUtente)){
-          DatiInterfacceUtente* p = dynamic_cast<DatiInterfacceUtente*>(data_);
-          if(p) dynamic_cast<GUIDev*>(considered_employee)->setDatiInterfacceUtente(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiManutenzione)){
-          DatiManutenzione* p = dynamic_cast<DatiManutenzione*>(data_);
-          if(p) dynamic_cast<Manutenzione*>(considered_employee)->setDatiManutenzione(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiSistemi)){
-          DatiSistemi* p = dynamic_cast<DatiSistemi*>(data_);
-          if(p) dynamic_cast<Hardware*>(considered_employee)->setDatiSistemi(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiRiparazioneSistemi)){
-          DatiRiparazioneSistemi* p = dynamic_cast<DatiRiparazioneSistemi*>(data_);
-          if(p) dynamic_cast<Tecnico*>(considered_employee)->setDatiRiparazioneSistemi(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-      }else  if(typeid(*data_)==typeid(DatiRipristinoSicurezza)){
-          DatiRipristinoSicurezza* p = dynamic_cast<DatiRipristinoSicurezza*>(data_);
-          if(p) dynamic_cast<ITSecurityDev*>(considered_employee)->setDatiRipristinoSicurezza(*p);
-              else {throw std::invalid_argument("Inserimento non valido");}
-            }
+        if (p)
+            dynamic_cast<FrontDev*>(considered_employee)->setDatiLatoClient(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiFullStack)) {
+        DatiFullStack* p = dynamic_cast<DatiFullStack*>(data_);
+        if (p)
+            dynamic_cast<FullStack*>(considered_employee)->setDatiFullStack(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiDatabase)) {
+        DatiDatabase* p = dynamic_cast<DatiDatabase*>(data_);
+        if (p){
+            dynamic_cast<DBDev*>(considered_employee)->setDatiDatabase(*p);
+        }
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiInterfacceUtente)) {
+        DatiInterfacceUtente* p = dynamic_cast<DatiInterfacceUtente*>(data_);
+        if (p)
+            dynamic_cast<GUIDev*>(considered_employee)->setDatiInterfacceUtente(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiManutenzione)) {
+        DatiManutenzione* p = dynamic_cast<DatiManutenzione*>(data_);
+        if (p)
+            dynamic_cast<Manutenzione*>(considered_employee)->setDatiManutenzione(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiSistemi)) {
+        DatiSistemi* p = dynamic_cast<DatiSistemi*>(data_);
+        if (p)
+            dynamic_cast<Hardware*>(considered_employee)->setDatiSistemi(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiRiparazioneSistemi)) {
+        DatiRiparazioneSistemi* p = dynamic_cast<DatiRiparazioneSistemi*>(data_);
+        if (p)
+            dynamic_cast<Tecnico*>(considered_employee)->setDatiRiparazioneSistemi(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
+    else if (typeid(*data_) == typeid(DatiRipristinoSicurezza)) {
+        DatiRipristinoSicurezza* p = dynamic_cast<DatiRipristinoSicurezza*>(data_);
+        if (p)
+            dynamic_cast<ITSecurityDev*>(considered_employee)->setDatiRipristinoSicurezza(*p);
+        else {
+            throw std::invalid_argument("Inserimento non valido");
+        }
+    }
     this->updateModel();
     delete data_;
 }
@@ -215,6 +256,7 @@ void Controller::SaveEditView(){
             }
 
             considered_employee=nullptr;
+            view->changeSelectedElementComboBox("Tutti");
             view->updateList();
         }
     }

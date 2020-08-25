@@ -353,7 +353,7 @@ void Gestionale::setStyle()
 
 void Gestionale::showLiquidation(QString nome, float quota_liquidazione){
     QString testo= QString("Per liquidare ")+ nome
-            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+" €";
+            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+"€";
     auto msg= QMessageBox(QMessageBox::Information, "Liquidazione", testo, QMessageBox::Ok);
     msg.exec();
 }
@@ -364,6 +364,7 @@ void Gestionale::deleteButtonClicked(){
     auto e = employeesList->getCurrent();
     if(e){
         QMessageBox msgBox(this);
+        msgBox.setStyleSheet("QLabel{min-width: 300px;}");
         msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
         msgBox.setInformativeText("Sicuro di voler procedere?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -416,6 +417,7 @@ void Gestionale::exitApplication(){
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected)
 {
+    Dipendenti->setCurrentText(selected);
     numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
     linguaggio->setCheckState(Qt::CheckState::Unchecked);
     percentuale_ripristino->setCheckState(Qt::CheckState::Unchecked);
