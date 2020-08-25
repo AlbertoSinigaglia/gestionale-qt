@@ -5,7 +5,7 @@ Suggerimento::Suggerimento(QString testo_, QWidget* parent): QPushButton(parent)
     setStyleSheet("background-color:#1565C0 !important; border-radius:14px !important;");
     setIcon(QIcon(":/resources/Suggestion.png"));
     setIconSize(QSize(16,16));
-    setFixedSize(28,28);
+    setFixedSize(30,28);
     setObjectName("suggerimento");
     setFlat(true);
 

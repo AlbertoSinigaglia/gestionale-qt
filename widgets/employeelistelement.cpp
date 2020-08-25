@@ -31,7 +31,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     layout->setMargin( 0 );
     layout->setSpacing(0);
     layout->setAlignment(Qt::AlignLeft);
-    this->setContentsMargins(20,20,20,20);
+    this->setContentsMargins(10,20,10,20);
     this->setMouseTracking(true);
 
     //dati relativi alla persona
@@ -78,24 +78,23 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
      ore_straordinari = new QLabel("");
      if(auto p = dynamic_cast<Tecnico*>(e))
          numero_righe_totali->setText(std::to_string(p->getDatiRiparazioneSistemi().ore_straordinari).c_str());
-
-
-    produttivo->setFixedWidth(150);
-    name->setFixedWidth(150);
-    surname->setFixedWidth(150);
-    date_of_birth->setFixedWidth(150);
-    cf->setFixedWidth(150);
-    date_of_empl->setFixedWidth(150);
-    date_end_of_contract->setFixedWidth(150);
-    salary->setFixedWidth(150);
-    weekly_hours->setFixedWidth(150);
-    bonus_stipendio->setFixedWidth(150);
-    grado_esperienza->setFixedWidth(150);
-    numero_righe_totali->setFixedWidth(150);
-    linguaggio->setFixedWidth(150);
-    percentuale_ripristino->setFixedWidth(150);
-    numero_criticita_risolte->setFixedWidth(150);
-    ore_straordinari->setFixedWidth(150);
+    auto width = 170;
+    produttivo->setFixedWidth(width);
+    name->setFixedWidth(width);
+    surname->setFixedWidth(width);
+    date_of_birth->setFixedWidth(width);
+    cf->setFixedWidth(width);
+    date_of_empl->setFixedWidth(width);
+    date_end_of_contract->setFixedWidth(width);
+    salary->setFixedWidth(width);
+    weekly_hours->setFixedWidth(width);
+    bonus_stipendio->setFixedWidth(width);
+    grado_esperienza->setFixedWidth(width);
+    numero_righe_totali->setFixedWidth(width);
+    linguaggio->setFixedWidth(width);
+    percentuale_ripristino->setFixedWidth(width);
+    numero_criticita_risolte->setFixedWidth(width);
+    ore_straordinari->setFixedWidth(width);
 
     name->setWordWrap(true);
     surname->setWordWrap(true);

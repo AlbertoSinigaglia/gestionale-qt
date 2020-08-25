@@ -192,7 +192,7 @@ void Controller::SaveChanges(AbstDataSection* data_){
           if(p) dynamic_cast<ITSecurityDev*>(considered_employee)->setDatiRipristinoSicurezza(*p);
               else {throw std::invalid_argument("Inserimento non valido");}
             }
-
+    this->updateModel();
     delete data_;
 }
 
@@ -209,8 +209,10 @@ void Controller::SaveEditView(){
         if(reply==QMessageBox::Save){
             edit_view->chooseAndSend();
 
-            if(is_creazione)
+            if(is_creazione){
                 model->addEmployee(considered_employee);
+                this->updateModel();
+            }
 
             considered_employee=nullptr;
             view->updateList();
