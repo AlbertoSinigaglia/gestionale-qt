@@ -97,7 +97,7 @@ void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo 
     view->setEnabled(false);
 
     edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
-    //edit_view->setModal(true);
+    edit_view->setModal(true);
     edit_view->show();
     connect(edit_view, SIGNAL(closeDirect()), this, SLOT(ExitEditView()));
     connect(edit_view, SIGNAL(saveAndClose()), this, SLOT(SaveEditView()));

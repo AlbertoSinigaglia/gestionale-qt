@@ -1,22 +1,35 @@
 #include"editviewemployee.h"
 #include<QDebug>
 
+void EditViewEmployee::setStyle(QWidget* w)
+{
+
+    QFile file(":/resources/edit_view_employee.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+    w->setStyleSheet(styleSheet);
+}
+
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
     QDialog(parent), stato(stato_utilizzo), isModify(false){
 
+
+
+        setStyle(this);
         topLevelWidget();
-        this->setFixedSize(850, 730);
         mainLayout = new QVBoxLayout(this);
-        mainLayout->setContentsMargins(20,20,20,20);
+        mainLayout->setContentsMargins(0,10,0,10);
         mainLayout->setSpacing(12);
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedSize(780,600);
+        impiegato->setFixedWidth(800);
         impiegato->setWidget(buildSections(dati_, impiegato));
+        impiegato->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
         LSalvaEsci= new QHBoxLayout();
         Esci = new QPushButton("Esci", this);
+        Esci->setObjectName("bottom-button");
         LSalvaEsci->addWidget(Esci);
         if(stato_utilizzo==Utilizzo::CREAZIONE)
             setModifed();
@@ -28,9 +41,10 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
 
 
         connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
-
         setLayout(mainLayout);
-        }
+        this->setMaximumWidth(this->width() + 30);
+        this->resize(this->minimumHeight(), 800);
+}
 
 QHBoxLayout* EditViewEmployee::buildIntestazione(){
 
@@ -48,7 +62,6 @@ QHBoxLayout* EditViewEmployee::buildIntestazione(){
     }
 
     info = new Suggerimento(tx_info);
-    testo_titolo->setFixedWidth(200);
     QHBoxLayout* titolo =new QHBoxLayout();
 
     titolo->addWidget(testo_titolo);
@@ -141,6 +154,9 @@ void EditViewEmployee::setModifed(){
     if(!isModify){
         Esci->setText("Annulla");
         QPushButton* salva = new QPushButton("Salva ed Esci",this);
+        Esci->setObjectName("bottom-button");
+        salva->setObjectName("bottom-button");
+        setStyle(salva);
         LSalvaEsci->addWidget(salva);
         connect(salva,SIGNAL(clicked()),this,SIGNAL(saveAndClose()));
 

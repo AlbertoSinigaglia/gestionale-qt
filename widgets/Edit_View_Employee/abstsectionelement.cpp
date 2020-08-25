@@ -4,12 +4,13 @@
 
 AbstSectionElement::AbstSectionElement(QString nome_sezione, QWidget *parent): QWidget(parent){
         is_modifyed=false;
-
+        setObjectName("abstract-section");
         setFixedWidth(750);
         layout = new QVBoxLayout(this);
         layout->setAlignment(Qt::AlignTop);
         QLabel* titolo = new QLabel(nome_sezione, this);
         layout->addWidget(titolo);
+        layout->setSpacing(5);
         setLayout(layout);
         connect(this, SIGNAL(setModifyed()), this, SLOT(setIs_Modifyed()));
     }

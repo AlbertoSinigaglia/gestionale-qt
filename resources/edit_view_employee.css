@@ -1,0 +1,47 @@
+QDialog{
+    background-color: white;
+}
+QDialog > QLabel{
+    font-size:20px;
+    font-weight:bold;
+    padding-left:10px;
+}
+#bottom-button{
+    color:white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: #1565C0;
+    margin-right:10px;
+}
+#bottom-button::pressed{
+    background-color: #115199;
+}
+
+QDialog > QPushButton#suggerimento{
+    padding:10px!important;
+    background-color:#1565C0 !important;
+    border-radius:14px !important;
+}
+QDialog > QScrollArea{
+    margin:10px;
+    border: 1px solid black;
+    border-width: 2px 0 2px 0;
+    background-color:white;
+}
+
+QDialog > QScrollArea > * > *{
+   background-color:white;
+}
+
+QDialog > QScrollArea #abstract-section > QLabel{
+    border: 1px solid #a5a5a5;
+    font-weight:600;
+    padding-bottom:10px;
+    border-width:0 0 1px 0;
+}
+
+QCalendarWidget{
+    background-color:black !important;
+}
+
+
