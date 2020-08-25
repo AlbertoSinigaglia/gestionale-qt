@@ -148,6 +148,7 @@ bool EditViewEmployee::isModifyed() const{
 
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
+    event->accept();
     emit closeDirect();
 }
 void EditViewEmployee::setModifed(){
