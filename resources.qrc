@@ -13,5 +13,6 @@
 	<file>resources/edit_view_employee.css</file>
         <file>resources/modifica.css</file>
         <file>resources/MyG.jpeg</file>
+	<file>resources/logo.ico</file>
     </qresource>
 </RCC>
