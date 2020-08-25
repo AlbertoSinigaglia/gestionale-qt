@@ -118,7 +118,7 @@ QFrame* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& da
         }
         else if(typeid(*objct)==typeid(DatiDatabase)) {
             sezione = new DatiDatabaseElement(*dynamic_cast<const DatiDatabase*>(objct), editable, this);
-        }else qDebug()<<"errore1";
+        }
 
         connect(sezione, SIGNAL(setModifyed()),this, SLOT(setModifed()));
         layout->addWidget(sezione);
@@ -136,7 +136,6 @@ bool EditViewEmployee::isModifyed() const{
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
     emit closeDirect();
-    event->accept();
 }
 void EditViewEmployee::setModifed(){
     if(!isModify){

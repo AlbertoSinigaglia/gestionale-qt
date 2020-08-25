@@ -10,8 +10,7 @@ SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, doub
 
     if(editable){
     setter_num = new QSlider(Qt::Horizontal,this);
-    setter_num->setFixedWidth(200);
-    layout->setAlignment(setter_num,Qt::AlignRight);
+    setter_num->setFixedWidth(300);
 
     setter_num->setRange(0,500); setter_num->setTickInterval(1);
     int posizione_iniziale= static_cast<int>((valore_-start_)*500.0/(end_-start_));

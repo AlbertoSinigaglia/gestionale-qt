@@ -10,9 +10,8 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     mainLayout->setContentsMargins(0,0,0,0);
     mainLayout->setSpacing(0);
     addMenu();
-	addBoxSinistro();
-	addBoxDestro();
-    setStyle();
+    addBoxSinistro();
+    addBoxDestro();
     setLayout(mainLayout);
 
 
@@ -123,6 +122,9 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
     connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
+
+    setStyle();
+    setEnabled(false);setEnabled(true);
 }
 
 Gestionale::~Gestionale(){}

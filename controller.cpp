@@ -97,7 +97,7 @@ void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo 
     view->setEnabled(false);
 
     edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
-    edit_view->setModal(true);
+    //edit_view->setModal(true);
     edit_view->show();
     connect(edit_view, SIGNAL(closeDirect()), this, SLOT(ExitEditView()));
     connect(edit_view, SIGNAL(saveAndClose()), this, SLOT(SaveEditView()));
@@ -222,12 +222,13 @@ void Controller::SaveEditView(){
 
 
 void Controller::ExitEditView(){
-
     if(edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE && considered_employee)
         delete considered_employee;
 
     considered_employee=nullptr;
+
     delete edit_view;
+
     edit_view=nullptr;
     view->setEnabled(true);
 }

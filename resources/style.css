@@ -1,9 +1,10 @@
-/*QGroupBox#DatiPersona{background-color:rgb(58,53,43);}*/
+
 #scroll-left, #scroll-left *{
     background-color:#1565C0;
     color: white;
     font-family: helvetica;
 }
+
 #scroll-left #title-left{
     font-size: 18px;
     font-weight: bold;
@@ -12,6 +13,7 @@
     background-color:white;
     color:black;
 }
+
 
 #scroll-left QCheckBox::indicator{
     background-color: white;
@@ -26,6 +28,7 @@
     background-color: white !important;
 }
 
+
 #scroll-left QGroupBox{
     border:1px solid white;
     border-radius:5px;
@@ -35,6 +38,7 @@
     padding-bottom:0px;
     padding-bottom:0px;
 }
+
 
 #scroll-left QGroupBox::title{
     subcontrol-origin: margin;
@@ -58,16 +62,22 @@
     padding:0 3px;
 }
 
+
 #scroll-left QPushButton {
+
     color:black;
-    padding: 5px;
-    border-radius: 12px;
+    padding: 10px;
+    width:100% !important;
+    border-radius: 10px;
     background-color: white;
 }
+
 #scroll-left QPushButton:pressed {
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
 }
+
+
 
 #frame {
     background-color: red !important;
@@ -79,6 +89,8 @@
     padding:0px;
     margin:0px;
 }
+
+
 
 
 

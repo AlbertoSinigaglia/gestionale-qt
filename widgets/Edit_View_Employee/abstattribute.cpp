@@ -4,7 +4,6 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
 {
     setFixedWidth(725);
     layout= new QHBoxLayout(this);
-    layout->setAlignment(Qt::AlignLeft);
     layout->setSpacing(30);
 
     QLabel* title = new QLabel(nome, this);
@@ -13,6 +12,8 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
     title->setFixedHeight(30);
 
     str_value = new QLabel(this);
+    str_value->setMaximumWidth(170);
+    str_value->setWordWrap(true);
 
     layout->addWidget(title);
     layout->addWidget(str_value);
@@ -22,8 +23,7 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
 
 void AbstAttribute::insertInfo(QString info){
     Suggerimento* s =new Suggerimento(info,this);
-    layout->insertWidget(2,s);
-    layout->setAlignment(s,Qt::AlignLeft);
+    layout->insertWidget(2,s,0,Qt::AlignLeft);
 }
 
 
