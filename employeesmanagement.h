@@ -52,8 +52,11 @@ public:
     void deleteEmployee(Employee* e);
 
     /**
-     * @brief Costruttore della classe
-     * @param source_ : path da cui ricostruire i dipendenti
+     * @brief importa dipendenti da file
+     * @param path path del file da cui importare
+     * @return
+     *      true: è riuscito a importare i dipendenti
+     *      false: altrimenti
      */
     bool import(const QString& path);
 
