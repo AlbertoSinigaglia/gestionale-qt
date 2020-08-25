@@ -11,6 +11,7 @@ FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget
         connect(setter_bool, SIGNAL(stateChanged(int)), this, SIGNAL(isModify()));
         connect(setter_bool,SIGNAL(stateChanged(int)), this, SLOT(setValue(int)));
 
+        layout->addItem(new QSpacerItem(25,15));
         layout->addWidget(setter_bool);
 
         layout->setAlignment(setter_bool,Qt::AlignRight);

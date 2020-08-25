@@ -3,7 +3,7 @@
 AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QWidget(parent), editable(editable_)
 {
     setObjectName("abstract-attribute");
-    setFixedWidth(780);
+    setFixedWidth(900);
     layout= new QHBoxLayout(this);
     layout->setSpacing(30);
     layout->setAlignment(Qt::AlignLeft);

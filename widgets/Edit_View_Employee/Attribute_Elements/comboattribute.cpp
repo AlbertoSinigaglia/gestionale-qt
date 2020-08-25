@@ -11,13 +11,12 @@ ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzion
         for(auto i=opzioni.begin(); i!=opzioni.end(); i++)
             setter_combo->addItem(*i);
         setter_combo->setCurrentIndex(index_valore_inizio);
-        setter_combo->setFixedWidth(300);
+        setter_combo->setFixedWidth(400);
 
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(setValue(int)));
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SIGNAL(isModify()));
 
-        //layout->addItem(new QSpacerItem(250,10,QSizePolicy::Maximum));
-
+        layout->addItem(new QSpacerItem(15,15));
         layout->addWidget(setter_combo,0,Qt::AlignRight);
     }
     setValue(index_valore_inizio);
