@@ -1,6 +1,6 @@
 #include "aboutus.h"
 
-AboutUs::AboutUs(QWidget *parent): QWidget(parent)
+AboutUs::AboutUs(QWidget *parent): QDialog(parent)
 {
     aboutUsLayout = new QVBoxLayout(this);
     addImage();
@@ -12,7 +12,7 @@ AboutUs::AboutUs(QWidget *parent): QWidget(parent)
 
 void AboutUs::addImage()
 {
-    QPixmap image("MyG.jpeg");
+    QPixmap image(":/resources/MyG.jpeg");
     QLabel* imageLabel = new QLabel(this);
     imageLabel->setPixmap(image);
     aboutUsLayout->addWidget(imageLabel);

@@ -2,9 +2,13 @@
 #include "ui_gestionale.h"
 #include "models/headers/BackDev.h"
 #include "widgets/employeelistelement.h"
+#include "widgets/aboutus.h"
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
+    AboutUs pippo(this);
+    pippo.exec();
+
     mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);
