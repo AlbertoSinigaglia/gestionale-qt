@@ -20,6 +20,9 @@ private:
     QComboBox* opzioni;
 
 signals:
+    /* Il segnale viene emesso in seguito alla scelta finale
+     * del tipo di impiegato <q> proposto da <opzioni>
+     */
     void choosed(QString q);
 
 private slots:

@@ -1,4 +1,3 @@
-
 namespace UFMath{
 
     /**     MEDIA PONDERATA

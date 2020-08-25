@@ -79,3 +79,19 @@ DynamicArray<AbstDataSection*> EmployeesManagement::serializeEmployee(Employee* 
 void EmployeesManagement::addEmployee(Employee* e){
     employees->push_back(e);
 }
+
+void EmployeesManagement::deleteEmployee(Employee* e){
+    for(auto it = employees->begin(); it != employees->end(); ++it){
+        if(*it == e){
+            employees->erase(it);
+            break;
+        }
+    }
+}
+
+
+void EmployeesManagement::updateMonthAll(){
+    for (auto i=employees->begin();i!=employees->end(); i++){
+        (*i)->aggiornaMese();
+    }
+}
