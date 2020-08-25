@@ -36,6 +36,8 @@ public:
     void setModel(std::shared_ptr<EmployeesManagement> model_);
     void updateList() const;
     bool disableSaveEnableImport();
+    void showLiquidation(QString nome, float quota_liquidazione);
+
 private:
     std::shared_ptr<EmployeesManagement> model;
 	QHBoxLayout* mainLayout;
@@ -66,18 +68,14 @@ private:
     QAction* a_export;
     QAction* a_exit;
     QAction* a_open;
-    QCheckBox* totRiparazioni;
-    QCheckBox* percCapo;
-    QCheckBox* libreria;
-    QCheckBox* percBack;
-    QCheckBox* professionalita;
-    QCheckBox* SistemiGestiti;
-    QCheckBox* criticitaRisolte;
-    QCheckBox* linguaggio;
-    QCheckBox* progConclusi;
-    QCheckBox* percRipSussistenti;
-    QCheckBox* percEntitaFN;
     QCheckBox* produttivo;
+    QCheckBox* bonus_stipendio;
+    QCheckBox* grado_esperienza;
+    QCheckBox* numero_righe_totali;
+    QCheckBox* linguaggio;
+    QCheckBox* percentuale_ripristino;
+    QCheckBox* numero_criticita_risolte;
+    QCheckBox* ore_straordinari;
 
 
 

@@ -6,14 +6,15 @@ Controller::Controller(QObject *parent, Gestionale* view_):
         model = std::make_shared<EmployeesManagement>();
         view->setModel(model);
         view->updateList();
-        connect(view.get(), SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(modifyButtonClicked(Employee *)));
-        connect(view.get(), SIGNAL(insertEmployeeEvent()), this, SLOT(insertNewEmployee()));
+        connect(view.get(), SIGNAL(modifyEmployeeEvent(Employee*)), this, SLOT(EditEmployeeInfo(Employee *)));
+        connect(view.get(), SIGNAL(insertEmployeeEvent()), this, SLOT(chooseNewEmployee()));
         connect(view.get(), SIGNAL(deleteEmployeeEvent(Employee *)), this, SLOT(deleteEmployee(Employee *)));
-        connect(view.get(), SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(openEmployeeInfo(Employee*)));
+        connect(view.get(), SIGNAL(employeeListElementDoubleClickedEvent(Employee*)), this, SLOT(ViewEmployeeInfo(Employee*)));
         connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
         connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
         connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
 
+        InizializeTimer();
 }
 bool Controller::updateModel(bool want_to_export){
     bool sent = false;
@@ -44,52 +45,17 @@ QString Controller::getFilePath(const QString info) const{
 }
 void Controller::deleteEmployee(Employee * e){
     if(e){
+
+        view->showLiquidation(QString::fromStdString(e->getNome()),e->risarcimentoLiquidazione());
+
         auto backup = DynamicArray<Employee*>(*(model->getEmployees()));
-        auto employees = model->getEmployees();
-        for(auto it = employees->begin(); it != employees->end(); ++it){
-            if(*it == e){
-                employees->erase(it);
-                break;
-            }
-        }
+
+        model->deleteEmployee(e);
+
         if(updateModel(false))
             view->updateList();
         else
             *(model->getEmployees()) = backup;
-    }
-}
-void Controller::insertNewEmployee(){
-    TypeCreation scelta_inserimento;
-    scelta_inserimento.setModal(true);
-    scelta_inserimento.exec();
-    qDebug() << "test";
-}
-
-void Controller::setTypeInsert(QString q){
-    if(q=="GUIDev"){
-        considered_employee=new GUIDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoClient(),DatiInterfacceUtente());
-    }else if(q=="DatBaseDev"){
-        considered_employee=new DBDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiDatabase());
-    }else if(q=="FullStack"){
-        considered_employee=new FullStack(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiLatoClient(),DatiFullStack());
-    }else if(q=="ITSecurityDev"){
-        considered_employee=new ITSecurityDev(Persona(),DatiLavoratore(),DatiManutenzione(),DatiDeveloping(),DatiRipristinoSicurezza());
-    }else if(q=="Tecnico"){
-        considered_employee=new Tecnico(Persona(),DatiLavoratore(),DatiManutenzione(),DatiSistemi(),DatiRiparazioneSistemi());
-    }else return;
-
-    OpenEditView(considered_employee,EditViewEmployee::Utilizzo::CREAZIONE);
-}
-
-void Controller::openEmployeeInfo(Employee* e){
-    OpenEditView(e,EditViewEmployee::Utilizzo::VISUALIZZA);
-}
-void Controller::modifyButtonClicked(Employee * e){
-    if(e){
-        OpenEditView(e,EditViewEmployee::Utilizzo::MODIFICA);
-    } else {
-        auto reply = QMessageBox::question(view.get(), "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
-        if(reply == QMessageBox::Yes) this->insertNewEmployee() ;
     }
 }
 
@@ -107,6 +73,7 @@ void Controller::importFile(){
 void Controller::exportToFile(){
     this->updateModel(true);
 }
+
 void Controller::exitApplication(){
     if(edit_view) ExitEditView();
     QMessageBox msgBox(view.get());
@@ -122,6 +89,8 @@ void Controller::exitApplication(){
 
 
 
+
+
 void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo){
 
     considered_employee = considerato;
@@ -130,11 +99,50 @@ void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo 
     edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
     edit_view->setModal(true);
     edit_view->show();
-    connect(edit_view, SIGNAL(handleExitEditView()), this, SLOT(ExitEditView()));
+    connect(edit_view, SIGNAL(closeDirect()), this, SLOT(ExitEditView()));
+    connect(edit_view, SIGNAL(saveAndClose()), this, SLOT(SaveEditView()));
     connect(edit_view, SIGNAL(SaveDataConsiderd(AbstDataSection*)), this, SLOT(SaveChanges(AbstDataSection*)));
-
 }
 
+
+void Controller::ViewEmployeeInfo(Employee* e){
+    OpenEditView(e,EditViewEmployee::Utilizzo::VISUALIZZA);
+}
+
+
+void Controller::EditEmployeeInfo(Employee * e){
+    if(e){
+        OpenEditView(e,EditViewEmployee::Utilizzo::MODIFICA);
+    } else {
+        auto reply = QMessageBox::question(view.get(), "Nessun dipendente selezionato", "Nessun dipendente selezionato, vuoi crearne uno?",QMessageBox::Yes|QMessageBox::No);
+        if(reply == QMessageBox::Yes) this->chooseNewEmployee() ;
+    }
+}
+
+
+void Controller::chooseNewEmployee(){
+    TypeCreation scelta_inserimento;
+    scelta_inserimento.setModal(true);
+    connect(&scelta_inserimento, SIGNAL(choosed(QString)),this, SLOT(createEmployeeInfo(QString)));
+    scelta_inserimento.exec();
+}
+
+
+void Controller::createEmployeeInfo(QString q){
+    if(q=="GUIDev"){
+        considered_employee=new GUIDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoClient(),DatiInterfacceUtente());
+    }else if(q=="DatBaseDev"){
+        considered_employee=new DBDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiDatabase());
+    }else if(q=="FullStack"){
+        considered_employee=new FullStack(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiLatoClient(),DatiFullStack());
+    }else if(q=="ITSecurityDev"){
+        considered_employee=new ITSecurityDev(Persona(),DatiLavoratore(),DatiManutenzione(),DatiDeveloping(),DatiRipristinoSicurezza());
+    }else if(q=="Tecnico"){
+        considered_employee=new Tecnico(Persona(),DatiLavoratore(),DatiManutenzione(),DatiSistemi(),DatiRiparazioneSistemi());
+    }else return;
+
+    OpenEditView(considered_employee,EditViewEmployee::Utilizzo::CREAZIONE);
+}
 
 
 void Controller::SaveChanges(AbstDataSection* data_){
@@ -189,15 +197,14 @@ void Controller::SaveChanges(AbstDataSection* data_){
 }
 
 
-
-void Controller::ExitEditView(){
+void Controller::SaveEditView(){
 
     bool is_creazione = edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE;
 
-    if(edit_view->isModifyed()||is_creazione){
+    if(edit_view->isModifyed()){
 
         QString testo=(is_creazione)? "Creazione":"Modifica";
-        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi che salvi le modifiche?",QMessageBox::Save | QMessageBox::Discard);
+        QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi salvare le modifiche?",QMessageBox::Save | QMessageBox::Discard);
 
         if(reply==QMessageBox::Save){
             edit_view->chooseAndSend();
@@ -205,15 +212,52 @@ void Controller::ExitEditView(){
             if(is_creazione)
                 model->addEmployee(considered_employee);
 
+            considered_employee=nullptr;
             view->updateList();
-        }else if(is_creazione) delete considered_employee;
-
+        }
     }
+
+    ExitEditView();
+}
+
+
+void Controller::ExitEditView(){
+
+    if(edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE && considered_employee)
+        delete considered_employee;
 
     considered_employee=nullptr;
     delete edit_view;
     edit_view=nullptr;
     view->setEnabled(true);
 }
+
+
+
+
+
+
+
+
+void Controller::InizializeTimer(){
+    prev_date=QDate::currentDate();
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT( updateTime() ));
+    timer->start(60000);
+    timer->setTimerType(Qt::VeryCoarseTimer);
+}
+
+void Controller::updateTime(){
+
+    if(prev_date.month()!=QDate::currentDate().month())
+        model->updateMonthAll();
+    prev_date = QDate::currentDate();
+
+    timer->start(60000);
+}
+
+
+
+
 
 

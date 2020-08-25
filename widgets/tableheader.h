@@ -17,6 +17,7 @@ public:
         layout->setMargin( 0 );
         layout->setSpacing(0);
         layout->setAlignment(Qt::AlignLeft);
+        setMinimumHeight(60);
         this->setStyleSheet(R"(
             border: 1px solid #CFD8DC;
             color: black;

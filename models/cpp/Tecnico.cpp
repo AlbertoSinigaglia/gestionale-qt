@@ -28,10 +28,11 @@ unsigned int Tecnico::oreLavoroNelMese() const{
 
 
 unsigned int Tecnico::orePiccolaRiparazione() const{
-     // ottengo le ore che ha dedicato fin ora per le piccole riparazioni togliendo le ore di stallo che non sono andate a sforare negli straordinari
-    unsigned int ore_piccole_riparazioni = oreLavoroNelMese() - ( ore_stallo_mensili - ore_straordinari );
-
-    return ore_piccole_riparazioni / ( getNRiparazioniMese() * (1 - perc_riparazioni_sussistenti) );
+     // ottengo le ore che ha dedicato fin ora per le piccole riparazioni togliendo le ore di stallo
+    int ore_piccole_riparazioni = oreLavoroNelMese() - ore_stallo_mensili;
+    int riparazioni_non_sussistenti = static_cast<int>( getNRiparazioniMese() * (1 - perc_riparazioni_sussistenti) );
+    unsigned int result = riparazioni_non_sussistenti==0? Conv::ore_ripristino_stallo/2: ore_piccole_riparazioni / riparazioni_non_sussistenti;
+    return (result<Conv::ore_ripristino_stallo/2)? Conv::ore_ripristino_stallo/2 : result;
 }
 
 
@@ -53,8 +54,8 @@ double Tecnico::percRipristino() const{
     double peso_piccola_riparazione = orePiccolaRiparazione();
 
     // calcolo il peso in ore della manutenzione prevista fino alla fine del mese, (perc_riparazioni_sussistenti mi da una stima di che tipo di manutenzioni posso aspettarmi )
-    double peso_manutenzione_prevista = getNSistemiMalfunzionanti() * ( perc_riparazioni_sussistenti * peso_stallo
-                                                                        + (1 - perc_riparazioni_sussistenti) * peso_piccola_riparazione );
+    double peso_manutenzione_prevista = (getNSistemiMalfunzionanti()<=getNSistemiGestiti()?getNSistemiMalfunzionanti():getNSistemiGestiti())
+                                       *( perc_riparazioni_sussistenti * peso_stallo + (1 - perc_riparazioni_sussistenti) * peso_piccola_riparazione );
 
     // la situazione di manutenzione totale (percRipristino() == 0) e quella in cui il tecnico deve riparare tutti i sistemi che gestisce
     // nel peggiore dei casi (cioe solo con il tipo di manutenzione più ponderante)

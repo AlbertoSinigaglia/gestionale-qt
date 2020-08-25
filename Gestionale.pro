@@ -117,7 +117,6 @@ HEADERS += \
     widgets/typecreation.h
 
 FORMS += \
-    gestionale.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

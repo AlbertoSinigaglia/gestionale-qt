@@ -1,6 +1,7 @@
 
 #include"slideattribute.h"
 #include"math.h"
+#include<QDebug>
 
 
 
@@ -13,7 +14,7 @@ SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, doub
     layout->setAlignment(setter_num,Qt::AlignRight);
 
     setter_num->setRange(0,500); setter_num->setTickInterval(1);
-    int posizione_iniziale= static_cast<int>(valore_-start_)*500.0/(end_-start_);
+    int posizione_iniziale= static_cast<int>((valore_-start_)*500.0/(end_-start_));
     setter_num->setSliderPosition(posizione_iniziale);
 
     connect(setter_num,SIGNAL(valueChanged(int)), this, SIGNAL(isModify()));

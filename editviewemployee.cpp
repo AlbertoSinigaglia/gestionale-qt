@@ -5,34 +5,32 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
     QDialog(parent), stato(stato_utilizzo), isModify(false){
 
         topLevelWidget();
-        this->setFixedSize(800, 700);
+        this->setFixedSize(850, 730);
         mainLayout = new QVBoxLayout(this);
-        mainLayout->setContentsMargins(0,0,0,0);
-        mainLayout->setSpacing(10);
+        mainLayout->setContentsMargins(20,20,20,20);
+        mainLayout->setSpacing(12);
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedSize(750,600);
+        impiegato->setFixedSize(780,600);
         impiegato->setWidget(buildSections(dati_, impiegato));
 
-
-        SalvaEsci = new QPushButton("Esci", this);
+        LSalvaEsci= new QHBoxLayout(this);
+        Esci = new QPushButton("Esci", this);
+        LSalvaEsci->addWidget(Esci);
+        if(stato_utilizzo==Utilizzo::CREAZIONE)
+            setModifed();
 
         mainLayout->addLayout(buildIntestazione());
         mainLayout->addWidget(impiegato);
-        mainLayout->addWidget(SalvaEsci);
-        mainLayout->setAlignment(SalvaEsci,Qt::AlignRight);
+        mainLayout->addLayout(LSalvaEsci);
+        mainLayout->setAlignment(LSalvaEsci,Qt::AlignRight);
 
 
-        connect(SalvaEsci, SIGNAL(clicked()), this, SLOT(closeButton()));
+        connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
 
         setLayout(mainLayout);
         }
-
-void EditViewEmployee::closeButton(){
-    close();
-}
-
 
 QHBoxLayout* EditViewEmployee::buildIntestazione(){
 
@@ -66,8 +64,8 @@ void EditViewEmployee::chooseAndSend() const{
         for(auto i=lista_elementi.begin(); i!=lista_elementi.end(); i++){
             if((*i)->isModifyed())
                emit SaveDataConsiderd((*i)->getData());
-            //Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
-            //Questi verranno gestiti ed eliminati dalla destinazione : il Controller
+            // Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
+            // Questi verranno gestiti ed eliminati dalla destinazione : il Controller
         }
     }
 
@@ -137,12 +135,18 @@ bool EditViewEmployee::isModifyed() const{
 
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
-    emit handleExitEditView();
+    emit closeDirect();
     event->accept();
 }
 void EditViewEmployee::setModifed(){
-    isModify=true;
-    SalvaEsci->setText("Esci...");
+    if(!isModify){
+        Esci->setText("Annulla");
+        QPushButton* salva = new QPushButton("Salva ed Esci",this);
+        LSalvaEsci->addWidget(salva);
+        connect(salva,SIGNAL(clicked()),this,SIGNAL(saveAndClose()));
+
+        isModify=true;
+    }
 }
 
 EditViewEmployee::Utilizzo EditViewEmployee::getStato() const{

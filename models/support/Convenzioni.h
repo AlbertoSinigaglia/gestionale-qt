@@ -39,13 +39,13 @@ namespace Conv{         // CONVENZIONI
 // EMPLOYEE
 // --------
 
-    /**
+    /*
     * coeff_liquidazione:                      (Modificabile)
     *  coefficente (del TFR) * calcolaStipendio() -> ultima retribuzione per una possibile liquidazione
     */
     extern const double coeff_liquidazione;
 
-    /**     PERCENTUALE REMUNERAZIONE
+    /*     PERCENTUALE REMUNERAZIONE
      * Stabilisce il raporto tra:      la remunerazione (per l'impiegato) del suo lavoro
      *                         e:      il valore lordo del lavoro dell'impiegato che apporta all'azienda
      */

@@ -1,4 +1,8 @@
 #include "widgets/employeelistelement.h"
+#include "models/headers/FullStack.h"
+#include "models/headers/GUIDev.h"
+#include "models/headers/ITSecurityDev.h"
+#include "models/headers/Tecnico.h"
 void EmployeeListElement::setStyle(){
     QFile file(":/resources/employee_list_element.css");
     file.open(QFile::ReadOnly);
@@ -39,9 +43,42 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     //dati relativi al lavoro
     date_of_empl = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().data_assunzione).c_str()));
     date_end_of_contract = new QLabel(QString(static_cast<std::string>(e->getDatiLavoratore().fine_contratto).c_str()));
-    salary = new QLabel(QString(std::to_string(e->calcolaStipendio()).c_str()));
+    salary = new QLabel(QString::number(e->calcolaStipendio())+" €");
     weekly_hours = new QLabel(QString(std::to_string(e->getDatiLavoratore().ore_lavoro_sett).c_str()));
     produttivo = new QLabel();
+
+
+     bonus_stipendio = new QLabel(QString::number(e->bonusStipendio())+" €");
+     grado_esperienza= new QLabel(std::to_string(e->gradoEsperienza()).c_str());
+     numero_righe_totali = new QLabel("");
+     linguaggio = new QLabel("");
+     if(auto p = dynamic_cast<Software*>(e)) {
+         numero_righe_totali->setText(std::to_string(p->getDatiDeveloping().n_righe_totali).c_str());
+         std::map<int, const char*> linguaggi = {
+             {Conv::Linguaggio::CPP , "C++"},
+             {Conv::Linguaggio::PHP , "PHP"},
+             {Conv::Linguaggio::SQL , "SQL"},
+             {Conv::Linguaggio::JAVA , "Java"},
+             {Conv::Linguaggio::RUBY , "Ruby"},
+             {Conv::Linguaggio::SWIFT , "Swift"},
+             {Conv::Linguaggio::PYTHON , "Python"},
+             {Conv::Linguaggio::JAVASCRIPT , "JavaScript"},
+             {Conv::Linguaggio::TYPESCRIPT , "TypeScript"},
+         };
+         linguaggio->setText(linguaggi[p->getDatiDeveloping().linguaggio]);
+     }
+
+     percentuale_ripristino = new QLabel("");
+     if(auto p = dynamic_cast<Manutenzione*>(e))
+         percentuale_ripristino->setText(std::to_string(p->getDatiManutenzione().perc_ripristino_medio).c_str());
+
+     numero_criticita_risolte = new QLabel("");
+     if(auto p = dynamic_cast<ITSecurityDev*>(e))
+         numero_righe_totali->setText(std::to_string(p->getDatiRipristinoSicurezza().n_criticita_risolte).c_str());
+     ore_straordinari = new QLabel("");
+     if(auto p = dynamic_cast<Tecnico*>(e))
+         numero_righe_totali->setText(std::to_string(p->getDatiRiparazioneSistemi().ore_straordinari).c_str());
+
 
     produttivo->setFixedWidth(150);
     name->setFixedWidth(150);
@@ -52,7 +89,13 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     date_end_of_contract->setFixedWidth(150);
     salary->setFixedWidth(150);
     weekly_hours->setFixedWidth(150);
-
+    bonus_stipendio->setFixedWidth(150);
+    grado_esperienza->setFixedWidth(150);
+    numero_righe_totali->setFixedWidth(150);
+    linguaggio->setFixedWidth(150);
+    percentuale_ripristino->setFixedWidth(150);
+    numero_criticita_risolte->setFixedWidth(150);
+    ore_straordinari->setFixedWidth(150);
 
     name->setWordWrap(true);
     surname->setWordWrap(true);
@@ -62,6 +105,26 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     date_end_of_contract->setWordWrap(true);
     salary->setWordWrap(true);
     weekly_hours->setWordWrap(true);
+    bonus_stipendio->setWordWrap(true);
+    grado_esperienza->setWordWrap(true);
+    numero_righe_totali->setWordWrap(true);
+    linguaggio->setWordWrap(true);
+    percentuale_ripristino->setWordWrap(true);
+    numero_criticita_risolte->setWordWrap(true);
+    ore_straordinari->setWordWrap(true);
+    /*
+
+
+    bonus_stipendio;
+    grado_esperienza;
+    numero_righe_totali;
+    linguaggio;
+    percentuale_ripristino;
+    numero_criticita_risolte;
+    ore_straordinari;
+
+*/
+
 
     layout->addWidget(produttivo);
     layout->addWidget(name);
@@ -73,7 +136,22 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     layout->addWidget(date_end_of_contract);
     layout->addWidget(salary);
     layout->addWidget(weekly_hours);
+    layout->addWidget(bonus_stipendio);
+    layout->addWidget(grado_esperienza);
+    layout->addWidget(numero_righe_totali);
+    layout->addWidget(linguaggio);
+    layout->addWidget(percentuale_ripristino);
+    layout->addWidget(numero_criticita_risolte);
+    layout->addWidget(ore_straordinari);
 
+
+    changeVisibility(
+                NumeroRigheTotali |
+                Linguaggio |
+                PercentualeRipristino |
+                NumeroCriticitaRisolte |
+                OreStraordinari , static_cast<int>(false)
+     );
 
     QPixmap produttivo_image;
     QString path = e->produttivo() ? ":/resources/tick.png" : ":/resources/close.png";
@@ -109,6 +187,7 @@ Employee* EmployeeListElement::getEmployee() const{
 }
 
 void EmployeeListElement::changeVisibility(int prop, int visibility){
+
     if(prop & EmployeeListElement::Name)
         updateVisibility(&EmployeeListElement::name, visibility);
     if(prop & EmployeeListElement::Surname)
@@ -125,6 +204,23 @@ void EmployeeListElement::changeVisibility(int prop, int visibility){
         updateVisibility(&EmployeeListElement::salary, visibility);
     if(prop & EmployeeListElement::WeeklyHours)
         updateVisibility(&EmployeeListElement::weekly_hours, visibility);
+    if(prop & EmployeeListElement::Produttivo)
+        updateVisibility(&EmployeeListElement::produttivo, visibility);
+
+    if(prop & EmployeeListElement::BonusStipendio)
+        updateVisibility(&EmployeeListElement::bonus_stipendio, visibility);
+    if(prop & EmployeeListElement::GradoEsperienza)
+        updateVisibility(&EmployeeListElement::grado_esperienza, visibility);
+    if(prop & EmployeeListElement::NumeroRigheTotali)
+        updateVisibility(&EmployeeListElement::numero_righe_totali, visibility);
+    if(prop & EmployeeListElement::Linguaggio)
+        updateVisibility(&EmployeeListElement::linguaggio, visibility);
+    if(prop & EmployeeListElement::PercentualeRipristino)
+        updateVisibility(&EmployeeListElement::percentuale_ripristino, visibility);
+    if(prop & EmployeeListElement::NumeroRigheTotali)
+        updateVisibility(&EmployeeListElement::numero_righe_totali, visibility);
+    if(prop & EmployeeListElement::OreStraordinari)
+        updateVisibility(&EmployeeListElement::ore_straordinari, visibility);
 }
 void EmployeeListElement::updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){
     visibility ? (this->*elem)->show() : (this->*elem)->hide();

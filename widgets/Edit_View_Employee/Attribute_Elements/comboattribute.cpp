@@ -14,8 +14,8 @@ ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzion
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(setValue(int)));
         connect(setter_combo, SIGNAL(currentIndexChanged(int)), this, SIGNAL(isModify()));
 
-        layout->addWidget(setter_combo);
         layout->setAlignment(setter_combo,Qt::AlignRight);
+        layout->addWidget(setter_combo);
     }
     setValue(index_valore_inizio);
 }

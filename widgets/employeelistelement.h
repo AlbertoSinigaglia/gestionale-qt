@@ -27,6 +27,14 @@ class EmployeeListElement : public QWidget{
     QLabel* salary;
     QLabel* weekly_hours;
     QLabel* produttivo;
+
+    QLabel* bonus_stipendio;
+    QLabel* grado_esperienza;
+    QLabel* numero_righe_totali;
+    QLabel* linguaggio;
+    QLabel* percentuale_ripristino;
+    QLabel* numero_criticita_risolte;
+    QLabel* ore_straordinari;
 public:
     enum{
         Name = 1<<0,
@@ -36,8 +44,17 @@ public:
         DateOfEmployment = 1<<4,
         DateEndOfContract = 1<<5,
         Salary = 1<<6,
-        WeeklyHours = 1<<7
+        WeeklyHours = 1<<7,
+        Produttivo = 1<<8,
 
+        BonusStipendio = 1<<9, // employee
+        GradoEsperienza = 1<<10, // employee
+
+        NumeroRigheTotali = 1<<11, // software
+        Linguaggio = 1<<12, // software
+        PercentualeRipristino = 1<<13, // manutentore
+        NumeroCriticitaRisolte = 1<<14, // security
+        OreStraordinari = 1<<15 // tecnico
     };
     EmployeeListElement(Employee *e, QWidget *parent = 0);
     ~EmployeeListElement();
