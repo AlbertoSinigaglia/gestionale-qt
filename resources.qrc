@@ -10,6 +10,7 @@
         <file>resources/tick.png</file>
         <file>resources/close.png</file>
         <file>resources/inserisci.css</file>
+	<file>resources/edit_view_employee.css</file>
         <file>resources/modifica.css</file>
     </qresource>
 </RCC>

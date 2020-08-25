@@ -2,9 +2,12 @@
 
 AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QWidget(parent), editable(editable_)
 {
+    setObjectName("abstract-attribute");
     setFixedWidth(725);
     layout= new QHBoxLayout(this);
     layout->setSpacing(30);
+    layout->setAlignment(Qt::AlignLeft);
+    layout->setContentsMargins(20,0,0,0);
 
     QLabel* title = new QLabel(nome, this);
     title->setWordWrap(true);
@@ -12,7 +15,7 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
     title->setFixedHeight(30);
 
     str_value = new QLabel(this);
-    str_value->setMaximumWidth(170);
+    str_value->setFixedWidth(170);
     str_value->setWordWrap(true);
 
     layout->addWidget(title);

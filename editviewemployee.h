@@ -44,7 +44,7 @@
  */
 class EditViewEmployee: public QDialog{
 Q_OBJECT
-
+    static void setStyle(QWidget*);
 public:
 
     /* Utilizzo:
