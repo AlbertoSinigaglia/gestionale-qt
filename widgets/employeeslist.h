@@ -45,6 +45,11 @@ public slots:
 template<class T>
 void EmployeesList::filter()
 {
+    if(current && !dynamic_cast<T*>(current->getEmployee())) {
+        current->updateStatus(false);
+        current = nullptr;
+    }
+    qDebug() << current;
     for(auto &e:children)
         if(dynamic_cast<T*>(e->getEmployee()))
             e->show();

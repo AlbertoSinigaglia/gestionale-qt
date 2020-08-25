@@ -554,5 +554,8 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
     }
+    if(selected=="Tutti"){
+        employeesList->filter<Employee>();
+    }
 
 }
