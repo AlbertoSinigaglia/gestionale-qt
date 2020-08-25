@@ -1,0 +1,18 @@
+#sfondo{
+    background-color:white;
+}
+#title{
+    font-size: 18px;
+    font-weight: bold;
+    color:black;
+}
+#comboBox{
+    background-color:white;
+    color:black;
+}
+#pulsanti{
+    color:white;
+    padding: 5px;
+    border-radius: 12px;
+    background-color: #1565C0;
+    }

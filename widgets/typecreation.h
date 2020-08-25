@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QFile>
 
 class TypeCreation: public QDialog{
 Q_OBJECT
@@ -18,7 +19,7 @@ private:
     static QStringList testo_opzioni;
 
     QComboBox* opzioni;
-
+    void setStyle();
 signals:
     void choosed(QString q);
 
