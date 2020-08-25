@@ -2,17 +2,19 @@
 
 AboutUs::AboutUs(QWidget *parent): QDialog(parent)
 {
+    this->setObjectName("sfondo");
+    this->setMinimumSize(600, 500);
     aboutUsLayout = new QVBoxLayout(this);
     addImage();
     addName();
     addVersion();
     addCreators();
-
+    setStyle();
 }
 
 void AboutUs::addImage()
 {
-    QPixmap image(":/resources/MyG.jpeg");
+    QPixmap image(":/resources/MyG.png");
     QLabel* imageLabel = new QLabel(this);
     imageLabel->setPixmap(image);
     aboutUsLayout->addWidget(imageLabel);
@@ -22,6 +24,7 @@ void AboutUs::addImage()
 void AboutUs::addName()
 {
     QLabel* name = new QLabel("MyGestionale",this, Qt::WindowFlags());
+    name->setObjectName("nome");
     name->setAlignment(Qt::AlignCenter);
     aboutUsLayout->addWidget(name);
 }
@@ -29,21 +32,33 @@ void AboutUs::addName()
 void AboutUs::addVersion()
 {
     QLabel* version = new QLabel("Version 1.0",this, Qt::WindowFlags());
+    version->setObjectName("versione");
+    version->setMargin(15);
     version->setAlignment(Qt::AlignCenter);
     aboutUsLayout->addWidget(version);
 }
 
 void AboutUs::addCreators()
 {
-    QGroupBox* creators = new QGroupBox("Creators",this);
+    QLabel* creators = new QLabel("Creators:",this, Qt::WindowFlags());
     creators->setAlignment(Qt::AlignCenter);
-    QVBoxLayout* creatorsLayout = new QVBoxLayout(creators);
+    creators->setObjectName("creatori");
     QLabel* creator1 = new QLabel("Sinigaglia Alberto, matricola:1193384",this, Qt::WindowFlags());
+    creator1->setAlignment(Qt::AlignCenter);
     QLabel* creator2 = new QLabel("Calcagno Riccardo, matricola:1193479",this, Qt::WindowFlags());
+    creator2->setAlignment(Qt::AlignCenter);
     QLabel* creator3 = new QLabel("Privitera Sara, matricola:1201157",this, Qt::WindowFlags());
-    creatorsLayout->addWidget(creator1);
-    creatorsLayout->addWidget(creator2);
-    creatorsLayout->addWidget(creator3);
-    creators->setLayout(creatorsLayout);
+    creator3->setAlignment(Qt::AlignCenter);
     aboutUsLayout->addWidget(creators);
+    aboutUsLayout->addWidget(creator1);
+    aboutUsLayout->addWidget(creator2);
+    aboutUsLayout->addWidget(creator3);
+}
+
+void AboutUs::setStyle()
+{
+    QFile file(":/resources/aboutUs.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(file.readAll());
+    setStyleSheet(styleSheet);
 }

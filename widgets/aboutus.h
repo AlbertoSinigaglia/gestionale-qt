@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QGroupBox>
+#include <QFile>
 
 class AboutUs: public QDialog
 {
@@ -19,6 +20,7 @@ private:
     void addName();
     void addVersion();
     void addCreators();
+    void setStyle();
 
 };
 

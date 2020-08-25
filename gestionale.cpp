@@ -6,7 +6,8 @@
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
-
+    AboutUs pippo(this);
+    pippo.exec();
     mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);

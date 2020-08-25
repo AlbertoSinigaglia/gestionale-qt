@@ -1,0 +1,17 @@
+#sfondo{
+    background-color:white;
+}
+#nome{
+    font:30px;
+    font-weight: bold;
+    color:#1565C0;
+    font-family: Helvetica;
+    }
+#versione{
+    font:25px;
+    }
+#creatori{
+    font:18px;
+    text-decoration: underline;
+}
+

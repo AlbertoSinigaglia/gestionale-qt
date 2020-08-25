@@ -10,8 +10,9 @@
         <file>resources/tick.png</file>
         <file>resources/close.png</file>
         <file>resources/inserisci.css</file>
-	<file>resources/edit_view_employee.css</file>
+        <file>resources/edit_view_employee.css</file>
         <file>resources/modifica.css</file>
-        <file>resources/MyG.jpeg</file>
+        <file>resources/aboutUs.css</file>
+        <file>resources/MyG.png</file>
     </qresource>
 </RCC>
