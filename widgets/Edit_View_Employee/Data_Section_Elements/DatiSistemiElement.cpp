@@ -25,11 +25,11 @@ void DatiSistemiElement::addCampi(const DatiSistemi& dati, bool editable){
     layout->addWidget(num_sistemi_malfunzionanti_widget);
     connect(num_sistemi_malfunzionanti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    num_sistemi_gestiti_totale_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti_totale),editable,this);
+    num_sistemi_gestiti_totale_widget = new LineEditAttribute(nome_campi[2],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.n_sistemi_gestiti_totale),editable,this);
     layout->addWidget(num_sistemi_gestiti_totale_widget);
     connect(num_sistemi_gestiti_totale_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 
-    nuovi_gestiti_widget = new LineEditAttribute(nome_campi[1],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.nuovi_gestiti),editable,this);
+    nuovi_gestiti_widget = new LineEditAttribute(nome_campi[3],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.nuovi_gestiti),editable,this);
     nuovi_gestiti_widget->setValMax(5);
     layout->addWidget(nuovi_gestiti_widget);
     connect(nuovi_gestiti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
