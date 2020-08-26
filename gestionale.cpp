@@ -6,6 +6,7 @@
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
+    setWindowState(Qt::WindowMaximized);
     mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);
@@ -125,6 +126,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
         about.exec();
     });
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
+    connect(ordine, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(cambioOrdine(const QString&)));
     setStyle();
     setEnabled(false);setEnabled(true);
 }
@@ -148,6 +150,7 @@ void Gestionale::addBoxSinistro(){
     addTitleSinistro();
     addComboBox();
     addFirstBox();
+    addOrdineBox();
     addAzioni();
 }
 
@@ -155,6 +158,28 @@ void Gestionale::addTitleSinistro(){
     QLabel* Visualizza = new QLabel("Metriche visualizzazione:", this, Qt::WindowFlags());
     Visualizza->setObjectName("title-left");
     layoutFrameFiltri->addWidget(Visualizza);
+}
+
+void Gestionale::addOrdineBox(){
+    auto q = new QGroupBox(this);
+    q->setTitle("Ordinamento");
+    QVBoxLayout* lq = new QVBoxLayout(q);
+    ordine = new QComboBox(this);
+    ordine->addItems({
+         "Nome",
+         "Cognome",
+         "Codice fiscale",
+         "Data di nascita",
+         "Data assuzione",
+         "Data fine contratto",
+         "Stipendio base mensile",
+         "Bonus stipendio",
+         "Ore di lavoro settimanale",
+         "Grado esperienza",
+         "Produttività"
+    });
+    lq->addWidget(ordine);
+    layoutFrameFiltri->addWidget(q);
 }
 
 void Gestionale::addComboBox(){
@@ -376,6 +401,7 @@ void Gestionale::setModel(std::shared_ptr<EmployeesManagement> model_){
 void Gestionale::updateList() const{
     if(model){
         this->employeesList->setEmployees(*model->getEmployees());
+        employeesList->orderBy(EmployeeListElement::Name);
     }
 }
 
@@ -517,4 +543,18 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
     else if(selected=="Tutti"){
         employeesList->filter<Employee>();
     }
+}
+
+void Gestionale::cambioOrdine(const QString& index){
+    if("Nome" == index) employeesList->orderBy(EmployeeListElement::Name);
+    if("Cognome" == index) employeesList->orderBy(EmployeeListElement::Surname);
+    if("Codice fiscale" == index) employeesList->orderBy(EmployeeListElement::CF);
+    if("Data di nascita" == index) employeesList->orderBy(EmployeeListElement::DateOfBirth);
+    if("Data assuzione" == index) employeesList->orderBy(EmployeeListElement::DateOfEmployment);
+    if("Data fine contratto" == index) employeesList->orderBy(EmployeeListElement::DateEndOfContract);
+    if("Stipendio base mensile" == index) employeesList->orderBy(EmployeeListElement::Salary);
+    if("Bonus stipendio" == index) employeesList->orderBy(EmployeeListElement::BonusStipendio);
+    if("Ore di lavoro settimanale" == index) employeesList->orderBy(EmployeeListElement::WeeklyHours);
+    if("Grado esperienza" == index) employeesList->orderBy(EmployeeListElement::GradoEsperienza);
+    if("Produttività" == index) employeesList->orderBy(EmployeeListElement::Produttivo);
 }

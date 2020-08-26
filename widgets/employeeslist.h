@@ -43,11 +43,11 @@ public slots:
     void changeListAttributeVisibility(int props, int visibility);
     void childPressedEvent(EmployeeListElement* e);
     void childClickedEvent(EmployeeListElement* e);
-    void ordinaPer(EmployeeListElement::FIELDS field){
+    void orderBy(EmployeeListElement::FIELDS field){
         std::sort(children.begin(), children.end(), [&](auto &f, auto& s){ return f->lessThan(*s, field);});
         std::vector<Employee*> v;
-        std::transform(children.begin(), children.end(), v.begin(), [](auto&el){ return el->getEmployee();});
-        //setEmployees(DynamicArray<std::vector<Employee*>::iterator>(v.begin(), v.end()));
+        std::transform(children.begin(), children.end(), std::back_inserter(v), [](auto&el){ return el->getEmployee();});
+        setEmployees(DynamicArray<Employee*>(v.begin(), v.end()));
     }
 };
 

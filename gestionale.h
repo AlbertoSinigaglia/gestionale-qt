@@ -49,6 +49,7 @@ private:
     QPushButton* inserisci;
     QPushButton* elimina;
     QComboBox* Dipendenti;
+    QComboBox* ordine;
     QCheckBox* c_nome;
     QCheckBox* c_cognome;
     QCheckBox* c_sesso;
@@ -82,6 +83,7 @@ private:
 	void addBoxLavoro();
     void addBoxSpecifico();
 	void addAzioni();
+    void addOrdineBox();
     void addMenu();
 	void setStyle();
 
@@ -103,6 +105,7 @@ public slots:
     void exportToFile();
     void exitApplication();
     void changeSelectedElementComboBox(const QString& selected);
+    void cambioOrdine(const QString&);
 };
 
 #endif // GESTIONALE_H

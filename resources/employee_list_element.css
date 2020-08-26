@@ -15,7 +15,11 @@ EmployeeListElement{
     color:white;
     font-weight: 600;
 }
-
+EmployeeListElement > QLabel{
+    padding: 20px 10px 20px 10px ;
+    border: 1px solid #CFD8DC;
+    border-width:0 0 1px 0;
+}
 
 #is_not_clicked{
     background-color: white;

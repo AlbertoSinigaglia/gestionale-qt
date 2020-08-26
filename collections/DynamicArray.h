@@ -309,13 +309,12 @@ public:
     explicit DynamicArray(unsigned int s, const T& el = T()) ;
     /**
      * @brief Costruttore : copia gli elementi [first , last) in this
-     * @tparam InputIt : iteratore che sia compatibile con Inputdynamic_array_iterator (check : http://www.cplusplus.com/reference/dynamic_array_iterator/Inputdynamic_array_iterator/)
+     * @tparam InputIt : iteratore che sia compatibile con InputIterator (check : http://www.cplusplus.com/reference/dynamic_array_iterator/Inputdynamic_array_iterator/)
      * @param first: posizione primo elemento
      * @param last: posizione a cui fermarsi
      */
-    template<class InputIt, typename = std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator>, InputIt>>
+    template<class InputIt>
     DynamicArray(const InputIt& first, const InputIt& last );
-    DynamicArray(const const_iterator& first, const const_iterator& last );
     /**
      * @brief Costruttore con lista di inizializzazione : copia gli elementi della lista in this
      * @param l : lista di inizializzaizone
@@ -430,8 +429,8 @@ public:
      */
     template< class InputIt >
     std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> insert(const const_dynamic_array_iterator<T>& pos, const InputIt& first, const InputIt& last );
-    template< class Const_dynamic_array_iterator >
-    std::enable_if_t<std::is_convertible_v<const_dynamic_array_iterator<T>, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> insert(const const_dynamic_array_iterator<T>& pos, const Const_dynamic_array_iterator& first, const Const_dynamic_array_iterator& last );
+    template< class Const_iterator >
+    std::enable_if_t<std::is_convertible_v<Const_iterator, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> insert(const const_dynamic_array_iterator<T>& pos, const Const_iterator& first, const Const_iterator& last );
     /**
      * @brief Inserisce alla posizione pos un nuovo elemento construito con args
      * @tparam Args : tipi parametri da passare al costruttore di T
@@ -833,9 +832,9 @@ DynamicArray<T>::DynamicArray(unsigned int s, const T &el) : p(std::make_unique<
 }
 
 template<class T>
-template<class InputIt, typename>
+template<class InputIt>
 DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last): p(nullptr), size_(0), capacity_(0) {
-    auto dist = std::distance(first, last);
+    auto dist = last-first;
     size_ = capacity_ = dist;
     p = std::make_unique<T[]>(dist);
     InputIt it = first;
@@ -845,17 +844,6 @@ DynamicArray<T>::DynamicArray(const InputIt &first, const InputIt &last): p(null
     }
 }
 
-template<class T>
-DynamicArray<T>::DynamicArray(const const_dynamic_array_iterator<T> &first, const const_dynamic_array_iterator<T> &last): p(nullptr), size_(0), capacity_(0) {
-    auto dist = last - first;
-    size_ = capacity_ = dist;
-    p = std::make_unique<T[]>(dist);
-    dynamic_array_iterator it(this, first.pos);
-    for(unsigned int i = 0; i < size_; ++i) {
-        p[i] = *it;
-        ++it;
-    }
-}
 
 template<class T>
 DynamicArray<T>::DynamicArray(std::initializer_list<T> l) : p(std::make_unique<T[]>(l.size())), size_(l.size()), capacity_(l.size()) {
@@ -1025,8 +1013,8 @@ std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator<T>
 }
 
 template<class T>
-template< class Const_dynamic_array_iterator>
-std::enable_if_t<std::is_convertible_v<const_dynamic_array_iterator<T>, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> DynamicArray<T>::insert(const const_dynamic_array_iterator<T>& pos, const Const_dynamic_array_iterator& first, const Const_dynamic_array_iterator& last ) {
+template< class Const_iterator>
+std::enable_if_t<std::is_convertible_v<Const_iterator, const_dynamic_array_iterator<T>>, dynamic_array_iterator<T>> DynamicArray<T>::insert(const const_dynamic_array_iterator<T>& pos, const Const_iterator & first, const Const_iterator& last ) {
     int dist = last - first;
     insert_distance(dist, pos, first);
     return dynamic_array_iterator(this, pos.pos);

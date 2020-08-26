@@ -3,7 +3,7 @@
 #include "models/headers/GUIDev.h"
 #include "models/headers/ITSecurityDev.h"
 #include "models/headers/Tecnico.h"
-
+#include "models/support/Data.h"
 void EmployeeListElement::setStyle(){
     QFile file(":/resources/employee_list_element.css");
     file.open(QFile::ReadOnly);
@@ -34,7 +34,6 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     layout->setMargin( 0 );
     layout->setSpacing(0);
     layout->setAlignment(Qt::AlignLeft);
-    this->setContentsMargins(10,20,10,20);
     this->setMouseTracking(true);
 
     //dati relativi alla persona
@@ -77,7 +76,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
 
      numero_criticita_risolte = new QLabel("");
      if(auto p = dynamic_cast<ITSecurityDev*>(e))
-         numero_righe_totali->setText(std::to_string(p->getDatiRipristinoSicurezza().n_criticita_risolte).c_str());
+         numero_criticita_risolte->setText(std::to_string(p->getDatiRipristinoSicurezza().n_criticita_risolte).c_str());
      ore_straordinari = new QLabel("");
      if(auto p = dynamic_cast<Tecnico*>(e))
          numero_righe_totali->setText(std::to_string(p->getDatiRiparazioneSistemi().ore_straordinari).c_str());
@@ -161,6 +160,26 @@ Employee* EmployeeListElement::getEmployee() const{
     return e_;
 }
 
+bool EmployeeListElement::lessThan(const EmployeeListElement &o, EmployeeListElement::FIELDS prop){
+    if(prop & EmployeeListElement::Name)                    return name->text()                                     < o.name->text();
+    if(prop & EmployeeListElement::Surname)                 return surname->text()                                  < o.surname->text();
+    if(prop & EmployeeListElement::CF)                      return cf->text()                                       < o.cf->text();
+    if(prop & EmployeeListElement::DateOfBirth)             return Data(date_of_birth->text().toStdString())        < Data(o.date_of_birth->text().toStdString());
+    if(prop & EmployeeListElement::DateOfEmployment)        return Data(date_of_empl->text().toStdString())         < Data(o.date_of_empl->text().toStdString());
+    if(prop & EmployeeListElement::DateEndOfContract)       return Data(date_end_of_contract->text().toStdString()) < Data(o.date_end_of_contract->text().toStdString());
+    if(prop & EmployeeListElement::Salary)                  return e_->calcolaStipendio()                           < o.e_->calcolaStipendio();
+    if(prop & EmployeeListElement::WeeklyHours)             return e_->getDatiLavoratore().ore_lavoro_sett          < o.e_->getDatiLavoratore().ore_lavoro_sett;
+    if(prop & EmployeeListElement::Produttivo)              return static_cast<int>(e_->produttivo())               < static_cast<int>(o.e_->produttivo());
+    if(prop & EmployeeListElement::BonusStipendio)          return e_->bonusStipendio()                             < o.e_->bonusStipendio();
+    if(prop & EmployeeListElement::GradoEsperienza)         return e_->gradoEsperienza()                            < o.e_->gradoEsperienza();
+    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()                      < o.numero_righe_totali->text();
+    if(prop & EmployeeListElement::Linguaggio)              return linguaggio->text()                               < o.linguaggio->text();
+    if(prop & EmployeeListElement::PercentualeRipristino)   return percentuale_ripristino->text()                   < o.percentuale_ripristino->text();
+    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()                      < o.numero_righe_totali->text();
+    if(prop & EmployeeListElement::OreStraordinari)         return ore_straordinari->text()                         < o.ore_straordinari->text();
+    return false;
+}
+
 void EmployeeListElement::changeVisibility(int prop, int visibility){
     if(prop & EmployeeListElement::Name)
         updateVisibility(&EmployeeListElement::name, visibility);
@@ -195,6 +214,8 @@ void EmployeeListElement::changeVisibility(int prop, int visibility){
         updateVisibility(&EmployeeListElement::numero_righe_totali, visibility);
     if(prop & EmployeeListElement::OreStraordinari)
         updateVisibility(&EmployeeListElement::ore_straordinari, visibility);
+    if(prop & EmployeeListElement::NumeroCriticitaRisolte)
+        updateVisibility(&EmployeeListElement::numero_criticita_risolte, visibility);
 }
 
 void EmployeeListElement::updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){
