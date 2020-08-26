@@ -49,7 +49,6 @@ void EmployeesList::filter()
         current->updateStatus(false);
         current = nullptr;
     }
-    qDebug() << current;
     for(auto &e:children)
         if(dynamic_cast<T*>(e->getEmployee()))
             e->show();

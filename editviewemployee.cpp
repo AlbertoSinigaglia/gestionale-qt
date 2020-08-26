@@ -23,7 +23,7 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedWidth(850);
+        impiegato->setFixedWidth(970);
         impiegato->setWidget(buildSections(dati_, impiegato));
         impiegato->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
@@ -148,6 +148,7 @@ bool EditViewEmployee::isModifyed() const{
 
 void EditViewEmployee::closeEvent(QCloseEvent *event)
 {
+    event->accept();
     emit closeDirect();
 }
 void EditViewEmployee::setModifed(){
