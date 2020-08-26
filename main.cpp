@@ -2,7 +2,6 @@
 #include "collections/DynamicArray.h"
 #include <QApplication>
 #include "controller.h"
-#include <QDebug>
 #include "CSV/CSVWriter.h"
 
 

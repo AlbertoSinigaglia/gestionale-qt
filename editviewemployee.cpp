@@ -1,5 +1,4 @@
 #include"editviewemployee.h"
-#include<QDebug>
 
 void EditViewEmployee::setStyle(QWidget* w){
     QFile file(":/resources/edit_view_employee.css");

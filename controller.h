@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <gestionale.h>
 #include<QFileDialog>
-#include<QDebug>
 #include <algorithm>
 #include <QShortcut>
 #include <QTimer>

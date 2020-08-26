@@ -10,7 +10,6 @@
 #include <QStyleOption>
 #include <QPainter>
 #include "models/headers/Employee.h"
-#include <QDebug>
 #include <QPaintEvent>
 #include <QMouseEvent>
 
