@@ -6,8 +6,7 @@
 #include "CSV/CSVWriter.h"
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":resources/logo.ico"));
     a.setApplicationName("MyGestionale");

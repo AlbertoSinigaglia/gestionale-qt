@@ -6,18 +6,16 @@
 #include <QComboBox>
 
 class ComboAttribute: public AbstAttribute{
-Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit ComboAttribute(QString nome,const DynamicArray<QString>& opzioni, int index_valore_inizio, bool editable=false,  QWidget *parent = nullptr);
 
 private:
-
     DynamicArray<QString> opzioni;
     QComboBox* setter_combo;
 
 private slots:
-
     void setValue(int i);
 
 };

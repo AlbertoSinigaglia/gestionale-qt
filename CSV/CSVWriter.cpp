@@ -1,4 +1,5 @@
 #include "CSV/CSVWriter.h"
+
 void CSVWriterTable::addRawRow(const std::map<std::string, std::string>& row){
     // aumento il numero di elementi dentro al
     ++n_elem;
@@ -41,6 +42,7 @@ void CSVWriterTable::addRawRow(const std::map<std::string, std::string>& row){
         }
     }
 }
+
 void CSVWriterTable::escape_all(std::string& source, char to_escape, char escape){
     // cenco nella stringa il valore di cui fare l'escape
     auto pos = source.find(to_escape);
@@ -74,6 +76,7 @@ std::string CSVWriterTable::escape(const std::string& source, const  std::vector
             escape_all(to_return, e, escape);
     return to_return;
 }
+
 void CSVWriterTable::addRow(const std::map<std::string, std::string>& row){
     // creo una mappa su cui assegnare i valori con l'escape
     std::map<std::string, std::string> map;
@@ -84,6 +87,7 @@ void CSVWriterTable::addRow(const std::map<std::string, std::string>& row){
     // aggiungo alla mappa dell'oggetto di invocazione questo nuovo elemento (appunto con gli escape necessari)
     addRawRow(map);
 }
+
 std::string CSVWriterTable::toString(char row_delimiter , char column_delimiter ){
     std::stringstream ss;
     // per ogni elemnto della tabella
@@ -115,6 +119,7 @@ std::string CSVWriterTable::toString(char row_delimiter , char column_delimiter 
     }
     return ss.str();
 }
+
 void CSVWriter::write(const QString& path, const DynamicArray<Employee*>& c){
     QFile file(path);
     CSVWriterTable table;

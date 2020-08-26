@@ -14,8 +14,6 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     addBoxSinistro();
     addBoxDestro();
     setLayout(mainLayout);
-
-
     connect(
         c_nome,&QCheckBox::stateChanged,
         [=](int state){
@@ -113,7 +111,6 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
             employeesList->changeListAttributeVisibility(EmployeeListElement::OreStraordinari, state);
         }
     );
-
     connect(elimina, SIGNAL(clicked()), this, SLOT(deleteButtonClicked()));
     connect(inserisci, SIGNAL(clicked()), this, SLOT(insertButtonClicked( )));
     connect(modifica, SIGNAL(clicked()), this, SLOT(modifyButtonClicked( )));
@@ -128,20 +125,17 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
         about.exec();
     });
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
-
     setStyle();
     setEnabled(false);setEnabled(true);
 }
 
-Gestionale::~Gestionale(){}
+Gestionale::~Gestionale() = default;
 
-void Gestionale::addBoxSinistro()
-{
+void Gestionale::addBoxSinistro(){
     auto* frameFiltri = new QFrame(this);
     frameFiltri->setFixedWidth(250);
     layoutFrameFiltri = new QVBoxLayout(frameFiltri);
     layoutFrameFiltri->setAlignment(Qt::AlignTop);
-
     auto scroll = new QScrollArea();
     scroll->setWidgetResizable(true);
     scroll->setObjectName("scroll-left");
@@ -162,8 +156,8 @@ void Gestionale::addTitleSinistro(){
     Visualizza->setObjectName("title-left");
     layoutFrameFiltri->addWidget(Visualizza);
 }
-void Gestionale::addComboBox()
-{
+
+void Gestionale::addComboBox(){
     Dipendenti = new QComboBox(this);
 	Dipendenti->addItems({
 		"Tutti",
@@ -181,8 +175,7 @@ void Gestionale::addComboBox()
     layoutFrameFiltri->addWidget(Dipendenti);
 }
 
-void Gestionale::addFirstBox()
-{
+void Gestionale::addFirstBox(){
     Visualizzare = new QGroupBox(this);
 	Visualizzare->setTitle("Cosa Visualizzare");
     LayoutVisualizzare = new QVBoxLayout(Visualizzare);
@@ -192,14 +185,11 @@ void Gestionale::addFirstBox()
     addBoxSpecifico();
 }
 
-void Gestionale::addBoxPersona()
-{
+void Gestionale::addBoxPersona(){
     QGroupBox* DatiPersona = new QGroupBox(this);
     DatiPersona->setObjectName("dati-persona-left");
 	DatiPersona->setTitle("Dati della persona");
     QVBoxLayout* layoutDatiPersona = new QVBoxLayout(DatiPersona);
-
-
     c_cognome = new QCheckBox("Cognome",this);
     layoutDatiPersona->addWidget(c_cognome);
     c_nome = new QCheckBox("Nome",this);
@@ -215,8 +205,7 @@ void Gestionale::addBoxPersona()
 	LayoutVisualizzare->addWidget(DatiPersona);
 }
 
-void Gestionale::addBoxLavoro()
-{
+void Gestionale::addBoxLavoro(){
 	QGroupBox* DatiDip = new QGroupBox(this);
 	DatiDip->setTitle("Dati relativi al lavoro");
 	QVBoxLayout* layoutDatiDip = new QVBoxLayout(DatiDip);
@@ -228,7 +217,6 @@ void Gestionale::addBoxLavoro()
 	layoutDatiDip->addWidget(StipendioBase);
     OreLavoro= new QCheckBox("Ore di lavoro \nsettimanale",this);
     layoutDatiDip->addWidget(OreLavoro);
-
 
     bonus_stipendio= new QCheckBox("Bonus stipendio",this);
     grado_esperienza= new QCheckBox("Grado esperienza",this);
@@ -244,8 +232,7 @@ void Gestionale::addBoxLavoro()
 	LayoutVisualizzare->addWidget(DatiDip);
 }
 
-void Gestionale::addBoxSpecifico()
-{
+void Gestionale::addBoxSpecifico(){
     QGroupBox* DatiSpecifici = new QGroupBox(this);
     DatiSpecifici->setTitle("Dati specifici");
     QVBoxLayout* layoutDatiSpecifici = new QVBoxLayout(DatiSpecifici);
@@ -278,12 +265,10 @@ void Gestionale::addBoxSpecifico()
     numero_criticita_risolte->setCheckState(Qt::CheckState::Unchecked);
     ore_straordinari->setCheckState(Qt::CheckState::Unchecked);
 
-
     LayoutVisualizzare->addWidget(DatiSpecifici);
 }
 
-void Gestionale::addAzioni()
-{
+void Gestionale::addAzioni(){
 	QGroupBox* Azioni = new QGroupBox(this);
 	Azioni->setTitle("Azioni sui dipendenti");
     Azioni->setObjectName("azioni-left");
@@ -297,8 +282,7 @@ void Gestionale::addAzioni()
     layoutFrameFiltri->addWidget(Azioni);
 }
 
-void Gestionale::addBoxDestro()
-{
+void Gestionale::addBoxDestro(){
     auto scroll = new QScrollArea();
     scroll->setContentsMargins(0,0,0,0);
     scroll->setWidgetResizable(true);
@@ -341,8 +325,7 @@ void Gestionale::addMenu(){
     mainLayout->setMenuBar(menuBar);
 }
 
-void Gestionale::setStyle()
-{
+void Gestionale::setStyle(){
 	QFile file(":/resources/style.css");
 	file.open(QFile::ReadOnly);
 	QString styleSheet = QLatin1String(file.readAll());
@@ -351,13 +334,9 @@ void Gestionale::setStyle()
 
 
 void Gestionale::showLiquidation(QString nome, float quota_liquidazione){
-    QString testo= QString("Per liquidare ")+ nome
-            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+"€";
-    auto msg= QMessageBox(QMessageBox::Information, "Liquidazione", testo, QMessageBox::Ok);
-    msg.exec();
+    QString testo= QString("Per liquidare ")+ nome + QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+"€";
+    QMessageBox(QMessageBox::Information, "Liquidazione", testo, QMessageBox::Ok).exec();
 }
-
-
 
 void Gestionale::deleteButtonClicked(){
     auto e = employeesList->getCurrent();
@@ -377,9 +356,11 @@ void Gestionale::deleteButtonClicked(){
         if(reply == QMessageBox::Yes) this->insertButtonClicked() ;
     }
 }
+
 void Gestionale::insertButtonClicked(){
     emit insertEmployeeEvent();
 }
+
 void Gestionale::modifyButtonClicked(){
     emit modifyEmployeeEvent(employeesList->getCurrent());
 }
@@ -391,11 +372,13 @@ void Gestionale::employeeListElementDoubleClicked(EmployeeListElement* e){
 void Gestionale::setModel(std::shared_ptr<EmployeesManagement> model_){
     model = model_;
 }
+
 void Gestionale::updateList() const{
     if(model){
         this->employeesList->setEmployees(*model->getEmployees());
     }
 }
+
 bool Gestionale::disableSaveEnableImport(){
     bool to_r = a_open->isEnabled();
     a_open->setDisabled(true);
@@ -403,6 +386,7 @@ bool Gestionale::disableSaveEnableImport(){
     a_export->setDisabled(false);
     return to_r;
 }
+
 void Gestionale::importFile(){
     emit importFileRequestEvent();
 }
@@ -414,22 +398,18 @@ void Gestionale::exitApplication(){
     emit exitApplicationEvent();
 }
 
-void Gestionale::changeSelectedElementComboBox(const QString& selected)
-{
+void Gestionale::changeSelectedElementComboBox(const QString& selected){
     Dipendenti->setCurrentText(selected);
     numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
     linguaggio->setCheckState(Qt::CheckState::Unchecked);
     percentuale_ripristino->setCheckState(Qt::CheckState::Unchecked);
     numero_criticita_risolte->setCheckState(Qt::CheckState::Unchecked);
     ore_straordinari->setCheckState(Qt::CheckState::Unchecked);
-
     numero_righe_totali->hide();
     linguaggio->hide();
     percentuale_ripristino->hide();
     numero_criticita_risolte->hide();
     ore_straordinari->hide();
-
-
 
     employeesList->changeListAttributeVisibility(
              EmployeeListElement::NumeroRigheTotali |
@@ -439,122 +419,102 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
              EmployeeListElement::OreStraordinari ,
              static_cast<int>(false)
      );
-
     if(selected=="Manutentore"){
         percentuale_ripristino->show();
-
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<Manutenzione>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::PercentualeRipristino, true
         );
-    };
-    if(selected=="FrontDeveloper"){
+    }
+    else if(selected=="FrontDeveloper"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<FrontDev>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="FullStack"){
+    }
+    else if(selected=="FullStack"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<FullStack>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="GUIDeveloper"){
+    }
+    else if(selected=="GUIDeveloper"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<GUIDev>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="Hardware"){
+    }
+    else if(selected=="Hardware"){
         employeesList->filter<Hardware>();
-    };
-    if(selected=="Software"){
+    }
+    else if(selected=="Software"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<Software>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="ITSecurityDev"){
+    }
+    else if(selected=="ITSecurityDev"){
         linguaggio->show();
         numero_righe_totali->show();
         percentuale_ripristino->show();
         numero_criticita_risolte->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
         numero_criticita_risolte->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<ITSecurityDev>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::PercentualeRipristino | EmployeeListElement::NumeroCriticitaRisolte | EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="Tecnico"){
+    }
+    else if(selected=="Tecnico"){
         percentuale_ripristino->show();
         ore_straordinari->show();
-
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
         ore_straordinari->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<Tecnico>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::OreStraordinari | EmployeeListElement::PercentualeRipristino, true
         );
-    };
-    if(selected=="BackDeveloper"){
+    }
+    else if(selected=="BackDeveloper"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<BackDev>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
-    };
-    if(selected=="DBDeveloper"){
+    }
+    else if(selected=="DBDeveloper"){
         linguaggio->show();
         numero_righe_totali->show();
-
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-
         employeesList->filter<DBDev>();
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
     }
-    if(selected=="Tutti"){
+    else if(selected=="Tutti"){
         employeesList->filter<Employee>();
     }
-
 }

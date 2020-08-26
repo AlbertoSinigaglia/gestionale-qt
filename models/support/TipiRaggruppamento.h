@@ -7,7 +7,6 @@
 
 struct AbstDataSection{
     virtual ~AbstDataSection() {}
-
     static double puntoDelMese(){
         return static_cast<double>(Data::oggi().getGiorno()) / 31.0;
     }

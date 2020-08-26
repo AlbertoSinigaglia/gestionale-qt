@@ -24,14 +24,11 @@ AbstAttribute::AbstAttribute(QString nome, bool editable_, QWidget *parent) : QW
     setLayout(layout);
 }
 
-
 void AbstAttribute::insertInfo(QString info){
     Suggerimento* s =new Suggerimento(info,this);
     layout->removeItem(layout->itemAt(2));
     layout->insertWidget(2,s,0,Qt::AlignLeft);
 }
-
-
 
 QString AbstAttribute::getValue() const{
     return str_value->text();

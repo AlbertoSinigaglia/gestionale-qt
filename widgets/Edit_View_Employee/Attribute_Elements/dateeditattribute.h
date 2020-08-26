@@ -8,21 +8,17 @@
 
 #include"widgets/Edit_View_Employee/abstattribute.h"
 
-class DateEditAttribute : public AbstAttribute
-{
+class DateEditAttribute : public AbstAttribute{
     Q_OBJECT
 public:
     explicit DateEditAttribute(QString nome, const Data& valore_, bool editable, QWidget *parent = nullptr);
 
 private:
     QCalendarWidget* setter_data;
-
     void setValue(Data d);
 
 private slots:
-
     void catchValue();
-
 
 };
 

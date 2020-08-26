@@ -1,5 +1,6 @@
 #include "controller.h"
 #include <QDebug>
+
 Controller::Controller(QObject *parent, Gestionale* view_):
     QObject(parent), view(view_), edit_view(nullptr), considered_employee(nullptr){
         view->show();
@@ -13,7 +14,6 @@ Controller::Controller(QObject *parent, Gestionale* view_):
         connect(view.get(), &Gestionale::importFileRequestEvent, this, &Controller::importFile);
         connect(view.get(), &Gestionale::exportToFileRequestEvent, this, &Controller::exportToFile);
         connect(view.get(), &Gestionale::exitApplicationEvent, this, &Controller::exitApplication);
-
         InizializeTimer();
 }
 bool Controller::updateModel(bool want_to_export){
@@ -43,15 +43,12 @@ bool Controller::updateModel(bool want_to_export){
 QString Controller::getFilePath(const QString info) const{
     return QFileDialog::getOpenFileName(view.get(),info, "", "Files (*.qcsv)");
 }
+
 void Controller::deleteEmployee(Employee * e){
     if(e){
-
         view->showLiquidation(QString::fromStdString(e->getNome()),e->risarcimentoLiquidazione());
-
         auto backup = DynamicArray<Employee*>(*(model->getEmployees()));
-
         model->deleteEmployee(e);
-
         if(updateModel(false))
             view->updateList();
         else
@@ -70,6 +67,7 @@ void Controller::importFile(){
         view->updateList();
     }
 }
+
 void Controller::exportToFile(){
     this->updateModel(true);
 }
@@ -85,17 +83,9 @@ void Controller::exitApplication(){
         emit exitEvent();
 }
 
-
-
-
-
-
-
 void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo){
-
     considered_employee = considerato;
     view->setEnabled(false);
-
     edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
     edit_view->setModal(true);
     edit_view->show();
@@ -104,11 +94,9 @@ void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo 
     connect(edit_view, SIGNAL(SaveDataConsiderd(AbstDataSection*)), this, SLOT(SaveChanges(AbstDataSection*)));
 }
 
-
 void Controller::ViewEmployeeInfo(Employee* e){
     OpenEditView(e,EditViewEmployee::Utilizzo::VISUALIZZA);
 }
-
 
 void Controller::EditEmployeeInfo(Employee * e){
     if(e){
@@ -119,14 +107,12 @@ void Controller::EditEmployeeInfo(Employee * e){
     }
 }
 
-
 void Controller::chooseNewEmployee(){
     TypeCreation scelta_inserimento;
     scelta_inserimento.setModal(true);
     connect(&scelta_inserimento, SIGNAL(choosed(QString)),this, SLOT(createEmployeeInfo(QString)));
     scelta_inserimento.exec();
 }
-
 
 void Controller::createEmployeeInfo(QString q){
     if(q=="GUIDev"){
@@ -140,10 +126,8 @@ void Controller::createEmployeeInfo(QString q){
     }else if(q=="Tecnico"){
         considered_employee=new Tecnico(Persona(),DatiLavoratore(),DatiManutenzione(),DatiSistemi(),DatiRiparazioneSistemi());
     }else return;
-
     OpenEditView(considered_employee,EditViewEmployee::Utilizzo::CREAZIONE);
 }
-
 
 void Controller::SaveChanges(AbstDataSection* data_){
     if (typeid(*data_) == typeid(DatiPersona)) {
@@ -237,52 +221,33 @@ void Controller::SaveChanges(AbstDataSection* data_){
     delete data_;
 }
 
-
 void Controller::SaveEditView(){
-
     bool is_creazione = edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE;
-
     if(edit_view->isModifyed()){
-
         QString testo=(is_creazione)? "Creazione":"Modifica";
         QMessageBox::StandardButton reply= QMessageBox::question(edit_view, testo,"Vuoi salvare le modifiche?",QMessageBox::Save | QMessageBox::Discard);
-
         if(reply==QMessageBox::Save){
             edit_view->chooseAndSend();
-
             if(is_creazione){
                 model->addEmployee(considered_employee);
                 this->updateModel();
             }
-
             considered_employee=nullptr;
             view->changeSelectedElementComboBox("Tutti");
             view->updateList();
         }
     }
-
     ExitEditView();
 }
-
 
 void Controller::ExitEditView(){
     if(edit_view->getStato()==EditViewEmployee::Utilizzo::CREAZIONE && considered_employee)
         delete considered_employee;
-
     considered_employee=nullptr;
-
     delete edit_view;
-
     edit_view=nullptr;
     view->setEnabled(true);
 }
-
-
-
-
-
-
-
 
 void Controller::InizializeTimer(){
     prev_date=QDate::currentDate();
@@ -293,11 +258,9 @@ void Controller::InizializeTimer(){
 }
 
 void Controller::updateTime(){
-
     if(prev_date.month()!=QDate::currentDate().month())
         model->updateMonthAll();
     prev_date = QDate::currentDate();
-
     timer->start(60000);
 }
 

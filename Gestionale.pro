@@ -59,6 +59,7 @@ SOURCES += \
     widgets/aboutus.cpp \
     widgets/employeelistelement.cpp \
     widgets/employeeslist.cpp \
+    widgets/tableheader.cpp \
     controller.cpp \
     main.cpp \
     gestionale.cpp \

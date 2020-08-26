@@ -6,25 +6,20 @@
 #include<QLabel>
 #include"widgets/suggerimento.h"
 
-class AbstAttribute : public QWidget
-{
+class AbstAttribute : public QWidget{
     Q_OBJECT
 public:
     explicit AbstAttribute(QString nome, bool editable=false, QWidget *parent = nullptr);
-
     QString getValue() const;
-
     void insertInfo(QString info);
 
 signals:
     void isModify();
 
 protected:
-
         QHBoxLayout* layout;
         QLabel* str_value;
         bool editable;
-
 };
 
 #endif // ABSTATTRIBUTE_H

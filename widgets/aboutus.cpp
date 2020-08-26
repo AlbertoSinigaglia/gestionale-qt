@@ -1,7 +1,6 @@
 #include "aboutus.h"
 
-AboutUs::AboutUs(QWidget *parent): QDialog(parent)
-{
+AboutUs::AboutUs(QWidget *parent): QDialog(parent){
     this->setObjectName("sfondo");
     this->setMinimumSize(600, 400);
     this->setContentsMargins(30,30,30,30);
@@ -13,8 +12,7 @@ AboutUs::AboutUs(QWidget *parent): QDialog(parent)
     setStyle();
 }
 
-void AboutUs::addImage()
-{
+void AboutUs::addImage(){
     QPixmap image(":/resources/MyG.png");
     image=image.scaled(200,200,Qt::KeepAspectRatio);
     QLabel* imageLabel = new QLabel(this);
@@ -23,16 +21,14 @@ void AboutUs::addImage()
     imageLabel->setAlignment(Qt::AlignCenter);
 }
 
-void AboutUs::addName()
-{
+void AboutUs::addName(){
     QLabel* name = new QLabel("MyGestionale",this, Qt::WindowFlags());
     name->setObjectName("nome");
     name->setAlignment(Qt::AlignCenter);
     aboutUsLayout->addWidget(name);
 }
 
-void AboutUs::addVersion()
-{
+void AboutUs::addVersion(){
     QLabel* version = new QLabel("Version 1.0",this, Qt::WindowFlags());
     version->setObjectName("versione");
     version->setMargin(15);
@@ -40,8 +36,7 @@ void AboutUs::addVersion()
     aboutUsLayout->addWidget(version);
 }
 
-void AboutUs::addCreators()
-{
+void AboutUs::addCreators(){
     QLabel* creators = new QLabel("Creators:",this, Qt::WindowFlags());
     creators->setAlignment(Qt::AlignCenter);
     creators->setObjectName("creatori");
@@ -60,8 +55,7 @@ void AboutUs::addCreators()
     aboutUsLayout->addWidget(creator3);
 }
 
-void AboutUs::setStyle()
-{
+void AboutUs::setStyle(){
     QFile file(":/resources/aboutUs.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());

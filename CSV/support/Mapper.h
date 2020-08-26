@@ -11,6 +11,7 @@
 #include "models/headers/Tecnico.h"
 #include "models/support/Convenzioni.h"
 #include <QDebug>
+
 class Mapper{
     enum supported{
         e_ITSecurityDev = 0,
@@ -20,30 +21,35 @@ class Mapper{
         e_GUIDev = 4,
         e_DBDev = 5
     };
+
     /**
      * @brief mappa da tipo dinamico a enum il puntatore fornito
      * @param e: puntatore di cui si vuole sapere il tipo dinamico
      * @return enumerativo rispetto al tipo dinamico di e
      */
     static int typeToEnum(Employee* e);
+
 public:
+
     /**
      * @brief genera una mappa (string -> string) del dipendente fornito
      * @param e: dipendente di cui si vuole la mappa
      * @return mappa rappresentate il dipendente fornito
      */
     static std::map<std::string, std::string> toMap(Employee* e);
+
     /**
      * @brief data una mappa, ne genera il dipendente corrispondente (inverso di toMap)
      * @param map: mappa da cui generare il dipendente
      * @return il dipendente generato dalla mappa
      */
     static Employee* fromMap(const std::map<std::string, std::string>& map);
+
 private:
-private:
+
     /**
      * ognuno di questi metodi produce la rispettiva struttura di supporto presente nel nome (get+StrutturaCheGenera)
-     * @param map: mappa da cui estraoplare i dati
+     * @param map: mappa da cui estrarre i dati
      * @return la corrispondente struttura di supporto
      */
     static Persona getPersona(const std::map<std::string, std::string>& map);

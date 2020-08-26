@@ -8,9 +8,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include "models/support/Data.h"
-
 #include"widgets/Edit_View_Employee/abstsectionelement.h"
-
 #include"widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
@@ -24,23 +22,16 @@ public:
 
 
 private:
-
+    static QString nome_campi[4];
+    static QString descrizione_campi[4];
 
     //  LISTA DI QWIDGET che mostrano i valori dei campi
-
     FlagAttribute* query_predefinite_widget;
     FlagAttribute* stile_minimalista_widget;
     LineEditAttribute* num_medio_percorsi_widget;
     LineEditAttribute* lunghezza_massima_percorso_widget;
 
-
-    static QString nome_campi[4];
-    static QString descrizione_campi[4];
-
-
     void addCampi(const DatiInterfacceUtente& dati, bool editable);
-    // Il metodo (X il COSTRUTTORE) + stabilisce le connessioni
-
 };
 
 #endif // DATIINTERFACCIAUTENTEELEMENT_H

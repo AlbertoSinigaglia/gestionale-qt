@@ -1,32 +1,27 @@
 #include "DatiDevelopingElement.h"
 
+QString DatiDevelopingElement::nome_campi[5] ={"Linguaggio usato","% ore programmazione", "# righe scritte dall'assuzione", "# righe scritte nel mese", "# progetti conclusi nel mese"};
+DynamicArray<QString> DatiDevelopingElement::opzioni_linguaggio = {"Python","Java","PHP","C++","Swift","JavaScript","Ruby","SQL","TypeScript"};
+
 DatiDevelopingElement::DatiDevelopingElement(const DatiDeveloping& dati_, bool editable, QWidget *parent)
     : AbstSectionElement(QString("Dati Developing"),parent ){
-addCampi(dati_,editable);
-
+        addCampi(dati_,editable);
 }
 
 AbstDataSection* DatiDevelopingElement::getData() const{
-
-        int indx=0; QString val=linguaggio_widget->getValue();
-        while(indx<static_cast<int>(opzioni_linguaggio.size()) && val!=opzioni_linguaggio[indx])
-            indx++;
-
-        return  new DatiDeveloping( static_cast<Conv::Linguaggio>(indx),
-                                    perc_ore_programmazione_widget->getValue().toDouble(),
-                                    n_righe_totali_widget->getValue().toUInt(),
-                                    n_righe_mese_widget->getValue().toUInt(),
-                                    n_progetti_conclusi_mese_widget->getValue().toUInt());
-    }
-
-
-QString DatiDevelopingElement::nome_campi[5] ={"Linguaggio usato","% ore programmazione", "# righe scritte dall'assuzione", "# righe scritte nel mese", "# progetti conclusi nel mese"};
-
-DynamicArray<QString> DatiDevelopingElement::opzioni_linguaggio = {"Python","Java","PHP","C++","Swift","JavaScript","Ruby","SQL","TypeScript"};
-
+    int indx=0; QString val=linguaggio_widget->getValue();
+    while(indx<static_cast<int>(opzioni_linguaggio.size()) && val!=opzioni_linguaggio[indx])
+        indx++;
+    return  new DatiDeveloping(
+                static_cast<Conv::Linguaggio>(indx),
+                perc_ore_programmazione_widget->getValue().toDouble(),
+                n_righe_totali_widget->getValue().toUInt(),
+                n_righe_mese_widget->getValue().toUInt(),
+                n_progetti_conclusi_mese_widget->getValue().toUInt()
+    );
+}
 
 void DatiDevelopingElement::addCampi(const DatiDeveloping& dati, bool editable){
-
     linguaggio_widget = new ComboAttribute(nome_campi[0],opzioni_linguaggio, dati.linguaggio, editable,this);
     layout->addWidget(linguaggio_widget);
     connect(linguaggio_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));

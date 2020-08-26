@@ -1,13 +1,8 @@
-
 #include"slideattribute.h"
 #include"math.h"
 #include<QDebug>
 
-
-
-SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, double end_, unsigned int cifre_approx_, bool editable, QWidget *parent)
-        :AbstAttribute(nome,editable,parent), start(start_), end(end_), cifre_approx(cifre_approx_){
-
+SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, double end_, unsigned int cifre_approx_, bool editable, QWidget *parent):AbstAttribute(nome,editable,parent), start(start_), end(end_), cifre_approx(cifre_approx_){
     if(editable){
     setter_num = new QSlider(Qt::Horizontal,this);
     setter_num->setFixedWidth(400);
@@ -28,12 +23,10 @@ SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, doub
 void SlideAttribute::catchValue(){
     double num = static_cast<double>(setter_num->sliderPosition()) * (end-start)/500.0 + start;
     num= static_cast<double>(round(num*pow(10,cifre_approx)))/pow(10,cifre_approx);
-
     setValue(num);
 }
 
 void SlideAttribute::setValue(double v){
-
     str_value->setText(QString::number(v));
 }
 

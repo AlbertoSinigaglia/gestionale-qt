@@ -7,19 +7,14 @@
 #include"widgets/Edit_View_Employee/abstattribute.h"
 
 class FlagAttribute : public AbstAttribute{
-Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit FlagAttribute(QString nome, bool valore, bool editable=false,  QWidget *parent = nullptr);
-
     QCheckBox* setter_bool;
 
-
 private slots:
-
     void setValue(int v);
-
-
 
 };
 

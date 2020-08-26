@@ -1,9 +1,7 @@
 #include"editviewemployee.h"
 #include<QDebug>
 
-void EditViewEmployee::setStyle(QWidget* w)
-{
-
+void EditViewEmployee::setStyle(QWidget* w){
     QFile file(":/resources/edit_view_employee.css");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
@@ -12,9 +10,6 @@ void EditViewEmployee::setStyle(QWidget* w)
 
 EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
     QDialog(parent), stato(stato_utilizzo), isModify(false){
-
-
-
         setStyle(this);
         topLevelWidget();
         mainLayout = new QVBoxLayout(this);
@@ -33,12 +28,10 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         LSalvaEsci->addWidget(Esci);
         if(stato_utilizzo==Utilizzo::CREAZIONE)
             setModifed();
-
         mainLayout->addLayout(buildIntestazione());
         mainLayout->addWidget(impiegato);
         mainLayout->addLayout(LSalvaEsci);
         mainLayout->setAlignment(LSalvaEsci,Qt::AlignRight);
-
 
         connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
         setLayout(mainLayout);
@@ -47,11 +40,9 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
 }
 
 QHBoxLayout* EditViewEmployee::buildIntestazione(){
-
     QLabel* testo_titolo;
     Suggerimento* info=nullptr;
     QString tx_info= QString("Gli attributi seguiti dal suffisso: <nel mese> indicano dati accumulati dall'inizio del mese, gli altri sono accumulativi dalla data assunzione (o estemporanei)\n");
-
     if(stato==Utilizzo::MODIFICA){
         testo_titolo = new QLabel(QString("Modifica Impiegato"));
     }else if(stato==Utilizzo::CREAZIONE){
@@ -60,42 +51,32 @@ QHBoxLayout* EditViewEmployee::buildIntestazione(){
     }else{
         testo_titolo = new QLabel(QString("Visualizza Impiegato"));
     }
-
     info = new Suggerimento(tx_info);
     QHBoxLayout* titolo =new QHBoxLayout();
 
     titolo->addWidget(testo_titolo);
     titolo->addWidget(info);
     titolo->setAlignment(Qt::AlignLeft);
-
     return titolo;
 }
 
-
 void EditViewEmployee::chooseAndSend() const{
-
-        for(auto i=lista_elementi.begin(); i!=lista_elementi.end(); i++){
-            if((*i)->isModifyed())
-               emit SaveDataConsiderd((*i)->getData());
-            // Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
-            // Questi verranno gestiti ed eliminati dalla destinazione : il Controller
-        }
+    for(auto i=lista_elementi.begin(); i!=lista_elementi.end(); i++){
+        if((*i)->isModifyed())
+           emit SaveDataConsiderd((*i)->getData());
+        // Con getData() genero dei dati allocati nello heap di tipo AbstDataSection
+        // Questi verranno gestiti ed eliminati dalla destinazione : il Controller
     }
-
-
+}
 
 QFrame* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent){
-
     QFrame* frame = new QFrame(parent);
     QVBoxLayout* layout = new QVBoxLayout(frame);
     layout->setSpacing(20);
-
-    bool editable= (stato==Utilizzo::VISUALIZZA)? false: true;
-
+    bool editable = stato!=Utilizzo::VISUALIZZA;
     for(auto i = dati_.begin(); i!=dati_.end(); i++){
         AbstDataSection* objct = *i;
         AbstSectionElement* sezione=nullptr;
-
         if(typeid(*objct)==typeid(DatiPersona)) {
             sezione = new DatiPersonaElement(*dynamic_cast<const DatiPersona*>(objct), editable, this);
         }
@@ -140,17 +121,17 @@ QFrame* EditViewEmployee::buildSections(const DynamicArray<AbstDataSection*>& da
     }
     frame->setLayout(layout);
     return frame;
-    }
+}
 
 bool EditViewEmployee::isModifyed() const{
     return isModify;
 }
 
-void EditViewEmployee::closeEvent(QCloseEvent *event)
-{
+void EditViewEmployee::closeEvent(QCloseEvent *event){
     event->accept();
     emit closeDirect();
 }
+
 void EditViewEmployee::setModifed(){
     if(!isModify){
         Esci->setText("Annulla");
@@ -160,7 +141,6 @@ void EditViewEmployee::setModifed(){
         setStyle(salva);
         LSalvaEsci->addWidget(salva);
         connect(salva,SIGNAL(clicked()),this,SIGNAL(saveAndClose()));
-
         isModify=true;
     }
 }

@@ -1,31 +1,24 @@
 #include "DatiLatoClientElement.h"
+QString DatiLatoClientElement::nome_campi[3] ={"Libreria usata", "È orientato alla professionalità?", "% di codice perfezionato"};
+DynamicArray<QString> DatiLatoClientElement::opzioni_libreria = {"Bootstrap","Jquery","Treejs","Angular","Vuejs"};
 
 DatiLatoClientElement::DatiLatoClientElement(const DatiLatoClient& dati_, bool editable, QWidget *parent)
     : AbstSectionElement(QString("Dati Lato Client"),parent ){
-
-addCampi(dati_,editable);
+        addCampi(dati_,editable);
 }
 
-
-QString DatiLatoClientElement::nome_campi[3] ={"Libreria usata", "È orientato alla professionalità?", "% di codice perfezionato"};
-
-DynamicArray<QString> DatiLatoClientElement::opzioni_libreria = {"Bootstrap","Jquery","Treejs","Angular","Vuejs"};
-
-
 AbstDataSection* DatiLatoClientElement::getData() const{
-
-        int indx=0; QString val=libreria_widget->getValue();
-        while(indx<static_cast<int>(opzioni_libreria.size()) && val!=opzioni_libreria[indx])
-            indx++;
-
-        return  new DatiLatoClient( static_cast<Conv::Libreria>(indx),
-                                    (orientato_professionalita_widget->getValue()=="SI")? true:false,
-                                    perc_codice_perfezionato_widget->getValue().toDouble());
-    }
-
+    int indx=0; QString val=libreria_widget->getValue();
+    while(indx<static_cast<int>(opzioni_libreria.size()) && val!=opzioni_libreria[indx])
+        indx++;
+    return  new DatiLatoClient(
+                static_cast<Conv::Libreria>(indx),
+                orientato_professionalita_widget->getValue()=="SI",
+                perc_codice_perfezionato_widget->getValue().toDouble()
+    );
+}
 
 void DatiLatoClientElement::addCampi(const DatiLatoClient& dati, bool editable){
-
     libreria_widget = new ComboAttribute(nome_campi[0],opzioni_libreria, dati.libreria, editable,this);
     layout->addWidget(libreria_widget);
     connect(libreria_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
@@ -40,4 +33,3 @@ void DatiLatoClientElement::addCampi(const DatiLatoClient& dati, bool editable){
     layout->addWidget(perc_codice_perfezionato_widget);
     connect(perc_codice_perfezionato_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }
-

@@ -5,6 +5,7 @@
 #include "CSV/CSVParser.h"
 #include "CSV/support/Mapper.h"
 #include <QFile>
+
 class CSVReader{
 public:
     /**

@@ -5,10 +5,13 @@ std::shared_ptr<EmployeesManagement> EmployeesManagement::instance = nullptr;
 EmployeesManagement::EmployeesManagement():
     employees(std::make_shared<DynamicArray<Employee*>>()),
     source(){}
+
 std::shared_ptr<EmployeesManagement> EmployeesManagement::getInstance(){
-    if(!EmployeesManagement::instance) EmployeesManagement::instance = std::shared_ptr<EmployeesManagement>(new EmployeesManagement);
+    if(!EmployeesManagement::instance)
+        EmployeesManagement::instance = std::shared_ptr<EmployeesManagement>(new EmployeesManagement);
     return EmployeesManagement::instance;
 }
+
 bool EmployeesManagement::import(const QString& path){
     try {
         auto empls = CSVReader::parse(path);
@@ -32,14 +35,10 @@ QString EmployeesManagement::getOriginalSource() const{
     return source;
 }
 
-
-
 DynamicArray<AbstDataSection*> EmployeesManagement::serializeEmployee(Employee* e){
-
     DynamicArray<AbstDataSection*> vett;
     vett.push_back(new DatiPersona(e->getDatiPersona()));
     vett.push_back(new DatiLavoratore(e->getDatiLavoratore()));
-
     Software* p = dynamic_cast<Software*>(e);
     if(p){
         vett.push_back(new DatiDeveloping(p->getDatiDeveloping()));
@@ -66,7 +65,6 @@ DynamicArray<AbstDataSection*> EmployeesManagement::serializeEmployee(Employee* 
         vett.push_back(new DatiSistemi(p->getDatiSistemi()));
         vett.push_back(new DatiRiparazioneSistemi(p->getDatiRiparazioneSistemi()));
     }
-
     return vett;
 }
 
@@ -83,9 +81,7 @@ void EmployeesManagement::deleteEmployee(Employee* e){
     }
 }
 
-
 void EmployeesManagement::updateMonthAll(){
-    for (auto i=employees->begin();i!=employees->end(); i++){
-        (*i)->aggiornaMese();
-    }
+    for(auto e: *employees)
+        e->aggiornaMese();
 }

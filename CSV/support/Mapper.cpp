@@ -241,22 +241,17 @@ Employee* Mapper::fromMap(const std::map<std::string, std::string>& map){
                         getDatiDeveloping(map),
                         getDatiLatoServer(map),
                         getDatiLatoClient(map),
-                        getDatiFullStack(map));
+                        getDatiFullStack(map)
+            );
         }
-//            case e_BackDev:{
-//                return new BackDev(
-//                            getPersona(map),
-//                            getDatiLavoratore(map),
-//                            getDatiDeveloping(map),
-//                            getDatiLatoServer(map));
-//            }
         case e_GUIDev:{
             return new GUIDev(
                         getPersona(map),
                         getDatiLavoratore(map),
                         getDatiDeveloping(map),
                         getDatiLatoClient(map),
-                        getDatiInterfacceUtente(map));
+                        getDatiInterfacceUtente(map)
+            );
         }
         case e_DBDev:{
             return new DBDev(
@@ -264,12 +259,13 @@ Employee* Mapper::fromMap(const std::map<std::string, std::string>& map){
                         getDatiLavoratore(map),
                         getDatiDeveloping(map),
                         getDatiLatoServer(map),
-                        getDatiDatabase(map));
+                        getDatiDatabase(map)
+            );
         }
     }
-    std::cerr << "errore"<< std::endl;
     throw std::invalid_argument("Tipo non supportato, potrebbe essere causato da incompatibilità tra versioni");
 }
+
 Persona Mapper::getPersona(const std::map<std::string, std::string>& map){
     return Persona(map.at("nome"), map.at("cognome"), map.at("cf"), Data(map.at("nascita")));
 }

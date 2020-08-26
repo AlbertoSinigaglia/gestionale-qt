@@ -1,26 +1,22 @@
 #include "DatiLavoratoreElement.h"
 
-
+QString DatiLavoratoreElement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
 
 DatiLavoratoreElement::DatiLavoratoreElement(const DatiLavoratore& dati_, bool editable, QWidget *parent)
     : AbstSectionElement(QString("Dati Lavoratore"),parent ){
-
-
-    addCampi(dati_, editable);
+        addCampi(dati_, editable);
 }
 
-
 AbstDataSection* DatiLavoratoreElement::getData() const{
-
-        return  new DatiLavoratore( Data(data_assunzione_widget->getValue().toStdString()),
-                                    Data(fine_contratto_widget->getValue().toStdString()),
-                                    ore_lavoro_sett_widget->getValue().toInt(),
-                                    quota_aggiuntiva_widget->getValue().toFloat());
-    }
-
+    return  new DatiLavoratore(
+                Data(data_assunzione_widget->getValue().toStdString()),
+                Data(fine_contratto_widget->getValue().toStdString()),
+                ore_lavoro_sett_widget->getValue().toInt(),
+                quota_aggiuntiva_widget->getValue().toFloat()
+    );
+}
 
 void DatiLavoratoreElement::addCampi(const DatiLavoratore& dati, bool editable){
-
     data_assunzione_widget = new DateEditAttribute(nome_campi[0],dati.data_assunzione,editable,this);
     layout->addWidget(data_assunzione_widget);
     connect(data_assunzione_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
@@ -37,8 +33,3 @@ void DatiLavoratoreElement::addCampi(const DatiLavoratore& dati, bool editable){
     layout->addWidget(quota_aggiuntiva_widget);
     connect(quota_aggiuntiva_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }
-QString DatiLavoratoreElement::nome_campi[4] ={"data di assunzione", "data di fine contratto", "ore di lavoro settimanali", "quota aggiuntiva"};
-
-
-
-

@@ -19,8 +19,6 @@
 #include"models/headers/FullStack.h"
 #include"models/headers/ITSecurityDev.h"
 #include"models/headers/Tecnico.h"
-
-
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiLavoratoreElement.h"
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiDatabaseElement.h"
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiDevelopingElement.h"
@@ -33,21 +31,20 @@
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiRiparazioneSistemiElement.h"
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiRipristinoSicurezzaElement.h"
 #include"widgets/Edit_View_Employee/Data_Section_Elements/DatiSistemiElement.h"
-
 #include"widgets/suggerimento.h"
 
-
-/*
- * La vista < EditViewEmployee>  si  occupa  di  creare  un interfaccia  per  visualizzare
+/**
+ * @brief La vista < EditViewEmployee>  si  occupa  di  creare  un interfaccia  per  visualizzare
  * sezioni indipendenti di dati di tipo <TipiRaggruppamento>, è con questi che interagisce
  * e non direttamente su  un impiegato.
  */
 class EditViewEmployee: public QDialog{
-Q_OBJECT
+    Q_OBJECT
     static void setStyle(QWidget*);
-public:
 
-    /* Utilizzo:
+public:
+    /**
+     * Utilizzo:
      * La vista può essere aperta per visualizzare un impiegato (in questo caso genererà
      * dei widget in sola lettura), oppure per modificarlo (in lettura/scrittura) o per
      * crearlo.
@@ -66,8 +63,9 @@ public:
      */
     EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo =Utilizzo::VISUALIZZA, QWidget *parent =0);
 
-    /* IS MODIFYED
-     * Permette di capire se dal momento della creazione della vista l'utente
+    /**
+     * IS MODIFYED
+     * @brief Permette di capire se dal momento della creazione della vista l'utente
      * ha eseguito una qualche azione sui widget per la modifica dei campi dati
      */
     bool isModifyed() const;
@@ -82,7 +80,6 @@ public:
     Utilizzo getStato() const;
 
 signals:
-
     /**
      * @brief Il segnale richiede che <dati_> venga intesa e gestita come la nuova
      * versione modificata della sezione univocata dal suo tipo dinamico
@@ -93,23 +90,19 @@ signals:
     //Il segnale richiama la gestione della chiusura della vista
     void closeDirect();
 
-    /*Il segnale richiama la gestione del salvataggio dei dati al momento della
-    Chiusura della vista*/
+    /**
+     * Il segnale richiama la gestione del salvataggio dei dati al momento della chiusura della vista
+     */
     void saveAndClose();
 
 private:
-
-    Utilizzo stato;
-
-    bool isModify;
-
-    QHBoxLayout* LSalvaEsci;
-    QPushButton* Esci;
-
     // lista_elementi è un vettore di riferimenti ai widget che riguardano ogni sezione
     // volutamente ridondante (mainLayout: *exist*)
     DynamicArray<AbstSectionElement*> lista_elementi;
-
+    Utilizzo stato;
+    bool isModify;
+    QHBoxLayout* LSalvaEsci;
+    QPushButton* Esci;
     QVBoxLayout* mainLayout;
 
     /**
@@ -119,26 +112,15 @@ private:
      * @param parent
      */
     QFrame* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
-
     QHBoxLayout* buildIntestazione();
 
-
-
 private slots:
-
     /**
      * @brief si occupa di gestire a livello di vista l'avvenuta alterazione delle
      * informazioni
      */
     void setModifed();
-
     void closeEvent(QCloseEvent *event) override;
-
-
-
 };
-
-
-
 
 #endif // EDITVIEWEMPLOYEE_H

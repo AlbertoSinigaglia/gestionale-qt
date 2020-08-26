@@ -1,7 +1,6 @@
 #ifndef EMPLOYEELISTELEMENT_H
 #define EMPLOYEELISTELEMENT_H
 
-
 #include <qwidget.h>
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -14,6 +13,7 @@
 #include <QDebug>
 #include <QPaintEvent>
 #include <QMouseEvent>
+
 class EmployeeListElement : public QWidget{
     Q_OBJECT
     Employee* e_;
@@ -55,29 +55,33 @@ public:
         NumeroCriticitaRisolte  = 1<<14,    // security
         OreStraordinari         = 1<<15     // tecnico
     };
-    EmployeeListElement(Employee *e, QWidget *parent = 0);
-    ~EmployeeListElement();
-    // da: https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
+
+    /**
+     * source: https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
+     */
     EmployeeListElement(const EmployeeListElement& e) = delete;
     EmployeeListElement& operator= (const EmployeeListElement& e) = delete;
+    EmployeeListElement(Employee *e, QWidget *parent = 0);
 
     /**
      * @brief imposta lo stato di questo elemento (se selezionato o no)
      * @param lo stato che deve assumere questo elemento
      */
     void updateStatus(bool new_status);
+
     /**
      * @brief getter per il dipendente che questo elemento gestisce
      * @return l'employee gestito
      */
     Employee* getEmployee() const;
 
-
 signals:
     void clicked(EmployeeListElement*);
     void doubleClicked(EmployeeListElement *);
+
 public slots:
     void changeVisibility(int prop, int visibility);
+
 private:
     void updateVisibility(QLabel* EmployeeListElement::* elem, int visibility);
     void setStyle();

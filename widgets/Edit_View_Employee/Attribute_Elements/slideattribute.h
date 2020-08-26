@@ -10,24 +10,19 @@
 #include"widgets/Edit_View_Employee/abstattribute.h"
 
 class SlideAttribute : public AbstAttribute{
-Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit SlideAttribute(QString nome, double valore_, double start_=0.0, double end_=1.0, unsigned int cifre_approx_=0, bool editable=false, QWidget *parent = nullptr);
 
 private:
-
     double start,end;
     unsigned int cifre_approx;
-
     QSlider* setter_num;
-
     void setValue(double v);
 
 private slots:
-
     void catchValue();
-
 
 };
 

@@ -9,7 +9,6 @@
 #include <algorithm>
 #include <QShortcut>
 #include <QTimer>
-
 #include "CSV/CSVWriter.h"
 #include "models/support/Convenzioni.h"
 #include"employeesmanagement.h"
@@ -17,8 +16,7 @@
 #include"editviewemployee.h"
 #include"widgets/typecreation.h"
 
-class Controller : public QObject
-{
+class Controller : public QObject{
     Q_OBJECT
 
 // -----------------------------------------
@@ -51,26 +49,21 @@ signals:
 // -----------------------------------------
 
 private:
-
     std::shared_ptr<Gestionale> view;
     std::shared_ptr<EmployeesManagement> model;
-
     bool updateModel(bool want_to_export = false);
     QString getFilePath(const QString info) const;
 
 public slots:
     void deleteEmployee(Employee * e);
-
     void importFile();
     void exportToFile();
-
 
 // -----------------------------------------
 //          RIGUARDO a: EDIT / VIEW
 // -----------------------------------------
 
 private:
-
     EditViewEmployee* edit_view;
 
     /**
@@ -86,9 +79,7 @@ private:
      */
     void OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo);
 
-
 public slots:
-
     /**
      * @brief si occupa di generare una vista che mostri in sola lettura i dati
      * relativi all'impiegato <e>
@@ -131,7 +122,6 @@ public slots:
      * le dovute procedure di abortimento della procedura scelta
      */
     void ExitEditView();
-
 };
 
 #endif // CONTROLLER_H

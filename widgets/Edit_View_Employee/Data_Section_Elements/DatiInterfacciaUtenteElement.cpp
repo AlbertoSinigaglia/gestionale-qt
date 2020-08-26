@@ -1,20 +1,22 @@
 #include "DatiInterfacciaUtenteElement.h"
 
+QString DatiInterfacciaUtenteElement::nome_campi[4] ={"Crea query predefinite?", "Segue stile minimaista?", "# medio di path a sezioni","# clicks path più lungo"};
+
 DatiInterfacciaUtenteElement::DatiInterfacciaUtenteElement(const DatiInterfacceUtente& dati_, bool editable, QWidget *parent)
     : AbstSectionElement(QString("Dati Interfacce Utente"),parent ){
-
-addCampi(dati_,editable);
+        addCampi(dati_,editable);
 }
+
 AbstDataSection* DatiInterfacciaUtenteElement::getData() const{
+    return  new DatiInterfacceUtente(
+                query_predefinite_widget->getValue()=="SI",
+                stile_minimalista_widget->getValue()=="SI",
+                num_medio_percorsi_widget->getValue().toUInt(),
+                lunghezza_massima_percorso_widget->getValue().toUInt()
+    );
+}
 
-        return  new DatiInterfacceUtente(
-                                    (query_predefinite_widget->getValue()=="SI")? true:false,
-                                    (stile_minimalista_widget->getValue()=="SI")? true:false,
-                                    num_medio_percorsi_widget->getValue().toUInt(),
-                                    lunghezza_massima_percorso_widget->getValue().toUInt());
-    }
 void DatiInterfacciaUtenteElement::addCampi(const DatiInterfacceUtente& dati, bool editable){
-
     query_predefinite_widget = new FlagAttribute(nome_campi[0],dati.quary_predefinite,editable,this);
     layout->addWidget(query_predefinite_widget);
     query_predefinite_widget->insertInfo("Crea delle quary predefinite per automatizzare richieste frequenti?");
@@ -35,7 +37,4 @@ void DatiInterfacciaUtenteElement::addCampi(const DatiInterfacceUtente& dati, bo
     lunghezza_massima_percorso_widget->insertInfo("Quanti cliks semparano le due sezioni del sito più distanti tra loro?");
     layout->addWidget(lunghezza_massima_percorso_widget);
     connect(lunghezza_massima_percorso_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
-
-   }
-QString DatiInterfacciaUtenteElement::nome_campi[4] ={"Crea query predefinite?", "Segue stile minimaista?", "# medio di path a sezioni","# clicks path più lungo"};
-
+}

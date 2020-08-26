@@ -10,7 +10,6 @@ TypeCreation::TypeCreation(QWidget* parent): QDialog(parent){
     layout->setContentsMargins(10,10,10,10);
     layout->setSpacing(50);
 
-
     QLabel* titolo = new QLabel("Che tipo di dipendente vuoi inserire?",this);
     titolo->setObjectName("title");
     titolo->setAlignment(Qt::AlignCenter);

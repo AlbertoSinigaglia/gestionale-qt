@@ -10,6 +10,7 @@
 #include <string>
 #include <sstream>
 #include <string>
+
 struct DifferenzaDate{
     int giorni = 0;
     int mesi = 0;
@@ -39,7 +40,7 @@ public:
      * Costruttori
      */
     explicit Data(const std::string& date);
-    explicit Data(int num_giorni = 0);     //dalla data base (0,1,1)
+    explicit Data(int num_giorni = 0);
     explicit Data(int a, unsigned int m, unsigned int g);
 
     /*
@@ -59,7 +60,7 @@ public:
     /*
      * Setter Helpers
      */
-    void addRemoveGiorni(int g);    // accetta anche valori negativi => toglie giorni
+    void addRemoveGiorni(int g);
     void addRemoveMesi(int m);
     void addRemoveAnni(int a);
 
@@ -74,8 +75,9 @@ public:
      * Operatori
      */
     bool operator==(const Data &d1) const;
-    bool operator<(const Data &) const;        //assunzione: qualsiasi data è maggiore di una data che non esiste
+    bool operator<(const Data &) const;
     bool operator>(const Data &) const;
+
     /**
      * Restituisce la differenza delle date tra (this, d);
      * @param d : data da sottrarre
@@ -85,18 +87,15 @@ public:
     Data& operator+=(const DifferenzaDate& diff);
     operator std::string() const;
 
-
     /*
      * Cast
      */
     explicit operator int() const; // differenza giorni dalla base (0,1,1)
 
-
     /*
      * Metodi statici
      */
     static Data oggi();
-
 };
 
 #endif //CSVPARSER_DATA_H

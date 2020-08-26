@@ -1,19 +1,21 @@
 #include "DatiRiparazioneSistemiElement.h"
 
+QString DatiRiparazioneSistemiElement::nome_campi[3] ={"ore di stallo nel mese", "ore straordinari nel mese", "% delle riparazioni di sussistenza"};
+
 DatiRiparazioneSistemiElement::DatiRiparazioneSistemiElement(const DatiRiparazioneSistemi& dati_, bool editable, QWidget *parent)
     : AbstSectionElement(QString("Dati Riparazione Sistemi"),parent ){
-
-    addCampi(dati_,editable);
+        addCampi(dati_,editable);
 }
 
 AbstDataSection* DatiRiparazioneSistemiElement::getData() const{
+    return  new DatiRiparazioneSistemi(
+                ore_stallo_mensili_widget->getValue().toUInt(),
+                ore_straordinari_widget->getValue().toUInt(),
+                perc_riparazioni_sussistenti_widget->getValue().toDouble()
+    );
+}
 
-        return  new DatiRiparazioneSistemi( ore_stallo_mensili_widget->getValue().toUInt(),
-                                  ore_straordinari_widget->getValue().toUInt(),
-                                  perc_riparazioni_sussistenti_widget->getValue().toDouble());
-    }
 void DatiRiparazioneSistemiElement::addCampi(const DatiRiparazioneSistemi& dati, bool editable){
-
     ore_stallo_mensili_widget = new LineEditAttribute(nome_campi[0],LineEditAttribute::TipoInserimento::INTEGER,QString::number(dati.ore_stallo_mensili),editable,this);
     ore_stallo_mensili_widget->setValMax(40);
     ore_stallo_mensili_widget->insertInfo("Gli stalli nel sistema produttivo vengono causati da tutte e sole le riparazioni a sistemi di sussistenza");
@@ -31,4 +33,3 @@ void DatiRiparazioneSistemiElement::addCampi(const DatiRiparazioneSistemi& dati,
     layout->addWidget(perc_riparazioni_sussistenti_widget);
     connect(perc_riparazioni_sussistenti_widget,SIGNAL(isModify()), this, SIGNAL(setModifyed()));
 }
-QString DatiRiparazioneSistemiElement::nome_campi[3] ={"ore di stallo nel mese", "ore straordinari nel mese", "% delle riparazioni di sussistenza"};

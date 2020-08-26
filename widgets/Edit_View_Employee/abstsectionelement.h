@@ -5,30 +5,22 @@
 #include<QVBoxLayout>
 #include<QLabel>
 #include "models/support/TipiRaggruppamento.h"
-
 #include"widgets/Edit_View_Employee/Attribute_Elements/slideattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/dateeditattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/lineeditattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/comboattribute.h"
 #include"widgets/Edit_View_Employee/Attribute_Elements/flagattribute.h"
 
-class AbstSectionElement: public QWidget
-{
+class AbstSectionElement: public QWidget{
     Q_OBJECT
-
 public:
-
     AbstSectionElement(QString nome_sezione, QWidget *parent = 0);
-
-    virtual ~AbstSectionElement(){}
-
     bool isModifyed() const;
-
+    virtual ~AbstSectionElement() = default;
     virtual AbstDataSection* getData() const = 0;
 
 protected:
     bool is_modifyed;
-
     QVBoxLayout* layout;
 
 signals:

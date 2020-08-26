@@ -1,25 +1,22 @@
 #ifndef EMPLOYEESMANAGEMENT_H
 #define EMPLOYEESMANAGEMENT_H
+
 #include "collections/DynamicArray.h"
 #include <QString>
 #include"CSV/CSVReader.h"
 #include <QFileDialog>
 #include"CSV/CSVWriter.h"
-
 #include"models/headers/GUIDev.h"
 #include"models/headers/DBDev.h"
 #include"models/headers/FullStack.h"
 #include"models/headers/ITSecurityDev.h"
 #include"models/headers/Tecnico.h"
 
-class EmployeesManagement
-{
+class EmployeesManagement{
     // contenitore dei dipendenti
     std::shared_ptr<DynamicArray<Employee*>> employees;
-
     // instanza del singleton
     static std::shared_ptr<EmployeesManagement> instance;
-
     // path del primo file importato (che nella vista corrisponde al "apri")
     QString source;
 
@@ -28,6 +25,7 @@ class EmployeesManagement
      * @param source_ : path da cui ricostruire i dipendenti
      */
     EmployeesManagement();
+
 public:
     EmployeesManagement(const EmployeesManagement &) = delete;
     EmployeesManagement& operator= (const EmployeesManagement &) = delete;
@@ -88,7 +86,7 @@ public:
      * @brief serializza i dati dell'impiegato in un insieme di macro raggruppamenti ordinato
      * @return l'insieme delle tipi raggruppamento
      */
-static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
-
+    static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
 };
+
 #endif // EMPLOYEESMANAGEMENT_H

@@ -2,7 +2,6 @@
 #define GESTIONALE_H
 
 #include <QWidget>
-
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -40,16 +39,12 @@ public:
 
 private:
     std::shared_ptr<EmployeesManagement> model;
-	QHBoxLayout* mainLayout;
-	//Layout Sinistro con tutti i suoi componenti
+    QHBoxLayout* mainLayout;
     QVBoxLayout* layoutFrameFiltri;
 	QGroupBox* Visualizzare;
-	QVBoxLayout* LayoutVisualizzare;
-	//Layout Destro con tutti i suoi componenti
+    QVBoxLayout* LayoutVisualizzare;
 	QHBoxLayout* Left;
 	QVBoxLayout* layoutVisualizza;
-
-
     EmployeesList* employeesList;
     QPushButton* modifica;
     QPushButton* inserisci;
@@ -79,9 +74,6 @@ private:
     QCheckBox* ore_straordinari;
     QMenu* aboutUs;
 
-
-
-
     void addTitleSinistro();
 	void addBoxDestro();
 	void addBoxSinistro();
@@ -92,8 +84,8 @@ private:
     void addBoxSpecifico();
 	void addAzioni();
     void addMenu();
-
 	void setStyle();
+
 signals:
     void employeeListElementDoubleClickedEvent(Employee*);
     void modifyEmployeeEvent(Employee*);
@@ -102,6 +94,7 @@ signals:
     void importFileRequestEvent();
     void exportToFileRequestEvent();
     void exitApplicationEvent();
+
 public slots:
     void deleteButtonClicked();
     void insertButtonClicked();

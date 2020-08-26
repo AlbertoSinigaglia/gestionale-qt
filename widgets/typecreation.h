@@ -10,18 +10,17 @@
 #include <QFile>
 
 class TypeCreation: public QDialog{
-Q_OBJECT
+    Q_OBJECT
+    static QStringList testo_opzioni;
+    QComboBox* opzioni;
+    void setStyle();
 
 public:
     TypeCreation(QWidget* parent=nullptr);
 
-private:
-    static QStringList testo_opzioni;
-
-    QComboBox* opzioni;
-    void setStyle();
 signals:
-    /* Il segnale viene emesso in seguito alla scelta finale
+    /*
+     * Il segnale viene emesso in seguito alla scelta finale
      * del tipo di impiegato <q> proposto da <opzioni>
      */
     void choosed(QString q);

@@ -1,10 +1,7 @@
 #include "comboattribute.h"
 #include <QLineEdit>
 
-
-ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzioni_, int index_valore_inizio, bool editable,  QWidget *parent)
-    :AbstAttribute(nome,editable,parent), opzioni(opzioni_){
-
+ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzioni_, int index_valore_inizio, bool editable,  QWidget *parent):AbstAttribute(nome,editable,parent), opzioni(opzioni_){
     if(editable){
         setter_combo = new QComboBox(this);
 
@@ -21,7 +18,6 @@ ComboAttribute::ComboAttribute(QString nome, const DynamicArray<QString>& opzion
     }
     setValue(index_valore_inizio);
 }
-
 
 void ComboAttribute::setValue(int i){
     str_value->setText(opzioni[i]);

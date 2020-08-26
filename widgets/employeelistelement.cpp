@@ -3,6 +3,7 @@
 #include "models/headers/GUIDev.h"
 #include "models/headers/ITSecurityDev.h"
 #include "models/headers/Tecnico.h"
+
 void EmployeeListElement::setStyle(){
     QFile file(":/resources/employee_list_element.css");
     file.open(QFile::ReadOnly);
@@ -17,10 +18,12 @@ void EmployeeListElement::paintEvent(QPaintEvent* event){
      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
      QWidget::paintEvent(event);
 }
+
 void EmployeeListElement::mousePressEvent(QMouseEvent *e){
     e->accept();
     emit clicked(this);
 }
+
 void EmployeeListElement::mouseDoubleClickEvent( QMouseEvent * e ){
     e->accept();
     emit doubleClicked(this);
@@ -78,102 +81,74 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
      ore_straordinari = new QLabel("");
      if(auto p = dynamic_cast<Tecnico*>(e))
          numero_righe_totali->setText(std::to_string(p->getDatiRiparazioneSistemi().ore_straordinari).c_str());
-    auto width = 170;
-    produttivo->setFixedWidth(width);
-    name->setFixedWidth(width);
-    surname->setFixedWidth(width);
-    date_of_birth->setFixedWidth(width);
-    cf->setFixedWidth(width);
-    date_of_empl->setFixedWidth(width);
-    date_end_of_contract->setFixedWidth(width);
-    salary->setFixedWidth(width);
-    weekly_hours->setFixedWidth(width);
-    bonus_stipendio->setFixedWidth(width);
-    grado_esperienza->setFixedWidth(width);
-    numero_righe_totali->setFixedWidth(width);
-    linguaggio->setFixedWidth(width);
-    percentuale_ripristino->setFixedWidth(width);
-    numero_criticita_risolte->setFixedWidth(width);
-    ore_straordinari->setFixedWidth(width);
+     auto width = 170;
+     produttivo->setFixedWidth(width);
+     name->setFixedWidth(width);
+     surname->setFixedWidth(width);
+     date_of_birth->setFixedWidth(width);
+     cf->setFixedWidth(width);
+     date_of_empl->setFixedWidth(width);
+     date_end_of_contract->setFixedWidth(width);
+     salary->setFixedWidth(width);
+     weekly_hours->setFixedWidth(width);
+     bonus_stipendio->setFixedWidth(width);
+     grado_esperienza->setFixedWidth(width);
+     numero_righe_totali->setFixedWidth(width);
+     linguaggio->setFixedWidth(width);
+     percentuale_ripristino->setFixedWidth(width);
+     numero_criticita_risolte->setFixedWidth(width);
+     ore_straordinari->setFixedWidth(width);
 
-    name->setWordWrap(true);
-    surname->setWordWrap(true);
-    date_of_birth->setWordWrap(true);
-    cf->setWordWrap(true);
-    date_of_empl->setWordWrap(true);
-    date_end_of_contract->setWordWrap(true);
-    salary->setWordWrap(true);
-    weekly_hours->setWordWrap(true);
-    bonus_stipendio->setWordWrap(true);
-    grado_esperienza->setWordWrap(true);
-    numero_righe_totali->setWordWrap(true);
-    linguaggio->setWordWrap(true);
-    percentuale_ripristino->setWordWrap(true);
-    numero_criticita_risolte->setWordWrap(true);
-    ore_straordinari->setWordWrap(true);
-    /*
+     name->setWordWrap(true);
+     surname->setWordWrap(true);
+     date_of_birth->setWordWrap(true);
+     cf->setWordWrap(true);
+     date_of_empl->setWordWrap(true);
+     date_end_of_contract->setWordWrap(true);
+     salary->setWordWrap(true);
+     weekly_hours->setWordWrap(true);
+     bonus_stipendio->setWordWrap(true);
+     grado_esperienza->setWordWrap(true);
+     numero_righe_totali->setWordWrap(true);
+     linguaggio->setWordWrap(true);
+     percentuale_ripristino->setWordWrap(true);
+     numero_criticita_risolte->setWordWrap(true);
+     ore_straordinari->setWordWrap(true);
 
+     layout->addWidget(produttivo);
+     layout->addWidget(name);
+     layout->addWidget(surname);
+     layout->addWidget(date_of_birth);
+     layout->addWidget(cf);
 
-    bonus_stipendio;
-    grado_esperienza;
-    numero_righe_totali;
-    linguaggio;
-    percentuale_ripristino;
-    numero_criticita_risolte;
-    ore_straordinari;
-
-*/
-
-
-    layout->addWidget(produttivo);
-    layout->addWidget(name);
-    layout->addWidget(surname);
-    layout->addWidget(date_of_birth);
-    layout->addWidget(cf);
-
-    layout->addWidget(date_of_empl);
-    layout->addWidget(date_end_of_contract);
-    layout->addWidget(salary);
-    layout->addWidget(weekly_hours);
-    layout->addWidget(bonus_stipendio);
-    layout->addWidget(grado_esperienza);
-    layout->addWidget(numero_righe_totali);
-    layout->addWidget(linguaggio);
-    layout->addWidget(percentuale_ripristino);
-    layout->addWidget(numero_criticita_risolte);
-    layout->addWidget(ore_straordinari);
-
-
-    changeVisibility(
+     layout->addWidget(date_of_empl);
+     layout->addWidget(date_end_of_contract);
+     layout->addWidget(salary);
+     layout->addWidget(weekly_hours);
+     layout->addWidget(bonus_stipendio);
+     layout->addWidget(grado_esperienza);
+     layout->addWidget(numero_righe_totali);
+     layout->addWidget(linguaggio);
+     layout->addWidget(percentuale_ripristino);
+     layout->addWidget(numero_criticita_risolte);
+     layout->addWidget(ore_straordinari);
+     changeVisibility(
                 NumeroRigheTotali |
                 Linguaggio |
                 PercentualeRipristino |
                 NumeroCriticitaRisolte |
                 OreStraordinari , static_cast<int>(false)
      );
-
-    QPixmap produttivo_image;
-    QString path = e->produttivo() ? ":/resources/tick.png" : ":/resources/close.png";
-    if(produttivo_image.load(path)){
-        produttivo_image = produttivo_image.scaled(20, 20);
-        produttivo->setPixmap(produttivo_image);
-    }
-
-
-    setStyle();
-    updateStatus(false);
+     QPixmap produttivo_image;
+     QString path = e->produttivo() ? ":/resources/tick.png" : ":/resources/close.png";
+     if(produttivo_image.load(path)){
+         produttivo_image = produttivo_image.scaled(20, 20);
+         produttivo->setPixmap(produttivo_image);
+     }
+     setStyle();
+     updateStatus(false);
 }
-EmployeeListElement::~EmployeeListElement(){
-    delete name;
-    delete surname;
-    delete date_of_birth;
-    delete cf;
 
-    delete date_of_empl;
-    delete date_end_of_contract;
-    delete salary;
-    delete weekly_hours;
-}
 void EmployeeListElement::updateStatus(bool new_status){
     if(new_status)
         setObjectName("is_clicked");
@@ -181,12 +156,12 @@ void EmployeeListElement::updateStatus(bool new_status){
         setObjectName("is_not_clicked");
     setStyle();
 }
+
 Employee* EmployeeListElement::getEmployee() const{
     return e_;
 }
 
 void EmployeeListElement::changeVisibility(int prop, int visibility){
-
     if(prop & EmployeeListElement::Name)
         updateVisibility(&EmployeeListElement::name, visibility);
     if(prop & EmployeeListElement::Surname)
@@ -221,6 +196,7 @@ void EmployeeListElement::changeVisibility(int prop, int visibility){
     if(prop & EmployeeListElement::OreStraordinari)
         updateVisibility(&EmployeeListElement::ore_straordinari, visibility);
 }
+
 void EmployeeListElement::updateVisibility(QLabel* EmployeeListElement::* elem, int visibility){
     visibility ? (this->*elem)->show() : (this->*elem)->hide();
 }

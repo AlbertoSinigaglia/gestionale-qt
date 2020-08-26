@@ -7,8 +7,8 @@ QVBoxLayout* EmployeesList::getNewLayout(){
     layout->setAlignment(Qt::AlignTop);
     return layout;
 }
-EmployeesList::EmployeesList( QWidget *parent): QFrame( parent ), header(new TableHeader(this))
-{
+
+EmployeesList::EmployeesList( QWidget *parent): QFrame( parent ), header(new TableHeader(this)){
     this->setLayout(getNewLayout());
     this->setObjectName("frame-right");
     this->setContentsMargins(0,0,0,0);
@@ -57,9 +57,11 @@ void EmployeesList::setEmployees(const DynamicArray<Employee*>& empl){
         connect(el, SIGNAL(doubleClicked(EmployeeListElement *)), this,SLOT(childClickedEvent(EmployeeListElement*)));
     }
 }
+
 Employee * EmployeesList::getCurrent() const{
     return current ? current->getEmployee() : nullptr;
 }
+
 void EmployeesList::changeListAttributeVisibility(int props, int visibility){
     if(props & EmployeeListElement::Produttivo) header->setVisibility("Produttivo", visibility);
     if(props & EmployeeListElement::Name) header->setVisibility("Nome", visibility);
@@ -80,6 +82,7 @@ void EmployeesList::changeListAttributeVisibility(int props, int visibility){
     if(props & EmployeeListElement::NumeroCriticitaRisolte)header->setVisibility("Numero criticità risolte", visibility);
     emit changeListAttributeVisibilityEvent(props, visibility);
 }
+
 void EmployeesList::childPressedEvent(EmployeeListElement* e){
     if(e != current){
         current = e;
@@ -92,6 +95,7 @@ void EmployeesList::childPressedEvent(EmployeeListElement* e){
         current = nullptr;
     }
 }
+
 void EmployeesList::childClickedEvent(EmployeeListElement* e){
     emit ListElementDoubleClicked(e);
 }

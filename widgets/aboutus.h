@@ -8,8 +8,8 @@
 #include <QGroupBox>
 #include <QFile>
 
-class AboutUs: public QDialog
-{
+class AboutUs: public QDialog{
+    Q_OBJECT
 public:
     AboutUs(QWidget *parent = 0);
 
@@ -21,7 +21,6 @@ private:
     void addVersion();
     void addCreators();
     void setStyle();
-
 };
 
 #endif // ABOUTUS_H

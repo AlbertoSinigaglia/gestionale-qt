@@ -1,7 +1,6 @@
 #include "flagattribute.h"
 
-FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget *parent) : AbstAttribute(nome,editable,parent)
-{
+FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget *parent) : AbstAttribute(nome,editable,parent){
     if(editable){
         setter_bool = new QCheckBox(this);
 
@@ -20,9 +19,10 @@ FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget
     setValue(valore_);
 }
 
-
 void FlagAttribute::setValue(int v){
-    if(v!=0) str_value->setText(QString("SI"));
-    else str_value->setText(QString("NO"));
+    if(v!=0)
+        str_value->setText(QString("SI"));
+    else
+        str_value->setText(QString("NO"));
 }
 

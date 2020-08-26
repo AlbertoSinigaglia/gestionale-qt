@@ -1,11 +1,14 @@
 #include "CSV/CSVParser.h"
+
 illformed_file_exception::illformed_file_exception(const std::string& message): std::exception(), message_(message){};
+
 const char* illformed_file_exception::what() const throw(){
     return message_.c_str();
 }
+
+
+
 CSVParser::CSVParser(): n_elem(0){}
-
-
 
 CSVParser& CSVParser::operator=(const CSVParser& csv){
     if(this != &csv){
@@ -14,18 +17,15 @@ CSVParser& CSVParser::operator=(const CSVParser& csv){
     }
     return *this;
 }
+
 std::map<std::string, std::vector<std::string>> CSVParser::getTable() const{
     return table;
 }
+
 unsigned int CSVParser::size() const{
     return n_elem;
 }
-/**
- * Popola l'oggetto di invocazione con i dati ottenuti dal parsing della stringa data in input (senza effettuare nessuna operazione di escaping e unescaping)
- * @param text : il testo di cui fare il parsing
- * @param column_delimiter : il delimitatore della colonna, di default è ","
- * @param row_delimiter : il delimitatore della riga, di default è "\n" (new line)
- */
+
 void CSVParser::parseText(std::string& text, char column_delimiter, char row_delimiter){
     //resetto l'oggetto corrente
     *this = CSVParser();
@@ -72,8 +72,6 @@ void CSVParser::parseText(std::string& text, char column_delimiter, char row_del
     }
 }
 
-
-
 void CSVParser::unescape_all(std::string& source, const std::string& to_unescape, char escape){
     std::string to_find;
     // trovo la stringa da cercare da portare poi alla forma originale
@@ -94,7 +92,6 @@ void CSVParser::unescape_all(std::string& source, const std::string& to_unescape
         index += to_unescape.length();
     }
 }
-
 
 std::string CSVParser::unescape(const std::string& source, const  std::vector<char>& to_unescape, char escape) {
     auto to_return(source);
@@ -154,7 +151,6 @@ std::vector<std::string> CSVParser::explode_rows(const std::string &str,char del
     return exploded_strings;
 }
 
-
 std::vector<std::string> CSVParser::explode_columns(const std::string &str, char escape,char delimiter){
     std::vector<std::string> exploded_strings;
 
@@ -185,7 +181,6 @@ std::vector<std::string> CSVParser::explode_columns(const std::string &str, char
     exploded_strings.push_back(remove_quotes(str.substr(oldpos)));
     return exploded_strings;
 }
-
 
 void CSVParser::addRawRow(const std::map<std::string, std::string>& row){
     // aumento il numero di elementi dentro al
@@ -229,7 +224,6 @@ void CSVParser::addRawRow(const std::map<std::string, std::string>& row){
         }
     }
 }
-
 
 void CSVParser::trim(std::string& str, char to_trim ){
     size_t first = str.find_first_not_of(to_trim);
