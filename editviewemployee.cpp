@@ -23,7 +23,7 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         mainLayout->setAlignment(Qt::AlignCenter);
 
         QScrollArea* impiegato = new QScrollArea(this);
-        impiegato->setFixedWidth(800);
+        impiegato->setFixedWidth(850);
         impiegato->setWidget(buildSections(dati_, impiegato));
         impiegato->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

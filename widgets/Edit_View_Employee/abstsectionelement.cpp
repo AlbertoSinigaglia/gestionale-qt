@@ -5,7 +5,7 @@
 AbstSectionElement::AbstSectionElement(QString nome_sezione, QWidget *parent): QWidget(parent){
         is_modifyed=false;
         setObjectName("abstract-section");
-        setFixedWidth(750);
+        setFixedWidth(800);
         layout = new QVBoxLayout(this);
         layout->setAlignment(Qt::AlignTop);
         QLabel* titolo = new QLabel(nome_sezione, this);

@@ -4,11 +4,6 @@ FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget
 {
     if(editable){
         setter_bool = new QCheckBox(this);
-        QWidget* c= new QWidget(this);
-        QVBoxLayout* Lc = new QVBoxLayout(c);
-        Lc->addWidget(setter_bool);
-        Lc->setAlignment(setter_bool,Qt::AlignRight);
-        c->setFixedWidth(300);
 
         if(valore_) setter_bool->setCheckState(Qt::Checked);
         else setter_bool->setCheckState(Qt::Unchecked);
@@ -16,7 +11,9 @@ FlagAttribute::FlagAttribute(QString nome, bool valore_, bool editable,  QWidget
         connect(setter_bool, SIGNAL(stateChanged(int)), this, SIGNAL(isModify()));
         connect(setter_bool,SIGNAL(stateChanged(int)), this, SLOT(setValue(int)));
 
-        layout->addWidget(c);
+        layout->addWidget(setter_bool);
+
+        layout->setAlignment(setter_bool,Qt::AlignRight);
     }
 
     setValue(valore_);

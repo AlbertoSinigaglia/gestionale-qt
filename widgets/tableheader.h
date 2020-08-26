@@ -33,7 +33,7 @@ public:
         });
         if( pos == fields.end()){
             auto new_label = new QLabel(new_field);
-            new_label->setFixedWidth(150);
+            new_label->setFixedWidth(170);
             new_label->setStyleSheet("border-right: 1px solid #BDBDBD;") ;
             new_label->setAlignment(Qt::AlignCenter);
             new_label->setWordWrap(true);

@@ -12,7 +12,6 @@
 #include <QStyleOption>
 #include <QPainter>
 #include <QMessageBox>
-#include <QDebug>
 #include "widgets/employeelistelement.h"
 #include "models/headers/Employee.h"
 #include "collections/DynamicArray.h"
@@ -26,7 +25,7 @@ class EmployeesList : public QFrame
     TableHeader* header;
 public:
     EmployeesList( QWidget *parent = 0);
-    ~EmployeesList() {}
+    ~EmployeesList() = default;
     // from https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
     EmployeesList(const EmployeesList& e) = delete;
     EmployeesList& operator= (const EmployeesList& e) = delete;
@@ -46,6 +45,11 @@ public slots:
 template<class T>
 void EmployeesList::filter()
 {
+    if(current && !dynamic_cast<T*>(current->getEmployee())) {
+        current->updateStatus(false);
+        current = nullptr;
+    }
+    qDebug() << current;
     for(auto &e:children)
         if(dynamic_cast<T*>(e->getEmployee()))
             e->show();

@@ -12,7 +12,12 @@
         <file>resources/inserisci.css</file>
         <file>resources/edit_view_employee.css</file>
         <file>resources/modifica.css</file>
+<<<<<<< HEAD
         <file>resources/aboutUs.css</file>
         <file>resources/MyG.png</file>
+=======
+        <file>resources/MyG.jpeg</file>
+	<file>resources/logo.ico</file>
+>>>>>>> faacd99eaab0282f6a27094544cf7fda95e112e3
     </qresource>
 </RCC>

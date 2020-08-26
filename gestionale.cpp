@@ -124,6 +124,11 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(a_open, &QAction::triggered, this, &Gestionale::importFile);
     connect(a_export, &QAction::triggered, this, &Gestionale::exportToFile);
     connect(a_exit, &QAction::triggered, this, &Gestionale::exitApplication);
+    connect(a_aboutUs,&QAction::triggered, [=](){
+        AboutUs about;
+        about.setModal(true);
+        about.exec();
+    });
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
 
     setStyle();
@@ -330,7 +335,9 @@ void Gestionale::addMenu(){
     menu->addSeparator();
     menu->addAction(a_exit);
     menu->setMinimumWidth(200);
-    aboutUs = new QMenu("About Us");
+    aboutUs = new QMenu("Help");
+    a_aboutUs = new QAction("Informazioni su MyGestionale", aboutUs);
+    aboutUs->addAction(a_aboutUs);
     menuBar->addMenu(aboutUs);
     aboutUs->setMinimumWidth(200);
     mainLayout->setMenuBar(menuBar);
@@ -347,7 +354,7 @@ void Gestionale::setStyle()
 
 void Gestionale::showLiquidation(QString nome, float quota_liquidazione){
     QString testo= QString("Per liquidare ")+ nome
-            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+" €";
+            +QString(" l'azienda deve lui una retribuzione di: ")+ QString::number(quota_liquidazione)+"€";
     auto msg= QMessageBox(QMessageBox::Information, "Liquidazione", testo, QMessageBox::Ok);
     msg.exec();
 }
@@ -358,6 +365,7 @@ void Gestionale::deleteButtonClicked(){
     auto e = employeesList->getCurrent();
     if(e){
         QMessageBox msgBox(this);
+        msgBox.setStyleSheet("QLabel{min-width: 300px;}");
         msgBox.setText(QString("Stai per eliminare ") + QString(e->getNome().c_str()) + QString(" ") + QString(e->getCognome().c_str()));
         msgBox.setInformativeText("Sicuro di voler procedere?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -410,6 +418,7 @@ void Gestionale::exitApplication(){
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected)
 {
+    Dipendenti->setCurrentText(selected);
     numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
     linguaggio->setCheckState(Qt::CheckState::Unchecked);
     percentuale_ripristino->setCheckState(Qt::CheckState::Unchecked);
@@ -545,6 +554,9 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected)
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
+    }
+    if(selected=="Tutti"){
+        employeesList->filter<Employee>();
     }
 
 }
