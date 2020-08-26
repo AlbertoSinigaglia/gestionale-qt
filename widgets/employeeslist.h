@@ -7,7 +7,6 @@
 #include <QFrame>
 #include <QLabel>
 #include <QFile>
-#include <QDebug>
 #include <QStyleOption>
 #include <QPainter>
 #include <QMessageBox>

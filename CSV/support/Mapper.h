@@ -10,7 +10,6 @@
 #include "models/headers/FullStack.h"
 #include "models/headers/Tecnico.h"
 #include "models/support/Convenzioni.h"
-#include <QDebug>
 
 class Mapper{
     enum supported{

@@ -3,7 +3,6 @@
 
 #include "collections/DynamicArray.h"
 #include<QLabel>
-#include<QDebug>
 #include<QHBoxLayout>
 #include<algorithm>
 

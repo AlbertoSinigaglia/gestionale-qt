@@ -1,5 +1,4 @@
 #include "controller.h"
-#include <QDebug>
 
 Controller::Controller(QObject *parent, Gestionale* view_):
     QObject(parent), view(view_), edit_view(nullptr), considered_employee(nullptr){

@@ -62,7 +62,6 @@ void CSVParser::parseText(std::string& text, char column_delimiter, char row_del
                 }
 
                 if(tmp.size() != columns_name.size()){
-                    std::cerr << "da: " << table.size() << " a: " << tmp.size();
                     throw illformed_file_exception("Il file è malformato");
                 }
                 // aggiungo al mio oggetto questa nuova mappa con la riga corrente

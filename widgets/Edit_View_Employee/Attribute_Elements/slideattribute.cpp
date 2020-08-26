@@ -1,6 +1,5 @@
 #include"slideattribute.h"
 #include"math.h"
-#include<QDebug>
 
 SlideAttribute::SlideAttribute(QString nome, double valore_, double start_, double end_, unsigned int cifre_approx_, bool editable, QWidget *parent):AbstAttribute(nome,editable,parent), start(start_), end(end_), cifre_approx(cifre_approx_){
     if(editable){

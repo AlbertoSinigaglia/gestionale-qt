@@ -1,8 +1,5 @@
 #include<vector>
 #include "Data.h"
-#include<QDebug>
-
-
 
 const int Data::giorni_al_mese[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
