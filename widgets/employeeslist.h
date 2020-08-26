@@ -14,6 +14,7 @@
 #include "models/headers/Employee.h"
 #include "collections/DynamicArray.h"
 #include "widgets/tableheader.h"
+#include <algorithm>
 
 class EmployeesList : public QFrame{
     Q_OBJECT
@@ -42,6 +43,12 @@ public slots:
     void changeListAttributeVisibility(int props, int visibility);
     void childPressedEvent(EmployeeListElement* e);
     void childClickedEvent(EmployeeListElement* e);
+    void ordinaPer(EmployeeListElement::FIELDS field){
+        std::sort(children.begin(), children.end(), [&](auto &f, auto& s){ return f->lessThan(*s, field);});
+        std::vector<Employee*> v;
+        std::transform(children.begin(), children.end(), v.begin(), [](auto&el){ return el->getEmployee();});
+        //setEmployees(DynamicArray<std::vector<Employee*>::iterator>(v.begin(), v.end()));
+    }
 };
 
 template<class T> void EmployeesList::filter(){

@@ -313,7 +313,7 @@ public:
      * @param first: posizione primo elemento
      * @param last: posizione a cui fermarsi
      */
-    template<class InputIt, typename = std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator>>>
+    template<class InputIt, typename = std::enable_if_t<!std::is_convertible_v<InputIt, const_dynamic_array_iterator>, InputIt>>
     DynamicArray(const InputIt& first, const InputIt& last );
     DynamicArray(const const_iterator& first, const const_iterator& last );
     /**

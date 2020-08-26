@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "controller.h"
 #include "CSV/CSVWriter.h"
+#include "collections/DynamicArray.h"
 
 
 int main(int argc, char *argv[]){

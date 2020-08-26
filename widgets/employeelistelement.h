@@ -35,7 +35,7 @@ class EmployeeListElement : public QWidget{
     QLabel* numero_criticita_risolte;
     QLabel* ore_straordinari;
 public:
-    enum{
+    enum FIELDS{
         Name                    = 1<<0,
         Surname                 = 1<<1,
         CF                      = 1<<2,
@@ -74,6 +74,31 @@ public:
      */
     Employee* getEmployee() const;
 
+    /**
+     * @brief è un operator< con un parametro specifico per il confronto
+     * @param o : oggetto con cui confrontare prop
+     * @param prop : proprietà da confrontare
+     * @return true sse this->prop < o->prop, false altrimenti (o se la proprietà specificata non è supportata)
+     */
+    bool lessThan(const EmployeeListElement& o, EmployeeListElement::FIELDS prop){
+        if(prop & EmployeeListElement::Name)                    return name->text()                         < o.name->text();
+        if(prop & EmployeeListElement::Surname)                 return surname->text()                      < o.surname->text();
+        if(prop & EmployeeListElement::CF)                      return cf->text()                           < o.cf->text();
+        if(prop & EmployeeListElement::DateOfBirth)             return date_of_birth->text()                < o.date_of_birth->text();
+        if(prop & EmployeeListElement::DateOfEmployment)        return date_of_empl->text()                 < o.date_of_empl->text();
+        if(prop & EmployeeListElement::DateEndOfContract)       return date_end_of_contract->text()         < o.date_end_of_contract->text();
+        if(prop & EmployeeListElement::Salary)                  return salary->text()                       < o.salary->text();
+        if(prop & EmployeeListElement::WeeklyHours)             return weekly_hours->text()                 < o.weekly_hours->text();
+        if(prop & EmployeeListElement::Produttivo)              return static_cast<int>(e_->produttivo())   < static_cast<int>(o.e_->produttivo());
+        if(prop & EmployeeListElement::BonusStipendio)          return bonus_stipendio->text()              < o.bonus_stipendio->text();
+        if(prop & EmployeeListElement::GradoEsperienza)         return grado_esperienza->text()             < o.grado_esperienza->text();
+        if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()          < o.numero_righe_totali->text();
+        if(prop & EmployeeListElement::Linguaggio)              return linguaggio->text()                   < o.linguaggio->text();
+        if(prop & EmployeeListElement::PercentualeRipristino)   return percentuale_ripristino->text()       < o.percentuale_ripristino->text();
+        if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()          < o.numero_righe_totali->text();
+        if(prop & EmployeeListElement::OreStraordinari)         return ore_straordinari->text()             < o.ore_straordinari->text();
+        return false;
+    }
 signals:
     void clicked(EmployeeListElement*);
     void doubleClicked(EmployeeListElement *);
