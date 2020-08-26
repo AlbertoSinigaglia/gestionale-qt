@@ -9,9 +9,15 @@
     }
 #versione{
     font:25px;
+    font-style: italic;
     }
 #creatori{
     font:18px;
     text-decoration: underline;
+    color: gray;
+}
+#creatore{
+    color:gray;
+    font-style: italic;
 }
 

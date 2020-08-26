@@ -3,7 +3,8 @@
 AboutUs::AboutUs(QWidget *parent): QDialog(parent)
 {
     this->setObjectName("sfondo");
-    this->setMinimumSize(600, 500);
+    this->setMinimumSize(600, 400);
+    this->setContentsMargins(30,30,30,30);
     aboutUsLayout = new QVBoxLayout(this);
     addImage();
     addName();
@@ -15,6 +16,7 @@ AboutUs::AboutUs(QWidget *parent): QDialog(parent)
 void AboutUs::addImage()
 {
     QPixmap image(":/resources/MyG.png");
+    image=image.scaled(200,200,Qt::KeepAspectRatio);
     QLabel* imageLabel = new QLabel(this);
     imageLabel->setPixmap(image);
     aboutUsLayout->addWidget(imageLabel);
@@ -49,6 +51,9 @@ void AboutUs::addCreators()
     creator2->setAlignment(Qt::AlignCenter);
     QLabel* creator3 = new QLabel("Privitera Sara, matricola:1201157",this, Qt::WindowFlags());
     creator3->setAlignment(Qt::AlignCenter);
+    creator1->setObjectName("creatore");
+    creator2->setObjectName("creatore");
+    creator3->setObjectName("creatore");
     aboutUsLayout->addWidget(creators);
     aboutUsLayout->addWidget(creator1);
     aboutUsLayout->addWidget(creator2);
