@@ -11,8 +11,9 @@ AbstDataSection* DatiInterfacciaUtenteElement::getData() const{
     return  new DatiInterfacceUtente(
                 query_predefinite_widget->getValue()=="SI",
                 stile_minimalista_widget->getValue()=="SI",
-                num_medio_percorsi_widget->getValue().toUInt(),
-                lunghezza_massima_percorso_widget->getValue().toUInt()
+                lunghezza_massima_percorso_widget->getValue().toUInt(),
+                num_medio_percorsi_widget->getValue().toUInt()
+
     );
 }
 

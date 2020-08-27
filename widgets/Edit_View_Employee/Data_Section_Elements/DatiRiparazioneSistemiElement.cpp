@@ -9,9 +9,10 @@ DatiRiparazioneSistemiElement::DatiRiparazioneSistemiElement(const DatiRiparazio
 
 AbstDataSection* DatiRiparazioneSistemiElement::getData() const{
     return  new DatiRiparazioneSistemi(
+                perc_riparazioni_sussistenti_widget->getValue().toDouble(),
                 ore_stallo_mensili_widget->getValue().toUInt(),
-                ore_straordinari_widget->getValue().toUInt(),
-                perc_riparazioni_sussistenti_widget->getValue().toDouble()
+                ore_straordinari_widget->getValue().toUInt()
+
     );
 }
 
