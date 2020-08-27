@@ -400,6 +400,8 @@ void Gestionale::setModel(std::shared_ptr<EmployeesManagement> model_){
 void Gestionale::updateList() const{
     if(model){
         this->employeesList->setEmployees(*model->getEmployees());
+        this->ordine->setCurrentText("Nome");
+        this->employeesList->orderBy(EmployeeListElement::Name);
     }
 }
 
