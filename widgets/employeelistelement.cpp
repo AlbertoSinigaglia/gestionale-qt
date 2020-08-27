@@ -50,7 +50,7 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget(
     produttivo = new QLabel();
 
 
-     bonus_stipendio = new QLabel(QString::number(e->bonusStipendio())+" €");
+     bonus_stipendio = new QLabel(QString::number(static_cast<float>(round(e->bonusStipendio()*100))/100.0f)+" €");
      grado_esperienza= new QLabel(std::to_string(e->gradoEsperienza()).c_str());
      numero_righe_totali = new QLabel("");
      linguaggio = new QLabel("");
