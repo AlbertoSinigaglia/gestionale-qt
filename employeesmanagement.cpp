@@ -16,7 +16,8 @@ bool EmployeesManagement::import(const QString& path){
     try {
         auto empls = CSVReader::parse(path);
         employees->insert(employees->end(), empls.begin(), empls.end());
-        source = path;
+        if(source.isEmpty())
+            source = path;
         return true;
     } catch (std::exception& e) {
         return false;
