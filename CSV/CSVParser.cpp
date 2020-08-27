@@ -185,28 +185,28 @@ void CSVParser::addRawRow(const std::map<std::string, std::string>& row){
     // aumento il numero di elementi dentro al
     ++n_elem;
     // per ogni elemento della mia tabella corrente
-    for(auto & [col_name, col_vec] : table) {
+    for(auto & p : table) {
         // cerco se la colonna corrente della mia tabella è contenuta nel nuovo oggetto
-        auto it = row.find(col_name);
+        auto it = row.find(p.first);
         // se c'è allora semplicemente aggiungo il valore di quella colonna del nuovo oggetto alla tabella
         if(it != row.end())
-            col_vec.emplace_back(it->second);
+            p.second.emplace_back(it->second);
         // altrimenti inserisco una stringa vuota
         else
-            col_vec.emplace_back("");
+            p.second.emplace_back("");
     }
 
     //estraggo le chiavi (nomi colonne) della mia tabella corrente
     std::vector<std::string> table_cells;
     table_cells.reserve(table.size());
-    for(auto & [col_name, col_vec] : table)
-        table_cells.push_back(col_name);
+    for(auto & p : table)
+        table_cells.push_back(p.first);
 
     //estraggo le chiavi (nomi colonne) del nuovo oggetto
     std::vector<std::string> row_cells;
     row_cells.reserve(row.size());
-    for(auto & [col_name, col_vec] : row) {
-        row_cells.push_back(col_name);
+    for(auto & p : row) {
+        row_cells.push_back(p.first);
     }
 
     // salvo dentro a diff la differenza tra le colonne corrrenti e le colonne del nuovo oggetto

@@ -4,6 +4,7 @@
 #include "models/headers/ITSecurityDev.h"
 #include "models/headers/Tecnico.h"
 #include "models/support/Data.h"
+#include <math.h>
 void EmployeeListElement::setStyle(){
     QFile file(":/resources/employee_list_element.css");
     file.open(QFile::ReadOnly);

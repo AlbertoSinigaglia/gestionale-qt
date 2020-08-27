@@ -1,12 +1,10 @@
 #include "gestionale.h"
-#include "ui_gestionale.h"
 #include "models/headers/BackDev.h"
 #include "widgets/employeelistelement.h"
 #include "widgets/aboutus.h"
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
-    setWindowState(Qt::WindowMaximized);
     mainLayout = new QHBoxLayout(this);
     mainLayout->setAlignment(Qt::AlignTop);
     mainLayout->setContentsMargins(0,0,0,0);
@@ -129,6 +127,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     connect(ordine, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(cambioOrdine(const QString&)));
     setStyle();
     setEnabled(false);setEnabled(true);
+    resize(this->width(), layoutFrameFiltri->sizeHint().height());
 }
 
 Gestionale::~Gestionale() = default;
