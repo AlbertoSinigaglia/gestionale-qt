@@ -5,6 +5,9 @@ QDialog > QLabel{
     font-size:20px;
     font-weight:bold;
     padding-left:10px;
+    padding-top:2px;
+    padding-bottom:2x;
+    color:black;
 }
 #bottom-button{
     color:white;
