@@ -96,7 +96,7 @@ float ITSecurityDev::bonusStipendio() const{
 
     double n_criticita_nel_mese = n_criticita_risolte * Data::oggi().getGiorno() / 31.0 ;
 
-    float bonus_quantita_criticita_gestite = (0.5, n_criticita_nel_mese / 50.0 , Conv::bonus_delle_50_criticita);
+    float bonus_quantita_criticita_gestite = calcoloBonusLineare(0.5, n_criticita_nel_mese / 50.0 , Conv::bonus_delle_50_criticita);
 
     return bonus_quantita_criticita_gestite + Manutenzione::bonusStipendio() + Software::bonusStipendio() - Employee::bonusStipendio();
 
