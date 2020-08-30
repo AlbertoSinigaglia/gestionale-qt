@@ -20,6 +20,7 @@ SOURCES += \
     CSV/CSVReader.cpp \
     CSV/CSVWriter.cpp \
     CSV/support/Mapper.cpp \
+    TipiRaggruppamento.cpp \
     editviewemployee.cpp \
     employeesmanagement.cpp \
     models/support/Convenzioni.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     CSV/CSVReader.h \
     CSV/CSVWriter.h \
     CSV/support/Mapper.h \
+    TipiRaggruppamento.h \
     collections/DynamicArray.h \
     CSV/CSVParser.h \
     CSV/support/Mapper.h \
@@ -76,7 +78,6 @@ HEADERS += \
     employeesmanagement.h \
     models/support/Convenzioni.h \
     models/support/Data.h \
-    models/support/TipiRaggruppamento.h \
     models/support/UsefullMath.h \
     models/headers/BackDev.h \
     models/headers/Employee.h \

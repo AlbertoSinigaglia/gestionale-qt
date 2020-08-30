@@ -1,7 +1,7 @@
 #ifndef DATIFULLSTACKELEMENT_H
 #define DATIFULLSTACKELEMENT_H
 
-#include"models/support/TipiRaggruppamento.h"
+#include"TipiRaggruppamento.h"
 #include"collections/DynamicArray.h"
 #include <qwidget.h>
 #include <iostream>

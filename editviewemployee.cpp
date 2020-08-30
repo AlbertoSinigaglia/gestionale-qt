@@ -7,7 +7,7 @@ void EditViewEmployee::setStyle(QWidget* w){
     w->setStyleSheet(styleSheet);
 }
 
-EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo, QWidget *parent):
+EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_,QString type_employee, Utilizzo stato_utilizzo, QWidget *parent):
     QDialog(parent), stato(stato_utilizzo), isModify(false){
         setStyle(this);
         topLevelWidget();
@@ -27,36 +27,41 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, 
         LSalvaEsci->addWidget(Esci);
         if(stato_utilizzo==Utilizzo::CREAZIONE)
             setModifed();
-        mainLayout->addLayout(buildIntestazione());
+
+        mainLayout->addWidget(buildIntestazione(type_employee));
         mainLayout->addWidget(impiegato);
         mainLayout->addLayout(LSalvaEsci);
         mainLayout->setAlignment(LSalvaEsci,Qt::AlignRight);
 
         connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
         setLayout(mainLayout);
-        this->setMaximumWidth(this->width() + 30);
-        this->resize(this->minimumHeight(), 800);
+        //this->setMaximumWidth(this->width() + 30);
+        //this->resize(this->minimumHeight(), 800);
 }
 
-QHBoxLayout* EditViewEmployee::buildIntestazione(){
+QWidget* EditViewEmployee::buildIntestazione(QString type_employee){
     QLabel* testo_titolo;
     Suggerimento* info=nullptr;
     QString tx_info= QString("Gli attributi seguiti dal suffisso: <nel mese> indicano dati accumulati dall'inizio del mese, gli altri sono accumulativi dalla data assunzione (o estemporanei)\n");
     if(stato==Utilizzo::MODIFICA){
-        testo_titolo = new QLabel(QString("Modifica Impiegato"));
+        testo_titolo = new QLabel(QString("Modifica Impiegato"),this);
     }else if(stato==Utilizzo::CREAZIONE){
-        testo_titolo = new QLabel(QString("Creazione Impiegato"));
+        testo_titolo = new QLabel(QString("Creazione Impiegato"),this);
         tx_info="1) "+tx_info+"2) I valori di default degli attributi indicano dei valori medi rispetto a precedenti inserimenti, essi pongono luce su equilibri di design aziendale preesistenti";
     }else{
-        testo_titolo = new QLabel(QString("Visualizza Impiegato"));
+        testo_titolo = new QLabel(QString("Visualizza Impiegato"),this);
     }
     info = new Suggerimento(tx_info);
-    QHBoxLayout* titolo =new QHBoxLayout();
+
+    QWidget* intestazione = new QWidget(this);
+    QHBoxLayout* titolo =new QHBoxLayout(intestazione);
 
     titolo->addWidget(testo_titolo);
+    titolo->addWidget(new QLabel(type_employee,this));
     titolo->addWidget(info);
     titolo->setAlignment(Qt::AlignLeft);
-    return titolo;
+    intestazione->setLayout(titolo);
+    return intestazione;
 }
 
 void EditViewEmployee::chooseAndSend() const{

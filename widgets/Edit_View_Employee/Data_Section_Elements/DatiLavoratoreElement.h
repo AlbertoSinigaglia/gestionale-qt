@@ -1,7 +1,7 @@
 #ifndef DATILAVORATOREELEMENT_H
 #define DATILAVORATOREELEMENT_H
 
-#include"models/support/TipiRaggruppamento.h"
+#include"TipiRaggruppamento.h"
 #include"collections/DynamicArray.h"
 #include <qwidget.h>
 #include <iostream>

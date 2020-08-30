@@ -1,7 +1,7 @@
 #ifndef DATIDATABASEELEMENT_H
 #define DATIDATABASEELEMENT_H
 
-#include"models/support/TipiRaggruppamento.h"
+#include"TipiRaggruppamento.h"
 #include"collections/DynamicArray.h"
 #include <qwidget.h>
 #include <iostream>
