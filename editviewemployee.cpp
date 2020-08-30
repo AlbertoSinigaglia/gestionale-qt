@@ -35,8 +35,8 @@ EditViewEmployee::EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_,Q
 
         connect(Esci, SIGNAL(clicked()), this, SIGNAL(closeDirect()));
         setLayout(mainLayout);
-        //this->setMaximumWidth(this->width() + 30);
-        //this->resize(this->minimumHeight(), 800);
+        this->setMaximumWidth(this->width() + 30);
+        this->resize(this->minimumHeight(), 800);
 }
 
 QWidget* EditViewEmployee::buildIntestazione(QString type_employee){
