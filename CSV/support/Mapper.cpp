@@ -1,12 +1,12 @@
 #include "CSV/support/Mapper.h"
 
 int Mapper::typeToEnum(Employee* e){
-    if(dynamic_cast<DBDev*>(e)) return e_DBDev;
-    if(dynamic_cast<FullStack*>(e)) return e_FullStack;
-    if(dynamic_cast<GUIDev*>(e)) return e_GUIDev;
-    if(dynamic_cast<ITSecurityDev*>(e)) return e_ITSecurityDev;
-    if(dynamic_cast<Tecnico*>(e)) return e_Tecnico;
-    if(dynamic_cast<BackDev*>(e)) return e_BackDev;
+    if(typeid(*e)==typeid(DBDev)) return e_DBDev;
+    if(typeid(*e)==typeid(FullStack)) return e_FullStack;
+    if(typeid(*e)==typeid(GUIDev)) return e_GUIDev;
+    if(typeid(*e)==typeid(ITSecurityDev)) return e_ITSecurityDev;
+    if(typeid(*e)==typeid(Tecnico)) return e_Tecnico;
+    if(typeid(*e)==typeid(BackDev)) return e_BackDev;
     throw std::invalid_argument("Tipo non supportato, potrebbe essere causato da incompatibilità tra versioni");
 }
 
