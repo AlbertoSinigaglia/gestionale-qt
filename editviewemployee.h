@@ -1,7 +1,7 @@
 #ifndef EDITVIEWEMPLOYEE_H
 #define EDITVIEWEMPLOYEE_H
 
-#include"models/support/TipiRaggruppamento.h"
+#include"TipiRaggruppamento.h"
 #include"collections/DynamicArray.h"
 #include <qwidget.h>
 #include <iostream>
@@ -61,7 +61,7 @@ public:
      * @param stato_utilizzo (VISUALIZZA, CREAZIONE, MODIFICA)
      * @param parent
      */
-    EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_, Utilizzo stato_utilizzo =Utilizzo::VISUALIZZA, QWidget *parent =0);
+    EditViewEmployee(const DynamicArray<AbstDataSection*>& dati_,QString type_employee, Utilizzo stato_utilizzo =Utilizzo::VISUALIZZA, QWidget *parent =0);
 
     /**
      * IS MODIFYED
@@ -112,7 +112,7 @@ private:
      * @param parent
      */
     QFrame* buildSections(const DynamicArray<AbstDataSection*>& dati_, QWidget* parent);
-    QHBoxLayout* buildIntestazione();
+    QWidget* buildIntestazione(QString type_employee);
 
 private slots:
     /**

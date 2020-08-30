@@ -87,6 +87,8 @@ public:
      * @return l'insieme delle tipi raggruppamento
      */
     static DynamicArray<AbstDataSection*> serializeEmployee(Employee* e);
+
+    static std::string StdTypeEmployee(Employee* e);
 };
 
 #endif // EMPLOYEESMANAGEMENT_H

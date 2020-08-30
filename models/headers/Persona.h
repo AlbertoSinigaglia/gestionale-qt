@@ -3,7 +3,7 @@
 
 #include <string>
 #include "../support/Data.h"
-#include "../support/TipiRaggruppamento.h"
+#include "TipiRaggruppamento.h"
 #include "../support/Data.h"
 #include "../support/Convenzioni.h"
 #include "../support/UsefullMath.h"

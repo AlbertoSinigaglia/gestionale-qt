@@ -85,7 +85,9 @@ void Controller::exitApplication(){
 void Controller::OpenEditView(Employee* considerato, EditViewEmployee::Utilizzo stato_utilizzo){
     considered_employee = considerato;
     view->setEnabled(false);
-    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee), stato_utilizzo);
+    edit_view = new EditViewEmployee(EmployeesManagement::serializeEmployee(considered_employee),
+                                     QString::fromStdString(EmployeesManagement::StdTypeEmployee(considered_employee)),
+                                     stato_utilizzo);
     edit_view->setModal(true);
     edit_view->show();
     connect(edit_view, SIGNAL(closeDirect()), this, SLOT(ExitEditView()));
@@ -116,7 +118,7 @@ void Controller::chooseNewEmployee(){
 void Controller::createEmployeeInfo(QString q){
     if(q=="GUIDev"){
         considered_employee=new GUIDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoClient(),DatiInterfacceUtente());
-    }else if(q=="DatBaseDev"){
+    }else if(q=="DBDev"){
         considered_employee=new DBDev(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiDatabase());
     }else if(q=="FullStack"){
         considered_employee=new FullStack(Persona(),DatiLavoratore(),DatiDeveloping(),DatiLatoServer(),DatiLatoClient(),DatiFullStack());

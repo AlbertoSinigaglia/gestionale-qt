@@ -86,3 +86,19 @@ void EmployeesManagement::updateMonthAll(){
     for(auto e: *employees)
         e->aggiornaMese();
 }
+
+
+std::string EmployeesManagement::StdTypeEmployee(Employee* e){
+    if(typeid(*e)==typeid(GUIDev)){
+        return "GUIDev";
+    }else if(typeid(*e)==typeid(DBDev)){
+        return "DBDev";
+    }else if(typeid(*e)==typeid(FullStack)){
+        return "FullStack";
+    }else if(typeid(*e)==typeid(ITSecurityDev)){
+        return "ITSecurityDev";
+    }else if(typeid(*e)==typeid(Tecnico)){
+        return "Tecnico";
+    }
+    return "";
+}

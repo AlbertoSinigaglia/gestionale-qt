@@ -1,7 +1,7 @@
 #ifndef DATIINTERFACCIAUTENTEELEMENT_H
 #define DATIINTERFACCIAUTENTEELEMENT_H
 
-#include"models/support/TipiRaggruppamento.h"
+#include"TipiRaggruppamento.h"
 #include"collections/DynamicArray.h"
 #include <qwidget.h>
 #include <iostream>
