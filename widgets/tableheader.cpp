@@ -46,3 +46,9 @@ void TableHeader::showAll(){
     });
 }
 
+void TableHeader::hideAll(){
+    std::for_each(fields.begin(), fields.end(), [](auto& el){
+        el->hide();
+    });
+}
+

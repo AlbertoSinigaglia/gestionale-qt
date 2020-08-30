@@ -15,6 +15,7 @@
 #include "collections/DynamicArray.h"
 #include "widgets/tableheader.h"
 #include <algorithm>
+#include <functional>
 
 class EmployeesList : public QFrame{
     Q_OBJECT
@@ -31,8 +32,20 @@ public:
     EmployeesList& operator= (const EmployeesList& e) = delete;
     EmployeesList( QWidget *parent = 0);
 
-    template<class T> void filter();
+    /**
+     * @brief filtra la lista
+     * @param f : funzione che ritorna true solo se quel dipendente deve essere mostrato
+     */
+    void filter(std::function<bool(Employee*)> f);
+    /**
+     * @brief imposta i dipendenti da mostrare, se ce ne sono già, rimuove quelli presenti
+     * @param empl : dipendenti da mostrare
+     */
     void setEmployees(const DynamicArray<Employee*>& empl);
+    /**
+     * @brief getter per il dipendente correntemente selezionato
+     * @return employee selezionato
+     */
     Employee * getCurrent() const;
 
 signals:
@@ -43,25 +56,7 @@ public slots:
     void changeListAttributeVisibility(int props, int visibility);
     void childPressedEvent(EmployeeListElement* e);
     void childClickedEvent(EmployeeListElement* e);
-    void orderBy(EmployeeListElement::FIELDS field){
-        std::sort(children.begin(), children.end(), [&](auto &f, auto& s){ return f->lessThan(*s, field);});
-        std::vector<Employee*> v;
-        std::transform(children.begin(), children.end(), std::back_inserter(v), [](auto&el){ return el->getEmployee();});
-        setEmployees(DynamicArray<Employee*>(v.begin(), v.end()));
-    }
+    void orderBy(EmployeeListElement::FIELDS field);
 };
-
-template<class T> void EmployeesList::filter(){
-    if(current && !dynamic_cast<T*>(current->getEmployee())) {
-        current->updateStatus(false);
-        current = nullptr;
-    }
-    for(auto &e:children){
-        if(dynamic_cast<T*>(e->getEmployee()))
-            e->show();
-        else
-            e->hide();
-    }
-}
 
 #endif // EMPLOYEELIST_H

@@ -44,6 +44,19 @@ EmployeesList::EmployeesList( QWidget *parent): QFrame( parent ), header(new Tab
     header->setVisibility("Ore straordinari", static_cast<int>(false));
 }
 
+void EmployeesList::filter(std::function<bool (Employee *)> f){
+    if(current && f(current->getEmployee())) {
+        current->updateStatus(false);
+        current = nullptr;
+    }
+    for(auto &e:children){
+        if(f(e->getEmployee()))
+            e->show();
+        else
+            e->hide();
+    }
+}
+
 void EmployeesList::setEmployees(const DynamicArray<Employee*>& empl){
     for(auto c: children)
         delete c;
@@ -100,3 +113,9 @@ void EmployeesList::childClickedEvent(EmployeeListElement* e){
     emit ListElementDoubleClicked(e);
 }
 
+void EmployeesList::orderBy(EmployeeListElement::FIELDS field){
+    std::sort(children.begin(), children.end(), [&](auto &f, auto& s){ return f->lessThan(*s, field);});
+    std::vector<Employee*> v;
+    std::transform(children.begin(), children.end(), std::back_inserter(v), [](auto&el){ return el->getEmployee();});
+    setEmployees(DynamicArray<Employee*>(v.begin(), v.end()));
+}

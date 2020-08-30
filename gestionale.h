@@ -87,6 +87,14 @@ private:
     void addMenu();
 	void setStyle();
 
+    /**
+     * @brief funzione per filtrare i dipendenti in base se o se non tipano su T
+     * @param e: puntatore a Employee su cui verificare se tipa su T
+     * @return true sse "e" tipa su T
+     */
+     template<class T>
+    static bool employeesTypeFilter(Employee* e);
+
 signals:
     void employeeListElementDoubleClickedEvent(Employee*);
     void modifyEmployeeEvent(Employee*);
@@ -107,5 +115,9 @@ public slots:
     void changeSelectedElementComboBox(const QString& selected);
     void cambioOrdine(const QString&);
 };
+
+template<class T> bool Gestionale::employeesTypeFilter(Employee* e){
+    return dynamic_cast<T*>(e) != nullptr;
+}
 
 #endif // GESTIONALE_H

@@ -448,7 +448,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
     if(selected=="Manutentore"){
         percentuale_ripristino->show();
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<Manutenzione>();
+        employeesList->filter(employeesTypeFilter<Manutenzione>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::PercentualeRipristino, true
         );
@@ -458,7 +458,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<FrontDev>();
+        employeesList->filter(employeesTypeFilter<FrontDev>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
@@ -468,7 +468,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<FullStack>();
+        employeesList->filter(employeesTypeFilter<FullStack>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
@@ -478,20 +478,20 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<GUIDev>();
+        employeesList->filter(employeesTypeFilter<GUIDev>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
     }
     else if(selected=="Hardware"){
-        employeesList->filter<Hardware>();
+        employeesList->filter(employeesTypeFilter<Hardware>);
     }
     else if(selected=="Software"){
         linguaggio->show();
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<Software>();
+        employeesList->filter(employeesTypeFilter<Software>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
@@ -505,7 +505,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
         numero_criticita_risolte->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<ITSecurityDev>();
+        employeesList->filter(employeesTypeFilter<ITSecurityDev>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::PercentualeRipristino | EmployeeListElement::NumeroCriticitaRisolte | EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
@@ -515,7 +515,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         ore_straordinari->show();
         percentuale_ripristino->setCheckState(Qt::CheckState::Checked);
         ore_straordinari->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<Tecnico>();
+        employeesList->filter(employeesTypeFilter<Tecnico>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::OreStraordinari | EmployeeListElement::PercentualeRipristino, true
         );
@@ -525,7 +525,7 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<BackDev>();
+        employeesList->filter(employeesTypeFilter<BackDev>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
@@ -535,13 +535,13 @@ void Gestionale::changeSelectedElementComboBox(const QString& selected){
         numero_righe_totali->show();
         linguaggio->setCheckState(Qt::CheckState::Checked);
         numero_righe_totali->setCheckState(Qt::CheckState::Checked);
-        employeesList->filter<DBDev>();
+        employeesList->filter(employeesTypeFilter<DBDev>);
         employeesList->changeListAttributeVisibility(
             EmployeeListElement::NumeroRigheTotali | EmployeeListElement::Linguaggio, true
         );
     }
     else if(selected=="Tutti"){
-        employeesList->filter<Employee>();
+        employeesList->filter(employeesTypeFilter<Employee>);
     }
 }
 

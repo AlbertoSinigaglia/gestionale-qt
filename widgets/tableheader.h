@@ -13,9 +13,29 @@ class TableHeader: public QWidget{
 
 public:
     TableHeader(QWidget* parent);
+
+    /**
+     * @brief Aggiunge un campo
+     * @param new_field nume del campo da aggiungere
+     */
     void addField(const QString& new_field);
+
+    /**
+     * @brief imposta la visibilità di un campo
+     * @param field : testo del campo di cui cambiare la visibilità
+     * @param visibility : visibilità che il campo deve assumere
+     */
     void setVisibility(const QString& field, bool visibility);
+
+    /**
+     * @brief mostra tutti i campi
+     */
     void showAll();
+
+    /**
+     * @brief nasconde tutti i campi
+     */
+    void hideAll();
 };
 
 #endif // TABLEHEADER_H
