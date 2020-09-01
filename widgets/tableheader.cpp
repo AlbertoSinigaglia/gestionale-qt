@@ -14,7 +14,7 @@ TableHeader::TableHeader(QWidget *parent): QWidget(parent){
         background-color: #EEEEEE;
         margin:0px;
         padding:10px;)"
-                        );
+    );
 }
 
 void TableHeader::addField(const QString &new_field){
@@ -50,5 +50,15 @@ void TableHeader::hideAll(){
     std::for_each(fields.begin(), fields.end(), [](auto& el){
         el->hide();
     });
+}
+
+std::vector<QString> TableHeader::getFields() const{
+    std::vector<QString> v;
+    std::transform(fields.begin(), fields.end(), std::back_inserter(v), [](QLabel* l){ return l->text();});
+    return v;
+}
+
+void TableHeader::resetFields(){
+    fields.clear();
 }
 

@@ -577,16 +577,14 @@ void Gestionale::cambioOrdine(const QString& index){
     if("Produttività" == index) employeesList->orderBy(EmployeeListElement::Produttivo);
     emit name->textChanged(name->text());
 }
-#include <QDebug>
+
 void Gestionale::filterByKeyword(const QString &to_search){
     employeesList->filter([&](Employee* e) -> bool{
         if(to_search.isEmpty()) return true;
         QString source_name_surname = (QString(e->getDatiPersona().nome.c_str()) + " " + QString(e->getDatiPersona().cognome.c_str())).trimmed().toLower();
         QString source_surname_name = (QString(e->getDatiPersona().cognome.c_str()) + " " + QString(e->getDatiPersona().nome.c_str())).trimmed().toLower();
         QString trimmed_to_search(to_search.trimmed().toLower());
-        qDebug() << trimmed_to_search << " " << source_name_surname;
         return trimmed_to_search.contains(source_name_surname) || source_name_surname.contains(trimmed_to_search) ||
                 trimmed_to_search.contains(source_surname_name) || source_surname_name.contains(trimmed_to_search) ;
-
     });
 }

@@ -36,6 +36,17 @@ public:
      * @brief nasconde tutti i campi
      */
     void hideAll();
+
+    /**
+     * @brief getter per i fields correnti
+     * @return collezione dei fields correnti
+     */
+    std::vector<QString> getFields() const;
+
+    /**
+     * @brief rimuove tutti i campi correnti
+     */
+    void resetFields();
 };
 
 #endif // TABLEHEADER_H

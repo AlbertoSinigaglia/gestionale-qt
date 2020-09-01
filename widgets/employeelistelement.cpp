@@ -161,7 +161,7 @@ Employee* EmployeeListElement::getEmployee() const{
     return e_;
 }
 
-bool EmployeeListElement::lessThan(const EmployeeListElement &o, EmployeeListElement::FIELDS prop){
+bool EmployeeListElement::lessThan(const EmployeeListElement &o, EmployeeListElement::FIELDS prop) const {
     if(prop & EmployeeListElement::Name)                    return name->text()                                     < o.name->text();
     if(prop & EmployeeListElement::Surname)                 return surname->text()                                  < o.surname->text();
     if(prop & EmployeeListElement::CF)                      return cf->text()                                       < o.cf->text();

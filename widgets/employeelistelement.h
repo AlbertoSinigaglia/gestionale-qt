@@ -80,7 +80,7 @@ public:
      * @param prop : proprietà da confrontare
      * @return true sse this->prop < o->prop, false altrimenti (o se la proprietà specificata non è supportata)
      */
-    bool lessThan(const EmployeeListElement& o, EmployeeListElement::FIELDS prop);
+    bool lessThan(const EmployeeListElement& o, EmployeeListElement::FIELDS prop) const;
 signals:
     void clicked(EmployeeListElement*);
     void doubleClicked(EmployeeListElement *);
