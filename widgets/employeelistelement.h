@@ -13,7 +13,7 @@
 #include <QPaintEvent>
 #include <QMouseEvent>
 
-class EmployeeListElement : public QWidget{
+class EmployeeListElement : public QFrame{
     Q_OBJECT
     Employee* e_;
     QLabel* name;

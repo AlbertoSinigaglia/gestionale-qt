@@ -30,7 +30,7 @@ void EmployeeListElement::mouseDoubleClickEvent( QMouseEvent * e ){
     emit doubleClicked(this);
 }
 
-EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QWidget( parent ), e_(e){
+EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QFrame( parent ), e_(e){
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setMargin( 0 );
     layout->setSpacing(0);

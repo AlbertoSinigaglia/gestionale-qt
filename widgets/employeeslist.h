@@ -23,7 +23,8 @@ class EmployeesList : public QFrame{
     std::vector<EmployeeListElement*> children;
     QVBoxLayout* getNewLayout();
     TableHeader* header;
-
+    static const std::map<unsigned int, const char *> fields;
+    static const std::vector<const char *> ordered_fields;
 public:
     /**
      * source: https://doc.qt.io/archives/qt-5.6/qobject.html#no-copy-constructor-or-assignment-operator
