@@ -38,6 +38,7 @@ public:
 
 private:
     std::shared_ptr<EmployeesManagement> model;
+    QLineEdit* name;
     QHBoxLayout* mainLayout;
     QVBoxLayout* layoutFrameFiltri;
 	QGroupBox* Visualizzare;
@@ -77,7 +78,7 @@ private:
     void addTitleSinistro();
 	void addBoxDestro();
 	void addBoxSinistro();
-	void addComboBox();
+	void addEmployeesFilters();
 	void addFirstBox();
 	void addBoxPersona();
 	void addBoxLavoro();
@@ -114,6 +115,7 @@ public slots:
     void exitApplication();
     void changeSelectedElementComboBox(const QString& selected);
     void cambioOrdine(const QString&);
+    void filterByKeyword(const QString&);
 };
 
 template<class T> bool Gestionale::employeesTypeFilter(Employee* e){

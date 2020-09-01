@@ -2,6 +2,7 @@
 #include "models/headers/BackDev.h"
 #include "widgets/employeelistelement.h"
 #include "widgets/aboutus.h"
+#include <QLineEdit>
 
 Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     this->setMinimumSize(1280, 800);
@@ -125,6 +126,7 @@ Gestionale::Gestionale(QWidget *parent): QWidget(parent), model(nullptr){
     });
     connect(Dipendenti, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(changeSelectedElementComboBox(const QString&)));
     connect(ordine, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(cambioOrdine(const QString&)));
+    connect(name, &QLineEdit::textChanged, this, &Gestionale::filterByKeyword);
     setStyle();
     setEnabled(false);setEnabled(true);
     resize(this->width(), layoutFrameFiltri->sizeHint().height());
@@ -147,7 +149,7 @@ void Gestionale::addBoxSinistro(){
     scroll->setAlignment(Qt::AlignHCenter);
     mainLayout->addWidget(scroll);
     addTitleSinistro();
-    addComboBox();
+    addEmployeesFilters();
     addFirstBox();
     addOrdineBox();
     addAzioni();
@@ -181,22 +183,36 @@ void Gestionale::addOrdineBox(){
     layoutFrameFiltri->addWidget(q);
 }
 
-void Gestionale::addComboBox(){
+void Gestionale::addEmployeesFilters(){
+    QGroupBox* filtri = new QGroupBox(this);
+    filtri->setTitle("Filtri");
+    QVBoxLayout* lfiltri = new QVBoxLayout(filtri);
+    name = new QLineEdit(filtri);
+    name->setPlaceholderText("Nome Dipendente");
+    name->setStyleSheet("width:100%; background-color:white; padding:5px; color:black;");
     Dipendenti = new QComboBox(this);
-	Dipendenti->addItems({
-		"Tutti",
-		"Manutentore",
-		"Hardware",
-		"Software",
+    Dipendenti->addItems({
+        "Tutti",
+        "Manutentore",
+        "Hardware",
+        "Software",
         "BackDeveloper",
         "FrontDeveloper",
-		"FullStack",
+        "FullStack",
         "DBDeveloper",
-		"GUIDeveloper",
-		"ITSecurityDev",
-		"Tecnico"
-	});
-    layoutFrameFiltri->addWidget(Dipendenti);
+        "GUIDeveloper",
+        "ITSecurityDev",
+        "Tecnico"
+    });
+    QLabel* name_l = new QLabel("Per nome/cognome:", filtri);
+    name_l->setStyleSheet("font-size:15px; color:white;");
+    QLabel* type_l = new QLabel("Per tipo di dipendente:", filtri);
+    type_l->setStyleSheet("font-size:15px; color:white;");
+    lfiltri->addWidget(name_l);
+    lfiltri->addWidget(name);
+    lfiltri->addWidget(type_l);
+    lfiltri->addWidget(Dipendenti);
+    layoutFrameFiltri->addWidget(filtri);
 }
 
 void Gestionale::addFirstBox(){
@@ -402,6 +418,7 @@ void Gestionale::updateList() const{
         this->employeesList->setEmployees(*model->getEmployees());
         this->ordine->setCurrentText("Nome");
         this->employeesList->orderBy(EmployeeListElement::Name);
+        name->setText({});
     }
 }
 
@@ -425,6 +442,7 @@ void Gestionale::exitApplication(){
 }
 
 void Gestionale::changeSelectedElementComboBox(const QString& selected){
+    name->setText({});
     Dipendenti->setCurrentText(selected);
     numero_righe_totali->setCheckState(Qt::CheckState::Unchecked);
     linguaggio->setCheckState(Qt::CheckState::Unchecked);
@@ -557,4 +575,18 @@ void Gestionale::cambioOrdine(const QString& index){
     if("Ore di lavoro settimanale" == index) employeesList->orderBy(EmployeeListElement::WeeklyHours);
     if("Grado esperienza" == index) employeesList->orderBy(EmployeeListElement::GradoEsperienza);
     if("Produttività" == index) employeesList->orderBy(EmployeeListElement::Produttivo);
+    emit name->textChanged(name->text());
+}
+#include <QDebug>
+void Gestionale::filterByKeyword(const QString &to_search){
+    employeesList->filter([&](Employee* e) -> bool{
+        if(to_search.isEmpty()) return true;
+        QString source_name_surname = (QString(e->getDatiPersona().nome.c_str()) + " " + QString(e->getDatiPersona().cognome.c_str())).trimmed().toLower();
+        QString source_surname_name = (QString(e->getDatiPersona().cognome.c_str()) + " " + QString(e->getDatiPersona().nome.c_str())).trimmed().toLower();
+        QString trimmed_to_search(to_search.trimmed().toLower());
+        qDebug() << trimmed_to_search << " " << source_name_surname;
+        return trimmed_to_search.contains(source_name_surname) || source_name_surname.contains(trimmed_to_search) ||
+                trimmed_to_search.contains(source_surname_name) || source_surname_name.contains(trimmed_to_search) ;
+
+    });
 }
