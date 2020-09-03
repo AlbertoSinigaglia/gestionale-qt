@@ -9,9 +9,9 @@ DatiPersonaElement::DatiPersonaElement(const DatiPersona& dati_, bool editable, 
 
 AbstDataSection* DatiPersonaElement::getData() const{
     return  new DatiPersona(
-                nome_widget->getValue().toStdString(),
-                cognome_widget->getValue().toStdString(),
-                cf_widget->getValue().toStdString(),
+                nome_widget->getValue().simplified().toStdString(),
+                cognome_widget->getValue().simplified().toStdString(),
+                cf_widget->getValue().simplified().toStdString(),
                 Data(dataNascita_widget->getValue().toStdString())
     );
 }
