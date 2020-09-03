@@ -38,8 +38,8 @@ EmployeeListElement::EmployeeListElement(Employee *e, QWidget *parent): QFrame( 
     this->setMouseTracking(true);
 
     //dati relativi alla persona
-    name = new QLabel(QString(e->getNome().c_str()));
-    surname = new QLabel(QString(e->getCognome().c_str()));
+    name = new QLabel(QString(e->getNome().c_str()).simplified());
+    surname = new QLabel(QString(e->getCognome().c_str()).simplified());
     date_of_birth = new QLabel(QString(static_cast<std::string>(e->getNascita()).c_str()));
     cf = new QLabel(QString(e->getCF().c_str()));
 
@@ -162,22 +162,22 @@ Employee* EmployeeListElement::getEmployee() const{
 }
 
 bool EmployeeListElement::lessThan(const EmployeeListElement &o, EmployeeListElement::FIELDS prop) const {
-    if(prop & EmployeeListElement::Name)                    return name->text()                                     < o.name->text();
-    if(prop & EmployeeListElement::Surname)                 return surname->text()                                  < o.surname->text();
-    if(prop & EmployeeListElement::CF)                      return cf->text()                                       < o.cf->text();
-    if(prop & EmployeeListElement::DateOfBirth)             return Data(date_of_birth->text().toStdString())        < Data(o.date_of_birth->text().toStdString());
-    if(prop & EmployeeListElement::DateOfEmployment)        return Data(date_of_empl->text().toStdString())         < Data(o.date_of_empl->text().toStdString());
-    if(prop & EmployeeListElement::DateEndOfContract)       return Data(date_end_of_contract->text().toStdString()) < Data(o.date_end_of_contract->text().toStdString());
+    if(prop & EmployeeListElement::Name)                    return e_->getDatiPersona().nome                        < o.e_->getDatiPersona().nome;
+    if(prop & EmployeeListElement::Surname)                 return e_->getDatiPersona().cognome                     < o.e_->getDatiPersona().cognome;
+    if(prop & EmployeeListElement::CF)                      return e_->getDatiPersona().CF                          < o.e_->getDatiPersona().CF;
+    if(prop & EmployeeListElement::DateOfBirth)             return e_->getDatiPersona().nascita                     < o.e_->getDatiPersona().nascita;
+    if(prop & EmployeeListElement::DateOfEmployment)        return e_->getDatiLavoratore().data_assunzione          < o.e_->getDatiLavoratore().data_assunzione;
+    if(prop & EmployeeListElement::DateEndOfContract)       return e_->getDatiLavoratore().fine_contratto           < o.e_->getDatiLavoratore().fine_contratto;
     if(prop & EmployeeListElement::Salary)                  return e_->calcolaStipendio()                           < o.e_->calcolaStipendio();
     if(prop & EmployeeListElement::WeeklyHours)             return e_->getDatiLavoratore().ore_lavoro_sett          < o.e_->getDatiLavoratore().ore_lavoro_sett;
     if(prop & EmployeeListElement::Produttivo)              return static_cast<int>(e_->produttivo())               < static_cast<int>(o.e_->produttivo());
     if(prop & EmployeeListElement::BonusStipendio)          return e_->bonusStipendio()                             < o.e_->bonusStipendio();
     if(prop & EmployeeListElement::GradoEsperienza)         return e_->gradoEsperienza()                            < o.e_->gradoEsperienza();
-    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()                      < o.numero_righe_totali->text();
+    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text().toInt()              < o.numero_righe_totali->text().toInt();
     if(prop & EmployeeListElement::Linguaggio)              return linguaggio->text()                               < o.linguaggio->text();
-    if(prop & EmployeeListElement::PercentualeRipristino)   return percentuale_ripristino->text()                   < o.percentuale_ripristino->text();
-    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text()                      < o.numero_righe_totali->text();
-    if(prop & EmployeeListElement::OreStraordinari)         return ore_straordinari->text()                         < o.ore_straordinari->text();
+    if(prop & EmployeeListElement::PercentualeRipristino)   return percentuale_ripristino->text().toDouble()        < o.percentuale_ripristino->text().toDouble();
+    if(prop & EmployeeListElement::NumeroRigheTotali)       return numero_righe_totali->text().toInt()              < o.numero_righe_totali->text().toInt();
+    if(prop & EmployeeListElement::OreStraordinari)         return ore_straordinari->text().toInt()                 < o.ore_straordinari->text().toInt();
     return false;
 }
 
